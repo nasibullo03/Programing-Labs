@@ -3,16 +3,14 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Programing_Labs"
-        mc:Ignorable="d"
-        Height="600" 
+        xmlns:local="clr-namespace:Programing_Labs" mc:Ignorable="d"
+        Height="600"
         Width="920"
-        x:Name ="MainWindow"
         WindowStyle="None"
-        WindowStartupLocation="CenterScreen"
+        ResizeMode="CanResizeWithGrip"
+        Background="Transparent"
         AllowsTransparency="True"
-        ResizeMode="NoResize"
-        Background="Transparent">
+        >
     <Border Background="#272537" CornerRadius="20">
         <Grid>
             <Grid.ColumnDefinitions>
@@ -30,7 +28,26 @@
                        FontSize="22"
                        Margin="20,0,0,0"
                        />
-            
+            <StackPanel  Grid.Row="1">
+                <RadioButton Content="Home"
+                             Height="50"
+                             Foreground="White"
+                             FontSize="14" 
+                             Style="{StaticResource MenuButtonTheme}"/>
+                <RadioButton Content="Home1"
+                             Height="50"
+                             Foreground="White"
+                             FontSize="14" 
+                             Style="{StaticResource MenuButtonTheme}"/>
+                <RadioButton Content="Home2"
+                             Height="50"
+                             Foreground="White"
+                             FontSize="14" 
+                             Style="{StaticResource MenuButtonTheme}"/>
+
+            </StackPanel>
+
         </Grid>
     </Border>
+
 </Window>
