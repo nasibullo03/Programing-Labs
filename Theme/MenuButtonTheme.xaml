@@ -7,19 +7,31 @@
             <Setter Property="Template">
                 <Setter.Value >
                     <ControlTemplate TargetType="RadioButton">
-                        <Grid VerticalAlignment="Stretch"
+                        <Grid  x:Name="RadioButtonGrid" VerticalAlignment="Stretch"
                               HorizontalAlignment="Stretch"
                               Background="{TemplateBinding Background}">
                             <TextBlock Text="{TemplateBinding Property=Content}"
                                        VerticalAlignment="Center"
                                        HorizontalAlignment="Center"
                                        />
-                            <Rectangle x:Name="MenuItemRectangle"
-                                       Width="10"  
-                                       StrokeThickness="1" 
-                                       Fill="#48465e"
-                                       HorizontalAlignment="Left"
-                            />
+                            <Rectangle x:Name = "MenuItemRectangle"
+                                       Width = "10"
+                                       StrokeThickness = "1"
+                                       Fill = "#48465e"
+                                       HorizontalAlignment = "Left"
+                                       Visibility="Hidden"
+                            >
+                                <Rectangle.Style>
+                                    <Style TargetType="{x:Type Rectangle}">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Background,ElementName=RadioButtonGrid}" Value="#2d2a3d">
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                        <Setter Property="Visibility" Value="Hidden"/>
+                                    </Style>
+                                </Rectangle.Style>
+                            </Rectangle>
 
                         </Grid>
                     </ControlTemplate>
@@ -27,7 +39,7 @@
             </Setter>
             <Setter Property="Background" Value="Transparent"/>
             <Setter Property="BorderThickness" Value="0"/>
-            
+
 
         </Style.Setters>
         <Style.Triggers>

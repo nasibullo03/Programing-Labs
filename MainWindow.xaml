@@ -28,22 +28,22 @@
                        FontSize="22"
                        Margin="20,0,0,0"
                        />
-            <StackPanel  Grid.Row="1">
+            <StackPanel x:Name="MenuItemList" Grid.Row="1">
                 <RadioButton Content="Home"
                              Height="50"
                              Foreground="White"
                              FontSize="14" 
-                             Style="{StaticResource MenuButtonTheme}"/>
+                             Style="{StaticResource MenuButtonTheme}" Checked="RadioButton_Checked"/>
                 <RadioButton Content="Home1"
                              Height="50"
                              Foreground="White"
                              FontSize="14" 
-                             Style="{StaticResource MenuButtonTheme}"/>
+                             Style="{StaticResource MenuButtonTheme}" Checked="RadioButton_Checked"/>
                 <RadioButton Content="Home2"
                              Height="50"
                              Foreground="White"
                              FontSize="14" 
-                             Style="{StaticResource MenuButtonTheme}"/>
+                             Style="{StaticResource MenuButtonTheme}" Checked="RadioButton_Checked"/>
 
             </StackPanel>
             <TextBox x:Name="TextBox121"
