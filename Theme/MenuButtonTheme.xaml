@@ -28,7 +28,7 @@
                                                 <Setter Property="Visibility" Value="Visible"/>
                                             </DataTrigger>
                                         </Style.Triggers>
-                                        <Setter Property="Visibility" Value="Hidden"/>
+                                        
                                     </Style>
                                 </Rectangle.Style>
                             </Rectangle>
