@@ -25,12 +25,14 @@ namespace Programing_Labs.Properties
     {
 
         private static global::System.Resources.ResourceManager resourceMan;
+        public static Resources resources;
 
         private static global::System.Globalization.CultureInfo resourceCulture;
 
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
         internal Resources()
         {
+            resources = this;
         }
 
         /// <summary>

@@ -10,21 +10,29 @@
                         <Grid  x:Name="RadioButtonGrid" VerticalAlignment="Stretch"
                               HorizontalAlignment="Stretch"
                               Background="{TemplateBinding Background}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="10"/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="10"/>
+                            </Grid.ColumnDefinitions>
+                           
                             <TextBlock Text="{TemplateBinding Property=Content}"
                                        VerticalAlignment="Center"
                                        HorizontalAlignment="Center"
+                                       Grid.Column="1"
                                        />
                             <Rectangle x:Name = "MenuItemRectangle"
                                        Width = "10"
                                        StrokeThickness = "1"
                                        Fill = "#48465e"
                                        HorizontalAlignment = "Left"
-                                       Visibility="Hidden"
+                                       Visibility="Visible"
+                                       Grid.Column="0"
                             >
                                 <Rectangle.Style>
                                     <Style TargetType="{x:Type Rectangle}">
                                         <Style.Triggers>
-                                            <DataTrigger Binding="{Binding Background,ElementName=RadioButtonGrid}" Value="#2d2a3d">
+                                            <DataTrigger Binding="{Binding ElementName=RadioButtonGrid, Path=IsChecked}">
                                                 <Setter Property="Visibility" Value="Visible"/>
                                             </DataTrigger>
                                         </Style.Triggers>

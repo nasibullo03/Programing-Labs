@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Windows;
-using System.Windows.Resources;
+using System.Resources;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,7 +14,7 @@ namespace Programing_Labs.Design
     {
         public static Dictionary<int,int> AmountLabs { get; set; }
 
-        public static void AddMenuItems() {
+        public void AddMenuItems() {
             AmountLabs = new Dictionary<int, int>()
             {
                 {1,2 },
@@ -25,22 +25,25 @@ namespace Programing_Labs.Design
             };
             var converter = new System.Windows.Media.BrushConverter();
             RadioButton MenuItem;
-            
-            foreach (var valuePairs in AmountLabs)
-            {
-               MenuItem = new RadioButton()
-               {
-                   Content=$"Lab {valuePairs.Key}",
-                   Height = 50,
-                   Foreground = (Brush)converter.ConvertFromString("#FFFFFF"),
-                   FontSize = 14,
-                   Style = (Style)Resources["MenuButtonTheme"],
-                   Visibility = Visibility.Visible,
 
-               };
-                /*MenuItem.Checked += RadioButton_Checked;*/
+            /*foreach (var valuePairs in AmountLabs)
+            {
+                MenuItem = new RadioButton()
+                {
+                    Content = $"Lab {valuePairs.Key}",
+                    Height = 50,
+                    Foreground = (Brush)converter.ConvertFromString("#FFFFFF"),
+                    FontSize = 14,
+                    Style = 
+                    *//*Style = (Style)ResourceDictionary["MenuButtonTheme"],*//*
+                    Visibility = Visibility.Visible,
+
+                };
+                *//*MenuItem.Checked += RadioButton_Checked;*//*
                 MenuItemList.Children.Add(MenuItem);
-            }
+                MessageBox.Show("");
+                
+            }*/
 
         }
 
