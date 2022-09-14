@@ -21,26 +21,7 @@
                                        HorizontalAlignment="Center"
                                        Grid.Column="1"
                                        />
-                            <Rectangle x:Name = "MenuItemRectangle"
-                                       Width = "10"
-                                       StrokeThickness = "1"
-                                       Fill = "#48465e"
-                                       HorizontalAlignment = "Left"
-                                       Visibility="Visible"
-                                       Grid.Column="0"
-                            >
-                                <Rectangle.Style>
-                                    <Style TargetType="{x:Type Rectangle}">
-                                        <Style.Triggers>
-                                            <DataTrigger Binding="{Binding ElementName=RadioButtonGrid, Path=IsChecked}">
-                                                <Setter Property="Visibility" Value="Visible"/>
-                                            </DataTrigger>
-                                        </Style.Triggers>
-                                        
-                                    </Style>
-                                </Rectangle.Style>
-                            </Rectangle>
-
+                            
                         </Grid>
                     </ControlTemplate>
                 </Setter.Value>

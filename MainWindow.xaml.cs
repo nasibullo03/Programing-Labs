@@ -1,10 +1,13 @@
 ﻿using System;
+using System.Windows.Resources;
+
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Media;
 using System.Windows.Shapes;
-
+using System.Windows.Input;
 
 namespace Programing_Labs
 {
@@ -13,16 +16,17 @@ namespace Programing_Labs
     /// </summary>
     public partial class MainWindow : Window
     {
-       
+        private static object MenuItem_Sender = null;
+        private static object MenuItem_firstItem = null;
+
         public MainWindow()
         {
-           
+
             InitializeComponent();
-            
 
         }
-        
-        
+
+
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
@@ -49,22 +53,41 @@ namespace Programing_Labs
                     Height = 50,
                     Foreground = (Brush)converter.ConvertFromString("#FFFFFF"),
                     FontSize = 14,
-                    Style = (Style)this.FindResource("MenuButtonTheme"),
+                    Style = (valuePairs.Key != 1)?(Style)this.FindResource("MenuButtonTheme"):(Style)this.FindResource("MenuButtonThemeClicked"),
                     Visibility = Visibility.Visible,
                     TabIndex = valuePairs.Key,
+                    IsChecked = (valuePairs.Key != 1)?false:true,
                     
 
                 };
+                if (valuePairs.Key == 1) MenuItem_firstItem = MenuItem;
+                
                 MenuItem.Checked += RadioButton_Checked;
                 MenuItemList.Children.Add(MenuItem);
-                
+
 
             }
         }
 
+
+
         private void RadioButton_Checked(object sender, RoutedEventArgs e)
         {
-            
+            RadioButton radioButton = sender as RadioButton;
+            radioButton.Style = (Style)this.FindResource("MenuButtonThemeClicked");
+           
+            if(radioButton != null)
+            {
+                radioButton.Style = (Style)this.FindResource("MenuButtonTheme");
+                MenuItem_Sender = sender;
+            }
+            else
+            {
+                (MenuItem_firstItem as RadioButton).Style = (Style)this.FindResource("MenuButtonTheme");
+                MenuItem_Sender = sender;
+            }
+
         }
+        
     }
 }

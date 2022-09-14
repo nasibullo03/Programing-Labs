@@ -16,3 +16,22 @@ C:\Users\student\Source\Repos\Programing-Labs\obj\Debug\Programing Labs.csproj.G
 C:\Users\student\Source\Repos\Programing-Labs\obj\Debug\Programing Labs.csproj.CoreCompileInputs.cache
 C:\Users\student\Source\Repos\Programing-Labs\obj\Debug\Programing Labs.exe
 C:\Users\student\Source\Repos\Programing-Labs\obj\Debug\Programing Labs.pdb
+C:\Users\Admin\Source\Repos\Programing-Labs\bin\Debug\Programing Labs.exe.config
+C:\Users\Admin\Source\Repos\Programing-Labs\bin\Debug\Programing Labs.exe
+C:\Users\Admin\Source\Repos\Programing-Labs\bin\Debug\Programing Labs.pdb
+C:\Users\Admin\Source\Repos\Programing-Labs\obj\Debug\Programing Labs.csproj.AssemblyReference.cache
+C:\Users\Admin\Source\Repos\Programing-Labs\obj\Debug\Theme\MenuButtonTheme.baml
+C:\Users\Admin\Source\Repos\Programing-Labs\obj\Debug\Theme\TextBoxTheme.baml
+C:\Users\Admin\Source\Repos\Programing-Labs\obj\Debug\MainWindow.g.cs
+C:\Users\Admin\Source\Repos\Programing-Labs\obj\Debug\App.g.cs
+C:\Users\Admin\Source\Repos\Programing-Labs\obj\Debug\Programing Labs_MarkupCompile.cache
+C:\Users\Admin\Source\Repos\Programing-Labs\obj\Debug\Programing Labs_MarkupCompile.lref
+C:\Users\Admin\Source\Repos\Programing-Labs\obj\Debug\App.baml
+C:\Users\Admin\Source\Repos\Programing-Labs\obj\Debug\MainWindow.baml
+C:\Users\Admin\Source\Repos\Programing-Labs\obj\Debug\Programing Labs.g.resources
+C:\Users\Admin\Source\Repos\Programing-Labs\obj\Debug\Programing_Labs.Properties.Resources.resources
+C:\Users\Admin\Source\Repos\Programing-Labs\obj\Debug\Programing Labs.csproj.GenerateResource.cache
+C:\Users\Admin\Source\Repos\Programing-Labs\obj\Debug\Programing Labs.csproj.CoreCompileInputs.cache
+C:\Users\Admin\Source\Repos\Programing-Labs\obj\Debug\Programing Labs.exe
+C:\Users\Admin\Source\Repos\Programing-Labs\obj\Debug\Programing Labs.pdb
+C:\Users\Admin\Source\Repos\Programing-Labs\obj\Debug\Theme\MenuButtonThemeClicked.baml
