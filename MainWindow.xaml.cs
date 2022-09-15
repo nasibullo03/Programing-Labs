@@ -26,8 +26,6 @@ namespace Programing_Labs
 
         }
 
-
-
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
 
@@ -76,18 +74,43 @@ namespace Programing_Labs
             RadioButton radioButton = sender as RadioButton;
             radioButton.Style = (Style)this.FindResource("MenuButtonThemeClicked");
            
-            if(radioButton != null)
+            if(MenuItem_Sender != null)
             {
-                radioButton.Style = (Style)this.FindResource("MenuButtonTheme");
+                (MenuItem_Sender as RadioButton).Style = (Style)this.FindResource("MenuButtonTheme");
+                
                 MenuItem_Sender = sender;
             }
-            else
+            else if (MenuItem_Sender == null)
             {
                 (MenuItem_firstItem as RadioButton).Style = (Style)this.FindResource("MenuButtonTheme");
                 MenuItem_Sender = sender;
             }
 
         }
+
+       
+
+        private void Border_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.GetPosition(Mouse.Captured).Y <= 75)
+            {
+                this.DragMove();
+            }
+            if (e.ClickCount==2)
+            {
+                if (this.WindowState == WindowState.Maximized)
+                {
+                    this.WindowState = WindowState.Normal;
+                } else
+                {
+                    this.WindowState = WindowState.Maximized;
+                }
+            }
+            
+        }
+
+        
+        
         
     }
 }
