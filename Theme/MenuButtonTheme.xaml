@@ -15,28 +15,25 @@
                                 <ColumnDefinition/>
                                 <ColumnDefinition Width="10"/>
                             </Grid.ColumnDefinitions>
-                           
                             <TextBlock Text="{TemplateBinding Property=Content}"
                                        VerticalAlignment="Center"
                                        HorizontalAlignment="Center"
                                        Grid.Column="1"
                                        />
-                            
                         </Grid>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
             <Setter Property="Background" Value="Transparent"/>
             <Setter Property="BorderThickness" Value="0"/>
-
+            
 
         </Style.Setters>
         <Style.Triggers>
-            <Trigger Property="IsChecked" Value="True">
-                <Setter Property="Background" Value="#22202f"/>
-            </Trigger>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="#2d2a3d"/>
+                <Setter Property="Background" Value="#007575">
+                </Setter>
+
             </Trigger>
         </Style.Triggers>
     </Style>

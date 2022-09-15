@@ -5,7 +5,7 @@
            x:Key="MenuButtonThemeClicked">
         <Style.Setters>
             <Setter Property="Template">
-                <Setter.Value >
+                <Setter.Value>
                     <ControlTemplate TargetType="RadioButton">
                         <Grid  x:Name="RadioButtonGrid" VerticalAlignment="Stretch"
                               HorizontalAlignment="Stretch"
@@ -15,7 +15,7 @@
                                 <ColumnDefinition/>
                                 <ColumnDefinition Width="10"/>
                             </Grid.ColumnDefinitions>
-                           
+
                             <TextBlock Text="{TemplateBinding Property=Content}"
                                        VerticalAlignment="Center"
                                        HorizontalAlignment="Center"
@@ -24,27 +24,20 @@
                             <Rectangle x:Name = "MenuItemRectangle"
                                        Width = "10"
                                        StrokeThickness = "1"
-                                       Fill = "#48465e"
+                                       Fill = "#00f0f0"
                                        HorizontalAlignment = "Left"
                                        Grid.Column="0"
                             />
-
-
                         </Grid>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
-            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Background" Value="#009191"/>
             <Setter Property="BorderThickness" Value="0"/>
-
-
         </Style.Setters>
         <Style.Triggers>
-            <Trigger Property="IsChecked" Value="True">
-                <Setter Property="Background" Value="#22202f"/>
-            </Trigger>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="#2d2a3d"/>
+               
             </Trigger>
         </Style.Triggers>
     </Style>

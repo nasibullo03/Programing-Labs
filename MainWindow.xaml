@@ -13,14 +13,64 @@
         Loaded="Window_Loaded"
         Margin="5"
         >
+    
     <Window.Effect>
         <DropShadowEffect Color="White" BlurRadius="20"/>
         
     </Window.Effect>
-    
-    <Border Background="#272537"  MouseDown="Border_MouseDown"  >
-        
-        <Grid >
+    <Window.Triggers>
+        <EventTrigger RoutedEvent="Window.Loaded">
+            <EventTrigger.Actions>
+                <!--Анимация заднего фона-->
+                <BeginStoryboard >
+                    <Storyboard  RepeatBehavior="Forever" AutoReverse="True">
+                        <ColorAnimation  Storyboard.TargetName="WindowBorder"  
+                            Storyboard.TargetProperty = "(Border.Background).(LinearGradientBrush.GradientStops)[0].(GradientStop.Color)"  
+                            From="#272537" To="#042534" Duration="0:0:5"/>
+                        <ColorAnimation Storyboard.TargetName="WindowBorder"  
+                              Storyboard.TargetProperty = "(Border.Background).(LinearGradientBrush.GradientStops)[1].(GradientStop.Color)"  
+                              From="#042534" To="#142534" Duration="0:0:5"/>
+                        <ColorAnimation Storyboard.TargetName="WindowBorder"  
+                              Storyboard.TargetProperty = "(Border.Background).(LinearGradientBrush.GradientStops)[2].(GradientStop.Color)"  
+                              From="#142534" To="#272537" Duration="0:0:5"/>
+                    </Storyboard>
+                </BeginStoryboard>
+                <!--Анимация имя программы фона-->
+                <BeginStoryboard>
+                    <Storyboard RepeatBehavior="Forever" AutoReverse="True">
+                        <ColorAnimation  Storyboard.TargetName="ProgramName"  
+                            Storyboard.TargetProperty = "(TextBlock.Foreground).(LinearGradientBrush.GradientStops)[0].(GradientStop.Color)"  
+                            From="#00f0f0" To="White" Duration="0:0:5"/>
+                        <ColorAnimation  Storyboard.TargetName="ProgramName"  
+                            Storyboard.TargetProperty = "(TextBlock.Foreground).(LinearGradientBrush.GradientStops)[1].(GradientStop.Color)"  
+                            From="#00f0f0" To="White" Duration="0:0:3"/>
+                        <ColorAnimation  Storyboard.TargetName="ProgramName"  
+                            Storyboard.TargetProperty = "(TextBlock.Foreground).(LinearGradientBrush.GradientStops)[2].(GradientStop.Color)"  
+                            From="#00f0f0" To="White" Duration="0:0:2"/>
+                        <ColorAnimation  Storyboard.TargetName="ProgramName"  
+                            Storyboard.TargetProperty = "(TextBlock.Foreground).(LinearGradientBrush.GradientStops)[3].(GradientStop.Color)"  
+                            From="#00f0f0" To="White" Duration="0:0:1"/>
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger.Actions>
+        </EventTrigger>
+    </Window.Triggers>
+
+    <Border MouseDown="Border_MouseDown" x:Name="WindowBorder"  >
+        <Border.Background>
+            <LinearGradientBrush StartPoint="0.8,0" EndPoint="1,0.8">
+
+                <GradientStop Color="#272537" Offset="0.0" />
+                <GradientStop Color="#042534" Offset="0.5"/>
+                <GradientStop Color="#142534" Offset="0.8"/>
+
+            </LinearGradientBrush>
+        </Border.Background>
+        <Border.Effect>
+            <DropShadowEffect BlurRadius="15" Direction="-90"
+                              RenderingBias="Quality" ShadowDepth="2"/>
+        </Border.Effect>
+        <Grid x:Name="ApplicationMainGrid" >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="200"/>
                 <ColumnDefinition/>
@@ -29,19 +79,41 @@
                 <RowDefinition Height="75"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
-            <TextBlock Text="nasibullo03"
+            <TextBlock x:Name="ProgramName"
+                       Text="nasibullo03"
                        VerticalAlignment="Center"
                        HorizontalAlignment="Left"
-                       Foreground="White"
                        FontSize="22"
                        Margin="20,0,0,0"
-                       
-                       />
+                       >
+                <TextBlock.Foreground>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1" >
+                        <GradientStop Color="#00f0f0" Offset="0.1"/>
+                        <GradientStop Color="White" Offset="0.3"/>
+                        <GradientStop Color="White" Offset="0.5"/>
+                        <GradientStop Color="White" Offset="0.7"/>
+                    </LinearGradientBrush>
+                
+                </TextBlock.Foreground>
+            </TextBlock>
+            <Image Grid.Column="1" 
+                   HorizontalAlignment="Right" 
+                   VerticalAlignment="Top" 
+                   Width="25" 
+                   Margin="3"
+                   MouseLeftButtonDown="Image_MouseLeftButtonDown">
+                <Image.Source>
+                    <BitmapImage DecodePixelWidth="150"  UriSource="/Images/close-button.png" DecodePixelHeight="150"/>
+                </Image.Source>
+            </Image>
             <StackPanel x:Name="MenuItemList" Grid.Row="1"/>
+
             <ContentControl Grid.Row="1" 
                             Grid.Column="1"
-                            Margin="10"/>
+                            Margin="10"
+                            Background="#007575"/>
+            
         </Grid>
+        
     </Border>
-
 </Window>
