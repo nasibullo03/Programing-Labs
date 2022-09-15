@@ -35,3 +35,22 @@ C:\Users\Admin\Source\Repos\Programing-Labs\obj\Debug\Programing Labs.csproj.Cor
 C:\Users\Admin\Source\Repos\Programing-Labs\obj\Debug\Programing Labs.exe
 C:\Users\Admin\Source\Repos\Programing-Labs\obj\Debug\Programing Labs.pdb
 C:\Users\Admin\Source\Repos\Programing-Labs\obj\Debug\Theme\MenuButtonThemeClicked.baml
+C:\Users\student\Source\Repos\Programing-Labs1\obj\Debug\Programing Labs.exe
+C:\Users\student\Source\Repos\Programing-Labs1\obj\Debug\Programing Labs.pdb
+C:\Users\student\Source\Repos\Programing-Labs1\bin\Debug\Programing Labs.exe.config
+C:\Users\student\Source\Repos\Programing-Labs1\bin\Debug\Programing Labs.exe
+C:\Users\student\Source\Repos\Programing-Labs1\bin\Debug\Programing Labs.pdb
+C:\Users\student\Source\Repos\Programing-Labs1\obj\Debug\Theme\MenuButtonThemeClicked.baml
+C:\Users\student\Source\Repos\Programing-Labs1\obj\Debug\Theme\MenuButtonTheme.baml
+C:\Users\student\Source\Repos\Programing-Labs1\obj\Debug\Theme\TextBoxTheme.baml
+C:\Users\student\Source\Repos\Programing-Labs1\obj\Debug\MainWindow.g.cs
+C:\Users\student\Source\Repos\Programing-Labs1\obj\Debug\App.g.cs
+C:\Users\student\Source\Repos\Programing-Labs1\obj\Debug\Programing Labs_MarkupCompile.cache
+C:\Users\student\Source\Repos\Programing-Labs1\obj\Debug\Programing Labs_MarkupCompile.lref
+C:\Users\student\Source\Repos\Programing-Labs1\obj\Debug\App.baml
+C:\Users\student\Source\Repos\Programing-Labs1\obj\Debug\MainWindow.baml
+C:\Users\student\Source\Repos\Programing-Labs1\obj\Debug\Programing Labs.g.resources
+C:\Users\student\Source\Repos\Programing-Labs1\obj\Debug\Programing_Labs.Properties.Resources.resources
+C:\Users\student\Source\Repos\Programing-Labs1\obj\Debug\Programing Labs.csproj.GenerateResource.cache
+C:\Users\student\Source\Repos\Programing-Labs1\obj\Debug\Programing Labs.csproj.CoreCompileInputs.cache
+C:\Users\student\Source\Repos\Programing-Labs1\obj\Debug\Programing Labs.csproj.AssemblyReference.cache
