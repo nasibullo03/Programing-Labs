@@ -111,7 +111,9 @@
             <ContentControl Grid.Row="1" 
                             Grid.Column="1"
                             Margin="10"
-                            Background="#007575"/>
+                            Background="#007575"
+                            Content="{Binding Source=Labs_Pages/Lab1_1_Page.xaml}"/>
+            
             
         </Grid>
         
