@@ -38,7 +38,7 @@
             <TextBox x:Name="CatetA" Height="70"/>
             <TextBox x:Name="CatetB" Height="70"/>
             <TextBox x:Name="Heigh" Height="70"/>
-                
+
             <TextBox x:Name="Weight" Height="70"/>
 
         </StackPanel>
@@ -49,6 +49,6 @@
 
 
         </StackPanel>
-        
+
     </Grid>
 </Page>

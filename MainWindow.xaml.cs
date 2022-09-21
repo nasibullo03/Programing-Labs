@@ -16,10 +16,9 @@ namespace Programing_Labs
     /// </summary>
     public partial class MainWindow : Window
     {
-        public static MainWindow FormMain{get;set;}
+        public static MainWindow FormMain { get; set; }
         private static object MenuItem_Sender = null;
         private static object MenuSubitem_Sender = null;
-        /*private static Canvas menuItemBackgroundCanvas = default;*/
         public static BrushConverter converter = new System.Windows.Media.BrushConverter();
         public MainWindow()
         {
@@ -41,55 +40,57 @@ namespace Programing_Labs
         {
             RadioButton radioButton = sender as RadioButton;
             radioButton.Style = (Style)this.FindResource("MenuButtonThemeClicked");
-            for(int i=0; i < MenuItem.MenuItemsRadioButton.Count; ++i) {
-            
+            for (int i = 0; i < MenuItem.MenuItemsRadioButton.Count; ++i)
+            {
+
                 if (radioButton != MenuItem.MenuItemsRadioButton[i])
                 {
                     MenuItem.SubitemsRadioButton[i][0].IsChecked = false;
                     MenuItem.SubitemsRadioButton[i][0].Style = (Style)this.FindResource("MenuSubitemTheme");
-                    foreach (KeyValuePair<int,RadioButton>  item in MenuItem.SubitemsRadioButton[i])
+                    foreach (KeyValuePair<int, RadioButton> item in MenuItem.SubitemsRadioButton[i])
                     {
                         item.Value.Visibility = Visibility.Collapsed;
                     }
                 }
-                if (radioButton == MenuItem.MenuItemsRadioButton[i]) {
+                if (radioButton == MenuItem.MenuItemsRadioButton[i])
+                {
                     MenuItem.SubitemsRadioButton[i][0].IsChecked = true;
                     MenuItem.SubitemsRadioButton[i][0].Style = (Style)this.FindResource("MenuSubitemThemeClicked");
-
-                    foreach (KeyValuePair<int, RadioButton> item in MenuItem.SubitemsRadioButton[i])
+                    if (MenuItem.MenuItemParametrs[i + 1].ItemQuantity <= 1)
                     {
-                        item.Value.Visibility = Visibility.Visible;   
+                        MainFrame.Navigate(new Uri(MenuItem.MenuItemParametrs[i + 1].SoursePage[0], UriKind.Relative));
                     }
-                    
+                    else
+                        foreach (KeyValuePair<int, RadioButton> item in MenuItem.SubitemsRadioButton[i])
+                        {
+                            item.Value.Visibility = Visibility.Visible;
+
+                        }
+
                 }
-                
+
             }
-            
+
             if (MenuItem_Sender != null)
             {
                 (MenuItem_Sender as RadioButton).Style = (Style)this.FindResource("MenuButtonTheme");
-                
+
                 MenuItem_Sender = sender;
             }
             else if (MenuItem_Sender == null) MenuItem_Sender = sender;
-            
+
         }
         public void RadioButtonSubitem_Checked(object sender, RoutedEventArgs e)
         {
             RadioButton radioButton = sender as RadioButton;
             radioButton.Style = (Style)this.FindResource("MenuSubitemThemeClicked");
-            
-            /*MainFrame.Navigate(new Uri((string)MenuItem.SoursePages[radioButton.Name], UriKind.Relative));*/
-            /*MessageBox.Show($"{MenuItem.PagesUri[radioButton.Name]}");*/
-            for(int i=0; i < MenuItem.SubitemsRadioButton.Count; i++)
-            {
-               foreach(KeyValuePair<int,RadioButton> item in MenuItem.SubitemsRadioButton[i]) { 
-                    if (item.Value == radioButton)
-                    {
 
-                        MainFrame.Navigate(new Uri(MenuItem.MenuItemParametrs[i + 1].SoursePage[item.Key],UriKind.Relative));
-                        /* MessageBox.Show(MenuItem.MenuItemParametrs[i + 1].SoursePage[item.Key]);*/
-                    }
+            for (int i = 0; i < MenuItem.SubitemsRadioButton.Count; i++)
+            {
+                foreach (KeyValuePair<int, RadioButton> item in MenuItem.SubitemsRadioButton[i])
+                {
+                    if (item.Value == radioButton)
+                        MainFrame.Navigate(new Uri(MenuItem.MenuItemParametrs[i + 1].SoursePage[item.Key], UriKind.Relative));
                 }
             }
 
@@ -109,28 +110,32 @@ namespace Programing_Labs
             {
                 this.DragMove();
             }
-            if (e.ClickCount==2)
+            if (e.ClickCount == 2)
             {
                 if (this.WindowState == WindowState.Maximized)
                 {
                     WindowBorder.Margin = new Thickness(0);
                     this.WindowState = WindowState.Normal;
-                    
-                } else
+
+                }
+                else
                 {
                     WindowBorder.Margin = new Thickness(8);
                     this.WindowState = WindowState.Maximized;
                 }
             }
             
+
+
         }
 
+        
 
         private void Image_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             Close();
         }
 
-        
+
     }
 }

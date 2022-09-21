@@ -36,7 +36,7 @@
             <Setter Property="BorderThickness" Value="0"/>
         </Style.Setters>
         <Style.Triggers>
-            
+
         </Style.Triggers>
     </Style>
 </ResourceDictionary>

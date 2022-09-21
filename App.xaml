@@ -13,6 +13,6 @@
                 <ResourceDictionary Source="Theme/MenuSubitemThemeClicked.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
-       
+
     </Application.Resources>
 </Application>

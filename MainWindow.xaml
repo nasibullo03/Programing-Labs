@@ -13,10 +13,10 @@
         Loaded="Window_Loaded"
         Margin="5"
         >
-    
+
     <Window.Effect>
         <DropShadowEffect Color="White" BlurRadius="20"/>
-        
+
     </Window.Effect>
     <Window.Triggers>
         <EventTrigger RoutedEvent="Window.Loaded">
@@ -101,7 +101,7 @@
                         <GradientStop Color="White" Offset="0.5"/>
                         <GradientStop Color="White" Offset="0.7"/>
                     </LinearGradientBrush>
-                
+
                 </TextBlock.Foreground>
             </TextBlock>
             <Image Grid.Column="1" 
@@ -124,8 +124,8 @@
                    Grid.Column="1"       
                    Margin="10,50,10,10"
                    NavigationUIVisibility="Hidden"
-                   /> 
+                   />
         </Grid>
-        
+
     </Border>
 </Window>

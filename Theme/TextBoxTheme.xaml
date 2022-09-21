@@ -36,10 +36,10 @@
                                         <Setter Property="Visibility" Value="Hidden"/>
                                     </Style>
                                 </TextBlock.Style>
-                                
+
                             </TextBlock>
                         </Grid>
-                        
+
                     </Border>
                 </ControlTemplate>
             </Setter.Value>

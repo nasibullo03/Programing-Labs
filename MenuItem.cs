@@ -38,7 +38,8 @@ namespace Programing_Labs
         /// <summary>
         /// Заполняет MenuItemParametrs
         /// </summary>
-        private static void FillMenuItemParametrs(){
+        private static void FillMenuItemParametrs()
+        {
             MenuItemParametrs = new Dictionary<int, MenuItem>()
             {
                  {1,new MenuItem(){
@@ -61,15 +62,16 @@ namespace Programing_Labs
             };
 
         }
-        
-        private static RadioButton NewMenuItem() => new RadioButton() {
-                Height = 50,
-                Foreground = (Brush)converter.ConvertFromString("#FFFFFF"),
-                FontSize = 14,
-                Style = (Style)MainWindow.FormMain.FindResource("MenuButtonTheme"),
-                Visibility = Visibility.Visible,
-                IsChecked = false,
-                GroupName = "Items"
+
+        private static RadioButton NewMenuItem() => new RadioButton()
+        {
+            Height = 50,
+            Foreground = (Brush)converter.ConvertFromString("#FFFFFF"),
+            FontSize = 14,
+            Style = (Style)MainWindow.FormMain.FindResource("MenuButtonTheme"),
+            Visibility = Visibility.Visible,
+            IsChecked = false,
+            GroupName = "Items"
         };
         private static RadioButton NewMenuSubitem() => new RadioButton()
         {
@@ -81,23 +83,23 @@ namespace Programing_Labs
             IsChecked = false,
             GroupName = "Subitems",
         };
-        private static void AddSubitems(MenuItem menuItem, int count )
+        private static void AddSubitems(MenuItem menuItem, int count)
         {
             RadioButton Subitem;
             Dictionary<int, RadioButton> SubitemsList = new Dictionary<int, RadioButton>();
-            
-            for (int i=0; i< menuItem.ItemQuantity; ++i)
+
+            for (int i = 0; i < menuItem.ItemQuantity; ++i)
             {
                 Subitem = NewMenuSubitem();
                 Subitem.Name = $"MenuSubitem{count}";
                 Subitem.Content = menuItem.ItemsName[i];
                 Subitem.TabIndex = count;
                 Subitem.Checked += MainWindow.FormMain.RadioButtonSubitem_Checked;
-                Subitem.Visibility = (count == 1)?Visibility.Visible: Visibility.Collapsed;
+                Subitem.Visibility = (count == 1) ? Visibility.Visible : Visibility.Collapsed;
                 SubitemsList[i] = Subitem;
                 MainWindow.FormMain.MenuItemList.Children.Add(Subitem);
-                if (count == 1 && i==0) Subitem.IsChecked = true;
-                
+                if (count == 1 && i == 0) Subitem.IsChecked = true;
+
             }
             SubitemsRadioButton.Add(SubitemsList);
         }
@@ -112,7 +114,7 @@ namespace Programing_Labs
                 Item.Content = $"Lab {valuePairs.Key}";
                 Item.TabIndex = valuePairs.Key;
                 Item.Checked += MainWindow.FormMain.RadioButton_Checked;
-                
+
                 if (valuePairs.Key == 1) Item.IsChecked = true;
                 MainWindow.FormMain.MenuItemList.Children.Add(Item);
                 MenuItemsRadioButton.Add(Item);
