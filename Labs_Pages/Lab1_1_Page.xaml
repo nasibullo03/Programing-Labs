@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:Programing_Labs.Labs_Pages"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="Lab1_1_Page">
+      Title="Lab1_2_Page">
 
     <Grid>
         <Grid.ColumnDefinitions>

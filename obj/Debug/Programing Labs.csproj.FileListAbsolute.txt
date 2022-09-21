@@ -59,4 +59,6 @@ C:\Users\Admin\Source\Repos\Programing-Labs\obj\Debug\Labs_Pages\Lab1_1_Page.g.c
 C:\Users\Admin\Source\Repos\Programing-Labs\obj\Debug\Labs_Pages\Lab1_1_Page.baml
 C:\Users\Admin\Source\Repos\Programing-Labs\obj\Debug\Theme\MenuSubitemTheme.baml
 C:\Users\Admin\Source\Repos\Programing-Labs\obj\Debug\Theme\MenuSubitemThemeClicked.baml
+C:\Users\Admin\Source\Repos\Programing-Labs\obj\Debug\Labs_Pages\Lab1_2_Page.g.cs
+C:\Users\Admin\Source\Repos\Programing-Labs\obj\Debug\Labs_Pages\Lab1_2_Page.baml
 C:\Users\Admin\Source\Repos\Programing-Labs\obj\Debug\Programing Labs.csproj.AssemblyReference.cache
