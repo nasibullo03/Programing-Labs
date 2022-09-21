@@ -79,6 +79,14 @@
                 <RowDefinition Height="75"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
+            <Canvas Width="10"
+                    Height="50"
+                    Background="#00f0f0"
+                    Grid.Column="0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    
+                    />
             <TextBlock x:Name="ProgramName"
                        Text="nasibullo03"
                        VerticalAlignment="Center"

@@ -12,6 +12,7 @@ namespace Programing_Labs
 {
     public class MenuItem
     {
+        public static Dictionary<string, string> PagesUri { get; set; } = new Dictionary<string, string>();
         public static List<RadioButton[]> SubitemsRadioButton {get;set;} = new List<RadioButton[]>();
         public static List<RadioButton> MenuItemsRadioButton { get; set; } = new List<RadioButton>();
         public static BrushConverter converter = new System.Windows.Media.BrushConverter();
@@ -89,6 +90,7 @@ namespace Programing_Labs
                 SubitemsList[i] = Subitem;
                 MainWindow.FormMain.MenuItemList.Children.Add(Subitem);
                 if (count == 1 && i==0) Subitem.IsChecked = true;
+                PagesUri.Add(Subitem.Name, menuItem.SoursePage[i]);
 
             }
             SubitemsRadioButton.Add(SubitemsList);
@@ -112,7 +114,7 @@ namespace Programing_Labs
                     AddSubitems(valuePairs.Value, valuePairs.Key);
                 else
                 {
-                    SubitemsRadioButton.Add(new RadioButton[1]);
+                    SubitemsRadioButton.Add(new RadioButton[] { new RadioButton() });
                 }
 
             }

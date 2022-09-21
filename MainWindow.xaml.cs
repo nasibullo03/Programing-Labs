@@ -34,43 +34,37 @@ namespace Programing_Labs
         {
 
             MenuItem.ShowItems();
-            /*///TODO пока до конца не закончена
-            menuItemBackgroundCanvas = new Canvas()
-            {
-                Width = MenuItemList.Width,
-                Height = MenuItemList.Height
-            };
-            Canvas Pointer = new Canvas()
-            {
-                Width = 10,
-                Height = 50,
-                Background = (Brush)converter.ConvertFromString("#FFFFFF"),
-                
-            };
-            Canvas.SetTop(Pointer, 0);
-            Canvas.SetLeft(Pointer, 0);
+            ///TODO пока до конца не закончена
 
-            menuItemBackgroundCanvas.Children.Add(Pointer);
-            
-            ApplicationMainGrid.Children.Add(menuItemBackgroundCanvas);*/
-            
         }
 
         public void RadioButton_Checked(object sender, RoutedEventArgs e)
         {
             RadioButton radioButton = sender as RadioButton;
             radioButton.Style = (Style)this.FindResource("MenuButtonThemeClicked");
-            for(int i=0; i < MenuItem.MenuItemsRadioButton.Count; ++i)
-            {
-                if(radioButton.Name == MenuItem.MenuItemsRadioButton[i].Name)
+            for(int i=0; i < MenuItem.MenuItemsRadioButton.Count; ++i) {
+
+                if (radioButton != MenuItem.MenuItemsRadioButton[i])
                 {
-                    MenuItem.SubitemsRadioButton[i][0].IsChecked = true;
-                    MenuSubitem_Sender = MenuItem.SubitemsRadioButton[i][0];
+                    MenuItem.SubitemsRadioButton[i][0].IsChecked = false;
+                    foreach (RadioButton item in MenuItem.SubitemsRadioButton[i])
+                    {
+                        item.Visibility = Visibility.Collapsed;
+                    }
                 }
-                break;
-            }
+                if (radioButton == MenuItem.MenuItemsRadioButton[i]) {
+                    MenuItem.SubitemsRadioButton[i][0].IsChecked = true;
+                    foreach(RadioButton item in MenuItem.SubitemsRadioButton[i])
+                    {
+                        item.Visibility = Visibility.Visible;
+                    }
+                    
+                    break;
+                }
                 
-            if(MenuItem_Sender != null)
+            }
+            
+            if (MenuItem_Sender != null)
             {
                 (MenuItem_Sender as RadioButton).Style = (Style)this.FindResource("MenuButtonTheme");
                 
@@ -78,14 +72,15 @@ namespace Programing_Labs
             }
             else if (MenuItem_Sender == null) MenuItem_Sender = sender;
             
-
         }
         public void RadioButtonSubitem_Checked(object sender, RoutedEventArgs e)
         {
             RadioButton radioButton = sender as RadioButton;
             radioButton.Style = (Style)this.FindResource("MenuSubitemThemeClicked");
-
-            if (MenuSubitem_Sender != null)
+            /*MainFrame.Navigate(new Uri("Labs_Pages\\Lab1_1_Page.xaml", UriKind.Relative));*/
+            MessageBox.Show($"{MenuItem.PagesUri[radioButton.Name]}");
+            
+                if (MenuSubitem_Sender != null)
             {
                 (MenuSubitem_Sender as RadioButton).Style = (Style)this.FindResource("MenuSubitemTheme");
 
@@ -106,9 +101,12 @@ namespace Programing_Labs
             {
                 if (this.WindowState == WindowState.Maximized)
                 {
+                    WindowBorder.Margin = new Thickness(0);
                     this.WindowState = WindowState.Normal;
+                    
                 } else
                 {
+                    WindowBorder.Margin = new Thickness(8);
                     this.WindowState = WindowState.Maximized;
                 }
             }
@@ -121,17 +119,6 @@ namespace Programing_Labs
             Close();
         }
 
-        internal void RadioButton_Clicked(object sender, RoutedEventArgs e)
-        {
-            if(e.)
-            RadioButton radioButton = sender as RadioButton;
-            if (ClickedObject != null)
-            {
-                if(radioButton.Name == (ClickedObject as RadioButton).Name)
-                radioButton.IsChecked = false;
-                ClickedObject = sender;
-            }
-            else if (ClickedObject == null) ClickedObject = sender;
-        }
+        
     }
 }
