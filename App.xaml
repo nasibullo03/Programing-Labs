@@ -9,12 +9,9 @@
                 <ResourceDictionary Source="Theme/MenuButtonTheme.xaml"/>
                 <ResourceDictionary Source="Theme/TextBoxTheme.xaml"/>
                 <ResourceDictionary Source="Theme/MenuButtonThemeClicked.xaml"/>
+                <ResourceDictionary Source="Theme/MenuSubitemTheme.xaml"/>
+                <ResourceDictionary Source="Theme/MenuSubitemThemeClicked.xaml"/>
             </ResourceDictionary.MergedDictionaries>
-            <LinearGradientBrush x:Key="MenuItemClickedGradient" StartPoint="0,0" EndPoint="0,1">
-                <GradientStop Offset="0" Color="#006700"/>
-                <GradientStop Offset="1" Color="#00ef00"/>
-            </LinearGradientBrush>
-            
         </ResourceDictionary>
        
     </Application.Resources>

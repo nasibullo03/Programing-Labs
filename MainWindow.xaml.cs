@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Windows.Resources;
 using System.Collections.Generic;
 using System.Windows;
@@ -15,21 +16,25 @@ namespace Programing_Labs
     /// </summary>
     public partial class MainWindow : Window
     {
+        public static MainWindow FormMain{get;set;}
         private static object MenuItem_Sender = null;
-        private static object MenuItem_firstItem = null;
-        private static Canvas menuItemBackgroundCanvas = default;
-        private static BrushConverter converter = new System.Windows.Media.BrushConverter();
+        private static object MenuSubitem_Sender = null;
+        private static object ClickedObject = null;
+        /*private static Canvas menuItemBackgroundCanvas = default;*/
+        public static BrushConverter converter = new System.Windows.Media.BrushConverter();
         public MainWindow()
         {
 
             InitializeComponent();
+            FormMain = this;
 
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            ShowMenuItems();
-            ///TODO пока до конца не закончена
+
+            MenuItem.ShowItems();
+            /*///TODO пока до конца не закончена
             menuItemBackgroundCanvas = new Canvas()
             {
                 Width = MenuItemList.Width,
@@ -47,70 +52,49 @@ namespace Programing_Labs
 
             menuItemBackgroundCanvas.Children.Add(Pointer);
             
-            ApplicationMainGrid.Children.Add(menuItemBackgroundCanvas);
+            ApplicationMainGrid.Children.Add(menuItemBackgroundCanvas);*/
             
         }
-        
-        private  void ShowMenuItems()
-        {
-            Dictionary<int, int> AmountLabs;
-            /* new Design.MenuDesign().AddMenuItems();*/
-            AmountLabs = new Dictionary<int, int>()
-            {
-                {1,2 },
-                {2,2 },
-                {3,2 },
-                {4,2 },
-                {5,2 },
-            };
-            RadioButton MenuItem;
 
-            foreach (var valuePairs in AmountLabs)
-            {
-                MenuItem = new RadioButton()
-                {
-                    Name = $"MemuItem{valuePairs.Key}",
-                    Content = $"Lab {valuePairs.Key}",
-                    Height = 50,
-                    Foreground = (Brush)converter.ConvertFromString("#FFFFFF"),
-                    FontSize = 14,
-                    Style = (valuePairs.Key != 1) ? (Style)this.FindResource("MenuButtonTheme") : (Style)this.FindResource("MenuButtonThemeClicked"),
-                    Visibility = Visibility.Visible,
-                    TabIndex = valuePairs.Key,
-                    IsChecked = (valuePairs.Key != 1) ? false : true,
-
-
-                };
-                if (valuePairs.Key == 1) MenuItem_firstItem = MenuItem;
-
-                MenuItem.Checked += RadioButton_Checked;
-                MenuItemList.Children.Add(MenuItem);
-
-
-            }
-        }
-
-
-        private void RadioButton_Checked(object sender, RoutedEventArgs e)
+        public void RadioButton_Checked(object sender, RoutedEventArgs e)
         {
             RadioButton radioButton = sender as RadioButton;
             radioButton.Style = (Style)this.FindResource("MenuButtonThemeClicked");
-           
+            for(int i=0; i < MenuItem.MenuItemsRadioButton.Count; ++i)
+            {
+                if(radioButton.Name == MenuItem.MenuItemsRadioButton[i].Name)
+                {
+                    MenuItem.SubitemsRadioButton[i][0].IsChecked = true;
+                    MenuSubitem_Sender = MenuItem.SubitemsRadioButton[i][0];
+                }
+                break;
+            }
+                
             if(MenuItem_Sender != null)
             {
                 (MenuItem_Sender as RadioButton).Style = (Style)this.FindResource("MenuButtonTheme");
                 
                 MenuItem_Sender = sender;
             }
-            else if (MenuItem_Sender == null)
-            {
-                (MenuItem_firstItem as RadioButton).Style = (Style)this.FindResource("MenuButtonTheme");
-                MenuItem_Sender = sender;
-            }
+            else if (MenuItem_Sender == null) MenuItem_Sender = sender;
+            
 
         }
+        public void RadioButtonSubitem_Checked(object sender, RoutedEventArgs e)
+        {
+            RadioButton radioButton = sender as RadioButton;
+            radioButton.Style = (Style)this.FindResource("MenuSubitemThemeClicked");
 
-       
+            if (MenuSubitem_Sender != null)
+            {
+                (MenuSubitem_Sender as RadioButton).Style = (Style)this.FindResource("MenuSubitemTheme");
+
+                MenuSubitem_Sender = sender;
+            }
+            else if (MenuSubitem_Sender == null) MenuSubitem_Sender = sender;
+
+
+        }
 
         private void Border_MouseDown(object sender, MouseButtonEventArgs e)
         {
@@ -135,6 +119,19 @@ namespace Programing_Labs
         private void Image_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             Close();
+        }
+
+        internal void RadioButton_Clicked(object sender, RoutedEventArgs e)
+        {
+            if(e.)
+            RadioButton radioButton = sender as RadioButton;
+            if (ClickedObject != null)
+            {
+                if(radioButton.Name == (ClickedObject as RadioButton).Name)
+                radioButton.IsChecked = false;
+                ClickedObject = sender;
+            }
+            else if (ClickedObject == null) ClickedObject = sender;
         }
     }
 }

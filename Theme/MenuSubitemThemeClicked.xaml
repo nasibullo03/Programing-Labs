@@ -2,7 +2,7 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <Style BasedOn="{StaticResource {x:Type ToggleButton}}"
            TargetType="{x:Type RadioButton}"
-           x:Key="MenuButtonThemeClicked">
+           x:Key="MenuSubitemThemeClicked">
         <Style.Setters>
             <Setter Property="Template">
                 <Setter.Value>
@@ -18,7 +18,8 @@
 
                             <TextBlock Text="{TemplateBinding Property=Content}"
                                        VerticalAlignment="Center"
-                                       HorizontalAlignment="Center"
+                                       HorizontalAlignment="Left"
+                                       Margin="35,0,0,0"
                                        Grid.Column="1"
                                        />
                             <Rectangle x:Name = "MenuItemRectangle"
@@ -27,16 +28,29 @@
                                        Fill = "#00f0f0"
                                        HorizontalAlignment = "Left"
                                        Grid.Column="0"
+                                       Visibility="Visible"
                             />
+                            <Ellipse Width="10" 
+                                     Height="10" 
+                                     Fill="#0BD685" 
+                                     StrokeThickness="0"
+                                     Grid.Column ="1"
+                                     Margin="15,0,0,0"
+                                     HorizontalAlignment="Left"
+                                     VerticalAlignment="Center"
+                                     />
+
                         </Grid>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
-            <Setter Property="Background" Value="#009191"/>
+            <Setter Property="Background" Value="Transparent"/>
             <Setter Property="BorderThickness" Value="0"/>
         </Style.Setters>
         <Style.Triggers>
-            
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="#007575"/>
+            </Trigger>
         </Style.Triggers>
     </Style>
 </ResourceDictionary>

@@ -101,20 +101,23 @@
                    VerticalAlignment="Top" 
                    Width="25" 
                    Margin="3"
-                   MouseLeftButtonDown="Image_MouseLeftButtonDown">
+                   MouseLeftButtonDown="Image_MouseLeftButtonDown"
+                   >
                 <Image.Source>
-                    <BitmapImage DecodePixelWidth="150"  UriSource="/Images/close-button.png" DecodePixelHeight="150"/>
+                    <BitmapImage DecodePixelWidth="150"  
+                                 UriSource="/Images/close-button.png" 
+                                 DecodePixelHeight="150"/>
                 </Image.Source>
             </Image>
-            <StackPanel x:Name="MenuItemList" Grid.Row="1"/>
+            <StackPanel x:Name="MenuItemList" Grid.Row="1">
+                
+            </StackPanel>
 
-            <ContentControl Grid.Row="1" 
-                            Grid.Column="1"
-                            Margin="10"
-                            Background="#007575"
-                            Content="{Binding Source=Labs_Pages/Lab1_1_Page.xaml}"/>
-            
-            
+            <Frame x:Name="MainFrame"
+                    Grid.Row="1" 
+                   Grid.Column="1"       
+                   Margin="10,0,10,10"
+                   />
         </Grid>
         
     </Border>
