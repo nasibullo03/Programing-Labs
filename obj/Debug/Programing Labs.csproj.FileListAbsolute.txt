@@ -69,3 +69,6 @@ C:\Users\student\Source\Repos\Programing-Labs1\obj\Debug\Labs_Pages\Lab1_2_Page.
 C:\Users\student\Source\Repos\Programing-Labs1\obj\Debug\Labs_Pages\Lab1_2_Page.baml
 C:\Users\student\Source\Repos\Programing-Labs1\obj\Debug\Theme\SearchBoxTheme.baml
 C:\Users\student\Source\Repos\Programing-Labs1\obj\Debug\Theme\TextBoxTheme.baml
+C:\Users\Admin\Source\Repos\Programing-Labs\obj\Debug\Theme\ButtonTheme.baml
+C:\Users\Admin\Source\Repos\Programing-Labs\obj\Debug\Theme\LabelTheme.baml
+C:\Users\Admin\Source\Repos\Programing-Labs\obj\Debug\Theme\SearchBoxTheme.baml

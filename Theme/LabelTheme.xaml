@@ -11,7 +11,8 @@
                               HorizontalAlignment="Stretch"
                               Background="{TemplateBinding Background}">
 
-                            <Label Content="{TemplateBinding Content}"
+                            <Label x:Name="MainLabel"
+                                   Content="{TemplateBinding Content}"
                                    FontSize="{TemplateBinding FontSize}"
                                    HorizontalAlignment="Right"
                                    VerticalAlignment="Center"

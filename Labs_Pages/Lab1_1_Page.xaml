@@ -6,7 +6,9 @@
       xmlns:local="clr-namespace:Programing_Labs.Labs_Pages"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="Lab1_2_Page">
+      Title="Lab1_2_Page"
+      Loaded="Page_Loaded"
+      >
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -24,45 +26,53 @@
                FontSize="22" 
                Foreground="White" 
                Grid.Row="0"
-               FontWeight="Bold" Grid.Column="1" Height="38" Margin="26,16,176,16" Width="448"
+               FontWeight="Bold" 
+               Grid.ColumnSpan="2"
                />
         <!-- Панел для Label-ы -->
         <StackPanel x:Name="PageLabels" Grid.Row="1" HorizontalAlignment="Right" Width="88">
-            <Label Content="Катет А:"  Style="{StaticResource LabelTheme}" Height="70" Foreground ="White" FontSize="18"  VerticalAlignment="Top"/>
-            <Label Content="Катет B:"   Style="{StaticResource LabelTheme}" Height="70" Foreground ="White" FontSize="18"  VerticalAlignment="Top"/>
-            <Label Content="Толщина:"   Style="{StaticResource LabelTheme}" Height="70" Foreground ="White" FontSize="18"  VerticalAlignment="Top"/>
-            <Label Content="Масса:"   Style="{StaticResource LabelTheme}" Height="70" Foreground ="White" FontSize="18" VerticalAlignment="Top"/>
+            <Label Content="Катет А:"  Style="{StaticResource LabelTheme}" Height="60" Foreground ="White" FontSize="18"  VerticalAlignment="Top"/>
+            <Label Content="Катет B:"   Style="{StaticResource LabelTheme}" Height="60" Foreground ="White" FontSize="18"  VerticalAlignment="Top"/>
+            <Label Content="Толщина:"   Style="{StaticResource LabelTheme}" Height="60" Foreground ="White" FontSize="18"  VerticalAlignment="Top"/>
+            <Label Content="Масса:"   Style="{StaticResource LabelTheme}" Height="60" Foreground ="White" FontSize="18" VerticalAlignment="Top"/>
+            <Label x:Name="LblAnswerName" Content="Ответ:"   Style="{StaticResource LabelTheme}" Height="60" Foreground ="White" FontSize="18" VerticalAlignment="Top"/>
         </StackPanel>
         <!-- Панел для TextBox-ы -->
         <StackPanel Grid.Column="1" Grid.Row="1" >
-            <TextBox x:Name="CatetA" 
-                     Height="70"
+            <TextBox x:Name="TextBox_CatetA" 
+                     Height="60"
                      Style="{StaticResource TextBoxTheme}"
                      FontSize="18"
-                     
                      />
-            <TextBox x:Name="CatetB" 
-                     Height="70"
+            <TextBox x:Name="TextBox_CatetB" 
+                     Height="60"
                      Style="{StaticResource TextBoxTheme}"
                      FontSize="18"
-                     
                      />
-            <TextBox x:Name="Heigh" 
-                     Height="70"
+            <TextBox x:Name="TextBox_Height" 
+                     Height="60"
                      Style="{StaticResource TextBoxTheme}"
                      FontSize="18"
-                     
                      />
+            <TextBox x:Name="TextBox_Weight"
+                     Height="60"
+                     Style="{StaticResource TextBoxTheme}"
+                     FontSize="18"
+                     />
+            <Label x:Name="LblAnswer"
+                   Content=""
+                   Foreground="#0BD685"
+                   Height="60"
+                   FontSize="18"
+                   Style="{StaticResource LabelTheme}"
+                   HorizontalAlignment="Left"
+                   Margin="10,0,0,0"
+                   />
 
-            <TextBox x:Name="Weight"
-                     Height="70"
-                     Style="{StaticResource TextBoxTheme}"
-                     FontSize="18"
-                     
-                     />
+
 
         </StackPanel>
-        <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Top" Grid.ColumnSpan="2" Height="50"   >
+        <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Top" Height="50" Grid.ColumnSpan="2">
             <Button x:Name="BtnClear" 
                     Style="{StaticResource ButtonTheme}" 
                     FontSize="16" 
@@ -70,6 +80,7 @@
                     Height="50" Width="150" 
                     Margin="25,0,25,0" 
                     FontWeight="Bold"
+                    Click="BtnClear_Click"
                     />
             <Button x:Name="BtnSolve" 
                     Style="{StaticResource ButtonTheme}" 
@@ -77,7 +88,8 @@
                     Content="Решать" 
                     Height="50" Width="150" 
                     Margin="25,0,25,0" 
-                    FontWeight="Bold"/>
+                    FontWeight="Bold" Click="BtnSolve_Click"
+                    />
 
 
 

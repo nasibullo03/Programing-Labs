@@ -5,10 +5,10 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type TextBox}">
-                    <Border Background="{TemplateBinding Background}" 
+                    <Border Background="Transparent" 
                             CornerRadius="10" 
-                            BorderThickness="0"
-                            Height="50"
+                            BorderThickness="4"
+                            Height="45"
                             
                             >
                         <Grid>
@@ -23,16 +23,21 @@
                                      x:Name="MainTextBox"
                                      FontSize="{TemplateBinding FontSize}"
                                      />
-                            <TextBlock IsHitTestVisible="False"
+                            <TextBox x:Name="Placeholder"
+                                       IsHitTestVisible="False"
                                        Text="Вводите значение"
                                        VerticalAlignment="Center"
                                        HorizontalAlignment="Left"
                                        Margin="10,0,0,0"
                                        FontSize="11"
+                                        Background="Transparent"
+                                     BorderThickness="0"
                                        Foreground="#CFCFCF"
-                                       Grid.Column="1">
-                                <TextBlock.Style>
-                                    <Style TargetType="{x:Type TextBlock}">
+                                       Grid.Column="1"
+                                       IsReadOnly="True"
+                                     >
+                                <TextBox.Style>
+                                    <Style TargetType="{x:Type TextBox}">
                                         <Style.Triggers>
                                             <DataTrigger Binding="{Binding Text,ElementName=MainTextBox}" Value="">
                                                 <Setter Property="Visibility" Value="Visible"/>
@@ -40,15 +45,14 @@
                                         </Style.Triggers>
                                         <Setter Property="Visibility" Value="Hidden"/>
                                     </Style>
-                                </TextBlock.Style>
+                                </TextBox.Style>
 
-                            </TextBlock>
+                            </TextBox>
                         </Grid>
 
                     </Border>
-                    
+
                 </ControlTemplate>
-                <Setter Property="Background" Value="White"/>
             </Setter.Value>
             
         </Setter>
