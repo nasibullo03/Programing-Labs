@@ -51,7 +51,8 @@ namespace Programing_Labs.Labs_Pages
             {
                 textBox.Text = "";
                 textBox.PreviewTextInput +=
-            new TextCompositionEventHandler(Lab1_1_Page.PreviewTextInput);
+            new TextCompositionEventHandler(Check.PreviewTextInput);
+                DataObject.AddPastingHandler(textBox, (s, a) => a.CancelCommand());
             }
         }
 
@@ -64,46 +65,16 @@ namespace Programing_Labs.Labs_Pages
         {
             foreach (var textBox in UITextBoxes)
             textBox.Text = string.Empty;
+
             LblAnswer.Visibility = Visibility.Hidden;
             LblAnswerName.Visibility = Visibility.Hidden;
         }
         
-        private bool CheckTextBoxesValues()
-        {
-            string message = string.Empty;
-            foreach(TextBox textBox in UITextBoxes)
-            {
-                if(textBox.Text == string.Empty)
-                {
-                    if(!message.Contains("-Поле не может быть пустым."))
-                    message += "-Поле не может быть пустым.\n";
-                   
-                }
-                if (textBox.Text == "0")
-                {
-                    if (!message.Contains("-Значение поля не может быть нулевым"))
-                        message += "-Значение поля не может быть нулевым.\n";
-                }
-
-                if (double.TryParse(textBox.Text, out var numberStyles) == true && numberStyles<0)
-                {
-                    if (!message.Contains("-Значение поля не может быть отрицательным."))
-                        message += "-Значение поля не может быть отрицательным.\n";
-                }
-            }
-            if (message != string.Empty)
-            {
-                MessageBox.Show($"{message}Введите допустимое значение!", "Неверное значение", MessageBoxButton.OK, MessageBoxImage.Warning);
-                return false;
-            }
-            
-
-            return true;
-        }
+        
 
         private void BtnSolve_Click(object sender, RoutedEventArgs e)
         {
-            if (CheckTextBoxesValues())
+            if (Check.CheckTextBoxesValues(UITextBoxes))
             {   
                 double.TryParse(CatetA_TextBox.Text, out var CatetA);
                 double.TryParse(CatetB_TextBox.Text, out var CatetB);
@@ -114,18 +85,7 @@ namespace Programing_Labs.Labs_Pages
                 LblAnswerName.Visibility = Visibility.Visible;
             }
         }
-        public static new void PreviewTextInput(object sender, TextCompositionEventArgs e)
-        {
-            bool approvedDecimalPoint = false;
-
-            if (e.Text == ".")
-            {
-                if (!((TextBox)sender).Text.Contains("."))
-                    approvedDecimalPoint = true;
-            }
-            if (!(char.IsDigit(e.Text, e.Text.Length - 1) || approvedDecimalPoint))
-                e.Handled = true;
-        }
+        
         
 
     }

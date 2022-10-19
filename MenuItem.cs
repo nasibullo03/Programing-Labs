@@ -50,7 +50,7 @@ namespace Programing_Labs
                 },
                 {2,new MenuItem(){
                     ItemQuantity=1,
-                    SoursePage =  new[] {"Labs_Pages\\Lab1_1_Page.xaml"},
+                    SoursePage =  new[] {"Labs_Pages\\Lab2_Page.xaml"},
                     }
                 },
                 {3,new MenuItem(){
@@ -114,10 +114,15 @@ namespace Programing_Labs
                 Item.Content = $"Lab {valuePairs.Key}";
                 Item.TabIndex = valuePairs.Key;
                 Item.Checked += MainWindow.FormMain.RadioButton_Checked;
+                if (valuePairs.Key == 1)
+                {
+                    Item.IsChecked = true;
+                    MainWindow.FormMain.MainFrame.Navigate(new Uri(MenuItem.MenuItemParametrs[1].SoursePage[0], UriKind.Relative));
 
-                if (valuePairs.Key == 1) Item.IsChecked = true;
+                }
                 MainWindow.FormMain.MenuItemList.Children.Add(Item);
                 MenuItemsRadioButton.Add(Item);
+                
                 if (valuePairs.Value.ItemQuantity > 1)
                     AddSubitems(valuePairs.Value, valuePairs.Key);
                 else

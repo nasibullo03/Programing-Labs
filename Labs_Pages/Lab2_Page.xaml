@@ -1,0 +1,109 @@
+﻿<Page x:Class="Programing_Labs.Labs_Pages.Lab2_Page"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Programing_Labs.Labs_Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="Lab2_Page"
+      Loaded="Page_Loaded"
+      >
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="70"/>
+            <RowDefinition Height="310"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Label Content="Метод дихотомии" 
+            HorizontalAlignment="Center" 
+            VerticalAlignment="Center" 
+            FontSize="22" 
+            Foreground="White" 
+            Grid.Row="0"
+            Grid.ColumnSpan="2"
+            FontWeight="Bold"
+               />
+
+        <Menu  Height="auto" VerticalAlignment="Top" Background="Transparent" Grid.Row="1">
+            <!--TextBoxA-->
+            <MenuItem >
+                <MenuItem.Header>
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Top" >
+                        <Label Content="a =" Style="{StaticResource LabelTheme}" FontWeight="Bold"  Foreground ="White" FontSize="18"  VerticalAlignment="Top"/>
+                        <TextBox x:Name="TextBoxA" Style="{StaticResource TextBoxTheme}" FontSize="18" Margin="0,-5,0,0"         
+                        />
+                    </StackPanel>
+                </MenuItem.Header>
+            </MenuItem>
+            <!--TextBoxB-->
+            <MenuItem >
+                <MenuItem.Header>
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Top" >
+                        <Label Content="b =" Style="{StaticResource LabelTheme}" FontWeight="Bold"  Foreground ="White" FontSize="18"  VerticalAlignment="Top"/>
+                        <TextBox x:Name="TextBoxB" Style="{StaticResource TextBoxTheme}" FontSize="18" Margin="0,-5,0,0"         
+                        />
+                    </StackPanel>
+                </MenuItem.Header>
+            </MenuItem>
+            <!--TextBoxE-->
+            <MenuItem >
+                <MenuItem.Header>
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Top">
+                        <Label Content="e =" Style="{StaticResource LabelTheme}" FontWeight="Bold"  Foreground ="White" FontSize="18"  VerticalAlignment="Top"/>
+                        <TextBox x:Name="TextBoxE" Style="{StaticResource TextBoxTheme}" FontSize="18" Margin="0,-5,0,0"         
+                        />
+                    </StackPanel>
+                </MenuItem.Header>
+            </MenuItem>
+            <!--TextBoxFx-->
+            <MenuItem >
+                <MenuItem.Header>
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Top">
+                        <Label Content="F(x) =" Style="{StaticResource LabelTheme}" FontWeight="Bold"  Foreground ="White" FontSize="18"  VerticalAlignment="Top"/>
+                        <TextBox x:Name="TextBoxFx" Style="{StaticResource TextBoxTheme}" FontSize="18" Margin="0,-5,0,0"         
+                        />
+                    </StackPanel>
+                </MenuItem.Header>
+            </MenuItem>
+            <!--Выберите операцию-->
+            <MenuItem Background="#007575"  >
+                <MenuItem.Header>
+                    <Label Content="Вибрать операцию" 
+                               Style="{StaticResource LabelTheme}" 
+                               Foreground ="White" 
+                               FontSize="16"  
+                               VerticalAlignment="Center"/>
+                       
+                </MenuItem.Header>
+                <MenuItem Header="Рассчитать" 
+                          FontWeight="Black" 
+                          FontSize="16" 
+                          Foreground="#007575" 
+                          Background="Transparent"
+                          Click="MenuItemSolve_Click"
+                          />
+                <MenuItem 
+                          Header="Очистить" 
+                          FontWeight="Black" 
+                          FontSize="16" 
+                          Foreground="#007575" 
+                          Background="Transparent"
+                          Click="MenuItemClear_Click"
+                          />
+
+
+
+
+
+            </MenuItem>
+        </Menu>
+        <Image Name="ImgFormula" Grid.Row ="1" Height="50" />
+
+    </Grid>
+</Page>

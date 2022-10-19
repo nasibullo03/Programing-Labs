@@ -76,7 +76,8 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="75"/>
+                <RowDefinition Height="29.5"/>
+                <RowDefinition Height="45.5"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
             <Canvas Width="10"
@@ -84,7 +85,7 @@
                     Background="#00f0f0"
                     Grid.Column="0"
                     HorizontalAlignment="Left"
-                    VerticalAlignment="Top"
+                    VerticalAlignment="Top" Grid.RowSpan="2"
                     
                     />
             <TextBlock x:Name="ProgramName"
@@ -92,7 +93,7 @@
                        VerticalAlignment="Center"
                        HorizontalAlignment="Left"
                        FontSize="22"
-                       Margin="20,0,0,0"
+                       Margin="20,23,0,22" Grid.RowSpan="2"
                        >
                 <TextBlock.Foreground>
                     <LinearGradientBrush StartPoint="0,0" EndPoint="1,1" >
@@ -108,7 +109,7 @@
                    HorizontalAlignment="Right" 
                    VerticalAlignment="Top" 
                    Width="25" 
-                   Margin="3"
+                   Margin="0,3,3,0"
                    MouseLeftButtonDown="Image_MouseLeftButtonDown"
                    >
                 <Image.Source>
@@ -117,13 +118,13 @@
                                  DecodePixelHeight="150"/>
                 </Image.Source>
             </Image>
-            <StackPanel x:Name="MenuItemList" Grid.Row="1"/>
+            <StackPanel x:Name="MenuItemList" Grid.Row="2"/>
 
             <Frame x:Name="MainFrame"
                    Grid.RowSpan="2" 
                    Grid.Column="1"       
-                   Margin="10,50,10,10"
-                   NavigationUIVisibility="Hidden"
+                   Margin="10,20.5,10,10"
+                   NavigationUIVisibility="Hidden" Grid.Row="1"
                    />
         </Grid>
 

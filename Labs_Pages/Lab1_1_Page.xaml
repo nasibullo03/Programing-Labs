@@ -73,23 +73,24 @@
 
         </StackPanel>
         <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Top" Height="50" Grid.ColumnSpan="2">
+            <Button x:Name="BtnSolve" 
+                    Style="{StaticResource ButtonTheme}" 
+                    FontSize="16" 
+                    Content="Рассчитать" 
+                    Height="50" Width="150" 
+                    Margin="25,0,25,0" 
+                    FontWeight="Bold" Click="BtnSolve_Click"
+                    />
             <Button x:Name="BtnClear" 
                     Style="{StaticResource ButtonTheme}" 
                     FontSize="16" 
-                    Content="Отчистить"  
+                    Content="Очистить"  
                     Height="50" Width="150" 
                     Margin="25,0,25,0" 
                     FontWeight="Bold"
                     Click="BtnClear_Click"
                     />
-            <Button x:Name="BtnSolve" 
-                    Style="{StaticResource ButtonTheme}" 
-                    FontSize="16" 
-                    Content="Решать" 
-                    Height="50" Width="150" 
-                    Margin="25,0,25,0" 
-                    FontWeight="Bold" Click="BtnSolve_Click"
-                    />
+            
 
 
 

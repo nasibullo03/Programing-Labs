@@ -13,13 +13,13 @@
                             >
                         <Grid>
                             <Rectangle StrokeThickness="1"/>
-                            <TextBox Margin="1"
+                            <TextBox Margin="1,0,1,1"
                                      Text="{TemplateBinding Text}"
                                      BorderThickness="0"
                                      Background="Transparent"
                                      VerticalAlignment="Center"
-                                     Padding="5"
-                                     Foreground="#00f0f0"
+                                     Padding="5,0,0,0"
+                                     Foreground="#00f0f0"                                    
                                      x:Name="MainTextBox"
                                      FontSize="{TemplateBinding FontSize}"
                                      />
@@ -28,7 +28,7 @@
                                        Text="Вводите значение"
                                        VerticalAlignment="Center"
                                        HorizontalAlignment="Left"
-                                       Margin="10,0,0,0"
+                                       Margin="5,0,0,0"
                                        FontSize="11"
                                         Background="Transparent"
                                      BorderThickness="0"

@@ -30,7 +30,7 @@ namespace Programing_Labs
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-
+           
             MenuItem.ShowItems();
             ///TODO пока до конца не закончена
 

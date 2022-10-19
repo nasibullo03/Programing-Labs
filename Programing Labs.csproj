@@ -35,6 +35,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="org.matheval, Version=1.0.0.3, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\org.matheval.1.0.0.3\lib\net472\org.matheval.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -53,6 +56,9 @@
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="WindowsFormsIntegration" />
+    <Reference Include="WpfMath, Version=0.11.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\WpfMath.0.11.0\lib\net452\WpfMath.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -67,6 +73,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Labs_Pages\Lab2_Page.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -75,6 +85,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Check.cs" />
     <Compile Include="Core\ObservableObject.cs" />
     <Compile Include="Core\RelayCommand.cs" />
     <Compile Include="Design\MenuDesign.cs" />
@@ -83,6 +94,9 @@
     </Compile>
     <Compile Include="Labs_Pages\Lab1_2_Page.xaml.cs">
       <DependentUpon>Lab1_2_Page.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Labs_Pages\Lab2_Page.xaml.cs">
+      <DependentUpon>Lab2_Page.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -140,6 +154,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -150,6 +165,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Fonts\" />
+    <Folder Include="Libreries\" />
     <Folder Include="MVVM\Model\" />
     <Folder Include="MVVM\ViewModel\" />
     <Folder Include="MVVM\View\" />
