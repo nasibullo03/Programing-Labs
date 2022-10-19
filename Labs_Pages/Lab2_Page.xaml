@@ -16,8 +16,9 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="70"/>
-            <RowDefinition x:Name="mainDefinition" Height="310"/>
+            
             <RowDefinition/>
+            <RowDefinition Height="70"/>
         </Grid.RowDefinitions>
 
         <Label Content="Метод дихотомии" 
@@ -99,11 +100,14 @@
 
             </MenuItem>
         </Menu>
-            <WpfPlot Name="WpfPlot1"  Height="{Binding ElementName=mainDefinition}" MinHeight="350" />
+            <DockPanel>
+                <WpfPlot Name="WpfPlot1" Height="500"    ScrollViewer.CanContentScroll="True"/>
+            </DockPanel>
+            
         </StackPanel>
-        <DockPanel />-->
         
-        
-         
+
+
+
     </Grid>
 </Page>

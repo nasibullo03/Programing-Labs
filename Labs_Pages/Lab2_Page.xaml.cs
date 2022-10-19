@@ -127,7 +127,7 @@ namespace Programing_Labs.Labs_Pages
                 Xpoints.Add(i);
                 Ypoints.Add(F(i));
             }
-            WpfPlot1.Plot.AddScatter(Xpoints.ToArray(),Ypoints.ToArray());
+            WpfPlot1.Plot.AddScatter(new double[] { -1,2,-3,4,5,6},new double[] { -2,-2,2,-2,5,2},markerShape:MarkerShape.filledDiamond);
             WpfPlot1.Refresh();
 
         }
