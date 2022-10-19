@@ -16,7 +16,7 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="70"/>
-            <RowDefinition Height="310"/>
+            <RowDefinition x:Name="mainDefinition" Height="310"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
 
@@ -29,8 +29,8 @@
             Grid.ColumnSpan="2"
             FontWeight="Bold"
                />
-
-        <Menu  Height="auto" VerticalAlignment="Top" Background="Transparent" Grid.Row="1">
+        <StackPanel Grid.Row="1" Height="auto">
+        <Menu  Height="auto" VerticalAlignment="Top" Background="Transparent">
             <!--TextBoxA-->
             <MenuItem >
                 <MenuItem.Header>
@@ -97,13 +97,13 @@
                           Click="MenuItemClear_Click"
                           />
 
-
-
-
-
             </MenuItem>
         </Menu>
-        <Image Name="ImgFormula" Grid.Row ="1" Height="50" />
-
+            <WpfPlot Name="WpfPlot1"  Height="{Binding ElementName=mainDefinition}" MinHeight="350" />
+        </StackPanel>
+        <DockPanel />-->
+        
+        
+         
     </Grid>
 </Page>

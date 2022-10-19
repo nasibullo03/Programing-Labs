@@ -1,10 +1,13 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using org.matheval;
-using WpfMath;
+using ScottPlot;
+    
+
 
 namespace Programing_Labs.Labs_Pages
 {
@@ -19,6 +22,8 @@ namespace Programing_Labs.Labs_Pages
         private TextBox TxtBxFx { get; set; }
         private TextBox[] UITextBoxes { get; set; }
 
+
+
         public Lab2_Page()
         {
             InitializeComponent();
@@ -26,6 +31,7 @@ namespace Programing_Labs.Labs_Pages
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
+          
             TxtBxA = GetStyleElement(TextBoxA, "MainTextBox") as TextBox;
             TxtBxB = GetStyleElement(TextBoxB, "MainTextBox") as TextBox;
             TxtBxE = GetStyleElement(TextBoxE, "MainTextBox") as TextBox;
@@ -40,7 +46,7 @@ namespace Programing_Labs.Labs_Pages
                 TxtBxE,
                 TxtBxFx
             };
-            
+
             foreach (TextBox textBox in UITextBoxes)
             {
                 textBox.Text = "";
@@ -48,7 +54,7 @@ namespace Programing_Labs.Labs_Pages
                 if ((string)textBox.Tag == "formula") continue;
                 else textBox.PreviewTextInput +=
             new TextCompositionEventHandler(Check.PreviewTextInput);
-                
+
             }
         }
         private object GetStyleElement(Control element, string name) =>
@@ -68,8 +74,8 @@ namespace Programing_Labs.Labs_Pages
                 double.TryParse(TxtBxA.Text, out var StartPoint);
                 double.TryParse(TxtBxB.Text, out var EndPoint);
                 double.TryParse(TxtBxE.Text, out var Accuracy);
-                ShowFormula(@"f(x)="+TxtBxFx.Text);
-                int count=0;
+                
+                int count = 0;
                 /*double.TryParse(TxtBxFx.Text, out var Fx);*/
                 while (true)
                 {
@@ -90,7 +96,9 @@ namespace Programing_Labs.Labs_Pages
                     else
                     {
                         Result = (StartPoint + EndPoint) / 2;
+                        ShowGraph(StartPoint, EndPoint, Result);
                         System.Windows.Forms.MessageBox.Show($"Result:{Result} Count:{count}");
+                        
                         break;
                     }
                 }
@@ -103,34 +111,25 @@ namespace Programing_Labs.Labs_Pages
         }
         private double F(double X)
         {
-            
+
             org.matheval.Expression expression = new org.matheval.Expression(TxtBxFx.Text.ToLower());
             expression.Bind("x", X);
             double value = expression.Eval<double>();
             /*System.Windows.Forms.MessageBox.Show(value.ToString());*/
             return value;
         }
-        private void ShowFormula(string value)
+        private void ShowGraph(double StartPoint, double EndPoint, double Result)
         {
-            
-            const string fileName = @"T:\Temp\formula.png";
-
-            var parser = new TexFormulaParser();
-            var formula = parser.Parse(value);
-            
-            var renderer = formula.GetRenderer(TexStyle.Display, 60.0, "Arial",foreground:Brushes.White);
-            var bitmapSource = renderer.RenderToBitmap(0.0, 0.0);
-            ImgFormula.Source = bitmapSource;
-
-           /* var encoder = new PngBitmapEncoder();
-            encoder.Frames.Add(BitmapFrame.Create(bitmapSource));
-            using (var target = new FileStream(fileName, FileMode.Create))
+            List<double> Xpoints = new List<double>();
+            List<double> Ypoints = new List<double>();
+            for(double i = StartPoint; i <= EndPoint; ++i)
             {
-                encoder.Save(target);
-                Console.WriteLine($"File saved to {fileName}");
-            }*/
+                Xpoints.Add(i);
+                Ypoints.Add(F(i));
+            }
+            WpfPlot1.Plot.AddScatter(Xpoints.ToArray(),Ypoints.ToArray());
+            WpfPlot1.Refresh();
+
         }
-
-
     }
 }
