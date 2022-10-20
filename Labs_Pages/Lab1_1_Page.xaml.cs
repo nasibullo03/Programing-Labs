@@ -80,7 +80,7 @@ namespace Programing_Labs.Labs_Pages
                 double.TryParse(CatetB_TextBox.Text, out var CatetB);
                 double.TryParse(Height_TextBox.Text, out var HeightValue);
                 double.TryParse(Weight_TextBox.Text, out var Weight);
-                LabelAnswer.Content = 2 * Weight / (CatetA * CatetB * HeightValue);
+                LabelAnswer.Content =Math.Round(2 * Weight / (CatetA * CatetB * HeightValue),3);
                 LblAnswer.Visibility = Visibility.Visible;
                 LblAnswerName.Visibility = Visibility.Visible;
             }

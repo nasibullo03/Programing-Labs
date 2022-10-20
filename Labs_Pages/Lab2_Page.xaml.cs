@@ -85,9 +85,9 @@ namespace Programing_Labs.Labs_Pages
 
 
 
-                Result = -1 - Math.Pow(Math.Pow(2*(x-1)*(x-7),2), 1 / 3);
-                /*int count = 0;
-                *//*double.TryParse(TxtBxFx.Text, out var Fx);*//*
+                /* Result = -1 - Math.Pow(Math.Pow(2*(x-1)*(x-7),2), 1 / 3);*/
+                int count = 0;
+                double.TryParse(TxtBxFx.Text, out var Fx);
                 while (true)
                 {
                     ++count;
@@ -95,7 +95,7 @@ namespace Programing_Labs.Labs_Pages
                     {
                         Middle = (StartPoint + EndPoint) / 2;
 
-                        if (F(Math.Round(StartPoint,2)) * F(Math.Round(Middle,2)) < 0)
+                        if (F(Math.Round(StartPoint, 2)) * F(Math.Round(Middle, 2)) < 0)
                         {
                             EndPoint = Middle;
                         }
@@ -109,10 +109,10 @@ namespace Programing_Labs.Labs_Pages
                         Result = (StartPoint + EndPoint) / 2;
                         ShowGraph(a, b, Result);
                         System.Windows.Forms.MessageBox.Show($"Result:{Result} Count:{count}");
-                        
+
                         break;
                     }
-                }*/
+                }
 
             }
         }
