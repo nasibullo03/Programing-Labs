@@ -4,6 +4,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Drawing;
 using org.matheval;
 using ScottPlot;
     
@@ -21,6 +22,8 @@ namespace Programing_Labs.Labs_Pages
         private TextBox TxtBxE { get; set; }
         private TextBox TxtBxFx { get; set; }
         private TextBox[] UITextBoxes { get; set; }
+        List<double> Xpoints = new List<double>();
+        List<double> Ypoints = new List<double>();
 
 
 
@@ -68,15 +71,23 @@ namespace Programing_Labs.Labs_Pages
              Точность  = Accuracy
              */
             double Middle, Result;
+            Xpoints.Clear();
+            Ypoints.Clear();
+
 
             if (Check.CheckTextBoxesValues(UITextBoxes))
             {
                 double.TryParse(TxtBxA.Text, out var StartPoint);
                 double.TryParse(TxtBxB.Text, out var EndPoint);
                 double.TryParse(TxtBxE.Text, out var Accuracy);
-                
-                int count = 0;
-                /*double.TryParse(TxtBxFx.Text, out var Fx);*/
+                double a = StartPoint;
+                double b = EndPoint;
+
+
+
+                Result = -1 - Math.Pow(Math.Pow(2*(x-1)*(x-7),2), 1 / 3);
+                /*int count = 0;
+                *//*double.TryParse(TxtBxFx.Text, out var Fx);*//*
                 while (true)
                 {
                     ++count;
@@ -84,29 +95,39 @@ namespace Programing_Labs.Labs_Pages
                     {
                         Middle = (StartPoint + EndPoint) / 2;
 
-                        if (F(StartPoint) * F(Middle) > 0)
+                        if (F(Math.Round(StartPoint,2)) * F(Math.Round(Middle,2)) < 0)
                         {
-                            StartPoint = Middle;
+                            EndPoint = Middle;
                         }
                         else
                         {
-                            EndPoint = Middle;
+                            StartPoint = Middle;
                         }
                     }
                     else
                     {
                         Result = (StartPoint + EndPoint) / 2;
-                        ShowGraph(StartPoint, EndPoint, Result);
+                        ShowGraph(a, b, Result);
                         System.Windows.Forms.MessageBox.Show($"Result:{Result} Count:{count}");
                         
                         break;
                     }
-                }
+                }*/
 
             }
         }
         private void MenuItemClear_Click(object sender, RoutedEventArgs e)
         {
+
+            TxtBxA.Text = string.Empty;
+            TxtBxB.Text = string.Empty;
+            TxtBxE.Text = string.Empty;
+            TxtBxFx.Text = string.Empty;
+            WpfPlot1.UpdateDefaultStyle();
+            WpfPlot1.Plot.Clear();
+            WpfPlot1.Refresh();
+
+
 
         }
         private double F(double X)
@@ -120,15 +141,18 @@ namespace Programing_Labs.Labs_Pages
         }
         private void ShowGraph(double StartPoint, double EndPoint, double Result)
         {
-            List<double> Xpoints = new List<double>();
-            List<double> Ypoints = new List<double>();
-            for(double i = StartPoint; i <= EndPoint; ++i)
+            
+            for(int i = (int)StartPoint; i <= (int)EndPoint; ++i)
             {
                 Xpoints.Add(i);
                 Ypoints.Add(F(i));
             }
-            WpfPlot1.Plot.AddScatter(new double[] { -1,2,-3,4,5,6},new double[] { -2,-2,2,-2,5,2},markerShape:MarkerShape.filledDiamond);
+                       
+            WpfPlot1.Plot.AddScatter(Xpoints.ToArray(),Ypoints.ToArray());
+            WpfPlot1.Plot.AddScatter(new double[] { Result}, new double[] { F(Result)},color: System.Drawing.Color.FromName("Red"));
+            /*System.Windows.Forms.MessageBox.Show(Xpoints.ToArray().ToString());*/
             WpfPlot1.Refresh();
+           
 
         }
     }

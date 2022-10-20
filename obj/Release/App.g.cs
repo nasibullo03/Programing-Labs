@@ -10,7 +10,6 @@
 //------------------------------------------------------------------------------
 
 using Programing_Labs;
-using ScottPlot;
 using System;
 using System.Diagnostics;
 using System.Windows;

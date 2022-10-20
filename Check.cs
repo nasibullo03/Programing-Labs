@@ -54,6 +54,21 @@ namespace Programing_Labs
                     if (!message.Contains("-F(x) должен иметь свойство x."))
                         message += "-F(x) должен иметь свойство x.\n";
                 }
+                if ((string)textBox.Tag == "formula")
+                {
+                    try
+                    {
+                        org.matheval.Expression expression = new org.matheval.Expression(textBox.Text.ToLower());
+                        expression.Bind("x", 0.5);
+                        double value = expression.Eval<double>();
+                    }
+                    catch(Exception ex)
+                    {
+                        if (!message.Contains(ex.Message.ToString()))
+                            message += ex.Message.ToString()+"\n";
+                    }
+                    
+                }
                 
             }
             if (message != string.Empty)

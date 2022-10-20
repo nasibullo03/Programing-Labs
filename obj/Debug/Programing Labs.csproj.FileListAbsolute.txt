@@ -84,3 +84,25 @@ C:\Users\Admin\Source\Repos\Programing-Labs\bin\Debug\ScottPlot.xml
 C:\Users\Admin\Source\Repos\Programing-Labs\bin\Debug\System.Numerics.Vectors.xml
 C:\Users\Admin\Source\Repos\Programing-Labs\bin\Debug\System.ValueTuple.xml
 C:\Users\Admin\Source\Repos\Programing-Labs\bin\Debug\ScottPlot.WPF.dll
+C:\Users\student\Source\Repos\Programing-Labs\bin\Debug\org.matheval.dll
+C:\Users\student\Source\Repos\Programing-Labs\bin\Debug\ScottPlot.dll
+C:\Users\student\Source\Repos\Programing-Labs\bin\Debug\ScottPlot.WPF.dll
+C:\Users\student\Source\Repos\Programing-Labs\bin\Debug\System.Drawing.Common.dll
+C:\Users\student\Source\Repos\Programing-Labs\bin\Debug\System.Numerics.Vectors.dll
+C:\Users\student\Source\Repos\Programing-Labs\bin\Debug\System.ValueTuple.dll
+C:\Users\student\Source\Repos\Programing-Labs\bin\Debug\ScottPlot.xml
+C:\Users\student\Source\Repos\Programing-Labs\bin\Debug\System.Numerics.Vectors.xml
+C:\Users\student\Source\Repos\Programing-Labs\bin\Debug\System.ValueTuple.xml
+C:\Users\student\Source\Repos\Programing-Labs\obj\Debug\Theme\ButtonTheme.baml
+C:\Users\student\Source\Repos\Programing-Labs\obj\Debug\Theme\LabelTheme.baml
+C:\Users\student\Source\Repos\Programing-Labs\obj\Debug\Theme\MenuSubitemThemeClicked.baml
+C:\Users\student\Source\Repos\Programing-Labs\obj\Debug\Theme\MenuSubitemTheme.baml
+C:\Users\student\Source\Repos\Programing-Labs\obj\Debug\Theme\MenuButtonThemeClicked.baml
+C:\Users\student\Source\Repos\Programing-Labs\obj\Debug\Theme\SearchBoxTheme.baml
+C:\Users\student\Source\Repos\Programing-Labs\obj\Debug\Labs_Pages\Lab1_1_Page.g.cs
+C:\Users\student\Source\Repos\Programing-Labs\obj\Debug\Labs_Pages\Lab1_2_Page.g.cs
+C:\Users\student\Source\Repos\Programing-Labs\obj\Debug\Labs_Pages\Lab2_Page.g.cs
+C:\Users\student\Source\Repos\Programing-Labs\obj\Debug\Labs_Pages\Lab1_1_Page.baml
+C:\Users\student\Source\Repos\Programing-Labs\obj\Debug\Labs_Pages\Lab1_2_Page.baml
+C:\Users\student\Source\Repos\Programing-Labs\obj\Debug\Labs_Pages\Lab2_Page.baml
+C:\Users\student\Source\Repos\Programing-Labs\obj\Debug\Programing Labs.csproj.CopyComplete
