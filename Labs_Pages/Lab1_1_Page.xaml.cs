@@ -76,11 +76,13 @@ namespace Programing_Labs.Labs_Pages
         {
             if (Check.CheckTextBoxesValues(UITextBoxes))
             {   
-                double.TryParse(CatetA_TextBox.Text, out var CatetA);
-                double.TryParse(CatetB_TextBox.Text, out var CatetB);
-                double.TryParse(Height_TextBox.Text, out var HeightValue);
-                double.TryParse(Weight_TextBox.Text, out var Weight);
-                LabelAnswer.Content =Math.Round(2 * Weight / (CatetA * CatetB * HeightValue),3);
+                double.TryParse(CatetA_TextBox.Text, out double CatetA);
+                double.TryParse(CatetB_TextBox.Text, out double CatetB);
+                double.TryParse(Height_TextBox.Text, out double HeightValue);
+                double.TryParse(Weight_TextBox.Text, out double Weight);
+
+                LabelAnswer.Content =Math.Round(2 * Weight / (CatetA * CatetB * HeightValue),10);
+                System.Windows.Forms.MessageBox.Show(CatetA_TextBox.Text);
                 LblAnswer.Visibility = Visibility.Visible;
                 LblAnswerName.Visibility = Visibility.Visible;
             }

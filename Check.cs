@@ -15,17 +15,24 @@ namespace Programing_Labs
         {
             bool approvedDecimalPoint = false;
 
-            if (e.Text == ".")
+            if (e.Text == ",")
             {
-                if (!((TextBox)sender).Text.Contains("."))
+                if (!((TextBox)sender).Text.Contains(","))
                     approvedDecimalPoint = true;
                 
+            } else if (e.Text == "-")
+            {
+                if (!((TextBox)sender).Text.Contains("-"))
+                    approvedDecimalPoint = true;
+                if (!(((TextBox)sender).Text.Length>0))
+                        approvedDecimalPoint = true;
             }
             
             if (!(char.IsDigit(e.Text, e.Text.Length - 1) || approvedDecimalPoint ))
                 e.Handled = true;
             
         }
+
         
         public static bool CheckTextBoxesValues(TextBox[] UITextBoxes)
         {
