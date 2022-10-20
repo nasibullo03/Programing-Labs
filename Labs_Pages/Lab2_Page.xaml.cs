@@ -7,7 +7,7 @@ using System.Windows.Media;
 using System.Drawing;
 using org.matheval;
 using ScottPlot;
-    
+
 
 
 namespace Programing_Labs.Labs_Pages
@@ -34,7 +34,7 @@ namespace Programing_Labs.Labs_Pages
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-          
+
             TxtBxA = GetStyleElement(TextBoxA, "MainTextBox") as TextBox;
             TxtBxB = GetStyleElement(TextBoxB, "MainTextBox") as TextBox;
             TxtBxE = GetStyleElement(TextBoxE, "MainTextBox") as TextBox;
@@ -70,7 +70,7 @@ namespace Programing_Labs.Labs_Pages
              Интервал = [StartPoint, EndPoint]
              Точность  = Accuracy
              */
-            double Middle, Result;
+            double Middle = 0, Result;
             Xpoints.Clear();
             Ypoints.Clear();
 
@@ -82,12 +82,43 @@ namespace Programing_Labs.Labs_Pages
                 double.TryParse(TxtBxE.Text, out var Accuracy);
                 double a = StartPoint;
                 double b = EndPoint;
+                double x1, x2;
 
+                //метод чтобы найти точки минимума
+                double IncrementStep = Accuracy / 10;
+
+                int count = 0;
+                while (true)
+                {
+                    ++count;
+
+                    x1 = (StartPoint + EndPoint - IncrementStep) / 2;
+                    x2 = (StartPoint + EndPoint + IncrementStep) / 2;
+
+                    if (F(x1) <= F(x2))
+                        EndPoint = x2;
+                    else
+                        a = x1;
+
+                    Middle = (EndPoint - StartPoint) / 2;
+
+                    if (Middle <= Accuracy)
+                    {
+                        Result = (StartPoint + EndPoint) / 2;
+                        WpfPlot1.UpdateDefaultStyle();
+                        WpfPlot1.Plot.Clear();
+                        WpfPlot1.Refresh();
+                        ShowGraph(a, b, Result);
+                        System.Windows.Forms.MessageBox.Show($"Result:{Result} Count:{count}");
+                        System.Windows.Forms.MessageBox.Show(Middle.ToString());
+                        break;
+                    }
+                }
 
 
                 /* Result = -1 - Math.Pow(Math.Pow(2*(x-1)*(x-7),2), 1 / 3);*/
-                int count = 0;
-                double.TryParse(TxtBxFx.Text, out var Fx);
+                //метод чтобы найти точки максимума
+                /*int count = 0;
                 while (true)
                 {
                     ++count;
@@ -112,7 +143,7 @@ namespace Programing_Labs.Labs_Pages
 
                         break;
                     }
-                }
+                }*/
 
             }
         }
@@ -141,18 +172,29 @@ namespace Programing_Labs.Labs_Pages
         }
         private void ShowGraph(double StartPoint, double EndPoint, double Result)
         {
-            
-            for(int i = (int)StartPoint; i <= (int)EndPoint; ++i)
+
+            for (double i = StartPoint; i <= EndPoint; i += 0.1)
             {
                 Xpoints.Add(i);
                 Ypoints.Add(F(i));
             }
-                       
-            WpfPlot1.Plot.AddScatter(Xpoints.ToArray(),Ypoints.ToArray());
-            WpfPlot1.Plot.AddScatter(new double[] { Result}, new double[] { F(Result)},color: System.Drawing.Color.FromName("Red"));
+
+            WpfPlot1.Plot.AddScatter(Xpoints.ToArray(), Ypoints.ToArray());
+            WpfPlot1.Plot.AddScatter(
+                new double[] { Result },
+                new double[] { F(Result) },
+                color: System.Drawing.Color.FromName("Red"),
+                markerSize: 7,
+                label: "Точка минимум");
+            /*WpfPlot1.Plot.AddScatter(
+                new double[] { Result },
+                new double[] { F(Result) },
+                color: System.Drawing.Color.FromName("Red"),
+                markerSize: 7,
+                label: "Точка экстремиум");*/
             /*System.Windows.Forms.MessageBox.Show(Xpoints.ToArray().ToString());*/
             WpfPlot1.Refresh();
-           
+
 
         }
     }
