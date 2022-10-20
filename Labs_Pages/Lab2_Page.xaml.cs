@@ -178,21 +178,13 @@ namespace Programing_Labs.Labs_Pages
                 Xpoints.Add(i);
                 Ypoints.Add(F(i));
             }
-
-            WpfPlot1.Plot.AddScatter(Xpoints.ToArray(), Ypoints.ToArray());
+            WpfPlot1.Plot.AddScatter(Xpoints.ToArray(), Ypoints.ToArray(),markerShape:MarkerShape.none,lineWidth:3);
             WpfPlot1.Plot.AddScatter(
                 new double[] { Result },
                 new double[] { F(Result) },
                 color: System.Drawing.Color.FromName("Red"),
                 markerSize: 7,
                 label: "Точка минимум");
-            /*WpfPlot1.Plot.AddScatter(
-                new double[] { Result },
-                new double[] { F(Result) },
-                color: System.Drawing.Color.FromName("Red"),
-                markerSize: 7,
-                label: "Точка экстремиум");*/
-            /*System.Windows.Forms.MessageBox.Show(Xpoints.ToArray().ToString());*/
             WpfPlot1.Refresh();
 
 
