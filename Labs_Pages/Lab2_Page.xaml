@@ -16,7 +16,7 @@
 
         <!--Вверхный панел для имя задачи-->
         <Label DockPanel.Dock="Top"
-               Content="Метод дихотомии"
+               Content="Найти точки минимума методом дихотомии"
                HorizontalAlignment="Center"
                VerticalAlignment="Center"
                FontSize="22"

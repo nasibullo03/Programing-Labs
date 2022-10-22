@@ -38,7 +38,7 @@ namespace Programing_Labs.Labs_Pages
             CatetB_TextBox = GetStyleElement(TextBox_CatetB, "MainTextBox") as TextBox;
             Height_TextBox = GetStyleElement(TextBox_Height, "MainTextBox") as TextBox;
             Weight_TextBox = GetStyleElement(TextBox_Weight, "MainTextBox") as TextBox;
-            
+
 
             UITextBoxes = new TextBox[]{
                 CatetA_TextBox,
@@ -79,9 +79,9 @@ namespace Programing_Labs.Labs_Pages
                 double.TryParse(Height_TextBox.Text, out double HeightValue);
                 double.TryParse(Weight_TextBox.Text, out double Weight);
 
-                AnswerFormulaControl.Formula = @"p=\frac{2 \cdot m}{a \cdot b \cdot h}=\frac{2\cdot " + 
+                AnswerFormulaControl.Formula = @"p=\frac{2 \cdot m}{a \cdot b \cdot h}=\frac{2\cdot " +
                     Weight.ToString() + "}{" + $"{CatetA}\\cdot{CatetB}\\cdot{HeightValue}" + "}=" +
-                   Math.Round(2 * Weight / (CatetA * CatetB * HeightValue), 10).ToString();
+                   (2 * Weight / (CatetA * CatetB * HeightValue)).ToString();
 
             }
         }

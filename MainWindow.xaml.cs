@@ -32,7 +32,7 @@ namespace Programing_Labs
         {
            
             MenuItem.ShowItems();
-            ///TODO пока до конца не закончена
+            
 
         }
 
