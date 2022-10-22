@@ -92,7 +92,8 @@
                        Height="60"
                        Foreground="White"
                        FontSize="18"
-                       VerticalAlignment="Top" />
+                       VerticalAlignment="Top"
+                       Visibility="Hidden"/>
             </StackPanel>
             <!-- Правий панел. Панел для TextBox-ы -->
             <StackPanel>
@@ -114,23 +115,13 @@
                          FontSize="18"
                          IsTabStop="True"
                          TabIndex="2" />
-                <TextBox x:Name="TextBox_Weight"
-                         Height="60"
-                         Style="{StaticResource TextBoxTheme}"
-                         FontSize="18"
-                         IsTabStop="True"
-                         TabIndex="3" />
-                <Label x:Name="LblAnswer"
-                       Content=""
-                       Foreground="#0BD685"
-                       Height="60"
-                       FontSize="18"
-                       Style="{StaticResource LabelTheme}"
-                       HorizontalAlignment="Left"
-                       Margin="10,0,0,0"
-                       Width="auto"
-                       Visibility="Collapsed" />
-                <ScrollViewer HorizontalScrollBarVisibility="Auto"
+                    <TextBox x:Name="TextBox_Weight"
+                             Height="60"
+                             Style="{StaticResource TextBoxTheme}"
+                             FontSize="18"
+                             IsTabStop="True"
+                             TabIndex="3" />
+                    <ScrollViewer HorizontalScrollBarVisibility="Auto"
                               VerticalScrollBarVisibility="Auto">
                     <controls:FormulaControl x:Name="AnswerFormulaControl"
                                              Height="60"
