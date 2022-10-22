@@ -1,0 +1,15 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:controls="clr-namespace:WpfMath.Controls;assembly=WpfMath">
+
+    <Style x:Key="ClearTypeFormula"
+           TargetType="controls:FormulaControl">
+        <Setter Property="TextOptions.TextRenderingMode"
+                Value="ClearType" />
+        <Setter Property="TextOptions.TextHintingMode"
+                Value="Fixed" />
+        <Setter Property="TextOptions.TextFormattingMode"
+                Value="Display" />
+    </Style>
+
+</ResourceDictionary>

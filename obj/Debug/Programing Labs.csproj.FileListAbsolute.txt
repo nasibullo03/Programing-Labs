@@ -106,3 +106,5 @@ C:\Users\student\Source\Repos\Programing-Labs\obj\Debug\Labs_Pages\Lab1_1_Page.b
 C:\Users\student\Source\Repos\Programing-Labs\obj\Debug\Labs_Pages\Lab1_2_Page.baml
 C:\Users\student\Source\Repos\Programing-Labs\obj\Debug\Labs_Pages\Lab2_Page.baml
 C:\Users\student\Source\Repos\Programing-Labs\obj\Debug\Programing Labs.csproj.CopyComplete
+C:\Users\Admin\Source\Repos\Programing-Labs\bin\Debug\WpfMath.dll
+C:\Users\Admin\Source\Repos\Programing-Labs\obj\Debug\Theme\FormulaTheme.baml

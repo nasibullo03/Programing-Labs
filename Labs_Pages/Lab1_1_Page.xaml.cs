@@ -58,37 +58,44 @@ namespace Programing_Labs.Labs_Pages
 
 
 
-        private object GetStyleElement(Control element, string name)=>
-            element.Template.FindName(name, element); 
+        private object GetStyleElement(Control element, string name) =>
+            element.Template.FindName(name, element);
 
         private void BtnClear_Click(object sender, RoutedEventArgs e)
         {
             foreach (var textBox in UITextBoxes)
-            textBox.Text = string.Empty;
+                textBox.Text = string.Empty;
 
             LblAnswer.Visibility = Visibility.Hidden;
             LblAnswerName.Visibility = Visibility.Hidden;
         }
-        
-        
+
+
 
         private void BtnSolve_Click(object sender, RoutedEventArgs e)
         {
             if (Check.CheckTextBoxesValues(UITextBoxes))
-            {   
+            {
                 double.TryParse(CatetA_TextBox.Text, out double CatetA);
                 double.TryParse(CatetB_TextBox.Text, out double CatetB);
                 double.TryParse(Height_TextBox.Text, out double HeightValue);
                 double.TryParse(Weight_TextBox.Text, out double Weight);
 
-                LabelAnswer.Content =Math.Round(2 * Weight / (CatetA * CatetB * HeightValue),10);
+                /*LabelAnswer.Content =Math.Round(2 * Weight / (CatetA * CatetB * HeightValue),10);*/
+                AnswerFormulaControl.Formula = @"p=\frac{2 \cdot m}{a \cdot b \cdot h}=" +
+                   @"\frac{2\cdot " +Weight.ToString()+ "}{"+
+                   $"{CatetA}\\cdot{CatetB}\\cdot{HeightValue}" + "}="+
+                   Math.Round(2 * Weight / (CatetA * CatetB * HeightValue), 10).ToString();
                 System.Windows.Forms.MessageBox.Show(CatetA_TextBox.Text);
-                LblAnswer.Visibility = Visibility.Visible;
+                /*LblAnswer.Visibility = Visibility.Visible;*/
                 LblAnswerName.Visibility = Visibility.Visible;
+                MessageBox.Show('\u0175'.ToString());
             }
         }
-        
-        
 
+        private void AnswerFormulaControl_Scroll(object sender, System.Windows.Controls.Primitives.ScrollEventArgs e)
+        {
+
+        }
     }
 }

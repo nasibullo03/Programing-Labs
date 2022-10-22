@@ -1,64 +1,116 @@
 ﻿<Page x:Class="Programing_Labs.Labs_Pages.Lab1_1_Page"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:controls="clr-namespace:WpfMath.Controls;assembly=WpfMath"
       xmlns:local="clr-namespace:Programing_Labs.Labs_Pages"
-      mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      mc:Ignorable="d"
+      d:DesignHeight="450"
+      d:DesignWidth="800"
       Title="Lab1_2_Page"
-      Loaded="Page_Loaded"
-      >
+      Loaded="Page_Loaded">
 
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition MinWidth="70" Width="150"/>
-            <ColumnDefinition />
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="70"/>
-            <RowDefinition Height="310"/>
-            <RowDefinition/>
-        </Grid.RowDefinitions>
-        <Label Content="Плотность прямоуголного треугольника" 
-               HorizontalAlignment="Center" 
-               VerticalAlignment="Center" 
-               FontSize="22" 
-               Foreground="White" 
-               Grid.Row="0"
-               FontWeight="Bold" 
-               Grid.ColumnSpan="2"
-               />
-        <!-- Панел для Label-ы -->
-        <StackPanel x:Name="PageLabels" Grid.Row="1" HorizontalAlignment="Right" Width="88">
-            <Label Content="Катет А:"  Style="{StaticResource LabelTheme}" Height="60" Foreground ="White" FontSize="18"  VerticalAlignment="Top"/>
-            <Label Content="Катет B:"   Style="{StaticResource LabelTheme}" Height="60" Foreground ="White" FontSize="18"  VerticalAlignment="Top"/>
-            <Label Content="Толщина:"   Style="{StaticResource LabelTheme}" Height="60" Foreground ="White" FontSize="18"  VerticalAlignment="Top"/>
-            <Label Content="Масса:"   Style="{StaticResource LabelTheme}" Height="60" Foreground ="White" FontSize="18" VerticalAlignment="Top"/>
-            <Label x:Name="LblAnswerName" Content="Ответ:"   Style="{StaticResource LabelTheme}" Height="60" Foreground ="White" FontSize="18" VerticalAlignment="Top"/>
+
+    <DockPanel LastChildFill="True">
+        <!--Вверхный панел-->
+        <Label Content="Плотность металл в форме прямоугольного треугольника "
+               HorizontalAlignment="Center"
+               VerticalAlignment="Center"
+               FontSize="22"
+               Foreground="White"
+               FontWeight="Bold"
+               DockPanel.Dock="Top" />
+        <!--Нижный панел-->
+        <StackPanel Orientation="Horizontal"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Top"
+                    Height="50">
+            <Button x:Name="BtnSolve"
+                    Style="{StaticResource ButtonTheme}"
+                    FontSize="16"
+                    Content="Рассчитать"
+                    Height="50"
+                    Width="150"
+                    Margin="25,0,25,0"
+                    FontWeight="Bold"
+                    Click="BtnSolve_Click"
+                    TabIndex="4" />
+            <Button x:Name="BtnClear"
+                    Style="{StaticResource ButtonTheme}"
+                    FontSize="16"
+                    Content="Очистить"
+                    Height="50"
+                    Width="150"
+                    Margin="25,0,25,0"
+                    FontWeight="Bold"
+                    Click="BtnClear_Click"
+                    TabIndex="5" />
+        </StackPanel>
+        <!-- Левый панел. Панел для Label-ы -->
+        <StackPanel x:Name="PageLabels"
+                    Grid.Row="1"
+                    HorizontalAlignment="Right"
+                    Width="88"
+                    DockPanel.Dock="Left">
+            <Label Content="Катет А:"
+                   Style="{StaticResource LabelTheme}"
+                   Height="60"
+                   Foreground="White"
+                   FontSize="18"
+                   VerticalAlignment="Top" />
+            <Label Content="Катет B:"
+                   Style="{StaticResource LabelTheme}"
+                   Height="60"
+                   Foreground="White"
+                   FontSize="18"
+                   VerticalAlignment="Top" />
+            <Label Content="Толщина:"
+                   Style="{StaticResource LabelTheme}"
+                   Height="60"
+                   Foreground="White"
+                   FontSize="18"
+                   VerticalAlignment="Top" />
+            <Label Content="Масса:"
+                   Style="{StaticResource LabelTheme}"
+                   Height="60"
+                   Foreground="White"
+                   FontSize="18"
+                   VerticalAlignment="Top" />
+            <Label x:Name="LblAnswerName"
+                   Content="Ответ:"
+                   Style="{StaticResource LabelTheme}"
+                   Height="60"
+                   Foreground="White"
+                   FontSize="18"
+                   VerticalAlignment="Top" />
         </StackPanel>
         <!-- Панел для TextBox-ы -->
-        <StackPanel Grid.Column="1" Grid.Row="1" >
-            <TextBox x:Name="TextBox_CatetA" 
+        <StackPanel>
+            <TextBox x:Name="TextBox_CatetA"
                      Height="60"
                      Style="{StaticResource TextBoxTheme}"
                      FontSize="18"
-                     />
-            <TextBox x:Name="TextBox_CatetB" 
+                     IsTabStop="True"
+                     TabIndex="0" />
+            <TextBox x:Name="TextBox_CatetB"
                      Height="60"
                      Style="{StaticResource TextBoxTheme}"
                      FontSize="18"
-                     />
-            <TextBox x:Name="TextBox_Height" 
+                     IsTabStop="True"
+                     TabIndex="1" />
+            <TextBox x:Name="TextBox_Height"
                      Height="60"
                      Style="{StaticResource TextBoxTheme}"
                      FontSize="18"
-                     />
+                     IsTabStop="True"
+                     TabIndex="2" />
             <TextBox x:Name="TextBox_Weight"
                      Height="60"
                      Style="{StaticResource TextBoxTheme}"
                      FontSize="18"
-                     />
+                     IsTabStop="True"
+                     TabIndex="3" />
             <Label x:Name="LblAnswer"
                    Content=""
                    Foreground="#0BD685"
@@ -66,35 +118,24 @@
                    FontSize="18"
                    Style="{StaticResource LabelTheme}"
                    HorizontalAlignment="Left"
-                   Margin="10,0,0,0" Width="auto"
-                   />
-
-
-
+                   Margin="10,0,0,0"
+                   Width="auto"
+                   Visibility="Collapsed" />
+            <ScrollViewer ScrollViewer.HorizontalScrollBarVisibility="Auto"
+                          ScrollViewer.VerticalScrollBarVisibility="Auto">
+                <controls:FormulaControl x:Name="AnswerFormulaControl"
+                                         Height="60"
+                                         FontSize="18"
+                                         HorizontalAlignment="Left"
+                                         VerticalAlignment="Center"
+                                         Margin="10,0,0,0"
+                                         Width="auto"
+                                         Foreground="#0BD685"
+                                         Style="{StaticResource ClearTypeFormula}" />
+            </ScrollViewer>
+            <DockPanel Height="100"
+                       LastChildFill="False"
+                       Width="100" />
         </StackPanel>
-        <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Top" Height="50" Grid.ColumnSpan="2">
-            <Button x:Name="BtnSolve" 
-                    Style="{StaticResource ButtonTheme}" 
-                    FontSize="16" 
-                    Content="Рассчитать" 
-                    Height="50" Width="150" 
-                    Margin="25,0,25,0" 
-                    FontWeight="Bold" Click="BtnSolve_Click"
-                    />
-            <Button x:Name="BtnClear" 
-                    Style="{StaticResource ButtonTheme}" 
-                    FontSize="16" 
-                    Content="Очистить"  
-                    Height="50" Width="150" 
-                    Margin="25,0,25,0" 
-                    FontWeight="Bold"
-                    Click="BtnClear_Click"
-                    />
-            
-
-
-
-        </StackPanel>
-
-    </Grid>
+    </DockPanel>
 </Page>
