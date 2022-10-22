@@ -92,30 +92,35 @@ namespace Programing_Labs.Labs_Pages
                 double IncrementStep = Accuracy / 10;
 
                 int count = 0;
-                while (true)
+                try
                 {
-                    ++count;
-                    
-                    x1 = (StartPoint + EndPoint - IncrementStep) / 2;
-                    x2 = (StartPoint + EndPoint + IncrementStep) / 2;
-
-                    if (F(x1) <= F(x2))
-                        EndPoint = x2;
-                    else
-                        StartPoint = x1;
-
-                    Middle = (EndPoint - StartPoint) / 2;
-
-                    if (Middle <= Accuracy)
+                    while (true)
                     {
-                        Result = (StartPoint + EndPoint) / 2;
-                        WpfPlot1.Plot.Clear();
-                        WpfPlot1.Refresh();
-                        ShowGraph(a, b, Result);
-                        System.Windows.Forms.MessageBox.Show($"Result:{Result} Count:{count}");
-                        
-                        break;
+                        ++count;
+
+                        x1 = (StartPoint + EndPoint - IncrementStep) / 2;
+                        x2 = (StartPoint + EndPoint + IncrementStep) / 2;
+
+                        if (F(x1) <= F(x2))
+                            EndPoint = x2;
+                        else
+                            StartPoint = x1;
+
+                        Middle = (EndPoint - StartPoint) / 2;
+
+                        if (Middle <= Accuracy)
+                        {
+                            Result = (StartPoint + EndPoint) / 2;
+                            WpfPlot1.Plot.Clear();
+                            WpfPlot1.Refresh();
+                            ShowGraph(a, b, Result);
+                            break;
+                        }
                     }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
                 }
 
 
@@ -175,21 +180,23 @@ namespace Programing_Labs.Labs_Pages
         }
         private void ShowGraph(double StartPoint, double EndPoint, double Result)
         {
-
+            double x = Result;
+            double y = F(Result);
             for (double i = StartPoint; i <= EndPoint; i += 0.1)
             {
                 Xpoints.Add(i);
                 Ypoints.Add(F(i));
             }
+            WpfPlot1.Plot.Title($"Точка минимум - min[{Math.Round(x, 5)} ; {Math.Round(y, 5)}]");
             WpfPlot1.Plot.AddScatter(Xpoints.ToArray(), Ypoints.ToArray(), markerShape: MarkerShape.none, lineWidth: 3);
             WpfPlot1.Plot.AddScatter(
-                new double[] { Result },
-                new double[] { F(Result) },
-                color: System.Drawing.Color.FromName("Red"),
+                new double[] { x },
+                new double[] { y },
+                color: System.Drawing.Color.FromName("Green"),
                 markerSize: 7);
 
-            var fat = WpfPlot1.Plot.AddArrow(Result,
-                 F(Result), Result - 5, F(Result),
+            WpfPlot1.Plot.AddArrow(x,
+                 y, x - 3, y,
                 color: System.Drawing.Color.FromName("Red"));
 
             WpfPlot1.Refresh();
