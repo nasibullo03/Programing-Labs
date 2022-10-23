@@ -86,6 +86,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="IPhoneBook.cs" />
+    <Compile Include="PhoneBook.cs" />
+    <Compile Include="Styles\ListViewStyle.xaml.cs">
+      <DependentUpon>ListViewStyle.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\ModernSmallUserInputControl.xaml.cs">
       <DependentUpon>ModernSmallUserInputControl.xaml</DependentUpon>
     </Compile>
@@ -134,6 +139,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Styles\LabelStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Styles\ListViewStyle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

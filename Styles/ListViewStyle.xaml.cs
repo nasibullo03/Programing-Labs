@@ -13,22 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Programing_Labs.UserControls
+namespace Programing_Labs.Styles
 {
     /// <summary>
-    /// Логика взаимодействия для ModernSmallUserInputControl.xaml
+    /// Логика взаимодействия для ListViewStyle.xaml
     /// </summary>
-    public partial class ModernSmallUserInputControl : UserControl
+    public partial class ListViewStyle : UserControl
     {
-        public ModernSmallUserInputControl()
+        public ListViewStyle()
         {
             InitializeComponent();
-            this.DataContext = this;
         }
-
-        public string Title { get; set; }
-        public Brush ForegroundColor { get; set; }
-        public float FontSizeValue { get; set; }
-
     }
 }

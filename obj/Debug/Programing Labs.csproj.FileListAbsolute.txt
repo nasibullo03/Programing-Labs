@@ -41,5 +41,6 @@ C:\Users\Admin\Source\Repos\Programing-Labs\obj\Debug\Programing Labs.exe
 C:\Users\Admin\Source\Repos\Programing-Labs\obj\Debug\Programing Labs.pdb
 C:\Users\Admin\Source\Repos\Programing-Labs\obj\Debug\Styles\ButtonStyle.baml
 C:\Users\Admin\Source\Repos\Programing-Labs\obj\Debug\UserControls\ModernSmallUserInputControl.g.cs
-C:\Users\Admin\Source\Repos\Programing-Labs\obj\Debug\GeneratedInternalTypeHelper.g.cs
 C:\Users\Admin\Source\Repos\Programing-Labs\obj\Debug\UserControls\ModernSmallUserInputControl.baml
+C:\Users\Admin\Source\Repos\Programing-Labs\obj\Debug\Styles\ListViewStyle.g.cs
+C:\Users\Admin\Source\Repos\Programing-Labs\obj\Debug\Styles\ListViewStyle.baml

@@ -4,11 +4,11 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:local="clr-namespace:Programing_Labs.Pages"
-      xmlns:uc="clr-namespace:Programing_Labs.UserControls"
       mc:Ignorable="d"
       d:DesignHeight="450"
       d:DesignWidth="800"
-      Title="Lab1_2_Page">
+      Title="Lab1_2_Page"
+      Loaded="Page_Loaded">
 
     <DockPanel LastChildFill="True">
         <!--Вверхный панел для имя задачи-->
@@ -35,7 +35,7 @@
                     Width="150"
                     Margin="25,0,25,0"
                     FontWeight="Bold"
-                    Click="BtnSolve_Click" 
+                    Click="BtnSolve_Click"
                     TabIndex="4" />
             <Button x:Name="BtnSave"
                     Style="{StaticResource ButtonStyle}"
@@ -61,22 +61,75 @@
         <!--Панел ввода данные-->
         <WrapPanel DockPanel.Dock="Top">
 
-            <uc:ModernSmallUserInputControl Title="a="
-                                            ForegroundColor="White"
-                                            FontSizeValue="18" />
-            <Label Content="a ="
+            <Label Content="ФИО: "
                    Style="{StaticResource LabelStyle}"
                    FontWeight="Bold"
                    Foreground="White"
                    FontSize="18"
                    VerticalAlignment="Top" />
-            <TextBox x:Name="TextBoxA"
+            <TextBox x:Name="TextBoxName"
                      Style="{StaticResource TextBoxStyle}"
                      FontSize="18"
                      Margin="0,-5,0,0"
                      TabIndex="0" />
+
+            <Label Content="Номер телефона: "
+                   Style="{StaticResource LabelStyle}"
+                   FontWeight="Bold"
+                   Foreground="White"
+                   FontSize="18"
+                   VerticalAlignment="Top"
+                   InputMethod.PreferredImeSentenceMode="PhrasePrediction" />
+            <TextBox x:Name="TextBoxPhoneNumber"
+                     Style="{StaticResource TextBoxStyle}"
+                     FontSize="18"
+                     Margin="0,-5,0,0"
+                     TabIndex="0" />
+            <Label Content="Год установки телефона: "
+                   Style="{StaticResource LabelStyle}"
+                   FontWeight="Bold"
+                   Foreground="White"
+                   FontSize="18"
+                   VerticalAlignment="Top" />
+            <TextBox x:Name="TextBoxYear"
+                     Style="{StaticResource TextBoxStyle}"
+                     FontSize="18"
+                     Margin="0,-5,0,0"
+                     TabIndex="0" />
+            <Button x:Name="BtnAdd"
+                    Style="{StaticResource ButtonStyle}"
+                    FontSize="16"
+                    Content="Добавить"
+                    Height="50"
+                    Width="auto"
+                    Margin="5"
+                    FontWeight="Bold"
+                    Click="BtnAdd_Click"
+                    TabIndex="4" />
         </WrapPanel>
-
-
+        <Grid Background="Lavender">
+            <ListView Name="PhoneBookList"
+                      FontSize="18">
+                <ListView.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Remove"
+                                  Command="{Binding RemoveItem}"
+                                  CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=ContextMenu}, Path=PlacementTarget.SelectedItem}" />
+                    </ContextMenu>
+                </ListView.ContextMenu>
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=Id}"
+                                        Width="50">ID</GridViewColumn>
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=Name}"
+                                        Width="350">ФИО</GridViewColumn>
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=PhoneNumber}"
+                                        Width="200">Номер телефона</GridViewColumn>
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=Year}"
+                                        Width="auto">Год</GridViewColumn>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </Grid>
     </DockPanel>
 </Page>
