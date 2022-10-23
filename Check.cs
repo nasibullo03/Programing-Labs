@@ -24,18 +24,19 @@ namespace Programing_Labs
             {
                 if (!((TextBox)sender).Text.Contains(","))
                     approvedDecimalPoint = true;
-                
-            } else if (e.Text == "-")
+
+            }
+            else if (e.Text == "-")
             {
                 if (!((TextBox)sender).Text.Contains("-"))
                     approvedDecimalPoint = true;
-                if (!(((TextBox)sender).Text.Length>0))
-                        approvedDecimalPoint = true;
+                if (!(((TextBox)sender).Text.Length > 0))
+                    approvedDecimalPoint = true;
             }
-            
-            if (!(char.IsDigit(e.Text, e.Text.Length - 1) || approvedDecimalPoint ))
+
+            if (!(char.IsDigit(e.Text, e.Text.Length - 1) || approvedDecimalPoint))
                 e.Handled = true;
-            
+
         }
         /// <summary>
         /// Для первой лабы <see cref="Labs_Pages.Lab1_1_Page"/>
@@ -98,13 +99,14 @@ namespace Programing_Labs
                     continue;
 
                 }
-                if((string)textBox.Tag == "e")
+                if ((string)textBox.Tag == "e")
                 {
                     double.TryParse(a, out double dblA);
                     double.TryParse(b, out double dblB);
                     double.TryParse(textBox.Text, out double dblE);
 
-                    if(dblE<=0 && dblE >= (dblB - dblA)) {
+                    if (dblE <= 0 || dblE >= (dblB - dblA))
+                    {
                         if (!message.Contains("-Значение поля \"e\"  должно соответствовать этому условию: 0<e<(a-b)"))
                             message += "-Значение поля \"e\"  должно соответствовать этому условию: 0<e<(a-b)\n";
                         continue;
@@ -138,14 +140,14 @@ namespace Programing_Labs
                         expression.Bind("x", 0.5);
                         double value = expression.Eval<double>();
                     }
-                    catch(Exception ex)
+                    catch (Exception ex)
                     {
                         if (!message.Contains(ex.Message.ToString()))
-                            message += ex.Message.ToString()+"\n";
+                            message += "F(x)= "+ ex.Message.ToString() + "\n";
                     }
-                    
+
                 }
-                
+
             }
             if (message != string.Empty)
             {
@@ -156,7 +158,7 @@ namespace Programing_Labs
 
             return true;
         }
-        
+
         public void OnPaste(object sender, DataObjectPastingEventArgs e)
         {
             e.CancelCommand();

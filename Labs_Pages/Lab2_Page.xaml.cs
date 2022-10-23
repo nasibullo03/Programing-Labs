@@ -92,8 +92,8 @@ namespace Programing_Labs.Labs_Pages
                 double IncrementStep = Accuracy / 10;
 
                 int count = 0;
-                try
-                {
+                /*try
+                {*/
                     while (true)
                     {
                         ++count;
@@ -117,11 +117,11 @@ namespace Programing_Labs.Labs_Pages
                             break;
                         }
                     }
-                }
+               /* }
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message);
-                }
+                }*/
 
 
                 /* Result = -1 - Math.Pow(Math.Pow(2 * (x - 1) * (x - 7), 2), 1 / 3);*//*
@@ -165,8 +165,6 @@ namespace Programing_Labs.Labs_Pages
             WpfPlot1.UpdateDefaultStyle();
             WpfPlot1.Plot.Clear();
             WpfPlot1.Refresh();
-
-
 
         }
         private double F(double X)

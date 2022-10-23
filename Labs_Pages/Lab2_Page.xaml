@@ -139,8 +139,7 @@
             <!--Plot для графика-->
             <WpfPlot Name="WpfPlot1"
                      Height="auto"
-                     Width="auto"
-                     Padding="0,20,0,20" />
+                     Width="auto" />
         </ScrollViewer>
 
     </DockPanel>

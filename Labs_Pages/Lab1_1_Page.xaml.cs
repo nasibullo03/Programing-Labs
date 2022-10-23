@@ -64,7 +64,7 @@ namespace Programing_Labs.Labs_Pages
         {
             foreach (var textBox in UITextBoxes)
                 textBox.Text = string.Empty;
-
+            AnswerFormulaControl.Formula = "";
             LblAnswerName.Visibility = Visibility.Hidden;
         }
 
@@ -82,6 +82,7 @@ namespace Programing_Labs.Labs_Pages
                 AnswerFormulaControl.Formula = @"p=\frac{2 \cdot m}{a \cdot b \cdot h}=\frac{2\cdot " +
                     Weight.ToString() + "}{" + $"{CatetA}\\cdot{CatetB}\\cdot{HeightValue}" + "}=" +
                    (2 * Weight / (CatetA * CatetB * HeightValue)).ToString();
+                LblAnswerName.Visibility = Visibility.Visible;
 
             }
         }
