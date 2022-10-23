@@ -10,7 +10,7 @@ using ScottPlot;
 
 
 
-namespace Programing_Labs.Labs_Pages
+namespace Programing_Labs.Pages
 {
     /// <summary>
     /// Логика взаимодействия для Lab2_Page.xaml
@@ -192,11 +192,9 @@ namespace Programing_Labs.Labs_Pages
                 new double[] { y },
                 color: System.Drawing.Color.FromName("Green"),
                 markerSize: 7);
-
             WpfPlot1.Plot.AddArrow(x,
                  y, x - 3, y,
                 color: System.Drawing.Color.FromName("Red"));
-
             WpfPlot1.Refresh();
 
 

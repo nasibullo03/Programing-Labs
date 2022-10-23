@@ -39,14 +39,14 @@ namespace Programing_Labs
         public void RadioButton_Checked(object sender, RoutedEventArgs e)
         {
             RadioButton radioButton = sender as RadioButton;
-            radioButton.Style = (Style)this.FindResource("MenuButtonThemeClicked");
+            radioButton.Style = (Style)this.FindResource("MenuButtonStyleClicked");
             for (int i = 0; i < MenuItem.MenuItemsRadioButton.Count; ++i)
             {
 
                 if (radioButton != MenuItem.MenuItemsRadioButton[i])
                 {
                     MenuItem.SubitemsRadioButton[i][0].IsChecked = false;
-                    MenuItem.SubitemsRadioButton[i][0].Style = (Style)this.FindResource("MenuSubitemTheme");
+                    MenuItem.SubitemsRadioButton[i][0].Style = (Style)this.FindResource("MenuSubitemStyle");
                     foreach (KeyValuePair<int, RadioButton> item in MenuItem.SubitemsRadioButton[i])
                     {
                         item.Value.Visibility = Visibility.Collapsed;
@@ -55,7 +55,7 @@ namespace Programing_Labs
                 if (radioButton == MenuItem.MenuItemsRadioButton[i])
                 {
                     MenuItem.SubitemsRadioButton[i][0].IsChecked = true;
-                    MenuItem.SubitemsRadioButton[i][0].Style = (Style)this.FindResource("MenuSubitemThemeClicked");
+                    MenuItem.SubitemsRadioButton[i][0].Style = (Style)this.FindResource("MenuSubitemStyleClicked");
                     if (MenuItem.MenuItemParametrs[i + 1].ItemQuantity <= 1)
                     {
                         MainFrame.Navigate(new Uri(MenuItem.MenuItemParametrs[i + 1].SoursePage[0], UriKind.Relative));
@@ -73,7 +73,7 @@ namespace Programing_Labs
 
             if (MenuItem_Sender != null)
             {
-                (MenuItem_Sender as RadioButton).Style = (Style)this.FindResource("MenuButtonTheme");
+                (MenuItem_Sender as RadioButton).Style = (Style)this.FindResource("MenuButtonStyle");
 
                 MenuItem_Sender = sender;
             }
@@ -83,7 +83,7 @@ namespace Programing_Labs
         public void RadioButtonSubitem_Checked(object sender, RoutedEventArgs e)
         {
             RadioButton radioButton = sender as RadioButton;
-            radioButton.Style = (Style)this.FindResource("MenuSubitemThemeClicked");
+            radioButton.Style = (Style)this.FindResource("MenuSubitemStyleClicked");
 
             for (int i = 0; i < MenuItem.SubitemsRadioButton.Count; i++)
             {
@@ -96,7 +96,7 @@ namespace Programing_Labs
 
             if (MenuSubitem_Sender != null)
             {
-                (MenuSubitem_Sender as RadioButton).Style = (Style)this.FindResource("MenuSubitemTheme");
+                (MenuSubitem_Sender as RadioButton).Style = (Style)this.FindResource("MenuSubitemStyle");
 
                 MenuSubitem_Sender = sender;
             }

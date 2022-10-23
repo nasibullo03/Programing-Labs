@@ -14,7 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Programing_Labs.Labs_Pages
+namespace Programing_Labs.Pages
 {
     /// <summary>
     /// Логика взаимодействия для Lab1_1_Page.xaml

@@ -86,15 +86,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="Labs_Pages\Lab1_1_Page.xaml">
+    <Page Include="Pages\Lab1_1_Page.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Labs_Pages\Lab1_2_Page.xaml">
+    <Page Include="Pages\Lab1_2_Page.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Labs_Pages\Lab2_Page.xaml">
+    <Page Include="Pages\Lab2_Page.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -109,53 +109,52 @@
     <Compile Include="Check.cs" />
     <Compile Include="Core\ObservableObject.cs" />
     <Compile Include="Core\RelayCommand.cs" />
-    <Compile Include="Design\MenuDesign.cs" />
-    <Compile Include="Labs_Pages\Lab1_1_Page.xaml.cs">
+    <Compile Include="Pages\Lab1_1_Page.xaml.cs">
       <DependentUpon>Lab1_1_Page.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Labs_Pages\Lab1_2_Page.xaml.cs">
+    <Compile Include="Pages\Lab1_2_Page.xaml.cs">
       <DependentUpon>Lab1_2_Page.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Labs_Pages\Lab2_Page.xaml.cs">
+    <Compile Include="Pages\Lab2_Page.xaml.cs">
       <DependentUpon>Lab2_Page.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Theme\ButtonTheme.xaml">
+    <Page Include="Styles\ButtonStyle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Theme\FormulaTheme.xaml">
+    <Page Include="Styles\FormulaStyle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Theme\LabelTheme.xaml">
+    <Page Include="Styles\LabelStyle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Theme\MenuSubitemThemeClicked.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Theme\MenuSubitemTheme.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Theme\MenuButtonThemeClicked.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Theme\MenuButtonTheme.xaml">
+    <Page Include="Styles\MenuButtonStyle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Theme\SearchBoxTheme.xaml">
+    <Page Include="Styles\MenuButtonStyleClicked.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Theme\TextBoxTheme.xaml">
+    <Page Include="Styles\MenuSubitemStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Styles\MenuSubitemStyleClicked.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Styles\SearchBoxStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Styles\TextBoxStyle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -190,9 +189,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Fonts\" />
-    <Folder Include="MVVM\Model\" />
-    <Folder Include="MVVM\ViewModel\" />
-    <Folder Include="MVVM\View\" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\close-button.png" />

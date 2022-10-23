@@ -3,37 +3,41 @@
 
     <Style BasedOn="{StaticResource {x:Type Button}}"
            TargetType="{x:Type Button}"
-           x:Key="ButtonTheme">
+           x:Key="ButtonStyle">
         <Style.Setters>
             <Setter Property="Template">
-                <Setter.Value >
+                <Setter.Value>
                     <ControlTemplate TargetType="Button">
-                        <Grid  x:Name="RadioButtonGrid" VerticalAlignment="Stretch"
-                              HorizontalAlignment="Stretch"
-                              Background="{TemplateBinding Background}">
+                        <Grid  x:Name="RadioButtonGrid"
+                               VerticalAlignment="Stretch"
+                               HorizontalAlignment="Stretch"
+                               Background="{TemplateBinding Background}">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="10"/>
-                                <ColumnDefinition/>
-                                <ColumnDefinition Width="10"/>
+                                <ColumnDefinition Width="10" />
+                                <ColumnDefinition />
+                                <ColumnDefinition Width="10" />
                             </Grid.ColumnDefinitions>
                             <TextBlock Text="{TemplateBinding Property=Content}"
                                        VerticalAlignment="Center"
                                        HorizontalAlignment="Center"
                                        Grid.Column="1"
-                                       Foreground="White"
-                                       />
+                                       Foreground="White" />
                         </Grid>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
-            <Setter Property="Background" Value="#007575"/>
-            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Background"
+                    Value="#007575" />
+            <Setter Property="BorderThickness"
+                    Value="0" />
 
 
         </Style.Setters>
         <Style.Triggers>
-            <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="#00f0f0">
+            <Trigger Property="IsMouseOver"
+                     Value="True">
+                <Setter Property="Background"
+                        Value="#00f0f0">
                 </Setter>
 
             </Trigger>

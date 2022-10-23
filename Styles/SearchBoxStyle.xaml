@@ -8,7 +8,7 @@
                     <Border CornerRadius="10"
                             Background="#353340">
                         <Grid>
-                            <Rectangle StrokeThickness="1"/>
+                            <Rectangle StrokeThickness="1" />
                             <TextBox Margin="1"
                                      Text="{TemplateBinding Text}"
                                      BorderThickness="0"
@@ -16,8 +16,7 @@
                                      VerticalAlignment="Center"
                                      Padding="5"
                                      Foreground="#CFCFCF"
-                                     x:Name="SearchBox"
-                                     />
+                                     x:Name="SearchBox" />
                             <TextBlock IsHitTestVisible="False"
                                        Text="Search"
                                        VerticalAlignment="Center"
@@ -29,11 +28,14 @@
                                 <TextBlock.Style>
                                     <Style TargetType="{x:Type TextBlock}">
                                         <Style.Triggers>
-                                            <DataTrigger Binding="{Binding Text,ElementName=SearchBox}" Value="">
-                                                <Setter Property="Visibility" Value="Visible"/>
+                                            <DataTrigger Binding="{Binding Text,ElementName=SearchBox}"
+                                                         Value="">
+                                                <Setter Property="Visibility"
+                                                        Value="Visible" />
                                             </DataTrigger>
                                         </Style.Triggers>
-                                        <Setter Property="Visibility" Value="Hidden"/>
+                                        <Setter Property="Visibility"
+                                                Value="Hidden" />
                                     </Style>
                                 </TextBlock.Style>
 

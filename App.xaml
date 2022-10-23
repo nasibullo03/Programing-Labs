@@ -6,15 +6,17 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="Theme/MenuButtonTheme.xaml"/>
-                <ResourceDictionary Source="Theme/MenuButtonThemeClicked.xaml"/>
-                <ResourceDictionary Source="Theme/MenuSubitemTheme.xaml"/>
-                <ResourceDictionary Source="Theme/MenuSubitemThemeClicked.xaml"/>
-                <ResourceDictionary Source="Theme/LabelTheme.xaml"/>
-                <ResourceDictionary Source="Theme/ButtonTheme.xaml"/>
-                <ResourceDictionary Source="Theme/SearchBoxTheme.xaml"/>
-                <ResourceDictionary Source="Theme/TextBoxTheme.xaml"/>
-                <ResourceDictionary Source="Theme/FormulaTheme.xaml" />
+                <ResourceDictionary Source="Styles/FormulaStyle.xaml" />
+                <ResourceDictionary Source="Styles/LabelStyle.xaml" />
+                <ResourceDictionary Source="Styles/MenuSubitemStyle.xaml" />
+                <ResourceDictionary Source="Styles/MenuSubitemStyleClicked.xaml" />
+                <ResourceDictionary Source="Styles/SearchBoxStyle.xaml" />
+                <ResourceDictionary Source="Styles/TextBoxStyle.xaml" />
+                <ResourceDictionary Source="Styles/ButtonStyle.xaml" />
+                <ResourceDictionary Source="Styles/MenuButtonStyle.xaml" />
+                <ResourceDictionary Source="Styles/MenuButtonStyleClicked.xaml" />
+
+
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

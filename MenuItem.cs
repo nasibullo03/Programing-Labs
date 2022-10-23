@@ -45,18 +45,18 @@ namespace Programing_Labs
                  {1,new MenuItem(){
                     ItemQuantity=2,
                     ItemsName= new[]{"Заданяя №1", "Заданяя №2" },
-                    SoursePage = new[] {"Labs_Pages\\Lab1_1_Page.xaml","Labs_Pages\\Lab1_2_Page.xaml"},
+                    SoursePage = new[] {"Pages\\Lab1_1_Page.xaml","Pages\\Lab1_2_Page.xaml"},
                     }
                 },
                 {2,new MenuItem(){
                     ItemQuantity=1,
-                    SoursePage =  new[] {"Labs_Pages\\Lab2_Page.xaml"},
+                    SoursePage =  new[] {"Pages\\Lab2_Page.xaml"},
                     }
                 },
                 {3,new MenuItem(){
                     ItemQuantity=2,
                     ItemsName= new[]{"Заданяя №1", "Заданяя №2" },
-                    SoursePage = new[] {"Labs_Pages\\Lab1_1_Page.xaml","Labs_Pages\\Lab1_2_Page.xaml"},
+                    SoursePage = new[] {"Pages\\Lab1_1_Page.xaml","Pages\\Lab1_2_Page.xaml"},
                     }
                 },
             };
@@ -68,7 +68,7 @@ namespace Programing_Labs
             Height = 50,
             Foreground = (Brush)converter.ConvertFromString("#FFFFFF"),
             FontSize = 14,
-            Style = (Style)MainWindow.FormMain.FindResource("MenuButtonTheme"),
+            Style = (Style)MainWindow.FormMain.FindResource("MenuButtonStyle"),
             Visibility = Visibility.Visible,
             IsChecked = false,
             GroupName = "Items"
@@ -78,7 +78,7 @@ namespace Programing_Labs
             Height = 20,
             Foreground = (Brush)converter.ConvertFromString("#FFFFFF"),
             FontSize = 14,
-            Style = (Style)MainWindow.FormMain.FindResource("MenuSubitemTheme"),
+            Style = (Style)MainWindow.FormMain.FindResource("MenuSubitemStyle"),
             Visibility = Visibility.Visible,
             IsChecked = false,
             GroupName = "Subitems",

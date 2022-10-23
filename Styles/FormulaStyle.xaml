@@ -11,5 +11,5 @@
         <Setter Property="TextOptions.TextFormattingMode"
                 Value="Display" />
     </Style>
-
+    
 </ResourceDictionary>
