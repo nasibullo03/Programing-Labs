@@ -99,7 +99,8 @@
                                  Style="{StaticResource TextBoxStyle}"
                                  FontSize="18"
                                  Margin="0,-5,0,0"
-                                 TabIndex="3" />
+                                 TabIndex="3"
+                                 InputLanguageManager.InputLanguage="en"/>
                     </StackPanel>
                 </MenuItem.Header>
             </MenuItem>
