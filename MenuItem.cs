@@ -54,9 +54,8 @@ namespace Programing_Labs
                     }
                 },
                 {3,new MenuItem(){
-                    ItemQuantity=2,
-                    ItemsName= new[]{"Заданяя №1", "Заданяя №2" },
-                    SoursePage = new[] {"Pages\\Lab1_1_Page.xaml","Pages\\Lab1_2_Page.xaml"},
+                    ItemQuantity=1,
+                    SoursePage =  new[] {"Pages\\Lab2_Page.xaml"},
                     }
                 },
             };
