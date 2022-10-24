@@ -94,13 +94,14 @@ namespace Programing_Labs.Pages
                 int count = 0;
                 /*try
                 {*/
-                    while (true)
+                while (true)
+                {
+                    ++count;
+
+                    x1 = (StartPoint + EndPoint - IncrementStep) / 2;
+                    x2 = (StartPoint + EndPoint + IncrementStep) / 2;
+                    try
                     {
-                        ++count;
-
-                        x1 = (StartPoint + EndPoint - IncrementStep) / 2;
-                        x2 = (StartPoint + EndPoint + IncrementStep) / 2;
-
                         if (F(x1) <= F(x2))
                             EndPoint = x2;
                         else
@@ -117,11 +118,17 @@ namespace Programing_Labs.Pages
                             break;
                         }
                     }
-               /* }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
-                }*/
+                    catch (Exception ex)
+                    {
+                        System.Windows.Forms.MessageBox.Show(ex.Message);
+                        break; ;
+                    }
+                }
+                /* }
+                 catch (Exception ex)
+                 {
+                     MessageBox.Show(ex.Message);
+                 }*/
 
 
                 /* Result = -1 - Math.Pow(Math.Pow(2 * (x - 1) * (x - 7), 2), 1 / 3);*//*
@@ -169,12 +176,11 @@ namespace Programing_Labs.Pages
         }
         private double F(double X)
         {
-
             org.matheval.Expression expression = new org.matheval.Expression(TxtBxFx.Text.ToLower());
             expression.Bind("x", X);
-            double value = expression.Eval<double>();
+            decimal value = expression.Eval<decimal>();
             /*System.Windows.Forms.MessageBox.Show(value.ToString());*/
-            return value;
+            return (double)value;
         }
         private void ShowGraph(double StartPoint, double EndPoint, double Result)
         {

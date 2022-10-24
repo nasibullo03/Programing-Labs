@@ -90,6 +90,8 @@ namespace Programing_Labs
         public static bool CheckTextBoxesValues(TextBox[] UITextBoxes, string a, string b)
         {
             string message = string.Empty;
+            double.TryParse(a, out double dblA);
+            double.TryParse(b, out double dblB);
             foreach (TextBox textBox in UITextBoxes)
             {
                 if (textBox.Text == string.Empty)
@@ -101,8 +103,7 @@ namespace Programing_Labs
                 }
                 if ((string)textBox.Tag == "e")
                 {
-                    double.TryParse(a, out double dblA);
-                    double.TryParse(b, out double dblB);
+                    
                     double.TryParse(textBox.Text, out double dblE);
 
                     if (dblE <= 0 || dblE >= (dblB - dblA))
@@ -133,6 +134,14 @@ namespace Programing_Labs
                         if (!message.Contains("-F(x) должен иметь свойство x."))
                             message += "-F(x) должен иметь свойство x.\n";
                         continue;
+                    }
+                    if(textBox.Text.Contains("log") || textBox.Text.Contains("ln"))
+                    {
+                        if(dblA <= 0 || dblB <= 0)
+                        {
+                            if (!message.Contains("-Для этого F(x), значения a и b не могут быть отрицательными или равными"))
+                                message += "-Для этого F(x), значения a и b не могут быть отрицательными или равными.\n";
+                        }
                     }
                     try
                     {
