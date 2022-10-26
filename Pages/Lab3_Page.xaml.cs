@@ -27,7 +27,6 @@ namespace Programing_Labs.Pages
         /// </summary>
         private List<ScottPlot.Plottable.ScatterPlot> ScatterPlots = new List<ScottPlot.Plottable.ScatterPlot>();
         private List<ScottPlot.Plottable.Text> Texts = new List<ScottPlot.Plottable.Text>();
-        private int _index = 0;
         /// <summary>
         /// Пошаговый индекс точки сходимости
         /// </summary>
@@ -76,7 +75,7 @@ namespace Programing_Labs.Pages
 
         private void MenuItemSolve_Click(object sender, RoutedEventArgs e)
         {
-            
+
             /*
              Интервал = [StartPoint, EndPoint]
              Точность(e)  = Accuracy
@@ -86,7 +85,7 @@ namespace Programing_Labs.Pages
             Ypoints.Clear();
             Texts.Clear();
             ScatterPlots.Clear();
-            
+
             if (Check.CheckTextBoxesValues(UITextBoxes, TxtBxA.Text, TxtBxB.Text))
             {
                 double.TryParse(TxtBxA.Text, out var StartPoint);
@@ -155,7 +154,7 @@ namespace Programing_Labs.Pages
 
         private void ClearStartdatrtParams()
         {
-            
+
             Xpoints.Clear();
             Ypoints.Clear();
             Texts.Clear();
@@ -245,7 +244,7 @@ namespace Programing_Labs.Pages
         private void Button_Back_Click(object sender, RoutedEventArgs e)
         {
             if (Xpoints.Count == 0) return;
-            if (ScatterPlots.Count == 0 && ConvergenceIndex <= 0 && Texts.Count==0)
+            if (ScatterPlots.Count == 0 && ConvergenceIndex <= 0 && Texts.Count == 0)
             {
                 return;
             }
@@ -259,14 +258,14 @@ namespace Programing_Labs.Pages
             --ConvergenceIndex;
             if (ConvergenceIndex >= 0 && ConvergenceIndex <= Xpoints.Count)
             {
-                
+
                 if (ConvergenceIndex >= Xpoints.Count) ConvergenceIndex = Xpoints.Count - 1;
-                
+
                 WpfPlot1.Plot.Remove(ScatterPlots[index]);
                 WpfPlot1.Plot.Remove(Texts[index]);
                 ScatterPlots.RemoveAt(index);
                 Texts.RemoveAt(index);
-                
+
                 ScatterPlots.Add(WpfPlot1.Plot.AddScatter(
                 new double[] { Xpoints[ConvergenceIndex] },
                 new double[] { Ypoints[ConvergenceIndex] },
@@ -280,11 +279,12 @@ namespace Programing_Labs.Pages
                     color: System.Drawing.Color.FromName("Black")));
 
                 WpfPlot1.Refresh();
-            } else
+            }
+            else
             {
                 //когда в листе осталась один объект, отчистить все точки и значение точки из графика. Остается только график
                 if (ScatterPlots.Count == 1)
-                { 
+                {
                     ScatterPlots.ForEach(el => WpfPlot1.Plot.Remove(el));
                     Texts.ForEach(el => WpfPlot1.Plot.Remove(el));
                     ScatterPlots.Clear();
@@ -311,7 +311,7 @@ namespace Programing_Labs.Pages
                 else ++ConvergenceIndex;
                 backvard = false;
             }
-            
+
             int index = ScatterPlots.Count;
             if (ConvergenceIndex >= 0 && ConvergenceIndex < Xpoints.Count)
             {

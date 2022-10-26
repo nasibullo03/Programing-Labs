@@ -87,6 +87,9 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="IPhoneBook.cs" />
+    <Compile Include="Pages\Lab4_Page.xaml.cs">
+      <DependentUpon>Lab4_Page.xaml</DependentUpon>
+    </Compile>
     <Compile Include="PhoneBook.cs" />
     <Compile Include="Styles\ListViewStyle.xaml.cs">
       <DependentUpon>ListViewStyle.xaml</DependentUpon>
@@ -131,6 +134,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Pages\Lab3_Page.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Lab4_Page.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
