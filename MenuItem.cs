@@ -44,7 +44,7 @@ namespace Programing_Labs
             {
                  {1,new MenuItem(){
                     ItemQuantity=2,
-                    ItemsName= new[]{"Заданяя №1", "Заданяя №2" },
+                    ItemsName= new[]{"Задача №1", "Задача №2" },
                     SoursePage = new[] {"Pages\\Lab1_1_Page.xaml","Pages\\Lab1_2_Page.xaml"},
                     }
                 },
@@ -110,7 +110,7 @@ namespace Programing_Labs
             {
                 Item = NewMenuItem();
                 Item.Name = $"MenuItem{valuePairs.Key}";
-                Item.Content = $"Lab {valuePairs.Key}";
+                Item.Content = $"Лаба № {valuePairs.Key}";
                 Item.TabIndex = valuePairs.Key;
                 Item.Checked += MainWindow.FormMain.RadioButton_Checked;
                 if (valuePairs.Key == 1)
