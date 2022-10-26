@@ -58,6 +58,11 @@ namespace Programing_Labs
                     SoursePage =  new[] {"Pages\\Lab3_Page.xaml"},
                     }
                 },
+                {4,new MenuItem(){
+                    ItemQuantity=1,
+                    SoursePage =  new[] {"Pages\\Lab4_Page.xaml"},
+                    }
+                },
             };
 
         }
@@ -121,7 +126,7 @@ namespace Programing_Labs
                 }
                 MainWindow.FormMain.MenuItemList.Children.Add(Item);
                 MenuItemsRadioButton.Add(Item);
-                
+
                 if (valuePairs.Value.ItemQuantity > 1)
                     AddSubitems(valuePairs.Value, valuePairs.Key);
                 else
