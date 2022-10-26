@@ -139,17 +139,17 @@ namespace Programing_Labs
                     try
                     {
                         org.matheval.Expression expression = new org.matheval.Expression(textBox.Text.ToLower());
-                        expression.Bind("x", 0.5);
+                        expression.Bind("x", dblA);
                         double value = expression.Eval<double>();
 
-                        expression.Bind("x", -0.5);
+                        expression.Bind("x", dblB);
                         value = expression.Eval<double>();
                     }
                     catch (Exception ex)
                     {
-                        if (!ex.Message.Contains("Значение было недопустимо малым или недопустимо большим")
-                            && !message.Contains("-Для этого F(x), значения a и b не могут быть отрицательными или равными"))
-                            message += "-Для этого F(x), значения a и b не могут быть отрицательными или равными.\n";
+                        if (ex.Message.Contains("Значение было недопустимо малым или недопустимо большим")
+                            && !message.Contains("-Для этого F(x), значения a и b не могут быть отрицательными или равными нулю"))
+                            message += "-Для этого F(x), значения a и b не могут быть отрицательными или равными нулю.\n";
                         else if (!message.Contains(ex.Message.ToString()))
                             message += "F(x)= " + ex.Message.ToString() + "\n";
                     }

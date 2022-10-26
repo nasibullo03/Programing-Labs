@@ -13,14 +13,13 @@
 
     <DockPanel>
         <!--Вверхный панел для имя задачи-->
-        <Label Content="Найти точки минимума методом дихотомии"
+        <Label Content="Метод золотого сечения (Ньютона)"
                DockPanel.Dock="Top"
                HorizontalAlignment="Center"
                VerticalAlignment="Center"
                FontSize="22"
                Foreground="White"
-               FontWeight="Bold"
-               Height="70"/>
+               FontWeight="Bold"/>
         <!--Нижный панель-->
 
         <Menu Height="auto"
