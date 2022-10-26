@@ -68,8 +68,6 @@ namespace Programing_Labs
                         message += "-Значение поля не может быть отрицательным.\n";
                     continue;
                 }
-
-
             }
             if (message != string.Empty)
             {
@@ -165,7 +163,6 @@ namespace Programing_Labs
 
             return true;
         }
-
         public void OnPaste(object sender, DataObjectPastingEventArgs e)
         {
             e.CancelCommand();
