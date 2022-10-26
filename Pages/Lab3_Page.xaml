@@ -130,12 +130,40 @@
                           TabIndex="6" />
 
             </MenuItem>
+            <MenuItem>
+                <MenuItem.Header>
+                    <StackPanel Orientation="Horizontal"
+                                VerticalAlignment="Top">
+                        <Button x:Name="Button_Back"
+                                Style="{StaticResource ButtonStyle}"
+                                FontSize="16"
+                                Content="Шаг назад"
+                                Height="50"
+                                Width="auto"
+                                FontWeight="Bold"
+                                Click="Button_Back_Click"
+                                />
+                        <Button x:Name="Button_Forward"
+                                Style="{StaticResource ButtonStyle}"
+                                FontSize="16"
+                                Content="Шаг вперед"
+                                Height="50"
+                                Width="auto"
+                                FontWeight="Bold"
+                                Click="Button_Forward_Click"
+                                Margin="8,0,0,0"
+                                />
+                    </StackPanel>
+                                   
+                </MenuItem.Header>
+            </MenuItem>
         </Menu>
 
         <!--Plot для графика-->
         <WpfPlot x:Name="WpfPlot1"
                  Height="auto"
-                 Width="auto"/>
+                 Width="auto"
+                 />
 
 
     </DockPanel>
