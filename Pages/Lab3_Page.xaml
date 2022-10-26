@@ -115,23 +115,20 @@
                     FontSize="16"
                     Foreground="#007575"
                     Background="Transparent"
-                    Click="MenuItemSolve_Click"
+                    Click="MenuItem_Click"
                     TabIndex="5" />
                 <MenuItem Header="Очистить"
                     FontWeight="Black"
                     FontSize="16"
                     Foreground="#007575"
                     Background="Transparent"
-                    Click="MenuItemClear_Click"
+                    Click="MenuItem_Click_1"
                     TabIndex="6" />
 
             </MenuItem>
         </Menu>
 
         <!--Plot для графика-->
-        <WpfPlot x:Name="WpfPlot1"
-            Height="auto"
-            Width="auto" Margin="0,115.2,0,0" />
 
     </Grid>
 </Page>
