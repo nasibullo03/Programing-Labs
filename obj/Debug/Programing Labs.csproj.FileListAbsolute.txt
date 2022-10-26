@@ -82,3 +82,9 @@ C:\Users\student\Source\Repos\Programing-Labs\obj\Debug\Programing Labs.csproj.C
 C:\Users\student\Source\Repos\Programing-Labs\obj\Debug\Programing Labs.csproj.CopyComplete
 C:\Users\student\Source\Repos\Programing-Labs\obj\Debug\Programing Labs.exe
 C:\Users\student\Source\Repos\Programing-Labs\obj\Debug\Programing Labs.pdb
+C:\Users\Admin\Source\Repos\Programing-Labs\obj\Debug\Pages\Lab3_Page.g.cs
+C:\Users\Admin\Source\Repos\Programing-Labs\obj\Debug\Styles\ListViewStyle.g.cs
+C:\Users\Admin\Source\Repos\Programing-Labs\obj\Debug\UserControls\ModernSmallUserInputControl.g.cs
+C:\Users\Admin\Source\Repos\Programing-Labs\obj\Debug\Pages\Lab3_Page.baml
+C:\Users\Admin\Source\Repos\Programing-Labs\obj\Debug\Styles\ListViewStyle.baml
+C:\Users\Admin\Source\Repos\Programing-Labs\obj\Debug\UserControls\ModernSmallUserInputControl.baml
