@@ -68,8 +68,6 @@ namespace Programing_Labs
                         message += "-Значение поля не может быть отрицательным.\n";
                     continue;
                 }
-
-
             }
             if (message != string.Empty)
             {
@@ -103,7 +101,7 @@ namespace Programing_Labs
                 }
                 if ((string)textBox.Tag == "e")
                 {
-                    
+
                     double.TryParse(textBox.Text, out double dblE);
 
                     if (dblE <= 0 || dblE >= (dblB - dblA))
@@ -135,26 +133,24 @@ namespace Programing_Labs
                             message += "-F(x) должен иметь свойство x.\n";
                         continue;
                     }
-                    if(textBox.Text.Contains("log") || textBox.Text.Contains("ln"))
-                    {
-                        if(dblA <= 0 || dblB <= 0)
-                        {
-                            if (!message.Contains("-Для этого F(x), значения a и b не могут быть отрицательными или равными"))
-                                message += "-Для этого F(x), значения a и b не могут быть отрицательными или равными.\n";
-                        }
-                    }
+
                     try
                     {
                         org.matheval.Expression expression = new org.matheval.Expression(textBox.Text.ToLower());
-                        expression.Bind("x", 0.5);
+                        expression.Bind("x", dblA);
                         double value = expression.Eval<double>();
+
+                        expression.Bind("x", dblB);
+                        value = expression.Eval<double>();
                     }
                     catch (Exception ex)
                     {
-                        if (!message.Contains(ex.Message.ToString()))
-                            message += "F(x)= "+ ex.Message.ToString() + "\n";
+                        if (ex.Message.Contains("Значение было недопустимо малым или недопустимо большим")
+                            && !message.Contains("-Для этого F(x), значения a и b не могут быть отрицательными или равными нулю"))
+                            message += "-Для этого F(x), значения a и b не могут быть отрицательными или равными нулю.\n";
+                        else if (!message.Contains(ex.Message.ToString()))
+                            message += "F(x)= " + ex.Message.ToString() + "\n";
                     }
-
                 }
 
             }
@@ -167,7 +163,6 @@ namespace Programing_Labs
 
             return true;
         }
-
         public void OnPaste(object sender, DataObjectPastingEventArgs e)
         {
             e.CancelCommand();
