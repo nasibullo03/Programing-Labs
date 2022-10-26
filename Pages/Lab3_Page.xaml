@@ -115,14 +115,14 @@
                     FontSize="16"
                     Foreground="#007575"
                     Background="Transparent"
-                    Click="MenuItemSolve_Click"
+                    Click=""
                     TabIndex="5" />
                 <MenuItem Header="Очистить"
                     FontWeight="Black"
                     FontSize="16"
                     Foreground="#007575"
                     Background="Transparent"
-                    Click="MenuItemClear_Click"
+                    Click=""
                     TabIndex="6" />
 
             </MenuItem>
