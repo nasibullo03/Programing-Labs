@@ -96,3 +96,9 @@ C:\Users\student\Source\Repos\Programing-Labs\obj\Debug\Styles\ListViewStyle.bam
 C:\Users\student\Source\Repos\Programing-Labs\obj\Debug\UserControls\ModernSmallUserInputControl.baml
 C:\Users\student\Source\Repos\Programing-Labs\obj\Debug\Pages\Lab3_Page.baml
 C:\Users\student\Source\Repos\Programing-Labs\obj\Debug\Pages\Lab4_Page.baml
+C:\Users\Admin\Source\Repos\Programing-Labs\obj\Debug\Pages\Lab4_Page.g.cs
+C:\Users\Admin\Source\Repos\Programing-Labs\obj\Debug\Pages\Lab4_Page.baml
+C:\Users\Admin\Source\Repos\Programing-Labs\bin\Debug\Programing Labs.exe.manifest
+C:\Users\Admin\Source\Repos\Programing-Labs\bin\Debug\Programing Labs.application
+C:\Users\Admin\Source\Repos\Programing-Labs\obj\Debug\Programing Labs.exe.manifest
+C:\Users\Admin\Source\Repos\Programing-Labs\obj\Debug\Programing Labs.application
