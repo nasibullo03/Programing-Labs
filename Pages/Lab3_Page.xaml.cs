@@ -22,11 +22,17 @@ namespace Programing_Labs.Pages
         private TextBox[] UITextBoxes { get; set; }
         private List<double> Xpoints = new List<double>();
         private List<double> Ypoints = new List<double>();
+        private List<List<double>> BeginPoints = new List<List<double>>();
+        private List<List<double>> lastPoints = new List<List<double>>();
+
+
         /// <summary>
         /// для хранение список точки сходимости в графике 
         /// </summary>
-        private List<ScottPlot.Plottable.ScatterPlot> ScatterPlots = new List<ScottPlot.Plottable.ScatterPlot>();
-        private List<ScottPlot.Plottable.Text> Texts = new List<ScottPlot.Plottable.Text>();
+        private List<ScottPlot.Plottable.ScatterPlot> BeginScatterPlots = new List<ScottPlot.Plottable.ScatterPlot>();
+        private List<ScottPlot.Plottable.ScatterPlot> LastScatterPlots = new List<ScottPlot.Plottable.ScatterPlot>();
+        private List<ScottPlot.Plottable.Text> BeginTexts = new List<ScottPlot.Plottable.Text>();
+        private List<ScottPlot.Plottable.Text> LastTexts = new List<ScottPlot.Plottable.Text>();
         /// <summary>
         /// Пошаговый индекс точки сходимости
         /// </summary>
@@ -83,8 +89,13 @@ namespace Programing_Labs.Pages
              */
             Xpoints.Clear();
             Ypoints.Clear();
-            Texts.Clear();
-            ScatterPlots.Clear();
+            BeginTexts.Clear();
+            BeginScatterPlots.Clear();
+
+            TxtBxA.Text = "-1";
+            TxtBxB.Text = "1";
+            TxtBxE.Text = "0,0001";
+            TxtBxFx.Text = "x^2";
 
             if (Check.CheckTextBoxesValues(UITextBoxes, TxtBxA.Text, TxtBxB.Text))
             {
@@ -92,12 +103,15 @@ namespace Programing_Labs.Pages
                 double.TryParse(TxtBxB.Text, out var EndPoint);
                 double.TryParse(TxtBxE.Text, out var Accuracy);
 
+
+
                 double a = StartPoint;
                 double b = EndPoint;
                 double x1, x2, k1, k2, F1, F2, Result;
 
                 int count = 0;
-
+                BeginPoints.Add(new List<double>() { StartPoint, F(StartPoint) });
+                lastPoints.Add(new List<double>() { EndPoint, F(EndPoint) });
                 k2 = (Math.Sqrt(5) - 1) / 2;
                 k1 = 1 - k2;
 
@@ -106,40 +120,51 @@ namespace Programing_Labs.Pages
 
                 try
                 {
+
                     F1 = F(x1);
                     F2 = F(x2);
-
                     while (true)
                     {
                         ++count;
 
-                        if ((EndPoint - StartPoint) < Accuracy)
+                        
+
+                        BeginPoints.Add(new List<double>() { x1, F1 });
+                        lastPoints.Add(new List<double>() { x2, F2 });
+
+
+                        if (F1 <= F2)
+                        {
+                            /* System.Windows.Forms.MessageBox.Show($"F1<f2    {F1}<{F2}");
+                             System.Windows.Forms.MessageBox.Show($"X1 = {x1}");
+                             System.Windows.Forms.MessageBox.Show($"X2 = {x2}");
+                             System.Windows.Forms.MessageBox.Show($"EndPoint = {EndPoint}");
+                             System.Windows.Forms.MessageBox.Show($"X2 = {x2}");*/
+
+                            EndPoint = x2;
+                            x2 = x1;
+                            F2 = F1;
+                            x1 = StartPoint + (k1 * (EndPoint - StartPoint));
+                            F1 = F(x1);
+                        }
+                        else
+                        {
+                            StartPoint = x1;
+                            x1 = x2;
+                            F1 = F2;
+                            x2 = StartPoint + (k2 * (EndPoint - StartPoint));
+                            F2 = F(x2);
+                        }
+                        if (((EndPoint - StartPoint)/2) <= Accuracy)
                         {
                             Result = (StartPoint + EndPoint) / 2;
                             WpfPlot1.Plot.Clear();
                             WpfPlot1.Refresh();
                             ShowGraph(a, b, Result);
+                            System.Windows.Forms.MessageBox.Show(lastPoints.ToArray().ToString());
                             break;
                         }
-                        else
-                        {
-                            if (F1 < F2)
-                            {
-                                EndPoint = x2;
-                                x2 = x1;
-                                F2 = F1;
-                                x1 = StartPoint + k1 * (EndPoint - StartPoint);
-                                F1 = F(x1);
-                            }
-                            else
-                            {
-                                StartPoint = x1;
-                                x1 = x2;
-                                F2 = F1;
-                                x2 = StartPoint + k2 * (EndPoint - StartPoint);
-                                F2 = F(x2);
-                            }
-                        }
+
 
                     }
                 }
@@ -157,8 +182,13 @@ namespace Programing_Labs.Pages
 
             Xpoints.Clear();
             Ypoints.Clear();
-            Texts.Clear();
-            ScatterPlots.Clear();
+            BeginPoints.Clear();
+            lastPoints.Clear();
+
+            BeginTexts.Clear();
+            BeginScatterPlots.Clear();
+            LastTexts.Clear();
+            LastScatterPlots.Clear();
 
             ConvergenceIndex = 0;
 
@@ -187,8 +217,8 @@ namespace Programing_Labs.Pages
         {
             org.matheval.Expression expression = new org.matheval.Expression(TxtBxFx.Text.ToLower());
             expression.Bind("x", X);
-            decimal value = expression.Eval<decimal>();
-            return (double)value;
+            double value = expression.Eval<double>();
+            return value;
         }
         /// <summary>
         /// Возвращает 20%  от расстояние между Max(y) и Min(x).
@@ -199,6 +229,17 @@ namespace Programing_Labs.Pages
             double min = Ypoints[0];
             double max = Ypoints[0];
             foreach (var el in Ypoints)
+            {
+                if (el < min) min = el;
+                if (el > max) max = el;
+            }
+            return (max - min) * 0.2;
+        }
+        private double ArrowXLength()
+        {
+            double min = Xpoints[0];
+            double max = Xpoints[0];
+            foreach (var el in Xpoints)
             {
                 if (el < min) min = el;
                 if (el > max) max = el;
@@ -244,7 +285,7 @@ namespace Programing_Labs.Pages
         private void Button_Back_Click(object sender, RoutedEventArgs e)
         {
             if (Xpoints.Count == 0) return;
-            if (ScatterPlots.Count == 0 && ConvergenceIndex <= 0 && Texts.Count == 0)
+            if (BeginScatterPlots.Count == 0 && ConvergenceIndex <= 0 && BeginTexts.Count == 0)
             {
                 return;
             }
@@ -254,27 +295,45 @@ namespace Programing_Labs.Pages
                 --ConvergenceIndex;
                 forvard = false;
             }
-            int index = ScatterPlots.Count - 1;
+            int index = BeginScatterPlots.Count - 1;
             --ConvergenceIndex;
-            if (ConvergenceIndex >= 0 && ConvergenceIndex <= Xpoints.Count)
+            if (ConvergenceIndex >= 0 && ConvergenceIndex <= BeginPoints.Count)
             {
 
-                if (ConvergenceIndex >= Xpoints.Count) ConvergenceIndex = Xpoints.Count - 1;
+                if (ConvergenceIndex >= BeginPoints.Count) ConvergenceIndex = BeginPoints.Count - 1;
 
-                WpfPlot1.Plot.Remove(ScatterPlots[index]);
-                WpfPlot1.Plot.Remove(Texts[index]);
-                ScatterPlots.RemoveAt(index);
-                Texts.RemoveAt(index);
+                WpfPlot1.Plot.Remove(BeginScatterPlots[index]);
+                WpfPlot1.Plot.Remove(BeginTexts[index]);
+                WpfPlot1.Plot.Remove(LastScatterPlots[index]);
+                WpfPlot1.Plot.Remove(LastTexts[index]);
 
-                ScatterPlots.Add(WpfPlot1.Plot.AddScatter(
-                new double[] { Xpoints[ConvergenceIndex] },
-                new double[] { Ypoints[ConvergenceIndex] },
+                BeginScatterPlots.RemoveAt(index);
+                BeginTexts.RemoveAt(index);
+                LastScatterPlots.RemoveAt(index);
+                LastTexts.RemoveAt(index);
+
+                BeginScatterPlots.Add(WpfPlot1.Plot.AddScatter(
+               new double[] { BeginPoints[ConvergenceIndex][0] },
+               new double[] { BeginPoints[ConvergenceIndex][1] },
+               color: System.Drawing.Color.FromName("Blue"),
+               markerShape: MarkerShape.filledCircle,
+               markerSize: 10
+               ));
+
+                LastScatterPlots.Add(WpfPlot1.Plot.AddScatter(
+                new double[] { lastPoints[ConvergenceIndex][0] },
+                new double[] { lastPoints[ConvergenceIndex][1] },
                 color: System.Drawing.Color.FromName("Blue"),
                 markerShape: MarkerShape.filledCircle,
                 markerSize: 10
                 ));
-                Texts.Add(WpfPlot1.Plot.AddText($"({Math.Round(Xpoints[ConvergenceIndex], 4)}; {Math.Round(Ypoints[ConvergenceIndex], 4)})",
-                    Xpoints[ConvergenceIndex], Ypoints[ConvergenceIndex],
+
+                BeginTexts.Add(WpfPlot1.Plot.AddText($"({Math.Round(BeginPoints[ConvergenceIndex][0], 4)}; {Math.Round(BeginPoints[ConvergenceIndex][1], 4)})",
+                     BeginPoints[ConvergenceIndex][0] - ArrowXLength(), BeginPoints[ConvergenceIndex][1],
+                     size: 18,
+                     color: System.Drawing.Color.FromName("Black")));
+                LastTexts.Add(WpfPlot1.Plot.AddText($"({Math.Round(lastPoints[ConvergenceIndex][0], 4)}; {Math.Round(lastPoints[ConvergenceIndex][1], 4)})",
+                    lastPoints[ConvergenceIndex][0], lastPoints[ConvergenceIndex][1],
                     size: 18,
                     color: System.Drawing.Color.FromName("Black")));
 
@@ -283,12 +342,16 @@ namespace Programing_Labs.Pages
             else
             {
                 //когда в листе осталась один объект, отчистить все точки и значение точки из графика. Остается только график
-                if (ScatterPlots.Count == 1)
+                if (BeginScatterPlots.Count == 1)
                 {
-                    ScatterPlots.ForEach(el => WpfPlot1.Plot.Remove(el));
-                    Texts.ForEach(el => WpfPlot1.Plot.Remove(el));
-                    ScatterPlots.Clear();
-                    Texts.Clear();
+                    BeginScatterPlots.ForEach(el => WpfPlot1.Plot.Remove(el));
+                    LastScatterPlots.ForEach(el => WpfPlot1.Plot.Remove(el));
+                    BeginTexts.ForEach(el => WpfPlot1.Plot.Remove(el));
+                    LastTexts.ForEach(el => WpfPlot1.Plot.Remove(el));
+                    BeginScatterPlots.Clear();
+                    LastScatterPlots.Clear();
+                    BeginTexts.Clear();
+                    LastTexts.Clear();
                     WpfPlot1.Refresh();
                 }
             }
@@ -302,7 +365,7 @@ namespace Programing_Labs.Pages
         private void Button_Forward_Click(object sender, RoutedEventArgs e)
         {
 
-            if (Xpoints.Count == 0) return;
+            if (BeginPoints.Count == 0) return;
             forvard = true;
             //после нажатия кнопку назад делать эти операции
             if (backvard)
@@ -312,29 +375,46 @@ namespace Programing_Labs.Pages
                 backvard = false;
             }
 
-            int index = ScatterPlots.Count;
+            int index = BeginScatterPlots.Count;
             if (ConvergenceIndex >= 0 && ConvergenceIndex < Xpoints.Count)
             {
                 if (index != 0)
                 {
                     //удалить указанный элемент из графика
-                    WpfPlot1.Plot.Remove(ScatterPlots[index - 1]);
-                    WpfPlot1.Plot.Remove(Texts[index - 1]);
+                    WpfPlot1.Plot.Remove(BeginScatterPlots[index - 1]);
+                    WpfPlot1.Plot.Remove(BeginTexts[index - 1]);
+
+                    WpfPlot1.Plot.Remove(LastScatterPlots[index - 1]);
+                    WpfPlot1.Plot.Remove(LastTexts[index - 1]);
                     //удалить элемент с указанным индексом из списка элементов для удаление
-                    ScatterPlots.RemoveAt(index - 1);
-                    Texts.RemoveAt(index - 1);
+                    BeginScatterPlots.RemoveAt(index - 1);
+                    BeginTexts.RemoveAt(index - 1);
+                    LastScatterPlots.RemoveAt(index - 1);
+                    LastTexts.RemoveAt(index - 1);
                 };
                 //Добавить точку к заданном координате
-                ScatterPlots.Add(WpfPlot1.Plot.AddScatter(
-                new double[] { Xpoints[ConvergenceIndex] },
-                new double[] { Ypoints[ConvergenceIndex] },
+                BeginScatterPlots.Add(WpfPlot1.Plot.AddScatter(
+                new double[] { BeginPoints[ConvergenceIndex][0] },
+                new double[] { BeginPoints[ConvergenceIndex][1] },
+                color: System.Drawing.Color.FromName("Blue"),
+                markerShape: MarkerShape.filledCircle,
+                markerSize: 10
+                ));
+
+                LastScatterPlots.Add(WpfPlot1.Plot.AddScatter(
+                new double[] { lastPoints[ConvergenceIndex][0] },
+                new double[] { lastPoints[ConvergenceIndex][1] },
                 color: System.Drawing.Color.FromName("Blue"),
                 markerShape: MarkerShape.filledCircle,
                 markerSize: 10
                 ));
                 //Добавить значение точку в виде текста на заданном координате 
-                Texts.Add(WpfPlot1.Plot.AddText($"({Math.Round(Xpoints[ConvergenceIndex], 4)}; {Math.Round(Ypoints[ConvergenceIndex], 4)})",
-                    Xpoints[ConvergenceIndex], Ypoints[ConvergenceIndex],
+                BeginTexts.Add(WpfPlot1.Plot.AddText($"({Math.Round(BeginPoints[ConvergenceIndex][0], 4)}; {Math.Round(BeginPoints[ConvergenceIndex][1], 4)})",
+                    BeginPoints[ConvergenceIndex][0] - ArrowXLength(), BeginPoints[ConvergenceIndex][1],
+                    size: 18,
+                    color: System.Drawing.Color.FromName("Black")));
+                LastTexts.Add(WpfPlot1.Plot.AddText($"({Math.Round(lastPoints[ConvergenceIndex][0], 4)}; {Math.Round(lastPoints[ConvergenceIndex][1], 4)})",
+                    lastPoints[ConvergenceIndex][0], lastPoints[ConvergenceIndex][1],
                     size: 18,
                     color: System.Drawing.Color.FromName("Black")));
                 ++ConvergenceIndex;
