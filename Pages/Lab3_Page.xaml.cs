@@ -20,6 +20,7 @@ namespace Programing_Labs.Pages
         private TextBox TxtBxE { get; set; }
         private TextBox TxtBxFx { get; set; }
         private TextBox[] UITextBoxes { get; set; }
+
         private List<double> Xpoints = new List<double>();
         private List<double> Ypoints = new List<double>();
 
@@ -100,60 +101,66 @@ namespace Programing_Labs.Pages
 
             if (Check.CheckTextBoxesValues(UITextBoxes, TxtBxA.Text, TxtBxB.Text))
             {
-                double.TryParse(TxtBxA.Text, out var StartPoint);
-                double.TryParse(TxtBxB.Text, out var EndPoint);
+                double.TryParse(TxtBxA.Text, out var a);
+                double.TryParse(TxtBxB.Text, out var b);
                 double.TryParse(TxtBxE.Text, out var Accuracy);
 
-                double a = StartPoint;
-                double b = EndPoint;
+                double StartPoint = a;
+                double EndPoint = b;
                 double x1, x2, k1, k2, F1, F2, Result;
 
-                BeginPoints.Add(new List<double>() { StartPoint, F(StartPoint) });
-                lastPoints.Add(new List<double>() { EndPoint, F(EndPoint) });
 
+                BeginPoints.Add(new List<double>() { a, F(a) });
+                lastPoints.Add(new List<double>() { b, F(b) });
                 int count = 0;
-
-
-                k2 = (Math.Sqrt(5) - 1) / 2;
-                k1 = 1 - k2;
-
-                x1 = StartPoint + (k1 * (EndPoint - StartPoint));
-                x2 = StartPoint + (k2 * (EndPoint - StartPoint));
 
                 try
                 {
+                    x1 = 0.618 * a + 0.382 * b;
+                    x2 = 0.382 * a + 0.618 * b;
+
                     F1 = F(x1);
                     F2 = F(x2);
+                    
+
                     while (true)
                     {
-                        ++count;
-                        BeginPoints.Add(new List<double>() { x1, F1 });
-                        lastPoints.Add(new List<double>() { x2, F2 });
 
-                        if (F1 <= F2)
+                        if (F1 < F2)
                         {
-                            EndPoint = x2;
+                            b = x2;
+                            if (Math.Abs(b - a) < Accuracy)
+                            {
+                                Result = (a + b) / 2;
+                                WpfPlot1.Plot.Clear();
+                                WpfPlot1.Refresh();
+                                ShowGraph(StartPoint, EndPoint, Result);
+                                break;
+                            }
                             x2 = x1;
                             F2 = F1;
-                            x1 = StartPoint + (k1 * (EndPoint - StartPoint));
+                            x1 = 0.618 * a + 0.382 * b;
                             F1 = F(x1);
+                            BeginPoints.Add(new List<double>() { a, F(a) });
+                            lastPoints.Add(new List<double>() { b, F(b) });
                         }
                         else
                         {
-                            StartPoint = x1;
+                            a = x1;
+                            if (Math.Abs(b - a) < Accuracy)
+                            {
+                                Result = (a + b) / 2;
+                                WpfPlot1.Plot.Clear();
+                                WpfPlot1.Refresh();
+                                ShowGraph(StartPoint, EndPoint, Result);
+                                break;
+                            }
                             x1 = x2;
                             F1 = F2;
-                            x2 = StartPoint + (k2 * (EndPoint - StartPoint));
+                            x2 = 0.382 * a + 0.618 * b;
                             F2 = F(x2);
-                        }
-
-                        if ((EndPoint - StartPoint) <= Accuracy)
-                        {
-                            Result = (StartPoint + EndPoint) / 2;
-                            WpfPlot1.Plot.Clear();
-                            WpfPlot1.Refresh();
-                            ShowGraph(a, b, Result);
-                            break;
+                            BeginPoints.Add(new List<double>() { a, F(a) });
+                            lastPoints.Add(new List<double>() { b, F(b) });
                         }
                     }
                 }
@@ -161,6 +168,73 @@ namespace Programing_Labs.Pages
                 {
                     System.Windows.Forms.MessageBox.Show(ex.Message);
                 }
+
+                /* k2 = (Math.Sqrt(5) - 1) / 2;
+
+                 k1 = 1 - k2;
+                 System.Windows.Forms.MessageBox.Show(k1.ToString());
+
+                 x2 = StartPoint + ((EndPoint - StartPoint) / (1+k2));
+                 x1 = EndPoint - (x2 -StartPoint);
+
+                 try
+                 {
+                     F1 = F(x1);
+                     F2 = F(x2);
+                     BeginPoints.Add(new List<double>() { x1, F1 });
+                     lastPoints.Add(new List<double>() { x2, F2 });
+                     while (true)
+                     {
+                         ++count;
+
+
+                         if (F1 >= F2)
+                         {
+                             if ((x2 - x1) <= Accuracy)
+                             {
+                                 *//*Result = (StartPoint + EndPoint) / 2;*//*
+                                 WpfPlot1.Plot.Clear();
+                                 WpfPlot1.Refresh();
+                                 ShowGraph(a, b, x2);
+                                 break;
+                             }
+                             BeginPoints.Add(new List<double>() { x1, F1 });
+                             StartPoint = x1;
+                             x1 = x2;
+                             F1 = F2;
+                             x2 = EndPoint - (x1 - StartPoint);
+                             F2 = F(x2);
+                             lastPoints.Add(new List<double>() { x2, F2 });
+                         }
+                         else
+                         {
+                             if ((x2 - x1) <= Accuracy)
+                             {
+                                 *//*Result = (StartPoint + EndPoint) / 2;*//*
+                                 WpfPlot1.Plot.Clear();
+                                 WpfPlot1.Refresh();
+                                 ShowGraph(a, b, x1);
+                                 break;
+                             }
+
+
+                             EndPoint = x2;
+                             x2 = x1;
+                             x1 = StartPoint + (EndPoint - x2);
+                             F2 = F1;
+                             F1 = F(x1);
+
+                             BeginPoints.Add(new List<double>() { x1, F1 });
+                             lastPoints.Add(new List<double>() { x2, F2 });
+
+                         }
+
+                     }
+                 }
+                 catch (Exception ex)
+                 {
+                     System.Windows.Forms.MessageBox.Show(ex.Message);
+                 }*/
 
 
 
@@ -270,7 +344,7 @@ namespace Programing_Labs.Pages
             org.matheval.Expression expression = new org.matheval.Expression(TxtBxFx.Text.ToLower());
             expression.Bind("x", X);
             double value = expression.Eval<double>();
-            return value;
+            return Math.Round(value, 5);
         }
         /// <summary>
         /// Возвращает 20%  от расстояние между Max(y) и Min(x).
@@ -285,7 +359,7 @@ namespace Programing_Labs.Pages
                 if (el < min) min = el;
                 if (el > max) max = el;
             }
-            return (max - min) * 0.2;
+            return Math.Round((max - min) * 0.2, 5);
         }
         private double ArrowXLength()
         {
@@ -296,7 +370,7 @@ namespace Programing_Labs.Pages
                 if (el < min) min = el;
                 if (el > max) max = el;
             }
-            return (max - min) * 0.2;
+            return Math.Round((max - min) * 0.2);
         }
         /// <summary>
         /// Метод который показывает график принимая значение a , b  и  x.  
@@ -380,13 +454,13 @@ namespace Programing_Labs.Pages
                 markerSize: 10
                 ));
 
-                BeginTexts.Add(WpfPlot1.Plot.AddText($"({Math.Round(BeginPoints[ConvergenceIndex][0], 4)}; " +
-                    $"{Math.Round(BeginPoints[ConvergenceIndex][1], 4)})",
-                     BeginPoints[ConvergenceIndex][0] - ArrowXLength(), 
+                BeginTexts.Add(WpfPlot1.Plot.AddText($"({Math.Round(BeginPoints[ConvergenceIndex][0], 5)}; " +
+                    $"{Math.Round(BeginPoints[ConvergenceIndex][1], 5)})",
+                     BeginPoints[ConvergenceIndex][0] - ArrowXLength(),
                      BeginPoints[ConvergenceIndex][1],
                      size: 18,
                      color: System.Drawing.Color.FromName("Black")));
-                LastTexts.Add(WpfPlot1.Plot.AddText($"({Math.Round(lastPoints[ConvergenceIndex][0], 4)}; {Math.Round(lastPoints[ConvergenceIndex][1], 4)})",
+                LastTexts.Add(WpfPlot1.Plot.AddText($"({Math.Round(lastPoints[ConvergenceIndex][0], 5)}; {Math.Round(lastPoints[ConvergenceIndex][1], 5)})",
                     lastPoints[ConvergenceIndex][0], lastPoints[ConvergenceIndex][1],
                     size: 18,
                     color: System.Drawing.Color.FromName("Black")));
@@ -430,9 +504,10 @@ namespace Programing_Labs.Pages
             }
 
             int index = BeginScatterPlots.Count;
+
             if (ConvergenceIndex >= 0 && ConvergenceIndex < BeginPoints.Count)
             {
-                if (ConvergenceIndex != 0)
+                if (BeginScatterPlots.Count != 0)
                 {
                     //удалить указанный элемент из графика
                     WpfPlot1.Plot.Remove(BeginScatterPlots[index - 1]);
@@ -463,16 +538,16 @@ namespace Programing_Labs.Pages
                 markerSize: 10
                 ));
                 //Добавить значение точку в виде текста на заданном координате 
-                BeginTexts.Add(WpfPlot1.Plot.AddText($"({Math.Round(BeginPoints[ConvergenceIndex][0], 4)}; " +
-                    $"{Math.Round(BeginPoints[ConvergenceIndex][1], 4)})",
-                    BeginPoints[ConvergenceIndex][0] - ArrowXLength(), 
+                BeginTexts.Add(WpfPlot1.Plot.AddText($"({Math.Round(BeginPoints[ConvergenceIndex][0], 5)}; " +
+                    $"{Math.Round(BeginPoints[ConvergenceIndex][1], 5)})",
+                    BeginPoints[ConvergenceIndex][0] - ArrowXLength(),
                     BeginPoints[ConvergenceIndex][1],
                     size: 18,
                     color: System.Drawing.Color.FromName("Black")));
 
-                LastTexts.Add(WpfPlot1.Plot.AddText($"({Math.Round(lastPoints[ConvergenceIndex][0], 4)}; " +
-                    $"{Math.Round(lastPoints[ConvergenceIndex][1], 4)})",
-                    lastPoints[ConvergenceIndex][0], 
+                LastTexts.Add(WpfPlot1.Plot.AddText($"({Math.Round(lastPoints[ConvergenceIndex][0], 5)}; " +
+                    $"{Math.Round(lastPoints[ConvergenceIndex][1], 5)})",
+                    lastPoints[ConvergenceIndex][0],
                     lastPoints[ConvergenceIndex][1],
                     size: 18,
                     color: System.Drawing.Color.FromName("Black")));
