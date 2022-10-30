@@ -106,25 +106,28 @@ namespace Programing_Labs
 
         private void Border_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            if (e.GetPosition(Mouse.Captured).Y <= 75)
+            try
             {
-                this.DragMove();
-            }
-            if (e.ClickCount == 2)
-            {
-                if (this.WindowState == WindowState.Maximized)
+                if (e.GetPosition(Mouse.Captured).Y <= 75)
                 {
-                    WindowBorder.Margin = new Thickness(0);
-                    this.WindowState = WindowState.Normal;
+                    this.DragMove();
+                }
+                if (e.ClickCount == 2)
+                {
+                    if (this.WindowState == WindowState.Maximized)
+                    {
+                        WindowBorder.Margin = new Thickness(0);
+                        this.WindowState = WindowState.Normal;
 
-                }
-                else
-                {
-                    WindowBorder.Margin = new Thickness(8);
-                    this.WindowState = WindowState.Maximized;
+                    }
+                    else
+                    {
+                        WindowBorder.Margin = new Thickness(8);
+                        this.WindowState = WindowState.Maximized;
+                    }
                 }
             }
-            
+            catch { }
 
 
         }
