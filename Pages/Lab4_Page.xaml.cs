@@ -31,14 +31,27 @@ namespace Programing_Labs.Pages
 
         private Label LblXi { get; set; }
         private Label LblYi { get; set; }
-
+        /// <summary>
+        /// Для храниние TextBox-ы которые при загрузки приложение показывается 
+        /// </summary>
         private TextBox[] OnStartUITextBoxes { get; set; }
+        /// <summary>
+        /// Для храниние TextBox-ы которые после нажатия на кнопку Далее показывается
+        /// </summary>
         private TextBox[] DataUITextBoxes { get; set; }
-
+        /// <summary>
+        /// для хранение элементы управление которые при загрузки приложение показывается
+        /// </summary>
         private List<Control> OnStartControls { get; set; }
+        /// <summary>
+        /// для хранение элементы управление которые после нажатия на кнопку Далее показывается
+        /// </summary>
         private List<Control> DataControls { get; set; }
-        private int index = 0;
-        
+        /// <summary>
+        /// значение i  для Xi и Yi 
+        /// </summary>
+        public int index = 0;
+
 
 
         public Lab4_Page()
@@ -83,7 +96,7 @@ namespace Programing_Labs.Pages
                 TxtBxXi,
                 TxtBxYi
             };
-            foreach(var textBox in OnStartUITextBoxes)
+            foreach (var textBox in OnStartUITextBoxes)
             {
                 textBox.Text = "";
                 DataObject.AddPastingHandler(textBox, (s, a) => a.CancelCommand());
@@ -111,11 +124,14 @@ namespace Programing_Labs.Pages
         {
             if (Check.CheckTextBoxesValues(DataUITextBoxes))
             {
+                ++index;
                 double.TryParse(TxtBxXi.Text, out double Xi);
                 double.TryParse(TxtBxYi.Text, out double Yi);
 
                 LabsClases.GraphicPoint graphicPoint = new LabsClases.GraphicPoint(Xi, Yi);
                 await LabsClases.GraphicPoint.Add(graphicPoint);
+                LblXi.Content = $"X({index})";
+                LblYi.Content = $"Y({index})";
             }
         }
 
@@ -133,6 +149,7 @@ namespace Programing_Labs.Pages
             TxtBxFx.Text = string.Empty;
             TxtBxXi.Text = string.Empty;
             TxtBxYi.Text = string.Empty;
+            LabsClases.GraphicPoint.Clear();
             index = 0;
         }
 
@@ -143,11 +160,13 @@ namespace Programing_Labs.Pages
             TxtBxE.Text = "0,0001";
             TxtBxFx.Text = "2*x^2";
 
-
             if (Check.CheckTextBoxesValues(OnStartUITextBoxes))
             {
                 OnStartControls.ForEach(el => el.Visibility = Visibility.Collapsed);
                 DataControls.ForEach(el => el.Visibility = Visibility.Visible);
+                ++index;
+                LblXi.Content = $"X({index})";
+                LblYi.Content = $"Y({index})";
             }
 
 
@@ -157,9 +176,10 @@ namespace Programing_Labs.Pages
         {
             var focusedItems = GraphicPointList.SelectedItems;
 
-
             LabsClases.GraphicPoint.Remove(focusedItems);
-
+            index = GraphicPointList.Items.Count+1;
+            LblXi.Content = $"X({index})";
+            LblYi.Content = $"Y({index})";
         }
 
         private void Edit_Click(object sender, RoutedEventArgs e)

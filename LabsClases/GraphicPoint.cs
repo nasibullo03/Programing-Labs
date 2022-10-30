@@ -52,11 +52,18 @@ namespace Programing_Labs.LabsClases
             }
 
             GraphicPointsCollection = graphicPointsCollection;
-            GraphicPointsView.ItemsSource = LabsClases.GraphicPoint.GraphicPointsCollection;
+            GraphicPointsView.ItemsSource = GraphicPointsCollection;
             GraphicPointsView.UpdateLayout();
 
         }
 
-
+        public static void Clear()
+        {
+            GraphicPointsView.ItemsSource = new ObservableCollection<GraphicPoint>();
+            GraphicPointsCollection.Clear();
+            GraphicPoints.Clear();
+            Count = 0;
+            GraphicPointsView.ItemsSource = GraphicPointsCollection;
+        }
     }
 }
