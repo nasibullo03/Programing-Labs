@@ -24,5 +24,25 @@ namespace Programing_Labs.Pages
         {
             InitializeComponent();
         }
+
+        private void BtnSolve_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void BtnSave_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void BtnClear_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void BtnAdd_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
