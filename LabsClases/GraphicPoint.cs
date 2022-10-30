@@ -4,11 +4,13 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 
 namespace Programing_Labs.LabsClases
 {
     class GraphicPoint
     {
+        public static ListView GraphicPointsView { get; set; }
         private static int Count { get; set; }
         public int index { get; set; }
         public double Xi { get; set; }
@@ -32,10 +34,26 @@ namespace Programing_Labs.LabsClases
             GraphicPointsCollection.Add(graphicPoint);
             await Task.Yield();
         }
-        public static void Remove(GraphicPoint item)
+        public static void Remove(System.Collections.IList item)
         {
-            GraphicPoints.Remove(item);
-            GraphicPointsCollection.Remove(item);
+            foreach (object el in GraphicPointsView.Items)
+            {
+                if (item.Contains(el))
+                {
+                    GraphicPoints.Remove(el as LabsClases.GraphicPoint);
+                }
+            }
+            var graphicPointsCollection = new ObservableCollection<GraphicPoint>();
+            Count = 0;
+            foreach (var el in GraphicPoints.ToArray())
+            {
+                el.index = ++Count;
+                graphicPointsCollection.Add(el);
+            }
+
+            GraphicPointsCollection = graphicPointsCollection;
+            GraphicPointsView.ItemsSource = LabsClases.GraphicPoint.GraphicPointsCollection;
+            GraphicPointsView.UpdateLayout();
 
         }
 

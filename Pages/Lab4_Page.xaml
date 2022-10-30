@@ -192,18 +192,23 @@
                       Margin="0,0,5,0">
                 <ListView.ContextMenu>
                     <ContextMenu>
-                        <MenuItem Header="Remove"
-                                  Command="{Binding RemoveItem}"
-                                  CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=ContextMenu}, Path=PlacementTarget.SelectedItem}" />
+                        <MenuItem Header="Удалить"
+                                  x:Name="Remove"
+                                  Click="Remove_Click"
+                                  />
+                        <MenuItem Header="Редактировать"
+                                  x:Name="Edit"
+                                  Click="Edit_Click"
+                                  />
                     </ContextMenu>
                 </ListView.ContextMenu>
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn DisplayMemberBinding="{Binding Path=Id}"
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=index}"
                                         Width="50">i</GridViewColumn>
-                        <GridViewColumn DisplayMemberBinding="{Binding Path=Name}"
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=Xi}"
                                         Width="50">X</GridViewColumn>
-                        <GridViewColumn DisplayMemberBinding="{Binding Path=PhoneNumber}"
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=Yi}"
                                         Width="50">Y</GridViewColumn>
                     </GridView>
                 </ListView.View>

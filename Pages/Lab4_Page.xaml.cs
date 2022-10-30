@@ -38,13 +38,13 @@ namespace Programing_Labs.Pages
         private List<Control> OnStartControls { get; set; }
         private List<Control> DataControls { get; set; }
         private int index = 0;
-        public static ListView GraphicPointsView { get; set; }
+        
 
 
         public Lab4_Page()
         {
             InitializeComponent();
-            GraphicPointsView = GraphicPointList;
+            LabsClases.GraphicPoint.GraphicPointsView = GraphicPointList;
             GraphicPointList.ItemsSource = LabsClases.GraphicPoint.GraphicPointsCollection;
 
         }
@@ -150,6 +150,20 @@ namespace Programing_Labs.Pages
                 DataControls.ForEach(el => el.Visibility = Visibility.Visible);
             }
 
+
+        }
+
+        private void Remove_Click(object sender, RoutedEventArgs e)
+        {
+            var focusedItems = GraphicPointList.SelectedItems;
+
+
+            LabsClases.GraphicPoint.Remove(focusedItems);
+
+        }
+
+        private void Edit_Click(object sender, RoutedEventArgs e)
+        {
 
         }
     }
