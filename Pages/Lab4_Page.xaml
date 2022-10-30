@@ -127,6 +127,59 @@
                     </StackPanel>
                 </MenuItem.Header>
             </MenuItem>
+
+            
+            <MenuItem x:Name="MenuItemNext">
+                <MenuItem.Header>
+                    <Button x:Name="BtnNext"
+                            Style="{StaticResource ButtonStyle}"
+                            FontSize="16"
+                            Content="Далее"
+                            Height="44"
+                            Width="auto"
+                            FontWeight="Bold"
+                            Click="BtnNext_Click" />
+                </MenuItem.Header>
+            </MenuItem>
+            <MenuItem x:Name="MenuItemEdit"
+                      Visibility="Collapsed">
+                <MenuItem.Header>
+                    <Button x:Name="BtnEdit"
+                            Style="{StaticResource ButtonStyle}"
+                            FontSize="16"
+                            Content="Изменить"
+                            Height="44"
+                            Width="auto"
+                            FontWeight="Bold"
+                            Click="BtnEdit_Click" />
+                </MenuItem.Header>
+            </MenuItem>
+            <MenuItem Name="MenuItemBack"
+                      Visibility="Visible">
+                <MenuItem.Header>
+                    <Button x:Name="BtnBack"
+      
+                            Style="{StaticResource ButtonStyle}"
+                            FontSize="16"
+                            Content="Назад"
+                            Height="44"
+                            Width="auto"
+                            FontWeight="Bold"
+                            Click="BtnBack_Click" />
+                </MenuItem.Header>
+            </MenuItem>
+            <MenuItem x:Name="MenuItemAdd">
+                <MenuItem.Header>
+                    <Button x:Name="BtnAdd"
+                            Style="{StaticResource ButtonStyle}"
+                            FontSize="16"
+                            Content="Добавить"
+                            Height="44"
+                            Width="auto"
+                            FontWeight="Bold"
+                            Click="BtnAdd_Click" />
+                </MenuItem.Header>
+            </MenuItem>
             <!--Выберите операцию-->
             <MenuItem x:Name="MenuItemChooseOperation"
                       Background="#007575"
@@ -159,42 +212,6 @@
                           TabIndex="6" />
 
             </MenuItem>
-            <MenuItem>
-                <MenuItem.Header>
-                    <StackPanel Orientation="Horizontal"
-                                VerticalAlignment="Top">
-                        <Button x:Name="BtnAdd"
-                                Visibility="Visible"
-                                Style="{StaticResource ButtonStyle}"
-                                FontSize="16"
-                                Content="Добавить"
-                                Height="44"
-                                Width="auto"
-                                FontWeight="Bold"
-                                Click="BtnAdd_Click" />
-                        <Button x:Name="BtnNext"
-                                Style="{StaticResource ButtonStyle}"
-                                FontSize="16"
-                                Content="Далее"
-                                Height="44"
-                                Margin="10,0,0,0"
-                                Width="auto"
-                                FontWeight="Bold"
-                                Click="BtnNext_Click" />
-                        <Button x:Name="BtnEdit"
-                                Visibility="Collapsed"
-                                Style="{StaticResource ButtonStyle}"
-                                FontSize="16"
-                                Content="Изменить"
-                                Height="44"
-                                Margin="10,0,0,0"
-                                Width="auto"
-                                FontWeight="Bold"
-                                Click="BtnEdit_Click" />
-                    </StackPanel>
-
-                </MenuItem.Header>
-            </MenuItem>
         </Menu>
         <Grid Background="Transparent">
             <ListView Name="GraphicPointList"
@@ -204,12 +221,10 @@
                     <ContextMenu>
                         <MenuItem Header="Удалить"
                                   x:Name="Remove"
-                                  Click="Remove_Click"
-                                  />
+                                  Click="Remove_Click" />
                         <MenuItem Header="Редактировать"
                                   x:Name="Edit"
-                                  Click="Edit_Click"
-                                  />
+                                  Click="Edit_Click" />
                     </ContextMenu>
                 </ListView.ContextMenu>
                 <ListView.View>
