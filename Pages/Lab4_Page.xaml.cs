@@ -19,7 +19,6 @@ namespace Programing_Labs.Pages
     /// Логика взаимодействия для Lab4_Page.xaml
     /// </summary>
     /// 
-
     public partial class Lab4_Page : Page
     {
         private TextBox TxtBxXi { get; set; }
@@ -51,6 +50,7 @@ namespace Programing_Labs.Pages
         /// значение i  для Xi и Yi 
         /// </summary>
         public int index = 0;
+        private bool editMode = false;
 
 
 
@@ -144,15 +144,17 @@ namespace Programing_Labs.Pages
         {
             OnStartControls.ForEach(el => el.Visibility = Visibility.Visible);
             DataControls.ForEach(el => el.Visibility = Visibility.Collapsed);
+            BtnEdit.Visibility = Visibility.Collapsed;
+
             TxtBxN.Text = string.Empty;
             TxtBxE.Text = string.Empty;
             TxtBxFx.Text = string.Empty;
             TxtBxXi.Text = string.Empty;
             TxtBxYi.Text = string.Empty;
+
             LabsClases.GraphicPoint.Clear();
             index = 0;
         }
-
 
         private void BtnNext_Click(object sender, RoutedEventArgs e)
         {
@@ -168,8 +170,6 @@ namespace Programing_Labs.Pages
                 LblXi.Content = $"X({index})";
                 LblYi.Content = $"Y({index})";
             }
-
-
         }
 
         private void Remove_Click(object sender, RoutedEventArgs e)
@@ -184,7 +184,50 @@ namespace Programing_Labs.Pages
 
         private void Edit_Click(object sender, RoutedEventArgs e)
         {
+            BtnAdd.Visibility = Visibility.Collapsed;
+            BtnEdit.Visibility = Visibility.Visible;
+
+            System.Collections.IList items = (System.Collections.IList)GraphicPointList.SelectedItems;
+            var collection = items.Cast<LabsClases.GraphicPoint>();
+            LabsClases.GraphicPoint.EditableList = collection.ToList();
+
+            LabsClases.GraphicPoint.PrepareDataForEditing(DataUITextBoxes, LblXi,LblYi);
+
+        }
+
+        private void BtnEdit_Click(object sender, RoutedEventArgs e)
+        {
+            
+            if (Check.CheckTextBoxesValues(DataUITextBoxes))
+            {
+                //добавить новые данные в списке
+                double.TryParse(TxtBxXi.Text, out double Xi);
+                double.TryParse(TxtBxYi.Text, out double Yi);
+                LabsClases.GraphicPoint.EditValues(Xi, Yi);
+                
+                //удалить данные которые уже отредактированы
+                LabsClases.GraphicPoint.DeleteEditedValue();
+            } else return;
+
+            
+            
+            if (LabsClases.GraphicPoint.EditableList.Count == 0)
+            {
+                BtnAdd.Visibility = Visibility.Visible;
+                BtnEdit.Visibility = Visibility.Collapsed;
+
+                LabsClases.GraphicPoint.EditableList.Clear();
+
+                index = GraphicPointList.Items.Count + 1;
+                LblXi.Content = $"X({index})";
+                LblYi.Content = $"Y({index})";
+                TxtBxXi.Text = string.Empty;
+                TxtBxYi.Text = string.Empty;
+                return;
+            }
+            LabsClases.GraphicPoint.PrepareDataForEditing(DataUITextBoxes, LblXi, LblYi);
 
         }
     }
 }
+    

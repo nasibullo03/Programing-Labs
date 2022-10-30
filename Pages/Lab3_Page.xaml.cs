@@ -112,7 +112,6 @@ namespace Programing_Labs.Pages
 
                 BeginPoints.Add(new List<double>() { a, F(a) });
                 lastPoints.Add(new List<double>() { b, F(b) });
-                int count = 0;
 
                 try
                 {

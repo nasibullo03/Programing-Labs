@@ -22,8 +22,8 @@ namespace Programing_Labs.Pages
         private TextBox TxtBxE { get; set; }
         private TextBox TxtBxFx { get; set; }
         private TextBox[] UITextBoxes { get; set; }
-        List<double> Xpoints = new List<double>();
-        List<double> Ypoints = new List<double>();
+        private List<double> Xpoints = new List<double>();
+        private List<double> Ypoints = new List<double>();
 
 
 

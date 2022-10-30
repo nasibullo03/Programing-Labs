@@ -11,6 +11,12 @@ namespace Programing_Labs.LabsClases
     class GraphicPoint
     {
         public static ListView GraphicPointsView { get; set; }
+        /// <summary>
+        /// Коллекция значение для изменение значение
+        /// </summary>
+        public static List<GraphicPoint> EditableList { get; set; }
+
+
         private static int Count { get; set; }
         public int index { get; set; }
         public double Xi { get; set; }
@@ -28,6 +34,9 @@ namespace Programing_Labs.LabsClases
 
         public static List<GraphicPoint> GraphicPoints = new List<GraphicPoint>();
         public static ObservableCollection<GraphicPoint> GraphicPointsCollection = new ObservableCollection<GraphicPoint>();
+
+
+
         public async static Task Add(GraphicPoint graphicPoint)
         {
             GraphicPoints.Add(graphicPoint);
@@ -40,7 +49,7 @@ namespace Programing_Labs.LabsClases
             {
                 if (item.Contains(el))
                 {
-                    GraphicPoints.Remove(el as LabsClases.GraphicPoint);
+                    GraphicPoints.Remove(el as GraphicPoint);
                 }
             }
             var graphicPointsCollection = new ObservableCollection<GraphicPoint>();
@@ -64,6 +73,38 @@ namespace Programing_Labs.LabsClases
             GraphicPoints.Clear();
             Count = 0;
             GraphicPointsView.ItemsSource = GraphicPointsCollection;
+        }
+
+        public static void PrepareDataForEditing(TextBox[] UITextBoxes, Label LblXi, Label LblYi)
+        {
+
+            int _index = (EditableList[0] as GraphicPoint).index;
+
+            LblXi.Content = $"X({_index})";
+            LblYi.Content = $"Y({_index})";
+
+            UITextBoxes[0].Text = (EditableList[0] as GraphicPoint).Xi.ToString();
+            UITextBoxes[1].Text = (EditableList[0] as GraphicPoint).Yi.ToString();
+
+        }
+        public static void EditValues(double Xi, double Yi)
+        {
+            GraphicPointsCollection[(EditableList[0] as GraphicPoint).index - 1].Xi = Xi;
+            GraphicPointsCollection[(EditableList[0] as GraphicPoint).index - 1].Yi = Yi;
+
+            GraphicPoints[(EditableList[0] as GraphicPoint).index - 1].Xi = Xi;
+            GraphicPoints[(EditableList[0] as GraphicPoint).index - 1].Yi = Yi;
+
+            GraphicPointsView.ItemsSource = new ObservableCollection<GraphicPoint>();
+            GraphicPointsView.ItemsSource = GraphicPointsCollection;
+
+
+        }
+
+        public static void DeleteEditedValue()
+        {
+           if(EditableList.Count!=0)
+            EditableList.RemoveAt(0);
         }
     }
 }
