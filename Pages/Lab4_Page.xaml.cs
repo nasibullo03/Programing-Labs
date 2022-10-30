@@ -19,7 +19,6 @@ namespace Programing_Labs.Pages
     /// Логика взаимодействия для Lab4_Page.xaml
     /// </summary>
     /// 
-
     public partial class Lab4_Page : Page
     {
         private TextBox TxtBxXi { get; set; }
@@ -31,14 +30,28 @@ namespace Programing_Labs.Pages
 
         private Label LblXi { get; set; }
         private Label LblYi { get; set; }
-
+        /// <summary>
+        /// Для храниние TextBox-ы которые при загрузки приложение показывается 
+        /// </summary>
         private TextBox[] OnStartUITextBoxes { get; set; }
+        /// <summary>
+        /// Для храниние TextBox-ы которые после нажатия на кнопку Далее показывается
+        /// </summary>
         private TextBox[] DataUITextBoxes { get; set; }
-
+        /// <summary>
+        /// для хранение элементы управление которые при загрузки приложение показывается
+        /// </summary>
         private List<Control> OnStartControls { get; set; }
+        /// <summary>
+        /// для хранение элементы управление которые после нажатия на кнопку Далее показывается
+        /// </summary>
         private List<Control> DataControls { get; set; }
-        private int index = 0;
-        
+        /// <summary>
+        /// значение i  для Xi и Yi 
+        /// </summary>
+        public int index = 0;
+        private bool editMode = false;
+
 
 
         public Lab4_Page()
@@ -83,7 +96,7 @@ namespace Programing_Labs.Pages
                 TxtBxXi,
                 TxtBxYi
             };
-            foreach(var textBox in OnStartUITextBoxes)
+            foreach (var textBox in OnStartUITextBoxes)
             {
                 textBox.Text = "";
                 DataObject.AddPastingHandler(textBox, (s, a) => a.CancelCommand());
@@ -111,11 +124,14 @@ namespace Programing_Labs.Pages
         {
             if (Check.CheckTextBoxesValues(DataUITextBoxes))
             {
+                ++index;
                 double.TryParse(TxtBxXi.Text, out double Xi);
                 double.TryParse(TxtBxYi.Text, out double Yi);
 
                 LabsClases.GraphicPoint graphicPoint = new LabsClases.GraphicPoint(Xi, Yi);
                 await LabsClases.GraphicPoint.Add(graphicPoint);
+                LblXi.Content = $"X({index})";
+                LblYi.Content = $"Y({index})";
             }
         }
 
@@ -128,14 +144,17 @@ namespace Programing_Labs.Pages
         {
             OnStartControls.ForEach(el => el.Visibility = Visibility.Visible);
             DataControls.ForEach(el => el.Visibility = Visibility.Collapsed);
+            BtnEdit.Visibility = Visibility.Collapsed;
+
             TxtBxN.Text = string.Empty;
             TxtBxE.Text = string.Empty;
             TxtBxFx.Text = string.Empty;
             TxtBxXi.Text = string.Empty;
             TxtBxYi.Text = string.Empty;
+
+            LabsClases.GraphicPoint.Clear();
             index = 0;
         }
-
 
         private void BtnNext_Click(object sender, RoutedEventArgs e)
         {
@@ -143,28 +162,72 @@ namespace Programing_Labs.Pages
             TxtBxE.Text = "0,0001";
             TxtBxFx.Text = "2*x^2";
 
-
             if (Check.CheckTextBoxesValues(OnStartUITextBoxes))
             {
                 OnStartControls.ForEach(el => el.Visibility = Visibility.Collapsed);
                 DataControls.ForEach(el => el.Visibility = Visibility.Visible);
+                ++index;
+                LblXi.Content = $"X({index})";
+                LblYi.Content = $"Y({index})";
             }
-
-
         }
 
         private void Remove_Click(object sender, RoutedEventArgs e)
         {
             var focusedItems = GraphicPointList.SelectedItems;
 
-
             LabsClases.GraphicPoint.Remove(focusedItems);
-
+            index = GraphicPointList.Items.Count+1;
+            LblXi.Content = $"X({index})";
+            LblYi.Content = $"Y({index})";
         }
 
         private void Edit_Click(object sender, RoutedEventArgs e)
         {
+            BtnAdd.Visibility = Visibility.Collapsed;
+            BtnEdit.Visibility = Visibility.Visible;
+
+            System.Collections.IList items = (System.Collections.IList)GraphicPointList.SelectedItems;
+            var collection = items.Cast<LabsClases.GraphicPoint>();
+            LabsClases.GraphicPoint.EditableList = collection.ToList();
+
+            LabsClases.GraphicPoint.PrepareDataForEditing(DataUITextBoxes, LblXi,LblYi);
+
+        }
+
+        private void BtnEdit_Click(object sender, RoutedEventArgs e)
+        {
+            
+            if (Check.CheckTextBoxesValues(DataUITextBoxes))
+            {
+                //добавить новые данные в списке
+                double.TryParse(TxtBxXi.Text, out double Xi);
+                double.TryParse(TxtBxYi.Text, out double Yi);
+                LabsClases.GraphicPoint.EditValues(Xi, Yi);
+                
+                //удалить данные которые уже отредактированы
+                LabsClases.GraphicPoint.DeleteEditedValue();
+            } else return;
+
+            
+            
+            if (LabsClases.GraphicPoint.EditableList.Count == 0)
+            {
+                BtnAdd.Visibility = Visibility.Visible;
+                BtnEdit.Visibility = Visibility.Collapsed;
+
+                LabsClases.GraphicPoint.EditableList.Clear();
+
+                index = GraphicPointList.Items.Count + 1;
+                LblXi.Content = $"X({index})";
+                LblYi.Content = $"Y({index})";
+                TxtBxXi.Text = string.Empty;
+                TxtBxYi.Text = string.Empty;
+                return;
+            }
+            LabsClases.GraphicPoint.PrepareDataForEditing(DataUITextBoxes, LblXi, LblYi);
 
         }
     }
 }
+    
