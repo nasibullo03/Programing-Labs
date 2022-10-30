@@ -16,7 +16,7 @@ namespace Programing_Labs.LabsClases
         /// </summary>
         public static List<GraphicPoint> EditableList { get; set; }
 
-
+        public static bool EditMode { get; set; }
         private static int Count { get; set; }
         public int index { get; set; }
         public double Xi { get; set; }
