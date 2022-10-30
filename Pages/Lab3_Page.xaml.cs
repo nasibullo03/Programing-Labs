@@ -21,12 +21,16 @@ namespace Programing_Labs.Pages
         private TextBox TxtBxFx { get; set; }
         private TextBox[] UITextBoxes { get; set; }
 
+        /// <summary>
+        /// для хранение значение координаты графика
+        /// </summary>
         private List<double> Xpoints = new List<double>();
         private List<double> Ypoints = new List<double>();
-
+        /// <summary>
+        /// для хранение координаты точки сходимоты
+        /// </summary>
         private List<List<double>> BeginPoints = new List<List<double>>();
         private List<List<double>> lastPoints = new List<List<double>>();
-
 
         /// <summary>
         /// для хранение список точки сходимости в графике 
@@ -94,10 +98,6 @@ namespace Programing_Labs.Pages
             BeginTexts.Clear();
             BeginScatterPlots.Clear();
 
-            TxtBxA.Text = "-1";
-            TxtBxB.Text = "1";
-            TxtBxE.Text = "0,0001";
-            TxtBxFx.Text = "x^2";
 
             if (Check.CheckTextBoxesValues(UITextBoxes, TxtBxA.Text, TxtBxB.Text))
             {

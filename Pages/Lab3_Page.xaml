@@ -105,12 +105,14 @@
             </MenuItem>
             <!--Выберите операцию-->
             <MenuItem Background="#007575"
-                      TabIndex="4">
+                      TabIndex="4"
+                      Margin="0,2,0,2">
                 <MenuItem.Header>
-                    <Label Content="Вибрать операцию"
+                    <Label Content="Выберите операцию"
                            Style="{StaticResource LabelStyle}"
                            Foreground="White"
                            FontSize="16"
+                           
                            VerticalAlignment="Center" />
 
                 </MenuItem.Header>
@@ -158,7 +160,7 @@
                 </MenuItem.Header>
             </MenuItem>
         </Menu>
-
+        
         <!--Plot для графика-->
         <WpfPlot x:Name="WpfPlot1"
                  Height="auto"

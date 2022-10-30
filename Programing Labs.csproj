@@ -116,6 +116,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="IPhoneBook.cs" />
+    <Compile Include="LabsClases\GraphicPoint.cs" />
     <Compile Include="Pages\Lab4_Page.xaml.cs">
       <DependentUpon>Lab4_Page.xaml</DependentUpon>
     </Compile>
