@@ -7,6 +7,7 @@ using System.Windows.Media;
 using System.Drawing;
 using org.matheval;
 using ScottPlot;
+using System.Threading.Tasks;
 
 namespace Programing_Labs.Pages
 {
@@ -120,12 +121,15 @@ namespace Programing_Labs.Pages
                     k1 = 1 - k2;
 
 
-                    x1 = k2* a + k1 * b;
+                    x1 = k2 * a + k1 * b;
                     x2 = k1 * a + k2 * b;
 
                     F1 = F(x1);
                     F2 = F(x2);
-                    
+
+                    BeginPoints.Add(new List<double>() { x1, F1 });
+                    lastPoints.Add(new List<double>() { x2, F2 });
+
 
                     while (true)
                     {
@@ -173,8 +177,10 @@ namespace Programing_Labs.Pages
                     System.Windows.Forms.MessageBox.Show(ex.Message);
                 }
 
-                
+
             }
+
+
         }
 
         private void ClearStartdatrtParams()
@@ -258,6 +264,7 @@ namespace Programing_Labs.Pages
         /// <param name="Result"></param>
         private void ShowGraph(double StartPoint, double EndPoint, double Result)
         {
+
             double x = Result;
             double y = F(Result);
             for (double i = StartPoint; i <= EndPoint; i += 0.1)
@@ -276,160 +283,171 @@ namespace Programing_Labs.Pages
                  y, x, y - ArrowYLength(),
                 color: System.Drawing.Color.FromName("Red"));
             WpfPlot1.Refresh();
+
+
         }
         /// <summary>
         /// Метод для кнопки назад
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void Button_Back_Click(object sender, RoutedEventArgs e)
+        private async void Button_Back_Click(object sender, RoutedEventArgs e)
         {
-            if (Xpoints.Count == 0) return;
-            if (BeginScatterPlots.Count == 0 && ConvergenceIndex <= 0 && BeginTexts.Count == 0)
+            Func<Task> func = async () =>
             {
-                return;
-            }
-            backvard = true;
-            if (forvard)
-            {
-                --ConvergenceIndex;
-                forvard = false;
-            }
-            int index = BeginScatterPlots.Count - 1;
-            --ConvergenceIndex;
-            if (ConvergenceIndex >= 0 && ConvergenceIndex <= BeginPoints.Count)
-            {
-
-                if (ConvergenceIndex >= BeginPoints.Count) ConvergenceIndex = BeginPoints.Count - 1;
-
-                WpfPlot1.Plot.Remove(BeginScatterPlots[index]);
-                WpfPlot1.Plot.Remove(BeginTexts[index]);
-                WpfPlot1.Plot.Remove(LastScatterPlots[index]);
-                WpfPlot1.Plot.Remove(LastTexts[index]);
-
-                BeginScatterPlots.RemoveAt(index);
-                BeginTexts.RemoveAt(index);
-                LastScatterPlots.RemoveAt(index);
-                LastTexts.RemoveAt(index);
-
-                BeginScatterPlots.Add(WpfPlot1.Plot.AddScatter(
-               new double[] { BeginPoints[ConvergenceIndex][0] },
-               new double[] { BeginPoints[ConvergenceIndex][1] },
-               color: System.Drawing.Color.FromName("Blue"),
-               markerShape: MarkerShape.filledCircle,
-               markerSize: 10
-               ));
-
-                LastScatterPlots.Add(WpfPlot1.Plot.AddScatter(
-                new double[] { lastPoints[ConvergenceIndex][0] },
-                new double[] { lastPoints[ConvergenceIndex][1] },
-                color: System.Drawing.Color.FromName("Blue"),
-                markerShape: MarkerShape.filledCircle,
-                markerSize: 10
-                ));
-
-                BeginTexts.Add(WpfPlot1.Plot.AddText($"({Math.Round(BeginPoints[ConvergenceIndex][0], 5)}; " +
-                    $"{Math.Round(BeginPoints[ConvergenceIndex][1], 5)})",
-                     BeginPoints[ConvergenceIndex][0] - ArrowXLength(),
-                     BeginPoints[ConvergenceIndex][1],
-                     size: 18,
-                     color: System.Drawing.Color.FromName("Black")));
-                LastTexts.Add(WpfPlot1.Plot.AddText($"({Math.Round(lastPoints[ConvergenceIndex][0], 5)}; {Math.Round(lastPoints[ConvergenceIndex][1], 5)})",
-                    lastPoints[ConvergenceIndex][0], lastPoints[ConvergenceIndex][1],
-                    size: 18,
-                    color: System.Drawing.Color.FromName("Black")));
-
-                WpfPlot1.Refresh();
-            }
-            else
-            {
-                //когда в листе осталась один объект, отчистить все точки и значение точки из графика. Остается только график
-                if (BeginScatterPlots.Count == 1)
+                if (Xpoints.Count == 0) return;
+                if (BeginScatterPlots.Count == 0 && ConvergenceIndex <= 0 && BeginTexts.Count == 0)
                 {
-                    BeginScatterPlots.ForEach(el => WpfPlot1.Plot.Remove(el));
-                    LastScatterPlots.ForEach(el => WpfPlot1.Plot.Remove(el));
-                    BeginTexts.ForEach(el => WpfPlot1.Plot.Remove(el));
-                    LastTexts.ForEach(el => WpfPlot1.Plot.Remove(el));
-                    BeginScatterPlots.Clear();
-                    LastScatterPlots.Clear();
-                    BeginTexts.Clear();
-                    LastTexts.Clear();
+                    return;
+                }
+                backvard = true;
+                if (forvard)
+                {
+                    --ConvergenceIndex;
+                    forvard = false;
+                }
+                int index = BeginScatterPlots.Count - 1;
+                --ConvergenceIndex;
+                if (ConvergenceIndex >= 0 && ConvergenceIndex <= BeginPoints.Count)
+                {
+
+                    if (ConvergenceIndex >= BeginPoints.Count) ConvergenceIndex = BeginPoints.Count - 1;
+
+                    WpfPlot1.Plot.Remove(BeginScatterPlots[index]);
+                    WpfPlot1.Plot.Remove(BeginTexts[index]);
+                    WpfPlot1.Plot.Remove(LastScatterPlots[index]);
+                    WpfPlot1.Plot.Remove(LastTexts[index]);
+
+                    BeginScatterPlots.RemoveAt(index);
+                    BeginTexts.RemoveAt(index);
+                    LastScatterPlots.RemoveAt(index);
+                    LastTexts.RemoveAt(index);
+
+                    BeginScatterPlots.Add(WpfPlot1.Plot.AddScatter(
+                   new double[] { BeginPoints[ConvergenceIndex][0] },
+                   new double[] { BeginPoints[ConvergenceIndex][1] },
+                   color: System.Drawing.Color.FromName("Blue"),
+                   markerShape: MarkerShape.filledCircle,
+                   markerSize: 10
+                   ));
+
+                    LastScatterPlots.Add(WpfPlot1.Plot.AddScatter(
+                    new double[] { lastPoints[ConvergenceIndex][0] },
+                    new double[] { lastPoints[ConvergenceIndex][1] },
+                    color: System.Drawing.Color.FromName("Blue"),
+                    markerShape: MarkerShape.filledCircle,
+                    markerSize: 10
+                    ));
+
+                    BeginTexts.Add(WpfPlot1.Plot.AddText($"({Math.Round(BeginPoints[ConvergenceIndex][0], 5)}; " +
+                        $"{Math.Round(BeginPoints[ConvergenceIndex][1], 5)})",
+                         BeginPoints[ConvergenceIndex][0] - ArrowXLength(),
+                         BeginPoints[ConvergenceIndex][1],
+                         size: 18,
+                         color: System.Drawing.Color.FromName("Black")));
+                    LastTexts.Add(WpfPlot1.Plot.AddText($"({Math.Round(lastPoints[ConvergenceIndex][0], 5)}; {Math.Round(lastPoints[ConvergenceIndex][1], 5)})",
+                        lastPoints[ConvergenceIndex][0], lastPoints[ConvergenceIndex][1],
+                        size: 18,
+                        color: System.Drawing.Color.FromName("Black")));
+
                     WpfPlot1.Refresh();
                 }
-            }
+                else
+                {
+                    //когда в листе осталась один объект, отчистить все точки и значение точки из графика. Остается только график
+                    if (BeginScatterPlots.Count == 1)
+                    {
+                        BeginScatterPlots.ForEach(el => WpfPlot1.Plot.Remove(el));
+                        LastScatterPlots.ForEach(el => WpfPlot1.Plot.Remove(el));
+                        BeginTexts.ForEach(el => WpfPlot1.Plot.Remove(el));
+                        LastTexts.ForEach(el => WpfPlot1.Plot.Remove(el));
+                        BeginScatterPlots.Clear();
+                        LastScatterPlots.Clear();
+                        BeginTexts.Clear();
+                        LastTexts.Clear();
+                        WpfPlot1.Refresh();
+                    }
+                }
+                await Task.Yield();
+            };
 
+            await func();
         }
         /// <summary>
         /// метод для кнопка вперед
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void Button_Forward_Click(object sender, RoutedEventArgs e)
+        private async void Button_Forward_Click(object sender, RoutedEventArgs e)
         {
-
-            if (BeginPoints.Count == 0) return;
-            forvard = true;
-            //после нажатия кнопку назад делать эти операции
-            if (backvard)
+            Func<Task> func = async () =>
             {
-                if (ConvergenceIndex < 0) ConvergenceIndex = 0;
-                else ++ConvergenceIndex;
-                backvard = false;
-            }
-
-            int index = BeginScatterPlots.Count;
-
-            if (ConvergenceIndex >= 0 && ConvergenceIndex < BeginPoints.Count)
-            {
-                if (BeginScatterPlots.Count != 0)
+                if (BeginPoints.Count == 0) return;
+                forvard = true;
+                //после нажатия кнопку назад делать эти операции
+                if (backvard)
                 {
-                    //удалить указанный элемент из графика
-                    WpfPlot1.Plot.Remove(BeginScatterPlots[index - 1]);
-                    WpfPlot1.Plot.Remove(BeginTexts[index - 1]);
+                    if (ConvergenceIndex < 0) ConvergenceIndex = 0;
+                    else ++ConvergenceIndex;
+                    backvard = false;
+                }
 
-                    WpfPlot1.Plot.Remove(LastScatterPlots[index - 1]);
-                    WpfPlot1.Plot.Remove(LastTexts[index - 1]);
-                    //удалить элемент с указанным индексом из списка элементов для удаление
-                    BeginScatterPlots.RemoveAt(index - 1);
-                    BeginTexts.RemoveAt(index - 1);
-                    LastScatterPlots.RemoveAt(index - 1);
-                    LastTexts.RemoveAt(index - 1);
-                };
-                //Добавить точку к заданном координате
-                BeginScatterPlots.Add(WpfPlot1.Plot.AddScatter(
-                new double[] { BeginPoints[ConvergenceIndex][0] },
-                new double[] { BeginPoints[ConvergenceIndex][1] },
-                color: System.Drawing.Color.FromName("Blue"),
-                markerShape: MarkerShape.filledCircle,
-                markerSize: 10
-                ));
+                int index = BeginScatterPlots.Count;
 
-                LastScatterPlots.Add(WpfPlot1.Plot.AddScatter(
-                new double[] { lastPoints[ConvergenceIndex][0] },
-                new double[] { lastPoints[ConvergenceIndex][1] },
-                color: System.Drawing.Color.FromName("Blue"),
-                markerShape: MarkerShape.filledCircle,
-                markerSize: 10
-                ));
-                //Добавить значение точку в виде текста на заданном координате 
-                BeginTexts.Add(WpfPlot1.Plot.AddText($"({Math.Round(BeginPoints[ConvergenceIndex][0], 5)}; " +
-                    $"{Math.Round(BeginPoints[ConvergenceIndex][1], 5)})",
-                    BeginPoints[ConvergenceIndex][0] - ArrowXLength(),
-                    BeginPoints[ConvergenceIndex][1],
-                    size: 18,
-                    color: System.Drawing.Color.FromName("Black")));
+                if (ConvergenceIndex >= 0 && ConvergenceIndex < BeginPoints.Count)
+                {
+                    if (index != 0)
+                    {
+                        //удалить указанный элемент из графика
+                        WpfPlot1.Plot.Remove(BeginScatterPlots[index - 1]);
+                        WpfPlot1.Plot.Remove(BeginTexts[index - 1]);
 
-                LastTexts.Add(WpfPlot1.Plot.AddText($"({Math.Round(lastPoints[ConvergenceIndex][0], 5)}; " +
-                    $"{Math.Round(lastPoints[ConvergenceIndex][1], 5)})",
-                    lastPoints[ConvergenceIndex][0],
-                    lastPoints[ConvergenceIndex][1],
-                    size: 18,
-                    color: System.Drawing.Color.FromName("Black")));
-                ++ConvergenceIndex;
-                //обновить панел для графика
-                WpfPlot1.Refresh();
-            }
+                        WpfPlot1.Plot.Remove(LastScatterPlots[index - 1]);
+                        WpfPlot1.Plot.Remove(LastTexts[index - 1]);
+                        //удалить элемент с указанным индексом из списка элементов для удаление
+                        BeginScatterPlots.RemoveAt(index - 1);
+                        BeginTexts.RemoveAt(index - 1);
+                        LastScatterPlots.RemoveAt(index - 1);
+                        LastTexts.RemoveAt(index - 1);
+                    };
+                    //Добавить точку к заданном координате
+                    BeginScatterPlots.Add(WpfPlot1.Plot.AddScatter(
+                    new double[] { BeginPoints[ConvergenceIndex][0] },
+                    new double[] { BeginPoints[ConvergenceIndex][1] },
+                    color: System.Drawing.Color.FromName("Blue"),
+                    markerShape: MarkerShape.filledCircle,
+                    markerSize: 10
+                    ));
 
+                    LastScatterPlots.Add(WpfPlot1.Plot.AddScatter(
+                    new double[] { lastPoints[ConvergenceIndex][0] },
+                    new double[] { lastPoints[ConvergenceIndex][1] },
+                    color: System.Drawing.Color.FromName("Blue"),
+                    markerShape: MarkerShape.filledCircle,
+                    markerSize: 10
+                    ));
+                    //Добавить значение точку в виде текста на заданном координате 
+                    BeginTexts.Add(WpfPlot1.Plot.AddText($"({Math.Round(BeginPoints[ConvergenceIndex][0], 5)}; " +
+                        $"{Math.Round(BeginPoints[ConvergenceIndex][1], 5)})",
+                        BeginPoints[ConvergenceIndex][0] - ArrowXLength(),
+                        BeginPoints[ConvergenceIndex][1],
+                        size: 18,
+                        color: System.Drawing.Color.FromName("Black")));
+
+                    LastTexts.Add(WpfPlot1.Plot.AddText($"({Math.Round(lastPoints[ConvergenceIndex][0], 5)}; " +
+                        $"{Math.Round(lastPoints[ConvergenceIndex][1], 5)})",
+                        lastPoints[ConvergenceIndex][0],
+                        lastPoints[ConvergenceIndex][1],
+                        size: 18,
+                        color: System.Drawing.Color.FromName("Black")));
+                    ++ConvergenceIndex;
+                    //обновить панел для графика
+                    await Task.Yield();
+                    WpfPlot1.Refresh();
+                }
+
+            };
+            await func();
         }
     }
 }
