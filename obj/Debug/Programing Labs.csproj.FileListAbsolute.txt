@@ -139,3 +139,4 @@ C:\Users\Admin\Source\Repos\Programing-Labs\bin\Debug\System.Memory.xml
 C:\Users\Admin\Source\Repos\Programing-Labs\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
 C:\Users\Admin\Source\Repos\Programing-Labs\bin\Debug\System.Text.Encoding.CodePages.xml
 C:\Users\Admin\Source\Repos\Programing-Labs\obj\Debug\Programing Labs.csproj.ResolveComReference.cache
+C:\Users\Admin\Source\Repos\Programing-Labs\obj\Debug\Programing Labs.TrustInfo.xml

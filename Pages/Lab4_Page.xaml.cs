@@ -62,7 +62,7 @@ namespace Programing_Labs.Pages
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             AddBaseControlsValues();
-            LabsClases.Excell.FillLinearTemplate();
+
         }
 
         private void AddBaseControlsValues()
@@ -143,6 +143,21 @@ namespace Programing_Labs.Pages
 
         private void MenuItemSolve_Click(object sender, RoutedEventArgs e)
         {
+            try
+            {
+                if (LabsClases.GraphicPoint.GraphicPoints.Count != 0)
+                {
+                    LabsClases.Excell.StartGreatingExcelFile();
+                    LabsClases.Excell.FillLinearTemplate();
+                    LabsClases.Excell.AddListViewsData();
+                    LabsClases.Excell.FillMatrixsValues();
+                    LabsClases.Excell.SaveFile();
+                    LabsClases.Excell.CloseAndQuitFromFile();
+                }
+            } catch (Exception ex)
+            {
+                System.Windows.Forms.MessageBox.Show(ex.Message+"\n"+ex.StackTrace.ToString());
+            }
 
         }
 
@@ -164,17 +179,16 @@ namespace Programing_Labs.Pages
 
         private void BtnNext_Click(object sender, RoutedEventArgs e)
         {
-            TxtBxN.Text = "5";
-            TxtBxE.Text = "0,0001";
-            TxtBxFx.Text = "2*x^2";
-
+            TxtBxFx.Text = "x";
+            TxtBxE.Text = "0,001";
+            TxtBxN.Text = "7";
             if (Check.CheckTextBoxesValues(OnStartUITextBoxes))
             {
                 OnStartControls.ForEach(el => el.Visibility = Visibility.Collapsed);
                 DataControls.ForEach(el => el.Visibility = Visibility.Visible);
 
                 int.TryParse(TxtBxN.Text, out int n);
-                
+
                 if (LabsClases.GraphicPoint.EditMode)
                     MenuItemBack.Visibility = Visibility.Visible;
 
