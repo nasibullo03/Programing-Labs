@@ -244,7 +244,6 @@ namespace Programing_Labs
                 return false;
             }
 
-
             return true;
         }
         public void OnPaste(object sender, DataObjectPastingEventArgs e)
