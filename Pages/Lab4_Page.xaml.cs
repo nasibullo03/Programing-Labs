@@ -62,7 +62,7 @@ namespace Programing_Labs.Pages
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             AddBaseControlsValues();
-
+            LabsClases.Excell.FillLinearTemplate();
         }
 
         private void AddBaseControlsValues()

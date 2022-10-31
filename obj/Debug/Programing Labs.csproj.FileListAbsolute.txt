@@ -1,54 +1,141 @@
-C:\Users\student\Source\Repos\Programing-Labs11\obj\Debug\Pages\Lab2_Page.baml
-C:\Users\student\Source\Repos\Programing-Labs11\obj\Debug\Styles\ButtonStyle.baml
-C:\Users\student\Source\Repos\Programing-Labs11\obj\Debug\Styles\FormulaStyle.baml
-C:\Users\student\Source\Repos\Programing-Labs11\obj\Debug\Styles\LabelStyle.baml
-C:\Users\student\Source\Repos\Programing-Labs11\obj\Debug\Styles\MenuButtonStyle.baml
-C:\Users\student\Source\Repos\Programing-Labs11\obj\Debug\Styles\MenuButtonStyleClicked.baml
-C:\Users\student\Source\Repos\Programing-Labs11\obj\Debug\Styles\MenuSubitemStyle.baml
-C:\Users\student\Source\Repos\Programing-Labs11\obj\Debug\Styles\MenuSubitemStyleClicked.baml
-C:\Users\student\Source\Repos\Programing-Labs11\obj\Debug\Styles\SearchBoxStyle.baml
-C:\Users\student\Source\Repos\Programing-Labs11\obj\Debug\Styles\TextBoxStyle.baml
-C:\Users\student\Source\Repos\Programing-Labs11\obj\Debug\Pages\Lab1_1_Page.g.cs
-C:\Users\student\Source\Repos\Programing-Labs11\obj\Debug\Pages\Lab1_2_Page.g.cs
-C:\Users\student\Source\Repos\Programing-Labs11\obj\Debug\Pages\Lab2_Page.g.cs
-C:\Users\student\Source\Repos\Programing-Labs11\obj\Debug\MainWindow.g.cs
-C:\Users\student\Source\Repos\Programing-Labs11\obj\Debug\Pages\Lab3_Page.g.cs
-C:\Users\student\Source\Repos\Programing-Labs11\obj\Debug\Pages\Lab4_Page.g.cs
-C:\Users\student\Source\Repos\Programing-Labs11\obj\Debug\Styles\ListViewStyle.g.cs
-C:\Users\student\Source\Repos\Programing-Labs11\obj\Debug\UserControls\ModernSmallUserInputControl.g.cs
-C:\Users\student\Source\Repos\Programing-Labs11\obj\Debug\App.g.cs
-C:\Users\student\Source\Repos\Programing-Labs11\obj\Debug\Programing Labs_MarkupCompile.cache
-C:\Users\student\Source\Repos\Programing-Labs11\obj\Debug\Programing Labs_MarkupCompile.lref
-C:\Users\student\Source\Repos\Programing-Labs11\obj\Debug\Programing Labs.csproj.AssemblyReference.cache
-C:\Users\student\Source\Repos\Programing-Labs11\bin\Debug\Programing Labs.exe.config
-C:\Users\student\Source\Repos\Programing-Labs11\bin\Debug\Programing Labs.exe.manifest
-C:\Users\student\Source\Repos\Programing-Labs11\bin\Debug\Programing Labs.application
-C:\Users\student\Source\Repos\Programing-Labs11\bin\Debug\Programing Labs.exe
-C:\Users\student\Source\Repos\Programing-Labs11\bin\Debug\Programing Labs.pdb
-C:\Users\student\Source\Repos\Programing-Labs11\bin\Debug\org.matheval.dll
-C:\Users\student\Source\Repos\Programing-Labs11\bin\Debug\ScottPlot.dll
-C:\Users\student\Source\Repos\Programing-Labs11\bin\Debug\ScottPlot.WPF.dll
-C:\Users\student\Source\Repos\Programing-Labs11\bin\Debug\System.Drawing.Common.dll
-C:\Users\student\Source\Repos\Programing-Labs11\bin\Debug\System.Numerics.Vectors.dll
-C:\Users\student\Source\Repos\Programing-Labs11\bin\Debug\System.ValueTuple.dll
-C:\Users\student\Source\Repos\Programing-Labs11\bin\Debug\WpfMath.dll
-C:\Users\student\Source\Repos\Programing-Labs11\bin\Debug\ScottPlot.xml
-C:\Users\student\Source\Repos\Programing-Labs11\bin\Debug\System.Numerics.Vectors.xml
-C:\Users\student\Source\Repos\Programing-Labs11\bin\Debug\System.ValueTuple.xml
-C:\Users\student\Source\Repos\Programing-Labs11\obj\Debug\App.baml
-C:\Users\student\Source\Repos\Programing-Labs11\obj\Debug\Pages\Lab1_1_Page.baml
-C:\Users\student\Source\Repos\Programing-Labs11\obj\Debug\Pages\Lab1_2_Page.baml
-C:\Users\student\Source\Repos\Programing-Labs11\obj\Debug\MainWindow.baml
-C:\Users\student\Source\Repos\Programing-Labs11\obj\Debug\Pages\Lab3_Page.baml
-C:\Users\student\Source\Repos\Programing-Labs11\obj\Debug\Pages\Lab4_Page.baml
-C:\Users\student\Source\Repos\Programing-Labs11\obj\Debug\Styles\ListViewStyle.baml
-C:\Users\student\Source\Repos\Programing-Labs11\obj\Debug\UserControls\ModernSmallUserInputControl.baml
-C:\Users\student\Source\Repos\Programing-Labs11\obj\Debug\Programing Labs.g.resources
-C:\Users\student\Source\Repos\Programing-Labs11\obj\Debug\Programing_Labs.Properties.Resources.resources
-C:\Users\student\Source\Repos\Programing-Labs11\obj\Debug\Programing Labs.csproj.GenerateResource.cache
-C:\Users\student\Source\Repos\Programing-Labs11\obj\Debug\Programing Labs.csproj.CoreCompileInputs.cache
-C:\Users\student\Source\Repos\Programing-Labs11\obj\Debug\Programing Labs.exe.manifest
-C:\Users\student\Source\Repos\Programing-Labs11\obj\Debug\Programing Labs.application
-C:\Users\student\Source\Repos\Programing-Labs11\obj\Debug\Programing Labs.csproj.CopyComplete
-C:\Users\student\Source\Repos\Programing-Labs11\obj\Debug\Programing Labs.exe
-C:\Users\student\Source\Repos\Programing-Labs11\obj\Debug\Programing Labs.pdb
+C:\Users\Admin\Source\Repos\Programing-Labs\obj\Debug\Programing Labs.csproj.AssemblyReference.cache
+C:\Users\Admin\Source\Repos\Programing-Labs\obj\Debug\Pages\Lab2_Page.baml
+C:\Users\Admin\Source\Repos\Programing-Labs\obj\Debug\Styles\FormulaStyle.baml
+C:\Users\Admin\Source\Repos\Programing-Labs\obj\Debug\Styles\LabelStyle.baml
+C:\Users\Admin\Source\Repos\Programing-Labs\obj\Debug\Styles\MenuButtonStyle.baml
+C:\Users\Admin\Source\Repos\Programing-Labs\obj\Debug\Styles\MenuButtonStyleClicked.baml
+C:\Users\Admin\Source\Repos\Programing-Labs\obj\Debug\Styles\MenuSubitemStyle.baml
+C:\Users\Admin\Source\Repos\Programing-Labs\obj\Debug\Styles\MenuSubitemStyleClicked.baml
+C:\Users\Admin\Source\Repos\Programing-Labs\obj\Debug\Styles\SearchBoxStyle.baml
+C:\Users\Admin\Source\Repos\Programing-Labs\obj\Debug\Styles\TextBoxStyle.baml
+C:\Users\Admin\Source\Repos\Programing-Labs\obj\Debug\Pages\Lab1_1_Page.g.cs
+C:\Users\Admin\Source\Repos\Programing-Labs\obj\Debug\Pages\Lab1_2_Page.g.cs
+C:\Users\Admin\Source\Repos\Programing-Labs\obj\Debug\Pages\Lab2_Page.g.cs
+C:\Users\Admin\Source\Repos\Programing-Labs\obj\Debug\MainWindow.g.cs
+C:\Users\Admin\Source\Repos\Programing-Labs\obj\Debug\App.g.cs
+C:\Users\Admin\Source\Repos\Programing-Labs\obj\Debug\Programing Labs_MarkupCompile.cache
+C:\Users\Admin\Source\Repos\Programing-Labs\obj\Debug\Programing Labs_MarkupCompile.lref
+C:\Users\Admin\Source\Repos\Programing-Labs\bin\Debug\Programing Labs.exe.config
+C:\Users\Admin\Source\Repos\Programing-Labs\bin\Debug\Programing Labs.exe
+C:\Users\Admin\Source\Repos\Programing-Labs\bin\Debug\Programing Labs.pdb
+C:\Users\Admin\Source\Repos\Programing-Labs\bin\Debug\org.matheval.dll
+C:\Users\Admin\Source\Repos\Programing-Labs\bin\Debug\ScottPlot.dll
+C:\Users\Admin\Source\Repos\Programing-Labs\bin\Debug\ScottPlot.WPF.dll
+C:\Users\Admin\Source\Repos\Programing-Labs\bin\Debug\System.Drawing.Common.dll
+C:\Users\Admin\Source\Repos\Programing-Labs\bin\Debug\System.Numerics.Vectors.dll
+C:\Users\Admin\Source\Repos\Programing-Labs\bin\Debug\System.ValueTuple.dll
+C:\Users\Admin\Source\Repos\Programing-Labs\bin\Debug\WpfMath.dll
+C:\Users\Admin\Source\Repos\Programing-Labs\bin\Debug\ScottPlot.xml
+C:\Users\Admin\Source\Repos\Programing-Labs\bin\Debug\System.Numerics.Vectors.xml
+C:\Users\Admin\Source\Repos\Programing-Labs\bin\Debug\System.ValueTuple.xml
+C:\Users\Admin\Source\Repos\Programing-Labs\obj\Debug\App.baml
+C:\Users\Admin\Source\Repos\Programing-Labs\obj\Debug\Pages\Lab1_1_Page.baml
+C:\Users\Admin\Source\Repos\Programing-Labs\obj\Debug\Pages\Lab1_2_Page.baml
+C:\Users\Admin\Source\Repos\Programing-Labs\obj\Debug\MainWindow.baml
+C:\Users\Admin\Source\Repos\Programing-Labs\obj\Debug\Programing Labs.g.resources
+C:\Users\Admin\Source\Repos\Programing-Labs\obj\Debug\Programing_Labs.Properties.Resources.resources
+C:\Users\Admin\Source\Repos\Programing-Labs\obj\Debug\Programing Labs.csproj.GenerateResource.cache
+C:\Users\Admin\Source\Repos\Programing-Labs\obj\Debug\Programing Labs.csproj.CoreCompileInputs.cache
+C:\Users\Admin\Source\Repos\Programing-Labs\obj\Debug\Programing Labs.csproj.CopyComplete
+C:\Users\Admin\Source\Repos\Programing-Labs\obj\Debug\Programing Labs.exe
+C:\Users\Admin\Source\Repos\Programing-Labs\obj\Debug\Programing Labs.pdb
+C:\Users\Admin\Source\Repos\Programing-Labs\obj\Debug\Styles\ButtonStyle.baml
+C:\Users\student\Source\Repos\Programing-Labs\bin\Debug\Programing Labs.exe.config
+C:\Users\student\Source\Repos\Programing-Labs\bin\Debug\Programing Labs.exe
+C:\Users\student\Source\Repos\Programing-Labs\bin\Debug\Programing Labs.pdb
+C:\Users\student\Source\Repos\Programing-Labs\bin\Debug\org.matheval.dll
+C:\Users\student\Source\Repos\Programing-Labs\bin\Debug\ScottPlot.dll
+C:\Users\student\Source\Repos\Programing-Labs\bin\Debug\ScottPlot.WPF.dll
+C:\Users\student\Source\Repos\Programing-Labs\bin\Debug\System.Drawing.Common.dll
+C:\Users\student\Source\Repos\Programing-Labs\bin\Debug\System.Numerics.Vectors.dll
+C:\Users\student\Source\Repos\Programing-Labs\bin\Debug\System.ValueTuple.dll
+C:\Users\student\Source\Repos\Programing-Labs\bin\Debug\WpfMath.dll
+C:\Users\student\Source\Repos\Programing-Labs\bin\Debug\ScottPlot.xml
+C:\Users\student\Source\Repos\Programing-Labs\bin\Debug\System.Numerics.Vectors.xml
+C:\Users\student\Source\Repos\Programing-Labs\bin\Debug\System.ValueTuple.xml
+C:\Users\student\Source\Repos\Programing-Labs\obj\Debug\Programing Labs.csproj.AssemblyReference.cache
+C:\Users\student\Source\Repos\Programing-Labs\obj\Debug\Pages\Lab2_Page.baml
+C:\Users\student\Source\Repos\Programing-Labs\obj\Debug\Styles\ButtonStyle.baml
+C:\Users\student\Source\Repos\Programing-Labs\obj\Debug\Styles\FormulaStyle.baml
+C:\Users\student\Source\Repos\Programing-Labs\obj\Debug\Styles\LabelStyle.baml
+C:\Users\student\Source\Repos\Programing-Labs\obj\Debug\Styles\MenuButtonStyle.baml
+C:\Users\student\Source\Repos\Programing-Labs\obj\Debug\Styles\MenuButtonStyleClicked.baml
+C:\Users\student\Source\Repos\Programing-Labs\obj\Debug\Styles\MenuSubitemStyle.baml
+C:\Users\student\Source\Repos\Programing-Labs\obj\Debug\Styles\MenuSubitemStyleClicked.baml
+C:\Users\student\Source\Repos\Programing-Labs\obj\Debug\Styles\SearchBoxStyle.baml
+C:\Users\student\Source\Repos\Programing-Labs\obj\Debug\Styles\TextBoxStyle.baml
+C:\Users\student\Source\Repos\Programing-Labs\obj\Debug\Pages\Lab1_1_Page.g.cs
+C:\Users\student\Source\Repos\Programing-Labs\obj\Debug\Pages\Lab1_2_Page.g.cs
+C:\Users\student\Source\Repos\Programing-Labs\obj\Debug\Pages\Lab2_Page.g.cs
+C:\Users\student\Source\Repos\Programing-Labs\obj\Debug\MainWindow.g.cs
+C:\Users\student\Source\Repos\Programing-Labs\obj\Debug\App.g.cs
+C:\Users\student\Source\Repos\Programing-Labs\obj\Debug\Programing Labs_MarkupCompile.cache
+C:\Users\student\Source\Repos\Programing-Labs\obj\Debug\Programing Labs_MarkupCompile.lref
+C:\Users\student\Source\Repos\Programing-Labs\obj\Debug\App.baml
+C:\Users\student\Source\Repos\Programing-Labs\obj\Debug\Pages\Lab1_1_Page.baml
+C:\Users\student\Source\Repos\Programing-Labs\obj\Debug\Pages\Lab1_2_Page.baml
+C:\Users\student\Source\Repos\Programing-Labs\obj\Debug\MainWindow.baml
+C:\Users\student\Source\Repos\Programing-Labs\obj\Debug\Programing Labs.g.resources
+C:\Users\student\Source\Repos\Programing-Labs\obj\Debug\Programing_Labs.Properties.Resources.resources
+C:\Users\student\Source\Repos\Programing-Labs\obj\Debug\Programing Labs.csproj.GenerateResource.cache
+C:\Users\student\Source\Repos\Programing-Labs\obj\Debug\Programing Labs.csproj.CoreCompileInputs.cache
+C:\Users\student\Source\Repos\Programing-Labs\obj\Debug\Programing Labs.csproj.CopyComplete
+C:\Users\student\Source\Repos\Programing-Labs\obj\Debug\Programing Labs.exe
+C:\Users\student\Source\Repos\Programing-Labs\obj\Debug\Programing Labs.pdb
+C:\Users\Admin\Source\Repos\Programing-Labs\obj\Debug\Pages\Lab3_Page.g.cs
+C:\Users\Admin\Source\Repos\Programing-Labs\obj\Debug\Styles\ListViewStyle.g.cs
+C:\Users\Admin\Source\Repos\Programing-Labs\obj\Debug\UserControls\ModernSmallUserInputControl.g.cs
+C:\Users\Admin\Source\Repos\Programing-Labs\obj\Debug\Pages\Lab3_Page.baml
+C:\Users\Admin\Source\Repos\Programing-Labs\obj\Debug\Styles\ListViewStyle.baml
+C:\Users\Admin\Source\Repos\Programing-Labs\obj\Debug\UserControls\ModernSmallUserInputControl.baml
+C:\Users\student\Source\Repos\Programing-Labs\obj\Debug\Pages\Lab3_Page.g.cs
+C:\Users\student\Source\Repos\Programing-Labs\obj\Debug\Pages\Lab4_Page.g.cs
+C:\Users\student\Source\Repos\Programing-Labs\obj\Debug\Styles\ListViewStyle.g.cs
+C:\Users\student\Source\Repos\Programing-Labs\obj\Debug\UserControls\ModernSmallUserInputControl.g.cs
+C:\Users\student\Source\Repos\Programing-Labs\obj\Debug\Styles\ListViewStyle.baml
+C:\Users\student\Source\Repos\Programing-Labs\obj\Debug\UserControls\ModernSmallUserInputControl.baml
+C:\Users\student\Source\Repos\Programing-Labs\obj\Debug\Pages\Lab3_Page.baml
+C:\Users\student\Source\Repos\Programing-Labs\obj\Debug\Pages\Lab4_Page.baml
+C:\Users\Admin\Source\Repos\Programing-Labs\obj\Debug\Pages\Lab4_Page.g.cs
+C:\Users\Admin\Source\Repos\Programing-Labs\obj\Debug\Pages\Lab4_Page.baml
+C:\Users\Admin\Source\Repos\Programing-Labs\bin\Debug\Programing Labs.exe.manifest
+C:\Users\Admin\Source\Repos\Programing-Labs\bin\Debug\Programing Labs.application
+C:\Users\Admin\Source\Repos\Programing-Labs\obj\Debug\Programing Labs.exe.manifest
+C:\Users\Admin\Source\Repos\Programing-Labs\obj\Debug\Programing Labs.application
+C:\Users\student\Source\Repos\Programing-Labs2\obj\Debug\Programing Labs.csproj.AssemblyReference.cache
+C:\Users\student\Source\Repos\Programing-Labs2\obj\Debug\Pages\Lab2_Page.baml
+C:\Users\student\Source\Repos\Programing-Labs2\obj\Debug\Styles\ButtonStyle.baml
+C:\Users\student\Source\Repos\Programing-Labs2\obj\Debug\Styles\FormulaStyle.baml
+C:\Users\student\Source\Repos\Programing-Labs2\obj\Debug\Styles\LabelStyle.baml
+C:\Users\student\Source\Repos\Programing-Labs2\obj\Debug\Styles\MenuButtonStyle.baml
+C:\Users\student\Source\Repos\Programing-Labs2\obj\Debug\Styles\MenuButtonStyleClicked.baml
+C:\Users\student\Source\Repos\Programing-Labs2\obj\Debug\Styles\MenuSubitemStyle.baml
+C:\Users\student\Source\Repos\Programing-Labs2\obj\Debug\Styles\MenuSubitemStyleClicked.baml
+C:\Users\student\Source\Repos\Programing-Labs2\obj\Debug\Styles\SearchBoxStyle.baml
+C:\Users\student\Source\Repos\Programing-Labs2\obj\Debug\Styles\TextBoxStyle.baml
+C:\Users\student\Source\Repos\Programing-Labs2\obj\Debug\Pages\Lab1_1_Page.g.cs
+C:\Users\student\Source\Repos\Programing-Labs2\obj\Debug\Pages\Lab1_2_Page.g.cs
+C:\Users\student\Source\Repos\Programing-Labs2\obj\Debug\Pages\Lab2_Page.g.cs
+C:\Users\student\Source\Repos\Programing-Labs2\obj\Debug\MainWindow.g.cs
+C:\Users\student\Source\Repos\Programing-Labs2\obj\Debug\Pages\Lab3_Page.g.cs
+C:\Users\student\Source\Repos\Programing-Labs2\obj\Debug\Pages\Lab4_Page.g.cs
+C:\Users\student\Source\Repos\Programing-Labs2\obj\Debug\Styles\ListViewStyle.g.cs
+C:\Users\student\Source\Repos\Programing-Labs2\obj\Debug\UserControls\ModernSmallUserInputControl.g.cs
+C:\Users\student\Source\Repos\Programing-Labs2\obj\Debug\App.g.cs
+C:\Users\student\Source\Repos\Programing-Labs2\obj\Debug\Programing Labs_MarkupCompile.cache
+C:\Users\student\Source\Repos\Programing-Labs2\obj\Debug\Programing Labs_MarkupCompile.lref
+C:\Users\student\Source\Repos\Programing-Labs2\obj\Debug\Programing Labs.exe
+C:\Users\student\Source\Repos\Programing-Labs2\obj\Debug\Programing Labs.pdb
+C:\Users\Admin\Source\Repos\Programing-Labs\bin\Debug\IronSoftware.Drawing.Common.dll
+C:\Users\Admin\Source\Repos\Programing-Labs\bin\Debug\SixLabors.ImageSharp.dll
+C:\Users\Admin\Source\Repos\Programing-Labs\bin\Debug\System.Buffers.dll
+C:\Users\Admin\Source\Repos\Programing-Labs\bin\Debug\System.Memory.dll
+C:\Users\Admin\Source\Repos\Programing-Labs\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\Admin\Source\Repos\Programing-Labs\bin\Debug\System.Text.Encoding.CodePages.dll
+C:\Users\Admin\Source\Repos\Programing-Labs\bin\Debug\IronSoftware.Drawing.Common.pdb
+C:\Users\Admin\Source\Repos\Programing-Labs\bin\Debug\SixLabors.ImageSharp.xml
+C:\Users\Admin\Source\Repos\Programing-Labs\bin\Debug\System.Buffers.xml
+C:\Users\Admin\Source\Repos\Programing-Labs\bin\Debug\System.Memory.xml
+C:\Users\Admin\Source\Repos\Programing-Labs\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+C:\Users\Admin\Source\Repos\Programing-Labs\bin\Debug\System.Text.Encoding.CodePages.xml
+C:\Users\Admin\Source\Repos\Programing-Labs\obj\Debug\Programing Labs.csproj.ResolveComReference.cache
