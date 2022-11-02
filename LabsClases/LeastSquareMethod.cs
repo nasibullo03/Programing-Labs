@@ -9,8 +9,8 @@ namespace Programing_Labs.LabsClases
     class LeastSquareMethod
     {
 
-        private static double[] X { get; set; }
-        private static double[] Y { get; set; }
+        public static double[] X { get; private set; }
+        public static double[] Y { get; private set; }
         private static int Count { get; set; }
         private static void FillValues(List<GraphicPoint> graphicPoints)
         {
@@ -37,25 +37,28 @@ namespace Programing_Labs.LabsClases
             return sum; ;
         }
 
-        public static void Clear()
-        {
-            X = null;
-            Y = null;
-            LinearFunction.Clear();
-        }
+       
         public class LinearFunction
         {
-            private static double[] PowX2 { get; set; }
-            private static double[] MultXY { get; set; }
-            private static double[] Ylinear { get; set; }
-            private static double[] D { get; set; }
-            private static double[] PowD2 { get; set; }
-            private static Matrix Matrix1 { get; set; }
-            private static Matrix MatrixInverse { get; set; }
+            public double[]XValue { get; private set; }
+            public double[]YValue { get; private set; }
+            public  double[] PowX2 { get; private set; }
+            public  double[] MultXY { get; private set; }
+            public  double[] Ylinear { get; private set; }
+            public  double[] D { get; private set; }
+            public  double A { get; private set; }
+            public  double B { get; private set; }
+            public  double S { get; private set; }
+            public  double[] PowD2 { get; private  set; }
+            public  Matrix Matrix1 { get; private set; }
+            public  Matrix Matrix2 { get; private set; }
+            public  Matrix MatrixInverse { get; private set; }
+            public  Matrix MatrixResult { get; private set; }
             
-                
-            public static void FillBasicValues(out double A,out double B, out double S, out double[] XValues, out  double[]YValues, out double[] YLinearValues)
+            
+            public void FillBasicValues()
             {
+                
                 FillValues(GraphicPoint.GraphicPoints);
                 PowX2 = new double[Count];
                 MultXY = new double[Count];
@@ -73,12 +76,14 @@ namespace Programing_Labs.LabsClases
                     { Sum(PowX2), Sum(X)},
                     { Sum(X),Count}
                 });
+                Matrix2 = new Matrix(new double[,] { { Sum(MultXY) }, { Sum(Y) } });
+
                 MatrixInverse = new Matrix(Matrix.FindInverseMatrix(Matrix1.Value));
 
-                Matrix matrixC = MatrixInverse * new Matrix(new double[,] { { Sum(MultXY) }, { Sum(Y) } });
-                A = matrixC.Value[0, 0];
-                B = matrixC.Value[1, 0];
+                MatrixResult = MatrixInverse * Matrix2;
 
+                A = MatrixResult.Value[0, 0];
+                B = MatrixResult.Value[1, 0];
 
                 for (int i = 0; i < Count; ++i)
                 {
@@ -87,22 +92,11 @@ namespace Programing_Labs.LabsClases
                     PowD2[i] = Math.Pow(D[i], 2);
                 }
                 S = Sum(PowD2);
-                XValues = X;
-                YValues = Y;
-                YLinearValues = Ylinear;
-
-
-
+                XValue = X;
+                YValue = Y;
             }
 
-            public static void Clear()
-            {
-                PowX2 = null;
-                MultXY = null;
-                Ylinear = null;
-                D = null;
-                PowD2 = null;
-            }
+            
 
 
 

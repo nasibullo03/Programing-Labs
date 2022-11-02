@@ -232,14 +232,43 @@ namespace Programing_Labs.LabsClases
             return Minor;
         }
 
+        public static double[,] FindAlgebraicAdditions(double[,] MainMatrix)
+        {
+            bool minus = false;
+            int SizeN = MainMatrix.GetLength(0);
+            int SizeM = MainMatrix.GetLength(1);
+
+            for(int i = 0; i < SizeM; ++i)
+            {
+                for(int j=0; j < SizeN; ++j)
+                {
+                    if (minus == false)
+                    {
+                        if (j % 2 != 0) MainMatrix[i, j] *= (-1); 
+                    }
+                    else
+                    {
+                        if (j % 2 == 0) MainMatrix[i, j] *= (-1);
+                    }
+                }
+                if (minus) minus = false;
+                else minus = true;
+            }
+
+            return MainMatrix;
+        }
         public static double[,] FindInverseMatrix(double[,] MainMatrix)
         {
             int Size = MainMatrix.GetLength(0);
-            double[,] Inverse = new double[Size, Size];
-            double[,] Transpose = FindTranspose(MainMatrix);
             double Determinant = FindDeterminant(MainMatrix);
-            double rr = 1 / Determinant;
 
+            double[,] Inverse = new double[Size, Size];
+            double[,] Minor = FindMinor(MainMatrix);
+            double[,] AlgebraicAdditions = FindAlgebraicAdditions(Minor);
+            double[,] Transpose = FindTranspose(AlgebraicAdditions);
+
+            double rr = 1 / Determinant;
+            
             for (int ColIndex = 0; ColIndex < Size; ++ColIndex)
             {
                 for (int RowIndex = 0; RowIndex < Size; ++RowIndex)
