@@ -73,6 +73,7 @@ namespace Programing_Labs.LabsClases
             GraphicPoints.Clear();
             Count = 0;
             GraphicPointsView.ItemsSource = GraphicPointsCollection;
+            EditableList.Clear();
         }
 
         public static void PrepareDataForEditing(TextBox[] UITextBoxes, Label LblXi, Label LblYi)

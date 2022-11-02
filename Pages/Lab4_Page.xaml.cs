@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ScottPlot;
 
 namespace Programing_Labs.Pages
 {
@@ -30,6 +31,11 @@ namespace Programing_Labs.Pages
 
         private Label LblXi { get; set; }
         private Label LblYi { get; set; }
+        /// <summary>
+        /// для хранение значение координаты графика
+        /// </summary>
+        private List<double> Xpoints = new List<double>();
+        private List<double> Ypoints = new List<double>();
         /// <summary>
         /// Для храниние TextBox-ы которые при загрузки приложение показывается 
         /// </summary>
@@ -126,7 +132,11 @@ namespace Programing_Labs.Pages
                 double.TryParse(TxtBxXi.Text, out double Xi);
                 double.TryParse(TxtBxYi.Text, out double Yi);
                 int.TryParse(TxtBxN.Text, out int n);
-
+                if (GraphicPointList.Items.Count >= n)
+                {
+                    MenuItemAdd.Visibility = Visibility.Collapsed;
+                    return;
+                }
                 LabsClases.GraphicPoint graphicPoint = new LabsClases.GraphicPoint(Xi, Yi);
                 await LabsClases.GraphicPoint.Add(graphicPoint);
                 if (GraphicPointList.Items.Count >= n)
@@ -143,33 +153,59 @@ namespace Programing_Labs.Pages
 
         private void MenuItemSolve_Click(object sender, RoutedEventArgs e)
         {
-            
-            /*if (LabsClases.GraphicPoint.GraphicPoints.Count != 0)
-            {
-                LabsClases.Excell.StartGreatingExcelFile();
-                LabsClases.Excell.FillLinearTemplate();
-                LabsClases.Excell.AddListViewsData();
-                LabsClases.Excell.FillMatrixsValues();
-                LabsClases.Excell.SaveFile();
-                LabsClases.Excell.CloseAndQuitFromFile();
-            }*/
-            
             try
             {
                 if (LabsClases.GraphicPoint.GraphicPoints.Count != 0)
                 {
-                    LabsClases.LeastSquareMethod.LinearFunction.FillBasicValues(out double A, out double B, out double S);
+                    LabsClases.LeastSquareMethod.LinearFunction function = new LabsClases.LeastSquareMethod.LinearFunction();
+                    function.FillBasicValues();
+                    ShowGraph(function.A, function.B, function.S, function.XValue, function.YValue, function.Ylinear);
+
+                    LabsClases.Excell.StartGreatingExcelFile();
+                    LabsClases.Excell.FillLinearTemplate();
+                    LabsClases.Excell.AddListViewsData(function);
+                    LabsClases.Excell.FillMatrixsValues(function);
+                    LabsClases.Excell.SaveFile();
+                    LabsClases.Excell.CloseAndQuitFromFile();
+
                 }
-            }  catch(Exception ex)
+            }
+            catch (Exception ex)
             {
                 System.Windows.Forms.MessageBox.Show(ex.Message);
             }
         }
 
+        private double F(double x, double A, double B)
+        {
+
+
+            return A * x + B;
+        }
+        private void ShowGraph(double A, double B, double S, double[] X, double[] Y, double[] Ylinear)
+        {
+            for (int i = 0; i < X.Length; ++i)
+                WpfPlot1.Plot.AddScatter(
+                              new double[] { X[i] },
+                              new double[] { Y[i] },
+                              color: System.Drawing.Color.FromName("Blue"),
+                              markerSize: 7,
+                              markerShape: MarkerShape.filledDiamond
+                              );
+
+
+            WpfPlot1.Plot.Title($"Невязка - S={S}");
+            WpfPlot1.Plot.AddScatter(X, Ylinear, markerShape: MarkerShape.none, lineWidth: 3, color: System.Drawing.Color.FromName("Red"));
+
+            WpfPlot1.Refresh();
+
+
+        }
         private void MenuItemClear_Click(object sender, RoutedEventArgs e)
         {
             OnStartControls.ForEach(el => el.Visibility = Visibility.Visible);
             DataControls.ForEach(el => el.Visibility = Visibility.Collapsed);
+            BtnEdit.Visibility = Visibility.Collapsed;
             MenuItemBack.Visibility = Visibility.Collapsed;
 
             TxtBxN.Text = string.Empty;
@@ -180,13 +216,20 @@ namespace Programing_Labs.Pages
 
             LabsClases.GraphicPoint.Clear();
             index = 0;
+
+            Xpoints.Clear();
+            Ypoints.Clear();
+
+            WpfPlot1.UpdateDefaultStyle();
+            WpfPlot1.Plot.Clear();
+            WpfPlot1.Refresh();
         }
 
         private void BtnNext_Click(object sender, RoutedEventArgs e)
         {
             TxtBxFx.Text = "x";
             TxtBxE.Text = "0,001";
-            TxtBxN.Text = "7";
+            TxtBxN.Text = "8";
             if (Check.CheckTextBoxesValues(OnStartUITextBoxes))
             {
                 OnStartControls.ForEach(el => el.Visibility = Visibility.Collapsed);
@@ -245,28 +288,34 @@ namespace Programing_Labs.Pages
         private void BtnEdit_Click(object sender, RoutedEventArgs e)
         {
 
+            double.TryParse(TxtBxN.Text, out double N);
             if (Check.CheckTextBoxesValues(DataUITextBoxes))
             {
                 //добавить новые данные в списке
                 double.TryParse(TxtBxXi.Text, out double Xi);
                 double.TryParse(TxtBxYi.Text, out double Yi);
-                LabsClases.GraphicPoint.EditValues(Xi, Yi);
+                
+                if (LabsClases.GraphicPoint.GraphicPoints.Count >= N && LabsClases.GraphicPoint.EditableList.Count==0)
+                    return;
 
+                LabsClases.GraphicPoint.EditValues(Xi, Yi);
                 //удалить данные которые уже отредактированы
                 LabsClases.GraphicPoint.DeleteEditedValue();
             }
             else return;
 
-
-
             if (LabsClases.GraphicPoint.EditableList.Count == 0)
             {
-                MenuItemAdd.Visibility = Visibility.Visible;
-                MenuItemBack.Visibility = Visibility.Collapsed;
+                MenuItemEdit.Visibility = Visibility.Collapsed;
+                
+                if (LabsClases.GraphicPoint.GraphicPoints.Count >= N)
+                    MenuItemAdd.Visibility = Visibility.Collapsed;
+                else MenuItemAdd.Visibility = Visibility.Visible;
 
                 LabsClases.GraphicPoint.EditableList.Clear();
                 LabsClases.GraphicPoint.EditMode = false;
-                index = GraphicPointList.Items.Count + 1;
+                
+                index = (index >= N) ? index : GraphicPointList.Items.Count + 1;
                 LblXi.Content = $"X({index})";
                 LblYi.Content = $"Y({index})";
                 TxtBxXi.Text = string.Empty;
