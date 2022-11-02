@@ -69,11 +69,11 @@ namespace Programing_Labs.LabsClases
         public static void Clear()
         {
             GraphicPointsView.ItemsSource = new ObservableCollection<GraphicPoint>();
-            GraphicPointsCollection.Clear();
-            GraphicPoints.Clear();
+            GraphicPointsCollection?.Clear();
+            GraphicPoints?.Clear();
             Count = 0;
             GraphicPointsView.ItemsSource = GraphicPointsCollection;
-            EditableList.Clear();
+            EditableList?.Clear();
         }
 
         public static void PrepareDataForEditing(TextBox[] UITextBoxes, Label LblXi, Label LblYi)

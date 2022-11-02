@@ -24,18 +24,12 @@ namespace Programing_Labs.Pages
     {
         private TextBox TxtBxXi { get; set; }
         private TextBox TxtBxYi { get; set; }
-
         private TextBox TxtBxN { get; set; }
-        private TextBox TxtBxE { get; set; }
-        private TextBox TxtBxFx { get; set; }
+        /*private TextBox TxtBxE { get; set; }
+        private TextBox TxtBxFx { get; set; }*/
 
         private Label LblXi { get; set; }
         private Label LblYi { get; set; }
-        /// <summary>
-        /// для хранение значение координаты графика
-        /// </summary>
-        private List<double> Xpoints = new List<double>();
-        private List<double> Ypoints = new List<double>();
         /// <summary>
         /// Для храниние TextBox-ы которые при загрузки приложение показывается 
         /// </summary>
@@ -73,26 +67,26 @@ namespace Programing_Labs.Pages
 
         private void AddBaseControlsValues()
         {
-            OnStartControls = new List<Control>() { MenuItemN, MenuItemE, MenuItemFx, MenuItemNext };
-            DataControls = new List<Control>() { MenuItemXi, MenuItemYi, MenuItemChooseOperation, MenuItemAdd, MenuItemBack };
+            OnStartControls = new List<Control>() { MenuItemN, /*MenuItemE, MenuItemFx,*/ MenuItemNext };
+            DataControls = new List<Control>() { MenuItemXi, MenuItemYi, MenuItemClearOpetations,MenuItemSolveOperation, MenuItemAdd, MenuItemBack };
 
             TxtBxXi = GetStyleElement(TextBoxXi, "MainTextBox") as TextBox;
             TxtBxYi = GetStyleElement(TextBoxYi, "MainTextBox") as TextBox;
             TxtBxN = GetStyleElement(TextBoxN, "MainTextBox") as TextBox;
-            TxtBxE = GetStyleElement(TextBoxE, "MainTextBox") as TextBox;
-            TxtBxFx = GetStyleElement(TextBoxFx, "MainTextBox") as TextBox;
+            /*TxtBxE = GetStyleElement(TextBoxE, "MainTextBox") as TextBox;
+            TxtBxFx = GetStyleElement(TextBoxFx, "MainTextBox") as TextBox;*/
 
             LblXi = GetStyleElement(LabelXi, "MainLabel") as Label;
             LblYi = GetStyleElement(LabelYi, "MainLabel") as Label;
 
-            TxtBxFx.Tag = "formula";
-            TxtBxE.Tag = "e";
+           /* TxtBxFx.Tag = "formula";
+            TxtBxE.Tag = "e";*/
 
             OnStartUITextBoxes = new TextBox[]
             {
-               TxtBxN,
-               TxtBxE,
-               TxtBxFx
+               TxtBxN/*,
+              *//* TxtBxE,
+               TxtBxFx*/
             };
             DataUITextBoxes = new TextBox[]
             {
@@ -151,37 +145,7 @@ namespace Programing_Labs.Pages
             }
         }
 
-        private void MenuItemSolve_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                if (LabsClases.GraphicPoint.GraphicPoints.Count != 0)
-                {
-                    LabsClases.LeastSquareMethod.LinearFunction function = new LabsClases.LeastSquareMethod.LinearFunction();
-                    function.FillBasicValues();
-                    ShowGraph(function.A, function.B, function.S, function.XValue, function.YValue, function.Ylinear);
-
-                    LabsClases.Excell.StartGreatingExcelFile();
-                    LabsClases.Excell.FillLinearTemplate();
-                    LabsClases.Excell.AddListViewsData(function);
-                    LabsClases.Excell.FillMatrixsValues(function);
-                    LabsClases.Excell.SaveFile();
-                    LabsClases.Excell.CloseAndQuitFromFile();
-
-                }
-            }
-            catch (Exception ex)
-            {
-                System.Windows.Forms.MessageBox.Show(ex.Message);
-            }
-        }
-
-        private double F(double x, double A, double B)
-        {
-
-
-            return A * x + B;
-        }
+        
         private void ShowGraph(double A, double B, double S, double[] X, double[] Y, double[] Ylinear)
         {
             for (int i = 0; i < X.Length; ++i)
@@ -201,35 +165,13 @@ namespace Programing_Labs.Pages
 
 
         }
-        private void MenuItemClear_Click(object sender, RoutedEventArgs e)
-        {
-            OnStartControls.ForEach(el => el.Visibility = Visibility.Visible);
-            DataControls.ForEach(el => el.Visibility = Visibility.Collapsed);
-            BtnEdit.Visibility = Visibility.Collapsed;
-            MenuItemBack.Visibility = Visibility.Collapsed;
-
-            TxtBxN.Text = string.Empty;
-            TxtBxE.Text = string.Empty;
-            TxtBxFx.Text = string.Empty;
-            TxtBxXi.Text = string.Empty;
-            TxtBxYi.Text = string.Empty;
-
-            LabsClases.GraphicPoint.Clear();
-            index = 0;
-
-            Xpoints.Clear();
-            Ypoints.Clear();
-
-            WpfPlot1.UpdateDefaultStyle();
-            WpfPlot1.Plot.Clear();
-            WpfPlot1.Refresh();
-        }
+       
 
         private void BtnNext_Click(object sender, RoutedEventArgs e)
         {
-            TxtBxFx.Text = "x";
-            TxtBxE.Text = "0,001";
-            TxtBxN.Text = "8";
+           /* TxtBxFx.Text = "x";
+            TxtBxE.Text = "0,001";*/
+            /*TxtBxN.Text = "8";*/
             if (Check.CheckTextBoxesValues(OnStartUITextBoxes))
             {
                 OnStartControls.ForEach(el => el.Visibility = Visibility.Collapsed);
@@ -326,6 +268,81 @@ namespace Programing_Labs.Pages
 
         }
 
+        private void MenuItemSolveLinear_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (LabsClases.GraphicPoint.GraphicPoints.Count != 0)
+                {
+                    LabsClases.LeastSquareMethod.LinearFunction function = new LabsClases.LeastSquareMethod.LinearFunction();
+                    function.FillBasicValues();
+                    ShowGraph(function.A, function.B, function.S, function.XValue, function.YValue, function.Ylinear);
 
+                    LabsClases.Excell.StartGreatingExcelFile();
+                    LabsClases.Excell.FillLinearTemplate();
+                    LabsClases.Excell.AddListViewsData(function);
+                    LabsClases.Excell.FillMatrixsValues(function);
+                    LabsClases.Excell.SaveFile();
+                    LabsClases.Excell.CloseAndQuitFromFile();
+
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Windows.Forms.MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void MenuItemSolveKvadratical_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void MenuItemClearAll_Click(object sender, RoutedEventArgs e)
+        {
+            OnStartControls.ForEach(el => el.Visibility = Visibility.Visible);
+            DataControls.ForEach(el => el.Visibility = Visibility.Collapsed);
+            BtnEdit.Visibility = Visibility.Collapsed;
+            MenuItemBack.Visibility = Visibility.Collapsed;
+
+            TxtBxN.Text = string.Empty;
+            /*TxtBxE.Text = string.Empty;
+            TxtBxFx.Text = string.Empty;*/
+            TxtBxXi.Text = string.Empty;
+            TxtBxYi.Text = string.Empty;
+
+            LabsClases.GraphicPoint.Clear();
+            index = 0;
+            WpfPlot1.Plot.Title("");
+            WpfPlot1.UpdateDefaultStyle();
+            WpfPlot1.Plot.Clear();
+            WpfPlot1.Refresh();
+        }
+
+        private void MenuItemClearPlot_Click(object sender, RoutedEventArgs e)
+        {
+            WpfPlot1.Plot.Title("");
+            WpfPlot1.UpdateDefaultStyle();
+            WpfPlot1.Plot.Clear();
+            WpfPlot1.Refresh();
+        }
+
+        private void MenuItemClearData_Click(object sender, RoutedEventArgs e)
+        {
+            OnStartControls.ForEach(el => el.Visibility = Visibility.Collapsed);
+            DataControls.ForEach(el => el.Visibility = Visibility.Visible);
+            BtnEdit.Visibility = Visibility.Collapsed;
+            MenuItemBack.Visibility = Visibility.Collapsed;
+            TxtBxXi.Text = string.Empty;
+            TxtBxYi.Text = string.Empty;
+
+            LabsClases.GraphicPoint.Clear();
+            index = 0;
+            WpfPlot1.Plot.Title("");
+            WpfPlot1.UpdateDefaultStyle();
+            WpfPlot1.Plot.Clear();
+            WpfPlot1.Refresh();
+
+        }
     }
 }
