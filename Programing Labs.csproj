@@ -144,6 +144,7 @@
     <Compile Include="LabsClases\Excell.cs" />
     <Compile Include="LabsClases\GraphicPoint.cs" />
     <Compile Include="LabsClases\LeastSquareMethod.cs" />
+    <Compile Include="LabsClases\Matrix.cs" />
     <Compile Include="Pages\Lab4_Page.xaml.cs">
       <DependentUpon>Lab4_Page.xaml</DependentUpon>
     </Compile>

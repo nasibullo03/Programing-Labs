@@ -18,7 +18,7 @@ namespace Programing_Labs.LabsClases
 
         public static bool EditMode { get; set; }
         private static int Count { get; set; }
-        public int index { get; set; }
+        public int Index { get; set; }
         public double Xi { get; set; }
         public double Yi { get; set; }
 
@@ -27,7 +27,7 @@ namespace Programing_Labs.LabsClases
         }
         public GraphicPoint(double Xi, double Yi)
         {
-            this.index = ++Count;
+            this.Index = ++Count;
             this.Xi = Xi;
             this.Yi = Yi;
         }
@@ -56,7 +56,7 @@ namespace Programing_Labs.LabsClases
             Count = 0;
             foreach (var el in GraphicPoints.ToArray())
             {
-                el.index = ++Count;
+                el.Index = ++Count;
                 graphicPointsCollection.Add(el);
             }
 
@@ -78,7 +78,7 @@ namespace Programing_Labs.LabsClases
         public static void PrepareDataForEditing(TextBox[] UITextBoxes, Label LblXi, Label LblYi)
         {
 
-            int _index = (EditableList[0] as GraphicPoint).index;
+            int _index = (EditableList[0] as GraphicPoint).Index;
 
             LblXi.Content = $"X({_index})";
             LblYi.Content = $"Y({_index})";
@@ -89,11 +89,11 @@ namespace Programing_Labs.LabsClases
         }
         public static void EditValues(double Xi, double Yi)
         {
-            GraphicPointsCollection[(EditableList[0] as GraphicPoint).index - 1].Xi = Xi;
-            GraphicPointsCollection[(EditableList[0] as GraphicPoint).index - 1].Yi = Yi;
+            GraphicPointsCollection[(EditableList[0] as GraphicPoint).Index - 1].Xi = Xi;
+            GraphicPointsCollection[(EditableList[0] as GraphicPoint).Index - 1].Yi = Yi;
 
-            GraphicPoints[(EditableList[0] as GraphicPoint).index - 1].Xi = Xi;
-            GraphicPoints[(EditableList[0] as GraphicPoint).index - 1].Yi = Yi;
+            GraphicPoints[(EditableList[0] as GraphicPoint).Index - 1].Xi = Xi;
+            GraphicPoints[(EditableList[0] as GraphicPoint).Index - 1].Yi = Yi;
 
             GraphicPointsView.ItemsSource = new ObservableCollection<GraphicPoint>();
             GraphicPointsView.ItemsSource = GraphicPointsCollection;
