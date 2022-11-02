@@ -54,7 +54,7 @@ namespace Programing_Labs.LabsClases
             private static Matrix MatrixInverse { get; set; }
             
                 
-            public static void FillBasicValues(out double A,out double B, out double S)
+            public static void FillBasicValues(out double A,out double B, out double S, out double[] XValues, out  double[]YValues, out double[] YLinearValues)
             {
                 FillValues(GraphicPoint.GraphicPoints);
                 PowX2 = new double[Count];
@@ -87,7 +87,11 @@ namespace Programing_Labs.LabsClases
                     PowD2[i] = Math.Pow(D[i], 2);
                 }
                 S = Sum(PowD2);
-                
+                XValues = X;
+                YValues = Y;
+                YLinearValues = Ylinear;
+
+
 
             }
 
