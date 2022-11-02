@@ -20,8 +20,9 @@ namespace Programing_Labs.LabsClases
             int count = 0;
             graphicPoints.ForEach(el =>
             {
-                X[count++] = el.Xi;
-                Y[count++] = el.Yi;
+                X[count] = el.Xi;
+                Y[count] = el.Yi;
+                ++count;
             });
         }
 
@@ -50,13 +51,18 @@ namespace Programing_Labs.LabsClases
             private static double[] D { get; set; }
             private static double[] PowD2 { get; set; }
             private static Matrix Matrix1 { get; set; }
-            private static Matrix Matrix2 { get; set; }
-
-            public static void FillBasicValues()
+            private static Matrix MatrixInverse { get; set; }
+            
+                
+            public static void FillBasicValues(out double A,out double B, out double S)
             {
                 FillValues(GraphicPoint.GraphicPoints);
                 PowX2 = new double[Count];
                 MultXY = new double[Count];
+                Ylinear = new double[Count];
+                D = new double[Count];
+                PowD2 = new double[Count];
+
                 for (int i = 0; i < Count; ++i)
                 {
                     PowX2[i] = Math.Pow(X[i], 2);
@@ -67,7 +73,22 @@ namespace Programing_Labs.LabsClases
                     { Sum(PowX2), Sum(X)},
                     { Sum(X),Count}
                 });
+                MatrixInverse = new Matrix(Matrix.FindInverseMatrix(Matrix1.Value));
+
+                Matrix matrixC = MatrixInverse * new Matrix(new double[,] { { Sum(MultXY) }, { Sum(Y) } });
+                A = matrixC.Value[0, 0];
+                B = matrixC.Value[1, 0];
+
+
+                for (int i = 0; i < Count; ++i)
+                {
+                    Ylinear[i] = A * X[i] + B;
+                    D[i] = Y[i] - Ylinear[i];
+                    PowD2[i] = Math.Pow(D[i], 2);
+                }
+                S = Sum(PowD2);
                 
+
             }
 
             public static void Clear()
@@ -88,22 +109,6 @@ namespace Programing_Labs.LabsClases
 
         }
 
-        public class Matrix
-        {
-            public double[,] Value { get; set; }
-            public Matrix()
-            {
 
-            }
-            public Matrix(double[,] Value)
-            {
-                this.Value = Value;
-            }
-
-
-
-
-
-        }
     }
 }

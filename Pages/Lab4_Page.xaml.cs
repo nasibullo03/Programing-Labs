@@ -143,9 +143,8 @@ namespace Programing_Labs.Pages
 
         private void MenuItemSolve_Click(object sender, RoutedEventArgs e)
         {
-            /*  try
-              {*/
-            if (LabsClases.GraphicPoint.GraphicPoints.Count != 0)
+            
+            /*if (LabsClases.GraphicPoint.GraphicPoints.Count != 0)
             {
                 LabsClases.Excell.StartGreatingExcelFile();
                 LabsClases.Excell.FillLinearTemplate();
@@ -153,12 +152,18 @@ namespace Programing_Labs.Pages
                 LabsClases.Excell.FillMatrixsValues();
                 LabsClases.Excell.SaveFile();
                 LabsClases.Excell.CloseAndQuitFromFile();
+            }*/
+            
+            try
+            {
+                if (LabsClases.GraphicPoint.GraphicPoints.Count != 0)
+                {
+                    LabsClases.LeastSquareMethod.LinearFunction.FillBasicValues(out double A, out double B, out double S);
+                }
+            }  catch(Exception ex)
+            {
+                System.Windows.Forms.MessageBox.Show(ex.Message);
             }
-            /* } catch (Exception ex)
-             *//*{
-                 System.Windows.Forms.MessageBox.Show(ex.Message+"\n"+ex.StackTrace.ToString());
-             }*/
-
         }
 
         private void MenuItemClear_Click(object sender, RoutedEventArgs e)

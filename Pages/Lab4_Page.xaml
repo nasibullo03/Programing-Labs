@@ -229,7 +229,7 @@
                 </ListView.ContextMenu>
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn DisplayMemberBinding="{Binding Path=index}"
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=Index}"
                                         Width="50">i</GridViewColumn>
                         <GridViewColumn DisplayMemberBinding="{Binding Path=Xi}"
                                         Width="50">X</GridViewColumn>
