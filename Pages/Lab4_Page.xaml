@@ -89,6 +89,7 @@
                 </MenuItem.Header>
             </MenuItem>
             <!--TextBoxE-->
+            <!--
             <MenuItem x:Name="MenuItemE">
                 <MenuItem.Header>
                     <StackPanel Orientation="Horizontal"
@@ -107,7 +108,9 @@
                     </StackPanel>
                 </MenuItem.Header>
             </MenuItem>
+            -->
             <!--TextBoxFx-->
+            <!--
             <MenuItem x:Name="MenuItemFx">
                 <MenuItem.Header>
                     <StackPanel Orientation="Horizontal"
@@ -127,7 +130,7 @@
                     </StackPanel>
                 </MenuItem.Header>
             </MenuItem>
-
+-->
             
             <MenuItem x:Name="MenuItemNext">
                 <MenuItem.Header>
@@ -180,35 +183,76 @@
                             Click="BtnAdd_Click" />
                 </MenuItem.Header>
             </MenuItem>
-            <!--Выберите операцию-->
-            <MenuItem x:Name="MenuItemChooseOperation"
+            <!--Рассчитать-->
+            <MenuItem x:Name="MenuItemSolveOperation"
                       Background="#007575"
                       TabIndex="4"
                       Margin="2"
                       Visibility="Visible">
                 <MenuItem.Header>
-                    <Label Content="Выберите операцию"
+                    <Label Content="Рассчитать"
                            Style="{StaticResource LabelStyle}"
                            Foreground="White"
                            FontSize="16"
                            VerticalAlignment="Center" />
 
                 </MenuItem.Header>
-                <MenuItem Header="Рассчитать"
+                <MenuItem Header="Линейная функция"
                           FontWeight="Black"
-                          x:Name="MenuItemSolve"
+                          x:Name="MenuItemSolveLinear"
                           FontSize="16"
                           Foreground="#007575"
                           Background="Transparent"
-                          Click="MenuItemSolve_Click"
+                          Click="MenuItemSolveLinear_Click"
+                           />
+                <MenuItem Header="Квадратичная функция"
+                          x:Name="MenuItemSolveKvadratical"
+                          FontWeight="Black"
+                          FontSize="16"
+                          Foreground="#007575"
+                          Background="Transparent"
+                          Click="MenuItemSolveKvadratical_Click"
+                           />
+
+            </MenuItem>
+            
+            <!--Очистить-->
+            <MenuItem x:Name="MenuItemClearOpetations"
+                      Background="#007575"
+                      TabIndex="4"
+                      Margin="2"
+                      Visibility="Visible">
+                <MenuItem.Header>
+                    <Label Content="Очистить"
+                           Style="{StaticResource LabelStyle}"
+                           Foreground="White"
+                           FontSize="16"
+                           VerticalAlignment="Center" />
+
+                </MenuItem.Header>
+                <MenuItem Header="Очистить все"
+                          FontWeight="Black"
+                          x:Name="MenuItemClearAll"
+                          FontSize="16"
+                          Foreground="#007575"
+                          Background="Transparent"
+                          Click="MenuItemClearAll_Click"
                           TabIndex="5" />
-                <MenuItem Header="Очистить"
-                          x:Name="MenuItemClear"
+                <MenuItem Header="Очистить график"
+                          x:Name="MenuItemClearPlot"
                           FontWeight="Black"
                           FontSize="16"
                           Foreground="#007575"
                           Background="Transparent"
-                          Click="MenuItemClear_Click"
+                          Click="MenuItemClearPlot_Click"
+                          TabIndex="6" />
+                <MenuItem Header="Очистить данные"
+                          x:Name="MenuItemClearData"
+                          FontWeight="Black"
+                          FontSize="16"
+                          Foreground="#007575"
+                          Background="Transparent"
+                          Click="MenuItemClearData_Click"
                           TabIndex="6" />
 
             </MenuItem>
