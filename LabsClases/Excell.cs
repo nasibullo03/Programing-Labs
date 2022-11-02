@@ -5,7 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Runtime.InteropServices;
 using Microsoft.Office.Interop.Excel;
-using Microsoft.Office.Core;
 using System.Windows.Forms;
 using System.IO;
 
@@ -29,6 +28,7 @@ namespace Programing_Labs.LabsClases
             XlApplication = new Microsoft.Office.Interop.Excel.Application();
             XlWorkbook = XlApplication.Workbooks.Add(missValue);
             XlWorksheet = (Worksheet)XlWorkbook.Worksheets.Item[1];
+            
         }
 
         public static void SaveFile()
@@ -92,7 +92,7 @@ namespace Programing_Labs.LabsClases
             XlWorksheet.Cells[3, 12] = $"=B{LastPointIndex}";
             
             XlWorksheet.Cells[5, 8] = "Обратная матрица:";
-            XlWorksheet.Cells["I5", "J7"] = XlApplication.WorksheetFunction.MInverse(XlWorksheet.Range["I2", "J3"]);
+            
             /*            XlWorksheet.Cells[5, 10] = "=C10";
              *            XlWorksheet.Cells[6, 9] = "=C10";
                         XlWorksheet.Cells[6, 10] = "=C10";*/
@@ -100,7 +100,6 @@ namespace Programing_Labs.LabsClases
             XlWorksheet.Cells[5, 11] = "a = ";
             XlWorksheet.Cells[6, 11] = "b = ";
 
-            XlWorksheet.Cells[5, 12] = XlApplication.WorksheetFunction.DProduct(XlWorksheet.Range["L5", "L6"], XlWorksheet.Range["I5", "J6"], XlWorksheet.Range["L2", "L3"]);
             /*XlWorksheet.Cells[6, 12] = "{=МУМНОЖ(I5:J6;L2:L3)}";*/
 
             for (int i=2; i <= LastPointIndex; ++i)

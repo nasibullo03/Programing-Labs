@@ -143,21 +143,21 @@ namespace Programing_Labs.Pages
 
         private void MenuItemSolve_Click(object sender, RoutedEventArgs e)
         {
-            try
+            /*  try
+              {*/
+            if (LabsClases.GraphicPoint.GraphicPoints.Count != 0)
             {
-                if (LabsClases.GraphicPoint.GraphicPoints.Count != 0)
-                {
-                    LabsClases.Excell.StartGreatingExcelFile();
-                    LabsClases.Excell.FillLinearTemplate();
-                    LabsClases.Excell.AddListViewsData();
-                    LabsClases.Excell.FillMatrixsValues();
-                    LabsClases.Excell.SaveFile();
-                    LabsClases.Excell.CloseAndQuitFromFile();
-                }
-            } catch (Exception ex)
-            {
-                System.Windows.Forms.MessageBox.Show(ex.Message+"\n"+ex.StackTrace.ToString());
+                LabsClases.Excell.StartGreatingExcelFile();
+                LabsClases.Excell.FillLinearTemplate();
+                LabsClases.Excell.AddListViewsData();
+                LabsClases.Excell.FillMatrixsValues();
+                LabsClases.Excell.SaveFile();
+                LabsClases.Excell.CloseAndQuitFromFile();
             }
+            /* } catch (Exception ex)
+             *//*{
+                 System.Windows.Forms.MessageBox.Show(ex.Message+"\n"+ex.StackTrace.ToString());
+             }*/
 
         }
 
