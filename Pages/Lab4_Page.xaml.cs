@@ -50,7 +50,6 @@ namespace Programing_Labs.Pages
         /// значение i  для Xi и Yi 
         /// </summary>
         public int index = 0;
-
         public Lab4_Page()
         {
             InitializeComponent();
@@ -58,17 +57,15 @@ namespace Programing_Labs.Pages
             GraphicPointList.ItemsSource = LabsClases.GraphicPoint.GraphicPointsCollection;
 
         }
-
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             AddBaseControlsValues();
 
         }
-
         private void AddBaseControlsValues()
         {
             OnStartControls = new List<Control>() { MenuItemN, /*MenuItemE, MenuItemFx,*/ MenuItemNext };
-            DataControls = new List<Control>() { MenuItemXi, MenuItemYi, MenuItemClearOpetations,MenuItemSolveOperation, MenuItemAdd, MenuItemBack };
+            DataControls = new List<Control>() { MenuItemXi, MenuItemYi, MenuItemClearOpetations, MenuItemSolveOperation, MenuItemAdd, MenuItemBack };
 
             TxtBxXi = GetStyleElement(TextBoxXi, "MainTextBox") as TextBox;
             TxtBxYi = GetStyleElement(TextBoxYi, "MainTextBox") as TextBox;
@@ -79,8 +76,8 @@ namespace Programing_Labs.Pages
             LblXi = GetStyleElement(LabelXi, "MainLabel") as Label;
             LblYi = GetStyleElement(LabelYi, "MainLabel") as Label;
 
-           /* TxtBxFx.Tag = "formula";
-            TxtBxE.Tag = "e";*/
+            /* TxtBxFx.Tag = "formula";
+             TxtBxE.Tag = "e";*/
 
             OnStartUITextBoxes = new TextBox[]
             {
@@ -113,11 +110,8 @@ namespace Programing_Labs.Pages
             DataControls.ForEach(el => el.Visibility = Visibility.Collapsed);
             MenuItemEdit.Visibility = Visibility.Collapsed;
         }
-
         private object GetStyleElement(Control element, string name) =>
            element.Template.FindName(name, element);
-
-
         private async void BtnAdd_Click(object sender, RoutedEventArgs e)
         {
             if (Check.CheckTextBoxesValues(DataUITextBoxes))
@@ -144,33 +138,99 @@ namespace Programing_Labs.Pages
 
             }
         }
-
-        
-        private void ShowGraph(double A, double B, double S, double[] X, double[] Y, double[] Ylinear)
+        private void ShowGraph(LabsClases.LeastSquareMethod.LinearFunction linearFunction)
         {
-            for (int i = 0; i < X.Length; ++i)
+            ClearPlot();
+            for (int i = 0; i < linearFunction.XValue.Length; ++i)
                 WpfPlot1.Plot.AddScatter(
-                              new double[] { X[i] },
-                              new double[] { Y[i] },
+                              new double[] { linearFunction.XValue[i] },
+                              new double[] { linearFunction.YValue[i] },
                               color: System.Drawing.Color.FromName("Blue"),
                               markerSize: 7,
                               markerShape: MarkerShape.filledDiamond
                               );
 
-
-            WpfPlot1.Plot.Title($"Невязка - S={S}");
-            WpfPlot1.Plot.AddScatter(X, Ylinear, markerShape: MarkerShape.none, lineWidth: 3, color: System.Drawing.Color.FromName("Red"));
+            WpfPlot1.Plot.Title($"Невязка - S={linearFunction.S}");
+            WpfPlot1.Plot.AddScatter(linearFunction.XValue, linearFunction.Ylinear, markerShape: MarkerShape.none, lineWidth: 3, color: System.Drawing.Color.FromName("Red"));
 
             WpfPlot1.Refresh();
 
 
         }
-       
+        private void ShowGraph(LabsClases.LeastSquareMethod.QuadraticFunction quadraticFunction)
+        {
+            ClearPlot();
+            for (int i = 0; i < quadraticFunction.XValue.Length; ++i)
+                if (i != 0)
+                {
+                    WpfPlot1.Plot.AddScatter(
+                              new double[] { quadraticFunction.XValue[i] },
+                              new double[] { quadraticFunction.YValue[i] },
+                              color: System.Drawing.Color.FromName("Blue"),
+                              markerSize: 7,
+                              markerShape: MarkerShape.filledDiamond
+                              );
+                }
+                else
+                {
+                    WpfPlot1.Plot.AddScatter(
+                              new double[] { quadraticFunction.XValue[i] },
+                              new double[] { quadraticFunction.YValue[i] },
+                              color: System.Drawing.Color.FromName("Blue"),
+                              markerSize: 7,
+                              markerShape: MarkerShape.filledDiamond,
+                              label: "Y"
+                              );
+                }
 
+            WpfPlot1.Plot.Title($"Невязка - S={Math.Round(quadraticFunction.S, 5)}");
+
+            double min = LabsClases.GraphicPoint.GraphicPoints[0].Xi;
+            double max = LabsClases.GraphicPoint.GraphicPoints[0].Yi;
+
+            LabsClases.GraphicPoint.GraphicPoints.ForEach(el =>
+            {
+                if (el.Xi > max) max = el.Xi;
+                if (el.Xi < min) min = el.Xi;
+            });
+            if (min > (-max))
+                min = -max;
+            else if (max < Math.Abs(min))
+                max = Math.Abs(min);
+
+
+            List<double> X = new List<double>();
+            List<double> Y = new List<double>();
+
+            for (double i = min; i <= max; i += 0.01)
+            {
+                Y.Add((quadraticFunction.A * Math.Pow(i, 2)) + (quadraticFunction.B * i) + quadraticFunction.C);
+                X.Add(i);
+            }
+
+            WpfPlot1.Plot.AddScatter(
+                X.ToArray(),
+                Y.ToArray(),
+                markerShape: MarkerShape.none,
+                lineWidth: 3,
+                color: System.Drawing.Color.FromName("Red"),
+                label: $"Y = {Math.Round(quadraticFunction.A, 5)}*x^2+{Math.Round(quadraticFunction.B, 5)}*x+{Math.Round(quadraticFunction.C, 5)}");
+
+
+            var legend = WpfPlot1.Plot.Legend();
+            legend.FontName = "comic sans ms";
+            legend.FontSize = 16;
+            legend.FontBold = true;
+            legend.FontColor = System.Drawing.Color.DarkBlue;
+
+            WpfPlot1.Refresh();
+
+
+        }
         private void BtnNext_Click(object sender, RoutedEventArgs e)
         {
-           /* TxtBxFx.Text = "x";
-            TxtBxE.Text = "0,001";*/
+            /* TxtBxFx.Text = "x";
+             TxtBxE.Text = "0,001";*/
             /*TxtBxN.Text = "8";*/
             if (Check.CheckTextBoxesValues(OnStartUITextBoxes))
             {
@@ -202,7 +262,6 @@ namespace Programing_Labs.Pages
                 MenuItemBack.Visibility = Visibility.Collapsed;
             }
         }
-
         private void Remove_Click(object sender, RoutedEventArgs e)
         {
             var focusedItems = GraphicPointList.SelectedItems;
@@ -213,7 +272,6 @@ namespace Programing_Labs.Pages
             LblYi.Content = $"Y({index})";
             MenuItemAdd.Visibility = Visibility.Visible;
         }
-
         private void Edit_Click(object sender, RoutedEventArgs e)
         {
             MenuItemAdd.Visibility = Visibility.Collapsed;
@@ -226,7 +284,6 @@ namespace Programing_Labs.Pages
             LabsClases.GraphicPoint.PrepareDataForEditing(DataUITextBoxes, LblXi, LblYi);
 
         }
-
         private void BtnEdit_Click(object sender, RoutedEventArgs e)
         {
 
@@ -236,8 +293,8 @@ namespace Programing_Labs.Pages
                 //добавить новые данные в списке
                 double.TryParse(TxtBxXi.Text, out double Xi);
                 double.TryParse(TxtBxYi.Text, out double Yi);
-                
-                if (LabsClases.GraphicPoint.GraphicPoints.Count >= N && LabsClases.GraphicPoint.EditableList.Count==0)
+
+                if (LabsClases.GraphicPoint.GraphicPoints.Count >= N && LabsClases.GraphicPoint.EditableList.Count == 0)
                     return;
 
                 LabsClases.GraphicPoint.EditValues(Xi, Yi);
@@ -249,14 +306,14 @@ namespace Programing_Labs.Pages
             if (LabsClases.GraphicPoint.EditableList.Count == 0)
             {
                 MenuItemEdit.Visibility = Visibility.Collapsed;
-                
+
                 if (LabsClases.GraphicPoint.GraphicPoints.Count >= N)
                     MenuItemAdd.Visibility = Visibility.Collapsed;
                 else MenuItemAdd.Visibility = Visibility.Visible;
 
                 LabsClases.GraphicPoint.EditableList.Clear();
                 LabsClases.GraphicPoint.EditMode = false;
-                
+
                 index = (index >= N) ? index : GraphicPointList.Items.Count + 1;
                 LblXi.Content = $"X({index})";
                 LblYi.Content = $"Y({index})";
@@ -267,7 +324,6 @@ namespace Programing_Labs.Pages
             LabsClases.GraphicPoint.PrepareDataForEditing(DataUITextBoxes, LblXi, LblYi);
 
         }
-
         private void MenuItemSolveLinear_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -275,13 +331,13 @@ namespace Programing_Labs.Pages
                 if (LabsClases.GraphicPoint.GraphicPoints.Count != 0)
                 {
                     LabsClases.LeastSquareMethod.LinearFunction function = new LabsClases.LeastSquareMethod.LinearFunction();
-                    function.FillBasicValues();
-                    ShowGraph(function.A, function.B, function.S, function.XValue, function.YValue, function.Ylinear);
+                    function.Solve();
+                    ShowGraph(function);
 
                     LabsClases.Excell.StartGreatingExcelFile();
-                    LabsClases.Excell.FillLinearTemplate();
-                    LabsClases.Excell.AddListViewsData(function);
-                    LabsClases.Excell.FillMatrixsValues(function);
+                    LabsClases.Excell.LinearFunction.FillTemplate();
+                    LabsClases.Excell.LinearFunction.AddListViewsData(function);
+                    LabsClases.Excell.LinearFunction.FillMatrixsValues(function);
                     LabsClases.Excell.SaveFile();
                     LabsClases.Excell.CloseAndQuitFromFile();
 
@@ -292,12 +348,31 @@ namespace Programing_Labs.Pages
                 System.Windows.Forms.MessageBox.Show(ex.Message);
             }
         }
-
         private void MenuItemSolveKvadratical_Click(object sender, RoutedEventArgs e)
         {
+            try
+            {
+                if (LabsClases.GraphicPoint.GraphicPoints.Count != 0)
+                {
+                    LabsClases.LeastSquareMethod.QuadraticFunction function = new LabsClases.LeastSquareMethod.QuadraticFunction();
+                    function.Solve();
+                    ShowGraph(function);
 
+                    LabsClases.Excell.StartGreatingExcelFile();
+                    LabsClases.Excell.QuadraticFunction.FillTemplate();
+                    LabsClases.Excell.QuadraticFunction.AddListViewsData(function);
+                    LabsClases.Excell.QuadraticFunction.FillMatrixsValues(function);
+                    LabsClases.Excell.QuadraticFunction.AddChart();
+                    LabsClases.Excell.SaveFile();
+                    LabsClases.Excell.CloseAndQuitFromFile();
+
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Windows.Forms.MessageBox.Show(ex.Message);
+            }
         }
-
         private void MenuItemClearAll_Click(object sender, RoutedEventArgs e)
         {
             OnStartControls.ForEach(el => el.Visibility = Visibility.Visible);
@@ -318,15 +393,17 @@ namespace Programing_Labs.Pages
             WpfPlot1.Plot.Clear();
             WpfPlot1.Refresh();
         }
-
-        private void MenuItemClearPlot_Click(object sender, RoutedEventArgs e)
+        private void ClearPlot()
         {
             WpfPlot1.Plot.Title("");
             WpfPlot1.UpdateDefaultStyle();
             WpfPlot1.Plot.Clear();
             WpfPlot1.Refresh();
         }
-
+        private void MenuItemClearPlot_Click(object sender, RoutedEventArgs e)
+        {
+            ClearPlot();
+        }
         private void MenuItemClearData_Click(object sender, RoutedEventArgs e)
         {
             OnStartControls.ForEach(el => el.Visibility = Visibility.Collapsed);
