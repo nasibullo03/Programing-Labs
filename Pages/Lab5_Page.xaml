@@ -8,16 +8,291 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="Lab5_Page">
 
-    <Grid>
+    <DockPanel>
         <!--Вверхный панел для имя задачи-->
         <Label Content="Олимпиадные сортировки"
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
             FontSize="22"
             Foreground="White"
-            FontWeight="Bold"  />
-        <!--Нижный панель-->
-        <!--Plot для графика-->
+            FontWeight="Bold"
+            DockPanel.Dock="Top"   
+               />
+        <Menu Height="auto"
+            VerticalAlignment="Top"
+            Background="Transparent"
+            DockPanel.Dock="Top">
 
-    </Grid>
+            <!--TextBoxXi-->
+            <MenuItem x:Name="MenuItemXi"
+                Visibility="Visible">
+                <MenuItem.Header>
+                    <StackPanel Orientation="Horizontal"
+                        VerticalAlignment="Top">
+                        <Label x:Name="LabelXi"
+                            Content="Xi ="
+                            Style="{StaticResource LabelStyle}"
+                            FontWeight="Bold"
+                            Foreground="White"
+                            FontSize="18"
+                            VerticalAlignment="Top"/>
+                        <TextBox x:Name="TextBoxXi"
+                            Style="{StaticResource TextBoxStyle}"
+                            FontSize="18"
+                            Margin="0,-5,0,0"
+                            TabIndex="0" />
+                    </StackPanel>
+                </MenuItem.Header>
+            </MenuItem>
+
+            <!--TextBoxArraySize-->
+            <MenuItem x:Name="MenuItemArraySize">
+                <MenuItem.Header>
+                    <StackPanel Orientation="Horizontal"
+                        VerticalAlignment="Top">
+                        <Label x:Name="LblArraySize"
+                            Content="n ="
+                            Style="{StaticResource LabelStyle}"
+                            FontWeight="Bold"
+                            Foreground="White"
+                            FontSize="18"
+                            VerticalAlignment="Top" />
+                        <TextBox x:Name="TextBoxArraySize"
+                            Style="{StaticResource TextBoxStyle}"
+                            FontSize="18"
+                            Margin="0,-5,0,0"
+                            TabIndex="1" />
+                    </StackPanel>
+                </MenuItem.Header>
+            </MenuItem>
+
+            <MenuItem x:Name="MenuItemFill">
+                <MenuItem.Header>
+                    <Button x:Name="BtnFill"
+                        Style="{StaticResource ButtonStyle}"
+                        FontSize="16"
+                        Content="Далее"
+                        Height="44"
+                        Width="auto"
+                        FontWeight="Bold"
+                        Click="BtnFill_Click" />
+                </MenuItem.Header>
+            </MenuItem>
+            <MenuItem x:Name="MenuItem_RandomGenerate">
+                <MenuItem.Header>
+                    <Button x:Name="BtnRandomGenerate"
+                        Style="{StaticResource ButtonStyle}"
+                        FontSize="16"
+                        Content="Далее"
+                        Height="44"
+                        Width="auto"
+                        FontWeight="Bold"
+                        Click="BtnRandomGenerate_Click" />
+                </MenuItem.Header>
+            </MenuItem>
+            <MenuItem x:Name="MenuItemEdit"
+                Visibility="Collapsed">
+                <MenuItem.Header>
+                    <Button x:Name="BtnEdit"
+                        Style="{StaticResource ButtonStyle}"
+                        FontSize="16"
+                        Content="Изменить"
+                        Height="44"
+                        Width="auto"
+                        FontWeight="Bold"
+                        Click="BtnEdit_Click" />
+                </MenuItem.Header>
+            </MenuItem>
+            <MenuItem x:Name="MenuItemBack"
+                Visibility="Visible">
+                <MenuItem.Header>
+                    <Button x:Name="BtnBack"
+                        Style="{StaticResource ButtonStyle}"
+                        FontSize="16"
+                        Content="Назад"
+                        Height="44"
+                        Width="auto"
+                        FontWeight="Bold"
+                        Click="BtnBack_Click" />
+                </MenuItem.Header>
+            </MenuItem>
+            <MenuItem x:Name="MenuItemAdd">
+                <MenuItem.Header>
+                    <Button x:Name="BtnAdd"
+                        Style="{StaticResource ButtonStyle}"
+                        FontSize="16"
+                        Content="Добавить"
+                        Height="44"
+                        Width="auto"
+                        FontWeight="Bold"
+                        Click="BtnAdd_Click" />
+                </MenuItem.Header>
+            </MenuItem>
+            <MenuItem x:Name="MenuItemCheckBox">
+                <MenuItem.Header>
+                    <CheckBox 
+                        x:Name="ReverseCheckBox"
+                        VerticalAlignment="Center"
+                        Content="Обратная сортировка"
+                        Foreground="White"
+                        FontSize="16"
+                        IsChecked="False"
+                        Checked="ReverseCheckBox_Checked"
+                        Unchecked="ReverseCheckBox_Unchecked"
+                        />
+                </MenuItem.Header>
+            </MenuItem>
+
+
+            <!--Сортировать-->
+            <MenuItem x:Name="MenuItemSortOperation"
+                Background="#007575"
+                TabIndex="4"
+                Margin="2"
+                Visibility="Visible">
+                <MenuItem.Header>
+                    <Label Content="Сортировать"
+                        Style="{StaticResource LabelStyle}"
+                        Foreground="White"
+                        FontSize="16"
+                        VerticalAlignment="Center" />
+
+                </MenuItem.Header>
+                <MenuItem Header="Пузырьковая сортировка"
+                    FontWeight="Black"
+                    x:Name="MenuItem_BubleSort"
+                    FontSize="16"
+                    Foreground="#007575"
+                    Background="Transparent"
+                    Click="MenuItem_BubleSort_Click"
+                           />
+                <MenuItem Header="Сортировка вставками"
+                    FontWeight="Black"
+                    x:Name="MenuItem_InsertSort"
+                    FontSize="16"
+                    Foreground="#007575"
+                    Background="Transparent"
+                    Click="MenuItem_InsertSort_Click"/>
+
+                <MenuItem Header="Шейкерная сортировка"
+                    FontWeight="Black"
+                    x:Name="MenuItem_ShakerSort"
+                    FontSize="16"
+                    Foreground="#007575"
+                    Background="Transparent"
+                    Click="MenuItem_ShakerSort_Click"/>
+
+                <MenuItem Header="Быстрая сортировка"
+                    FontWeight="Black"
+                    x:Name="MenuItem_FastSort"
+                    FontSize="16"
+                    Foreground="#007575"
+                    Background="Transparent"
+                    Click="MenuItem_FastSort_Click"/>
+
+                <MenuItem Header="BOGO сортировка"
+                    FontWeight="Black"
+                    x:Name="MenuItem_BogoSort"
+                    FontSize="16"
+                    Foreground="#007575"
+                    Background="Transparent"
+                    Click="MenuItem_BogoSort_Click"/>
+
+
+            </MenuItem>
+
+            <!--Очистить-->
+            <MenuItem x:Name="MenuItemClearOpetations"
+                Background="#007575"
+                TabIndex="4"
+                Margin="2"
+                Visibility="Visible">
+                <MenuItem.Header>
+                    <Label Content="Очистить"
+                        Style="{StaticResource LabelStyle}"
+                        Foreground="White"
+                        FontSize="16"
+                        VerticalAlignment="Center" />
+
+                </MenuItem.Header>
+                <MenuItem Header="Очистить все"
+                    FontWeight="Black"
+                    x:Name="MenuItemClearAll"
+                    FontSize="16"
+                    Foreground="#007575"
+                    Background="Transparent"
+                    Click="MenuItemClearAll_Click"
+                    TabIndex="5" />
+                <MenuItem Header="Очистить график"
+                    x:Name="MenuItemClearPlot"
+                    FontWeight="Black"
+                    FontSize="16"
+                    Foreground="#007575"
+                    Background="Transparent"
+                    Click="MenuItemClearPlot_Click"
+                    TabIndex="6" />
+                <MenuItem Header="Очистить данные"
+                    x:Name="MenuItemClearData"
+                    FontWeight="Black"
+                    FontSize="16"
+                    Foreground="#007575"
+                    Background="Transparent"
+                    Click="MenuItemClearData_Click"
+                    TabIndex="6" />
+
+            </MenuItem>
+        </Menu>
+
+
+        <Grid Background="Transparent">
+            <ListView Name="ArrayData_ListView"
+                      FontSize="18"
+                      Margin="0,0,5,0"
+                      MaxWidth="350"
+                      ScrollViewer.HorizontalScrollBarVisibility="Auto"
+                      ScrollViewer.VerticalScrollBarVisibility="Auto"
+                      >
+                <ListView.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Удалить"
+                                  x:Name="Remove"
+                                  Click="Remove_Click" />
+                        <MenuItem Header="Редактировать"
+                                  x:Name="Edit"
+                                  Click="Edit_Click" />
+                    </ContextMenu>
+                </ListView.ContextMenu>
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn x:Name="GridView_ColumnIndex" DisplayMemberBinding="{Binding Path=Index}"
+                                        Width="80">Индекс</GridViewColumn>
+                        <GridViewColumn x:Name="GridView_Xi" DisplayMemberBinding="{Binding Path=Xi}"
+                                        Width="150">Данные</GridViewColumn>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </Grid>
+        <Grid Background="Transparent" >
+            <ListView Name="ArrayData_ListView1"
+                      FontSize="18"
+                      Margin="0,0,5,0"
+                      ScrollViewer.HorizontalScrollBarVisibility="Auto"
+                      ScrollViewer.VerticalScrollBarVisibility="Auto">
+                <ListView.View>
+                    <GridView >
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=SortType}"
+                                        Width="250">Тип сортировки</GridViewColumn>
+                        <GridViewColumn  DisplayMemberBinding="{Binding Path=Time}"
+                                        Width="150">Время</GridViewColumn>
+                        <GridViewColumn  DisplayMemberBinding="{Binding Path=Time}"
+                                        Width="150">Размерность</GridViewColumn>
+
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </Grid>
+
+
+
+    </DockPanel>
 </Page>

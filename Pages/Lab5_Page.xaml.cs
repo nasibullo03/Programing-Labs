@@ -24,5 +24,65 @@ namespace Programing_Labs.Pages
         {
             InitializeComponent();
         }
+
+        private void BtnFill_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void BtnEdit_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void BtnBack_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void BtnAdd_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void MenuItem_BubleSort_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void MenuItem_InsertSort_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void MenuItem_ShakerSort_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void MenuItem_FastSort_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void MenuItem_BogoSort_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void BtnRandomGenerate_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void ReverseCheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void ReverseCheckBox_Unchecked(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
