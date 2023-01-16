@@ -258,7 +258,7 @@
             <ListView Name="ArrayData_ListView"
                       FontSize="18"
                       Margin="0,0,5,0"
-                      MaxWidth="350"
+                      MaxWidth="450"
                       ScrollViewer.HorizontalScrollBarVisibility="Auto"
                       ScrollViewer.VerticalScrollBarVisibility="Auto"
                       >
@@ -278,6 +278,8 @@
                                         Width="auto">Индекс</GridViewColumn>
                         <GridViewColumn x:Name="GridView_Xi" DisplayMemberBinding="{Binding Path=Xi}"
                                         Width="auto">Данные</GridViewColumn>
+                        <GridViewColumn x:Name="GridView_SortedXi" DisplayMemberBinding="{Binding Path=SortedXi}"
+                                        Width="auto">Отсортированные данные</GridViewColumn>
                     </GridView>
                 </ListView.View>
             </ListView>

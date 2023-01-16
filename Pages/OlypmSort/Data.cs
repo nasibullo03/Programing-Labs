@@ -8,36 +8,37 @@ using System.Windows.Controls;
 
 namespace Programing_Labs.Pages.OlypmSort
 {
-    class SortData
+    class Data
     {
         #region properties
         public static ListView SortDataView { get; set; }
         /// <summary>
         /// Коллекция значение для изменение значение
         /// </summary>
-        public static List<SortData> EditableList { get; set; }
+        public static List<Data> EditableList { get; set; }
 
         public static bool EditMode { get; set; }
         private static int Count { get; set; }
         public int Index { get; set; }
         public double Xi { get; set; }
+        public double SortedXi { get; set; }
 
-        public static List<SortData> SortDatas = new List<SortData>();
-        public static ObservableCollection<SortData> SortDataCollection = new ObservableCollection<SortData>();
+        public static List<Data> SortDatas = new List<Data>();
+        public static ObservableCollection<Data> SortDataCollection = new ObservableCollection<Data>();
         #endregion
         #region constructors
-        public SortData()
+        public Data()
         {
 
         }
-        public SortData(double Xi)
+        public Data(double Xi)
         {
             this.Index = ++Count;
             this.Xi = Xi;
         }
         #endregion
 
-        public async static Task Add(SortData sortData)
+        public async static Task Add(Data sortData)
         {
             SortDatas.Add(sortData);
             SortDataCollection.Add(sortData);
@@ -50,10 +51,10 @@ namespace Programing_Labs.Pages.OlypmSort
             {
                 if (item.Contains(el))
                 {
-                    SortDatas.Remove(el as SortData);
+                    SortDatas.Remove(el as Data);
                 }
             }
-            var sortDataCollection = new ObservableCollection<SortData>();
+            var sortDataCollection = new ObservableCollection<Data>();
             Count = 0;
             foreach (var el in SortDatas.ToArray())
             {
@@ -69,7 +70,7 @@ namespace Programing_Labs.Pages.OlypmSort
 
         public static void Clear()
         {
-            SortDataView.ItemsSource = new ObservableCollection<SortData>();
+            SortDataView.ItemsSource = new ObservableCollection<Data>();
             SortDataCollection?.Clear();
             SortDatas?.Clear();
             Count = 0;
@@ -79,19 +80,19 @@ namespace Programing_Labs.Pages.OlypmSort
         public static void PrepareDataForEditing(TextBox XiTextBox, Label LblXi)
         {
 
-            int _index = (EditableList[0] as SortData).Index;
+            int _index = (EditableList[0] as Data).Index;
 
             LblXi.Content = $"X({_index})";
 
-            XiTextBox.Text = (EditableList[0] as SortData).Xi.ToString();
+            XiTextBox.Text = (EditableList[0] as Data).Xi.ToString();
 
         }
         public static void EditValues(double Xi)
         {
-            SortDataCollection[(EditableList[0] as SortData).Index - 1].Xi = Xi;
-            SortDatas[(EditableList[0] as SortData).Index - 1].Xi = Xi;
+            SortDataCollection[(EditableList[0] as Data).Index - 1].Xi = Xi;
+            SortDatas[(EditableList[0] as Data).Index - 1].Xi = Xi;
 
-            SortDataView.ItemsSource = new ObservableCollection<SortData>();
+            SortDataView.ItemsSource = new ObservableCollection<Data>();
             SortDataView.ItemsSource = SortDataCollection;
 
 

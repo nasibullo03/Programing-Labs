@@ -168,7 +168,8 @@
     <Compile Include="Pages\Lab5_Page.xaml.cs">
       <DependentUpon>Lab5_Page.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\OlypmSort\SortData.cs" />
+    <Compile Include="Pages\OlypmSort\Data.cs" />
+    <Compile Include="Pages\OlypmSort\Sort.cs" />
     <Compile Include="PhoneBook.cs" />
     <Compile Include="Styles\ListViewStyle.xaml.cs">
       <DependentUpon>ListViewStyle.xaml</DependentUpon>
