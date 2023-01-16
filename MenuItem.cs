@@ -63,6 +63,11 @@ namespace Programing_Labs
                     SoursePage =  new[] {"Pages\\Lab4_Page.xaml"},
                     }
                 },
+                {5,new MenuItem(){
+                    ItemQuantity=1,
+                    SoursePage =  new[] {"Pages\\Lab5_Page.xaml"},
+                    }
+                },
             };
 
         }

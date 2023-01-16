@@ -26,7 +26,7 @@
 
             <!--TextBoxXi-->
             <MenuItem x:Name="MenuItemXi"
-                Visibility="Collapsed">
+                Visibility="Visible">
                 <MenuItem.Header>
                     <StackPanel Orientation="Horizontal"
                         VerticalAlignment="Top">
@@ -101,7 +101,7 @@
 
 
             <MenuItem x:Name="MenuItemEdit"
-                Visibility="Collapsed">
+                Visibility="Visible">
                 <MenuItem.Header>
                     <Button x:Name="BtnEdit"
                         Style="{StaticResource ButtonStyle}"
@@ -114,7 +114,7 @@
                 </MenuItem.Header>
             </MenuItem>
             <MenuItem x:Name="MenuItemBack"
-                Visibility="Collapsed">
+                Visibility="Visible">
                 <MenuItem.Header>
                     <Button x:Name="BtnBack"
                         Style="{StaticResource ButtonStyle}"
@@ -137,7 +137,7 @@
                 </MenuItem.Header>
             </MenuItem>
             <MenuItem x:Name="MenuItemCheckBox"
-                      Visibility="Collapsed"
+                      Visibility="Visible"
                       >
                 <MenuItem.Header>
                     <CheckBox 
@@ -159,7 +159,7 @@
                 Background="#007575"
                 TabIndex="4"
                 Margin="2"
-                Visibility="Collapsed">
+                Visibility="Visible">
                 <MenuItem.Header>
                     <Label Content="Сортировать"
                         Style="{StaticResource LabelStyle}"
@@ -216,7 +216,7 @@
                 Background="#007575"
                 TabIndex="4"
                 Margin="2"
-                Visibility="Collapsed">
+                Visibility="Visible">
                 <MenuItem.Header>
                     <Label Content="Очистить"
                         Style="{StaticResource LabelStyle}"
@@ -275,9 +275,9 @@
                 <ListView.View>
                     <GridView>
                         <GridViewColumn x:Name="GridView_ColumnIndex" DisplayMemberBinding="{Binding Path=Index}"
-                                        Width="80">Индекс</GridViewColumn>
+                                        Width="auto">Индекс</GridViewColumn>
                         <GridViewColumn x:Name="GridView_Xi" DisplayMemberBinding="{Binding Path=Xi}"
-                                        Width="150">Данные</GridViewColumn>
+                                        Width="auto">Данные</GridViewColumn>
                     </GridView>
                 </ListView.View>
             </ListView>
@@ -291,11 +291,11 @@
                 <ListView.View>
                     <GridView >
                         <GridViewColumn DisplayMemberBinding="{Binding Path=SortType}"
-                                        Width="250">Тип сортировки</GridViewColumn>
+                                        Width="auto">Тип сортировки</GridViewColumn>
                         <GridViewColumn  DisplayMemberBinding="{Binding Path=Time}"
-                                        Width="150">Время</GridViewColumn>
+                                        Width="auto">Время</GridViewColumn>
                         <GridViewColumn  DisplayMemberBinding="{Binding Path=Time}"
-                                        Width="150">Размерность</GridViewColumn>
+                                        Width="auto">Размерность</GridViewColumn>
 
                     </GridView>
                 </ListView.View>

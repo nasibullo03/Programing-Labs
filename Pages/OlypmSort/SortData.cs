@@ -22,7 +22,7 @@ namespace Programing_Labs.Pages.OlypmSort
         public int Index { get; set; }
         public double Xi { get; set; }
 
-        public static List<SortData> GraphicPoints = new List<SortData>();
+        public static List<SortData> SortDatas = new List<SortData>();
         public static ObservableCollection<SortData> SortDataCollection = new ObservableCollection<SortData>();
         #endregion
         #region constructors
@@ -39,7 +39,7 @@ namespace Programing_Labs.Pages.OlypmSort
 
         public async static Task Add(SortData sortData)
         {
-            GraphicPoints.Add(sortData);
+            SortDatas.Add(sortData);
             SortDataCollection.Add(sortData);
             await Task.Yield();
         }
@@ -50,12 +50,12 @@ namespace Programing_Labs.Pages.OlypmSort
             {
                 if (item.Contains(el))
                 {
-                    GraphicPoints.Remove(el as SortData);
+                    SortDatas.Remove(el as SortData);
                 }
             }
             var sortDataCollection = new ObservableCollection<SortData>();
             Count = 0;
-            foreach (var el in GraphicPoints.ToArray())
+            foreach (var el in SortDatas.ToArray())
             {
                 el.Index = ++Count;
                 sortDataCollection.Add(el);
@@ -71,7 +71,7 @@ namespace Programing_Labs.Pages.OlypmSort
         {
             SortDataView.ItemsSource = new ObservableCollection<SortData>();
             SortDataCollection?.Clear();
-            GraphicPoints?.Clear();
+            SortDatas?.Clear();
             Count = 0;
             SortDataView.ItemsSource = SortDataCollection;
             EditableList?.Clear();
@@ -89,7 +89,7 @@ namespace Programing_Labs.Pages.OlypmSort
         public static void EditValues(double Xi)
         {
             SortDataCollection[(EditableList[0] as SortData).Index - 1].Xi = Xi;
-            GraphicPoints[(EditableList[0] as SortData).Index - 1].Xi = Xi;
+            SortDatas[(EditableList[0] as SortData).Index - 1].Xi = Xi;
 
             SortDataView.ItemsSource = new ObservableCollection<SortData>();
             SortDataView.ItemsSource = SortDataCollection;

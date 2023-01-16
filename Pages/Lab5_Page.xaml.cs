@@ -54,12 +54,11 @@ namespace Programing_Labs.Pages
             OnStartControls = new List<Control>() { MenuItemArraySize, MenuItemFill };
             DataControls_onRandomlyClick = new List<Control>() {
                 MenuItemBack,
-                MenuItemAdd,
                 MenuItemCheckBox,
                 MenuItemSortOperation,
                 MenuItemClearOpetations,
-
             };
+
             DataControls_onManuallyClick = new List<Control>() {
                 MenuItemXi,
                 MenuItemBack,
@@ -70,14 +69,10 @@ namespace Programing_Labs.Pages
 
             };
 
-
-
             TxtBxXi = GetStyleElement(TextBoxXi, "MainTextBox") as TextBox;
             TxtBxArraySize = GetStyleElement(TextBoxArraySize, "MainTextBox") as TextBox;
 
             LblXi = GetStyleElement(LabelXi, "MainLabel") as Label;
-
-
 
 
             TxtBxXi.PreviewTextInput += new TextCompositionEventHandler(Check.PreviewTextInput);
@@ -99,7 +94,38 @@ namespace Programing_Labs.Pages
         #region Buttons
         private void BtnEdit_Click(object sender, RoutedEventArgs e)
         {
+            double.TryParse(TxtBxArraySize.Text, out double N);
+            if (N>0)
+            {
+                //добавить новые данные в списке
+                double.TryParse(TxtBxXi.Text, out double Xi);
+                
+                if (OlypmSort.SortData.SortDatas.Count >= N && OlypmSort.SortData.EditableList.Count == 0)
+                    return;
 
+                OlypmSort.SortData.EditValues(Xi);
+                //удалить данные которые уже отредактированы
+                OlypmSort.SortData.DeleteEditedValue();
+            }
+            else return;
+
+            if (OlypmSort.SortData.EditableList.Count == 0)
+            {
+                MenuItemEdit.Visibility = Visibility.Collapsed;
+
+                if (OlypmSort.SortData.SortDatas.Count >= N)
+                    MenuItemAdd.Visibility = Visibility.Collapsed;
+                else MenuItemAdd.Visibility = Visibility.Visible;
+
+                OlypmSort.SortData.EditableList.Clear();
+                OlypmSort.SortData.EditMode = false;
+
+                index = (index >= N) ? index : ArrayData_ListView.Items.Count + 1;
+                LblXi.Content = $"X({index})";
+                TxtBxXi.Text = string.Empty;
+                return;
+            }
+            OlypmSort.SortData.PrepareDataForEditing(TxtBxXi, LblXi);
         }
 
         private void BtnBack_Click(object sender, RoutedEventArgs e)
@@ -199,7 +225,7 @@ namespace Programing_Labs.Pages
             ++index;
             LblXi.Content = $"X({index})";
         }
-        private void MenuItem_RandomGenerate_Click(object sender, RoutedEventArgs e)
+        private async void MenuItem_RandomGenerate_Click(object sender, RoutedEventArgs e)
         {
             int.TryParse(TxtBxArraySize.Text, out int n);
             if (n <= 0)
@@ -216,7 +242,16 @@ namespace Programing_Labs.Pages
             if (ArrayData_ListView.Items.Count >= n)
                 MenuItemAdd.Visibility = Visibility.Collapsed;
 
-            if (index != 0) return;
+            Random random = new Random();
+            OlypmSort.SortData.Clear();
+
+            for(int i=0; i<n; ++i)
+            {
+                await OlypmSort.SortData.Add(new OlypmSort.SortData(random.Next()));
+            }
+
+
+
         }
         #endregion
 
@@ -224,12 +259,12 @@ namespace Programing_Labs.Pages
 
         private void MenuItemClearAll_Click(object sender, RoutedEventArgs e)
         {
-
+            OlypmSort.SortData.Clear();
         }
 
         private void MenuItemClearData_Click(object sender, RoutedEventArgs e)
         {
-
+            OlypmSort.SortData.Clear();
         }
 
         private void MenuItemClearSortData_Click(object sender, RoutedEventArgs e)
@@ -243,15 +278,31 @@ namespace Programing_Labs.Pages
         #region DataView context items 
         private void Remove_Click(object sender, RoutedEventArgs e)
         {
+            var focusedItems = ArrayData_ListView.SelectedItems;
 
+            OlypmSort.SortData.Remove(focusedItems);
+            index = ArrayData_ListView.Items.Count + 1;
+            LblXi.Content = $"X({index})";
+            MenuItemAdd.Visibility = Visibility.Visible;
         }
 
         private void Edit_Click(object sender, RoutedEventArgs e)
         {
+            MenuItemAdd.Visibility = Visibility.Collapsed;
+            MenuItemEdit.Visibility = Visibility.Visible;
 
+            System.Collections.IList items = (System.Collections.IList)ArrayData_ListView.SelectedItems;
+            
+            var collection = items.Cast<OlypmSort.SortData>();
+
+            OlypmSort.SortData.EditMode = true;
+            OlypmSort.SortData.EditableList = collection.ToList();
+            OlypmSort.SortData.PrepareDataForEditing(TxtBxXi, LblXi);
         }
+
+
         #endregion
 
-
+       
     }
 }
