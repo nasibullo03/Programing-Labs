@@ -165,6 +165,9 @@
     <Compile Include="Pages\Lab4_Page.xaml.cs">
       <DependentUpon>Lab4_Page.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\Lab5_Page.xaml.cs">
+      <DependentUpon>Lab5_Page.xaml</DependentUpon>
+    </Compile>
     <Compile Include="PhoneBook.cs" />
     <Compile Include="Styles\ListViewStyle.xaml.cs">
       <DependentUpon>ListViewStyle.xaml</DependentUpon>
@@ -213,6 +216,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\Lab4_Page.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Lab5_Page.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

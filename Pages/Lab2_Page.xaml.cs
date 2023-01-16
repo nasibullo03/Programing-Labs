@@ -46,7 +46,6 @@ namespace Programing_Labs.Pages
             TxtBxA.Tag = "a";
             TxtBxB.Tag = "b";
             TxtBxE.Tag = "e";
-            /*ShowFormula(@"{2+x}/2");*/
 
             UITextBoxes = new TextBox[]{
                 TxtBxA,
@@ -125,41 +124,7 @@ namespace Programing_Labs.Pages
                         break; ;
                     }
                 }
-                /* }
-                 catch (Exception ex)
-                 {
-                     MessageBox.Show(ex.Message);
-                 }*/
 
-
-                /* Result = -1 - Math.Pow(Math.Pow(2 * (x - 1) * (x - 7), 2), 1 / 3);*//*
-                //метод чтобы найти точки максимума
-                int count = 0;
-                while (true)
-                {
-                    ++count;
-                    if (Math.Abs(EndPoint - StartPoint) > Accuracy)
-                    {
-                        Middle = (StartPoint + EndPoint) / 2;
-
-                        if (F(Math.Round(StartPoint, 2)) * F(Math.Round(Middle, 2)) < 0)
-                        {
-                            EndPoint = Middle;
-                        }
-                        else
-                        {
-                            StartPoint = Middle;
-                        }
-                    }
-                    else
-                    {
-                        Result = (StartPoint + EndPoint) / 2;
-                        ShowGraph(a, b, Result);
-                        System.Windows.Forms.MessageBox.Show($"Result:{Result} Count:{count}");
-
-                        break;
-                    }
-                }*/
 
             }
         }
@@ -193,7 +158,7 @@ namespace Programing_Labs.Pages
                 Ypoints.Add(F(i));
             }
             WpfPlot1.Plot.Title($"Точка минимум - min[{Math.Round(x, 5)} ; {Math.Round(y, 5)}]");
-            WpfPlot1.Plot.AddScatter(Xpoints.ToArray(), Ypoints.ToArray(),markerShape: MarkerShape.none, lineWidth: 3);
+            WpfPlot1.Plot.AddScatter(Xpoints.ToArray(), Ypoints.ToArray(), markerShape: MarkerShape.none, lineWidth: 3);
             WpfPlot1.Plot.AddScatter(
                 new double[] { x },
                 new double[] { y },

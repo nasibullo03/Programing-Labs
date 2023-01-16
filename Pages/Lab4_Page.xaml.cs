@@ -70,20 +70,15 @@ namespace Programing_Labs.Pages
             TxtBxXi = GetStyleElement(TextBoxXi, "MainTextBox") as TextBox;
             TxtBxYi = GetStyleElement(TextBoxYi, "MainTextBox") as TextBox;
             TxtBxN = GetStyleElement(TextBoxN, "MainTextBox") as TextBox;
-            /*TxtBxE = GetStyleElement(TextBoxE, "MainTextBox") as TextBox;
-            TxtBxFx = GetStyleElement(TextBoxFx, "MainTextBox") as TextBox;*/
 
             LblXi = GetStyleElement(LabelXi, "MainLabel") as Label;
             LblYi = GetStyleElement(LabelYi, "MainLabel") as Label;
 
-            /* TxtBxFx.Tag = "formula";
-             TxtBxE.Tag = "e";*/
+          
 
             OnStartUITextBoxes = new TextBox[]
             {
-               TxtBxN/*,
-              *//* TxtBxE,
-               TxtBxFx*/
+               TxtBxN
             };
             DataUITextBoxes = new TextBox[]
             {
@@ -150,7 +145,8 @@ namespace Programing_Labs.Pages
                               markerShape: MarkerShape.filledDiamond
                               );
 
-            WpfPlot1.Plot.Title($"Невязка - S={linearFunction.S}");
+            
+            WpfPlot1.Plot.Title(linearFunction.GetFunctionFormula());
             WpfPlot1.Plot.AddScatter(linearFunction.XValue, linearFunction.Ylinear, markerShape: MarkerShape.none, lineWidth: 3, color: System.Drawing.Color.FromName("Red"));
 
             WpfPlot1.Refresh();
@@ -183,7 +179,7 @@ namespace Programing_Labs.Pages
                               );
                 }
 
-            WpfPlot1.Plot.Title($"Невязка - S={Math.Round(quadraticFunction.S, 5)}");
+            WpfPlot1.Plot.Title(quadraticFunction.GetFunctionFormula());
 
             double min = LabsClases.GraphicPoint.GraphicPoints[0].Xi;
             double max = LabsClases.GraphicPoint.GraphicPoints[0].Yi;
@@ -229,9 +225,7 @@ namespace Programing_Labs.Pages
         }
         private void BtnNext_Click(object sender, RoutedEventArgs e)
         {
-            /* TxtBxFx.Text = "x";
-             TxtBxE.Text = "0,001";*/
-            /*TxtBxN.Text = "8";*/
+            
             if (Check.CheckTextBoxesValues(OnStartUITextBoxes))
             {
                 OnStartControls.ForEach(el => el.Visibility = Visibility.Collapsed);
@@ -334,12 +328,12 @@ namespace Programing_Labs.Pages
                     function.Solve();
                     ShowGraph(function);
 
-                    LabsClases.Excell.StartGreatingExcelFile();
+                    /*LabsClases.Excell.StartGreatingExcelFile();
                     LabsClases.Excell.LinearFunction.FillTemplate();
                     LabsClases.Excell.LinearFunction.AddListViewsData(function);
                     LabsClases.Excell.LinearFunction.FillMatrixsValues(function);
                     LabsClases.Excell.SaveFile();
-                    LabsClases.Excell.CloseAndQuitFromFile();
+                    LabsClases.Excell.CloseAndQuitFromFile();*/
 
                 }
             }
@@ -358,13 +352,13 @@ namespace Programing_Labs.Pages
                     function.Solve();
                     ShowGraph(function);
 
-                    LabsClases.Excell.StartGreatingExcelFile();
+                   /* LabsClases.Excell.StartGreatingExcelFile();
                     LabsClases.Excell.QuadraticFunction.FillTemplate();
                     LabsClases.Excell.QuadraticFunction.AddListViewsData(function);
                     LabsClases.Excell.QuadraticFunction.FillMatrixsValues(function);
                     LabsClases.Excell.QuadraticFunction.AddChart();
                     LabsClases.Excell.SaveFile();
-                    LabsClases.Excell.CloseAndQuitFromFile();
+                    LabsClases.Excell.CloseAndQuitFromFile();*/
 
                 }
             }
