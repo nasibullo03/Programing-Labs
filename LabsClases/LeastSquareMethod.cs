@@ -95,6 +95,18 @@ namespace Programing_Labs.LabsClases
                 XValue = X;
                 YValue = Y;
             }
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <returns>Возвращает функцию в виде строка</returns>
+            public string GetFunctionFormula()
+            {
+                string result = $"{Math.Round(A)} * x ";
+                result += (B >= 0) ? "+ " : "";
+                result += Math.Round(B,5).ToString();
+                return result;
+
+            }
 
         }
         public class QuadraticFunction
@@ -182,6 +194,18 @@ namespace Programing_Labs.LabsClases
                 }
 
                 S = Sum(PowD2);
+
+            }
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <returns>Возвращает функцию в виде строка</returns>
+            public string GetFunctionFormula()
+            {
+                string result = $"{Math.Round(A,5)} * x^2 ";
+                result += (B >= 0) ? "+ " : "";
+                result += Math.Round(B,5).ToString();
+                return result;
 
             }
         }
