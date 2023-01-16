@@ -13,11 +13,6 @@ C:\Users\Admin\Source\Repos\Programing-Labs\obj\Debug\Pages\Lab1_2_Page.g.cs
 C:\Users\Admin\Source\Repos\Programing-Labs\obj\Debug\Pages\Lab2_Page.g.cs
 C:\Users\Admin\Source\Repos\Programing-Labs\obj\Debug\MainWindow.g.cs
 C:\Users\Admin\Source\Repos\Programing-Labs\obj\Debug\App.g.cs
-C:\Users\Admin\Source\Repos\Programing-Labs\obj\Debug\Programing Labs_MarkupCompile.cache
-C:\Users\Admin\Source\Repos\Programing-Labs\obj\Debug\Programing Labs_MarkupCompile.lref
-C:\Users\Admin\Source\Repos\Programing-Labs\bin\Debug\Programing Labs.exe.config
-C:\Users\Admin\Source\Repos\Programing-Labs\bin\Debug\Programing Labs.exe
-C:\Users\Admin\Source\Repos\Programing-Labs\bin\Debug\Programing Labs.pdb
 C:\Users\Admin\Source\Repos\Programing-Labs\bin\Debug\org.matheval.dll
 C:\Users\Admin\Source\Repos\Programing-Labs\bin\Debug\ScottPlot.dll
 C:\Users\Admin\Source\Repos\Programing-Labs\bin\Debug\ScottPlot.WPF.dll
@@ -32,13 +27,10 @@ C:\Users\Admin\Source\Repos\Programing-Labs\obj\Debug\App.baml
 C:\Users\Admin\Source\Repos\Programing-Labs\obj\Debug\Pages\Lab1_1_Page.baml
 C:\Users\Admin\Source\Repos\Programing-Labs\obj\Debug\Pages\Lab1_2_Page.baml
 C:\Users\Admin\Source\Repos\Programing-Labs\obj\Debug\MainWindow.baml
-C:\Users\Admin\Source\Repos\Programing-Labs\obj\Debug\Programing Labs.g.resources
 C:\Users\Admin\Source\Repos\Programing-Labs\obj\Debug\Programing_Labs.Properties.Resources.resources
 C:\Users\Admin\Source\Repos\Programing-Labs\obj\Debug\Programing Labs.csproj.GenerateResource.cache
 C:\Users\Admin\Source\Repos\Programing-Labs\obj\Debug\Programing Labs.csproj.CoreCompileInputs.cache
 C:\Users\Admin\Source\Repos\Programing-Labs\obj\Debug\Programing Labs.csproj.CopyComplete
-C:\Users\Admin\Source\Repos\Programing-Labs\obj\Debug\Programing Labs.exe
-C:\Users\Admin\Source\Repos\Programing-Labs\obj\Debug\Programing Labs.pdb
 C:\Users\Admin\Source\Repos\Programing-Labs\obj\Debug\Styles\ButtonStyle.baml
 C:\Users\student\Source\Repos\Programing-Labs\bin\Debug\Programing Labs.exe.config
 C:\Users\student\Source\Repos\Programing-Labs\bin\Debug\Programing Labs.exe
@@ -98,10 +90,6 @@ C:\Users\student\Source\Repos\Programing-Labs\obj\Debug\Pages\Lab3_Page.baml
 C:\Users\student\Source\Repos\Programing-Labs\obj\Debug\Pages\Lab4_Page.baml
 C:\Users\Admin\Source\Repos\Programing-Labs\obj\Debug\Pages\Lab4_Page.g.cs
 C:\Users\Admin\Source\Repos\Programing-Labs\obj\Debug\Pages\Lab4_Page.baml
-C:\Users\Admin\Source\Repos\Programing-Labs\bin\Debug\Programing Labs.exe.manifest
-C:\Users\Admin\Source\Repos\Programing-Labs\bin\Debug\Programing Labs.application
-C:\Users\Admin\Source\Repos\Programing-Labs\obj\Debug\Programing Labs.exe.manifest
-C:\Users\Admin\Source\Repos\Programing-Labs\obj\Debug\Programing Labs.application
 C:\Users\student\Source\Repos\Programing-Labs2\obj\Debug\Programing Labs.csproj.AssemblyReference.cache
 C:\Users\student\Source\Repos\Programing-Labs2\obj\Debug\Pages\Lab2_Page.baml
 C:\Users\student\Source\Repos\Programing-Labs2\obj\Debug\Styles\ButtonStyle.baml
@@ -126,17 +114,42 @@ C:\Users\student\Source\Repos\Programing-Labs2\obj\Debug\Programing Labs_MarkupC
 C:\Users\student\Source\Repos\Programing-Labs2\obj\Debug\Programing Labs_MarkupCompile.lref
 C:\Users\student\Source\Repos\Programing-Labs2\obj\Debug\Programing Labs.exe
 C:\Users\student\Source\Repos\Programing-Labs2\obj\Debug\Programing Labs.pdb
-C:\Users\Admin\Source\Repos\Programing-Labs\bin\Debug\IronSoftware.Drawing.Common.dll
 C:\Users\Admin\Source\Repos\Programing-Labs\bin\Debug\SixLabors.ImageSharp.dll
 C:\Users\Admin\Source\Repos\Programing-Labs\bin\Debug\System.Buffers.dll
 C:\Users\Admin\Source\Repos\Programing-Labs\bin\Debug\System.Memory.dll
 C:\Users\Admin\Source\Repos\Programing-Labs\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
 C:\Users\Admin\Source\Repos\Programing-Labs\bin\Debug\System.Text.Encoding.CodePages.dll
-C:\Users\Admin\Source\Repos\Programing-Labs\bin\Debug\IronSoftware.Drawing.Common.pdb
 C:\Users\Admin\Source\Repos\Programing-Labs\bin\Debug\SixLabors.ImageSharp.xml
 C:\Users\Admin\Source\Repos\Programing-Labs\bin\Debug\System.Buffers.xml
 C:\Users\Admin\Source\Repos\Programing-Labs\bin\Debug\System.Memory.xml
 C:\Users\Admin\Source\Repos\Programing-Labs\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
 C:\Users\Admin\Source\Repos\Programing-Labs\bin\Debug\System.Text.Encoding.CodePages.xml
 C:\Users\Admin\Source\Repos\Programing-Labs\obj\Debug\Programing Labs.csproj.ResolveComReference.cache
-C:\Users\Admin\Source\Repos\Programing-Labs\obj\Debug\Programing Labs.TrustInfo.xml
+C:\Users\Admin\source\repos\Programing-Labs\bin\Debug\libSkiaSharp.dylib
+C:\Users\Admin\source\repos\Programing-Labs\bin\Debug\x86\libSkiaSharp.dll
+C:\Users\Admin\source\repos\Programing-Labs\bin\Debug\x64\libSkiaSharp.dll
+C:\Users\Admin\source\repos\Programing-Labs\bin\Debug\arm64\libSkiaSharp.dll
+C:\Users\Admin\source\repos\Programing-Labs\bin\Debug\Programmig Labs.exe.config
+C:\Users\Admin\source\repos\Programing-Labs\bin\Debug\Programmig Labs.exe.manifest
+C:\Users\Admin\source\repos\Programing-Labs\bin\Debug\Programmig Labs.application
+C:\Users\Admin\source\repos\Programing-Labs\bin\Debug\Programmig Labs.exe
+C:\Users\Admin\source\repos\Programing-Labs\bin\Debug\Programmig Labs.pdb
+C:\Users\Admin\source\repos\Programing-Labs\bin\Debug\SkiaSharp.dll
+C:\Users\Admin\source\repos\Programing-Labs\bin\Debug\SkiaSharp.Views.Desktop.Common.dll
+C:\Users\Admin\source\repos\Programing-Labs\bin\Debug\SkiaSharp.Views.WPF.dll
+C:\Users\Admin\source\repos\Programing-Labs\bin\Debug\SkiaSharp.pdb
+C:\Users\Admin\source\repos\Programing-Labs\bin\Debug\SkiaSharp.xml
+C:\Users\Admin\source\repos\Programing-Labs\bin\Debug\SkiaSharp.Views.Desktop.Common.pdb
+C:\Users\Admin\source\repos\Programing-Labs\bin\Debug\SkiaSharp.Views.Desktop.Common.xml
+C:\Users\Admin\source\repos\Programing-Labs\bin\Debug\SkiaSharp.Views.WPF.pdb
+C:\Users\Admin\source\repos\Programing-Labs\bin\Debug\SkiaSharp.Views.WPF.xml
+C:\Users\Admin\source\repos\Programing-Labs\bin\Debug\System.Drawing.Common.xml
+C:\Users\Admin\source\repos\Programing-Labs\obj\Debug\Programmig Labs_Content.g.cs
+C:\Users\Admin\source\repos\Programing-Labs\obj\Debug\Programmig Labs_MarkupCompile.cache
+C:\Users\Admin\source\repos\Programing-Labs\obj\Debug\Programmig Labs_MarkupCompile.lref
+C:\Users\Admin\source\repos\Programing-Labs\obj\Debug\Programmig Labs.g.resources
+C:\Users\Admin\source\repos\Programing-Labs\obj\Debug\Programmig Labs.TrustInfo.xml
+C:\Users\Admin\source\repos\Programing-Labs\obj\Debug\Programmig Labs.exe.manifest
+C:\Users\Admin\source\repos\Programing-Labs\obj\Debug\Programmig Labs.application
+C:\Users\Admin\source\repos\Programing-Labs\obj\Debug\Programmig Labs.exe
+C:\Users\Admin\source\repos\Programing-Labs\obj\Debug\Programmig Labs.pdb

@@ -135,10 +135,7 @@
 
         <!--Plot для графика-->
         <WpfPlot Name="WpfPlot1"
-                 Height="auto"
-                 Width="auto" />
-
-
+                 Loaded="WpfPlot1_Loaded" />
     </DockPanel>
 
 </Page>

@@ -6,6 +6,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Drawing;
 using org.matheval;
+using ScottPlot.WPF;
 using ScottPlot;
 
 
@@ -192,7 +193,7 @@ namespace Programing_Labs.Pages
                 Ypoints.Add(F(i));
             }
             WpfPlot1.Plot.Title($"Точка минимум - min[{Math.Round(x, 5)} ; {Math.Round(y, 5)}]");
-            WpfPlot1.Plot.AddScatter(Xpoints.ToArray(), Ypoints.ToArray(), markerShape: MarkerShape.none, lineWidth: 3);
+            WpfPlot1.Plot.AddScatter(Xpoints.ToArray(), Ypoints.ToArray(),markerShape: MarkerShape.none, lineWidth: 3);
             WpfPlot1.Plot.AddScatter(
                 new double[] { x },
                 new double[] { y },
@@ -203,6 +204,11 @@ namespace Programing_Labs.Pages
                 color: System.Drawing.Color.FromName("Red"));
             WpfPlot1.Refresh();
 
+
+        }
+
+        private void WpfPlot1_Loaded(object sender, RoutedEventArgs e)
+        {
 
         }
     }
