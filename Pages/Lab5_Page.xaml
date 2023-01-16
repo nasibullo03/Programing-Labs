@@ -6,6 +6,7 @@
       xmlns:local="clr-namespace:Programing_Labs.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
+      Loaded="Page_Loaded"
       Title="Lab5_Page">
 
     <DockPanel>
@@ -25,7 +26,7 @@
 
             <!--TextBoxXi-->
             <MenuItem x:Name="MenuItemXi"
-                Visibility="Visible">
+                Visibility="Collapsed">
                 <MenuItem.Header>
                     <StackPanel Orientation="Horizontal"
                         VerticalAlignment="Top">
@@ -51,7 +52,7 @@
                     <StackPanel Orientation="Horizontal"
                         VerticalAlignment="Top">
                         <Label x:Name="LblArraySize"
-                            Content="n ="
+                            Content="Количество элементов: "
                             Style="{StaticResource LabelStyle}"
                             FontWeight="Bold"
                             Foreground="White"
@@ -66,30 +67,39 @@
                 </MenuItem.Header>
             </MenuItem>
 
-            <MenuItem x:Name="MenuItemFill">
+            <MenuItem x:Name="MenuItemFill"
+                Background="#007575"
+                TabIndex="4"
+                Margin="2"
+                Visibility="Visible">
                 <MenuItem.Header>
-                    <Button x:Name="BtnFill"
-                        Style="{StaticResource ButtonStyle}"
+                    <Label Content="Заполнить"
+                        Style="{StaticResource LabelStyle}"
+                        Foreground="White"
                         FontSize="16"
-                        Content="Далее"
-                        Height="44"
-                        Width="auto"
-                        FontWeight="Bold"
-                        Click="BtnFill_Click" />
+                        VerticalAlignment="Center" />
+
                 </MenuItem.Header>
+                <MenuItem Header="Вручную"
+                    FontWeight="Black"
+                    x:Name="MenuItem_FillManually"
+                    FontSize="16"
+                    Foreground="#007575"
+                    Background="Transparent"
+                    Click="MenuItem_FillManually_Click"
+                           />
+                <MenuItem Header="Рандомно"
+                    FontWeight="Black"
+                    x:Name="MenuItem_RandomGenerate"
+                    FontSize="16"
+                    Foreground="#007575"
+                    Background="Transparent"
+                    Click="MenuItem_RandomGenerate_Click"
+                           />
             </MenuItem>
-            <MenuItem x:Name="MenuItem_RandomGenerate">
-                <MenuItem.Header>
-                    <Button x:Name="BtnRandomGenerate"
-                        Style="{StaticResource ButtonStyle}"
-                        FontSize="16"
-                        Content="Далее"
-                        Height="44"
-                        Width="auto"
-                        FontWeight="Bold"
-                        Click="BtnRandomGenerate_Click" />
-                </MenuItem.Header>
-            </MenuItem>
+
+
+
             <MenuItem x:Name="MenuItemEdit"
                 Visibility="Collapsed">
                 <MenuItem.Header>
@@ -104,7 +114,7 @@
                 </MenuItem.Header>
             </MenuItem>
             <MenuItem x:Name="MenuItemBack"
-                Visibility="Visible">
+                Visibility="Collapsed">
                 <MenuItem.Header>
                     <Button x:Name="BtnBack"
                         Style="{StaticResource ButtonStyle}"
@@ -112,7 +122,6 @@
                         Content="Назад"
                         Height="44"
                         Width="auto"
-                        FontWeight="Bold"
                         Click="BtnBack_Click" />
                 </MenuItem.Header>
             </MenuItem>
@@ -124,11 +133,12 @@
                         Content="Добавить"
                         Height="44"
                         Width="auto"
-                        FontWeight="Bold"
                         Click="BtnAdd_Click" />
                 </MenuItem.Header>
             </MenuItem>
-            <MenuItem x:Name="MenuItemCheckBox">
+            <MenuItem x:Name="MenuItemCheckBox"
+                      Visibility="Collapsed"
+                      >
                 <MenuItem.Header>
                     <CheckBox 
                         x:Name="ReverseCheckBox"
@@ -149,7 +159,7 @@
                 Background="#007575"
                 TabIndex="4"
                 Margin="2"
-                Visibility="Visible">
+                Visibility="Collapsed">
                 <MenuItem.Header>
                     <Label Content="Сортировать"
                         Style="{StaticResource LabelStyle}"
@@ -206,7 +216,7 @@
                 Background="#007575"
                 TabIndex="4"
                 Margin="2"
-                Visibility="Visible">
+                Visibility="Collapsed">
                 <MenuItem.Header>
                     <Label Content="Очистить"
                         Style="{StaticResource LabelStyle}"
@@ -223,14 +233,6 @@
                     Background="Transparent"
                     Click="MenuItemClearAll_Click"
                     TabIndex="5" />
-                <MenuItem Header="Очистить график"
-                    x:Name="MenuItemClearPlot"
-                    FontWeight="Black"
-                    FontSize="16"
-                    Foreground="#007575"
-                    Background="Transparent"
-                    Click="MenuItemClearPlot_Click"
-                    TabIndex="6" />
                 <MenuItem Header="Очистить данные"
                     x:Name="MenuItemClearData"
                     FontWeight="Black"
@@ -238,6 +240,14 @@
                     Foreground="#007575"
                     Background="Transparent"
                     Click="MenuItemClearData_Click"
+                    TabIndex="6" />
+                <MenuItem Header="Очистить данные сортировки"
+                    x:Name="MenuItemClearSortData"
+                    FontWeight="Black"
+                    FontSize="16"
+                    Foreground="#007575"
+                    Background="Transparent"
+                    Click="MenuItemClearSortData_Click"
                     TabIndex="6" />
 
             </MenuItem>
