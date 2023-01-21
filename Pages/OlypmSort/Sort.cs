@@ -8,6 +8,8 @@ using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Threading;
 
+#pragma warning disable SecurityIntelliSenseCS // MS Security rules violation
+
 namespace Programing_Labs.Pages.OlypmSort
 {
     class Sort
@@ -16,16 +18,9 @@ namespace Programing_Labs.Pages.OlypmSort
         public static CancellationTokenSource cancellationToken { get; set; }
         private static double temp { get; set; }
         public static ListView SortDataView { get; set; }
-        /// <summary>
-        /// Коллекция значение для изменение значение
-        /// </summary>
-        public static List<Sort> EditableList { get; set; }
-
-        public static bool EditMode { get; set; }
-
         public string sortType { get; set; }
         public string TimerValue { get; set; }
-        public string  ArraySize { get; set; }
+        public string ArraySize { get; set; }
 
         public static List<Sort> SortDatas = new List<Sort>();
         public static ObservableCollection<Sort> SortDataCollection = new ObservableCollection<Sort>();
@@ -46,10 +41,10 @@ namespace Programing_Labs.Pages.OlypmSort
         {
 
         }
-        public Sort(SortType type,  long TimerValue, string ArraySize)
+        public Sort(SortType type, long TimerValue, string ArraySize)
         {
             sortType = SortTypeValue[type];
-            this. TimerValue = TimerValue.ToString() + " мс";
+            this.TimerValue = TimerValue.ToString() + " мс";
             this.ArraySize = ArraySize;
         }
         #endregion
@@ -67,7 +62,6 @@ namespace Programing_Labs.Pages.OlypmSort
             SortDataCollection?.Clear();
             SortDatas?.Clear();
             SortDataView.ItemsSource = SortDataCollection;
-            EditableList?.Clear();
         }
 
 
@@ -112,8 +106,36 @@ namespace Programing_Labs.Pages.OlypmSort
         }
         public static double[] InsertSort(bool reverse)
         {
+            double[] datas = Dispatcher.CurrentDispatcher.Invoke(() => Data.GetValues(Data.Value.Xi));
+            if (!reverse)
+                for (int i = 1; i < datas.Length; ++i)
+                {
+                    double temp = datas[i];
+                    int j = i - 1;
+                    while (j >= 0 && datas[j] > temp)
+                    {
+                        datas[j + 1] = datas[j];
+                        j = j - 1;
+                    }
 
-            return null;
+                    datas[j + 1] = temp;
+
+                }
+            else
+                for (int i = 1; i < datas.Length; ++i)
+                {
+                    double temp = datas[i];
+                    int j = i - 1;
+                    while (j >= 0 && datas[j] < temp)
+                    {
+                        datas[j + 1] = datas[j];
+                        j = j - 1;
+                    }
+
+                    datas[j + 1] = temp;
+
+                }
+            return datas;
         }
         public static double[] ShakerSort(bool reverse)
         {
@@ -127,8 +149,43 @@ namespace Programing_Labs.Pages.OlypmSort
         }
         public static double[] BogoSort(bool reverse)
         {
+            double[] datas = Dispatcher.CurrentDispatcher.Invoke(() => Data.GetValues(Data.Value.Xi));
+            Random random = new Random();
+            if (!reverse)
+                while (!IsSorted(datas))
+                {
+                    for (int i = datas.Length - 1; i > 0; --i)
+                    {
+                        int n = random.Next(i + 1);
+                        (datas[i], datas[n]) = (datas[n], datas[i]);
+                    }
+                }
+            else
+                while (!IsSorted_Revese(datas))
+                {
+                    for (int i = datas.Length - 1; i > 0; --i)
+                    {
+                        int n = random.Next(i + 1);
+                        (datas[i], datas[n]) = (datas[n], datas[i]);
+                    }
+                }
+            return datas;
+        }
+        static bool IsSorted(double[] datas)
+        {
+            for (int i = 0; i < datas.Length - 1; i++)
+                if (datas[i] > datas[i + 1])
+                    return false;
 
-            return null;
+            return true;
+        }
+        static bool IsSorted_Revese(double[] datas)
+        {
+            for (int i = 0; i < datas.Length - 1; i++)
+                if (datas[i] < datas[i + 1])
+                    return false;
+
+            return true;
         }
 
         #endregion

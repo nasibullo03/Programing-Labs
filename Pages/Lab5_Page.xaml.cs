@@ -17,6 +17,8 @@ using System.ComponentModel;
 using System.Windows.Threading;
 using System.Diagnostics;
 
+#pragma warning disable SecurityIntelliSenseCS // MS Security rules violation
+
 namespace Programing_Labs.Pages
 {
     /// <summary>
@@ -190,14 +192,17 @@ namespace Programing_Labs.Pages
                     OlypmSort.Sort.BubleSort(Reverse), OlypmSort.Sort.SortType.Buble),
                     OlypmSort.Data.Value.SortedXi))
             );
-
-
-
         }
 
-        private void MenuItem_InsertSort_Click(object sender, RoutedEventArgs e)
+        private async void MenuItem_InsertSort_Click(object sender, RoutedEventArgs e)
         {
-
+            await Task.Run(() =>
+           OlypmSort.Data.SortDataView.Dispatcher.Invoke(() =>
+           OlypmSort.Data.SetValues(
+                   SetTimer(() =>
+                   OlypmSort.Sort.InsertSort(Reverse), OlypmSort.Sort.SortType.Insert),
+                   OlypmSort.Data.Value.SortedXi))
+           );
         }
 
         private void MenuItem_ShakerSort_Click(object sender, RoutedEventArgs e)
@@ -210,9 +215,15 @@ namespace Programing_Labs.Pages
 
         }
 
-        private void MenuItem_BogoSort_Click(object sender, RoutedEventArgs e)
+        private async void MenuItem_BogoSort_Click(object sender, RoutedEventArgs e)
         {
-
+            await Task.Run(() =>
+          OlypmSort.Data.SortDataView.Dispatcher.Invoke(() =>
+          OlypmSort.Data.SetValues(
+                  SetTimer(() =>
+                  OlypmSort.Sort.BogoSort(Reverse), OlypmSort.Sort.SortType.Bogo),
+                  OlypmSort.Data.Value.SortedXi))
+          );
         }
         #endregion
 
