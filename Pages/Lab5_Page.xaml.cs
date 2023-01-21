@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -30,6 +31,7 @@ namespace Programing_Labs.Pages
         private List<Control> DataControls_onManuallyClick { get; set; }
 
         private List<Task> Tasks = new List<Task>();
+        private CancellationTokenSource cancellationToken { get; set; }
         /// <summary>
         /// значение i  для Xi
         /// </summary>
@@ -43,6 +45,7 @@ namespace Programing_Labs.Pages
             InitializeComponent();
             OlypmSort.Data.SortDataView = ArrayData_ListView;
             ArrayData_ListView.ItemsSource = OlypmSort.Data.SortDataCollection;
+            OlypmSort.Sort.cancellationToken = cancellationToken;
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
@@ -74,13 +77,11 @@ namespace Programing_Labs.Pages
 
             LblXi = GetStyleElement(LabelXi, "MainLabel") as Label;
 
-
             TxtBxXi.PreviewTextInput += new TextCompositionEventHandler(Check.PreviewTextInput);
             TxtBxArraySize.PreviewTextInput += new TextCompositionEventHandler(Check.PreviewTextInput);
 
             DataObject.AddPastingHandler(TxtBxXi, (s, a) => a.CancelCommand());
             DataObject.AddPastingHandler(TxtBxArraySize, (s, a) => a.CancelCommand());
-
 
             OnStartControls.ForEach(el => el.Visibility = Visibility.Visible);
             DataControls_onManuallyClick.ForEach(el => el.Visibility = Visibility.Collapsed);
@@ -89,17 +90,17 @@ namespace Programing_Labs.Pages
         private object GetStyleElement(Control element, string name) =>
           element.Template.FindName(name, element);
 
-        
+
 
         #region Buttons
         private void BtnEdit_Click(object sender, RoutedEventArgs e)
         {
             double.TryParse(TxtBxArraySize.Text, out double N);
-            if (N>0)
+            if (N > 0)
             {
                 //добавить новые данные в списке
                 double.TryParse(TxtBxXi.Text, out double Xi);
-                
+
                 if (OlypmSort.Data.SortDatas.Count >= N && OlypmSort.Data.EditableList.Count == 0)
                     return;
 
@@ -161,9 +162,11 @@ namespace Programing_Labs.Pages
         #endregion
 
         #region MenuItems Sort
-        private  void MenuItem_BubleSort_Click(object sender, RoutedEventArgs e)
+        private async void MenuItem_BubleSort_Click(object sender, RoutedEventArgs e)
         {
-            OlypmSort.Sort.BubleSort(Reverse);
+            var sortedData = Task.Run(() => OlypmSort.Sort.BubleSort(Reverse));
+            await Task.Factory.StartNew(() => OlypmSort.Data.SortDataView.Dispatcher.Invoke(()=> OlypmSort.Data.SetValues(sortedData.Result, OlypmSort.Data.Value.SortedXi)));
+            
         }
 
         private void MenuItem_InsertSort_Click(object sender, RoutedEventArgs e)
@@ -225,7 +228,7 @@ namespace Programing_Labs.Pages
             ++index;
             LblXi.Content = $"X({index})";
         }
-        private async void MenuItem_RandomGenerate_Click(object sender, RoutedEventArgs e)
+        private void MenuItem_RandomGenerate_Click(object sender, RoutedEventArgs e)
         {
             int.TryParse(TxtBxArraySize.Text, out int n);
             if (n <= 0)
@@ -242,15 +245,17 @@ namespace Programing_Labs.Pages
             if (ArrayData_ListView.Items.Count >= n)
                 MenuItemAdd.Visibility = Visibility.Collapsed;
 
-            Random random = new Random();
             OlypmSort.Data.Clear();
 
-            for(int i=0; i<n; ++i)
-            {
-                await OlypmSort.Data.Add(new OlypmSort.Data(random.Next()));
-            }
+            Random random = new Random();
+
+            double[] data = new double[n];
+
+            for (int i = 0; i < n; ++i)
+                data[i] = random.Next();
 
 
+            OlypmSort.Data.Add(data);
 
         }
         #endregion
@@ -260,6 +265,7 @@ namespace Programing_Labs.Pages
         private void MenuItemClearAll_Click(object sender, RoutedEventArgs e)
         {
             OlypmSort.Data.Clear();
+            /*GC.Collect();*/
         }
 
         private void MenuItemClearData_Click(object sender, RoutedEventArgs e)
@@ -292,7 +298,7 @@ namespace Programing_Labs.Pages
             MenuItemEdit.Visibility = Visibility.Visible;
 
             System.Collections.IList items = (System.Collections.IList)ArrayData_ListView.SelectedItems;
-            
+
             var collection = items.Cast<OlypmSort.Data>();
 
             OlypmSort.Data.EditMode = true;
@@ -303,6 +309,6 @@ namespace Programing_Labs.Pages
 
         #endregion
 
-       
+
     }
 }

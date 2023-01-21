@@ -3,8 +3,11 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
+using System.Threading;
+using System.Windows;
 using System.Threading.Tasks;
 using System.Windows.Controls;
+using System.Windows.Threading;
 
 namespace Programing_Labs.Pages.OlypmSort
 {
@@ -25,6 +28,8 @@ namespace Programing_Labs.Pages.OlypmSort
 
         public static List<Data> SortDatas = new List<Data>();
         public static ObservableCollection<Data> SortDataCollection = new ObservableCollection<Data>();
+        public enum Value { Xi, SortedXi }
+
         #endregion
         #region constructors
         public Data()
@@ -36,6 +41,7 @@ namespace Programing_Labs.Pages.OlypmSort
             this.Index = ++Count;
             this.Xi = Xi;
         }
+
         #endregion
 
         public async static Task Add(Data sortData)
@@ -44,6 +50,18 @@ namespace Programing_Labs.Pages.OlypmSort
             SortDataCollection.Add(sortData);
             await Task.Yield();
         }
+        public static void Add(double[] datas)
+        {
+            Data data1;
+            foreach (double data in datas)
+            {
+                data1 = new Data(data);
+                SortDatas.Add(data1);
+                SortDataCollection.Add(data1);
+            }
+
+        }
+       
 
         public static void Remove(System.Collections.IList item)
         {
@@ -66,6 +84,22 @@ namespace Programing_Labs.Pages.OlypmSort
             SortDataView.ItemsSource = SortDataCollection;
             SortDataView.UpdateLayout();
 
+        }
+
+        public static void UpdateCollection()
+        {
+
+            var sortDataCollection = new ObservableCollection<Data>();
+            Count = 0;
+            foreach (var el in SortDatas.ToArray())
+            {
+                el.Index = ++Count;
+                sortDataCollection.Add(el);
+            }
+
+            SortDataCollection = sortDataCollection;
+            SortDataView.ItemsSource = SortDataCollection;
+            SortDataView.UpdateLayout();
         }
 
         public static void Clear()
@@ -103,6 +137,47 @@ namespace Programing_Labs.Pages.OlypmSort
                 EditableList.RemoveAt(0);
         }
 
+
+        public static double[] GetValues(Value value)
+        {
+            double[] data = new double[SortDatas.Count];
+
+            switch (value)
+            {
+                case Value.Xi:
+                    for (int i = 0; i < SortDatas.Count; ++i)
+                        data[i] = SortDatas[i].Xi;
+                    break;
+                case Value.SortedXi:
+                    for (int i = 0; i < SortDatas.Count; ++i)
+                        data[i] = SortDatas[i].SortedXi;
+                    break;
+            }
+
+            return data;
+
+        }
+        public static void SetValues(double[] data, Value value)
+        {
+            switch (value)
+            {
+                case Value.Xi:
+
+                    for (int i = 0; i < SortDatas.Count; ++i)
+                    {
+                        SortDatas[i].Xi = data[i];
+                    }
+                    break;
+                case Value.SortedXi:
+                    for (int i = 0; i < SortDatas.Count; ++i)
+                    {
+                        SortDatas[i].SortedXi = data[i];
+                    }
+
+                    break;
+            }
+            UpdateCollection();
+        }
 
     }
 }

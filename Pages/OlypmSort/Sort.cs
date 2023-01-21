@@ -1,37 +1,86 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Controls;
+using System.Windows.Threading;
 
 namespace Programing_Labs.Pages.OlypmSort
 {
     class Sort
     {
+        #region properties
         public static CancellationTokenSource cancellationToken { get; set; }
-        private static Data temp { get; set; }
+        private static double temp { get; set; }
+        public static ListView SortDataView { get; set; }
+        /// <summary>
+        /// Коллекция значение для изменение значение
+        /// </summary>
+        public static List<Data> EditableList { get; set; }
+
+        public static bool EditMode { get; set; }
+        private static int Count { get; set; }
+        public int Index { get; set; }
+        public double Xi { get; set; }
+        public double SortedXi { get; set; }
+
+        public static List<Data> SortDatas = new List<Data>();
+        public static ObservableCollection<Data> SortDataCollection = new ObservableCollection<Data>();
+        public enum Value { Xi, SortedXi }
+
+
+
+        #endregion
         public Sort()
         {
 
         }
 
-        public static void BubleSort(bool reverse) 
+        public static double[] BubleSort(bool reverse)
         {
-            
-            for (int i = 0; i < Data.SortDatas.Count; i++)
-            {
-                for (int j = 0; j < Data.SortDatas.Count - 1 - i; j++)
+            double[] datas = Dispatcher.CurrentDispatcher.Invoke(() => Data.GetValues(Data.Value.Xi));
+
+            if (!reverse)
+                for (int i = 0; i < datas.Length; i++)
                 {
-                    if (!reverse && Data.SortDatas[j].Xi > Data.SortDatas[j + 1].Xi || reverse && Data.SortDatas[j].Xi < Data.SortDatas[j + 1].Xi)
+                    for (int j = 0; j < datas.Length - 1 - i; j++)
                     {
-                        Data.SortDatas[j].SortedXi = Data.SortDatas[j + 1].Xi;
-                        Data.SortDatas[j + 1].SortedXi = Data.SortDatas[j].Xi;
-                        if (cancellationToken.Token.IsCancellationRequested) return;
-                        
+                        if (datas[j] > datas[j + 1])
+                        {
+                            temp = datas[j + 1];
+                            datas[j + 1] = datas[j];
+                            datas[j] = temp;
+
+                            /*if (cancellationToken.Token.IsCancellationRequested) return;*/
+                        }
                     }
+
+                }
+            else
+            {
+                for (int i = 0; i < datas.Length; i++)
+                {
+                    for (int j = 0; j < datas.Length - 1 - i; j++)
+                    {
+                        if (datas[j] < datas[j + 1])
+                        {
+                            temp = datas[j + 1];
+                            datas[j + 1] = datas[j];
+                            datas[j] = temp;
+
+                            /*if (cancellationToken.Token.IsCancellationRequested) return;*/
+
+                        }
+                    }
+
                 }
             }
+
+
+            return datas;
         }
         public static List<Data> InsertSort(List<Data> data, bool reverse)
         {
@@ -40,7 +89,7 @@ namespace Programing_Labs.Pages.OlypmSort
         }
         public static List<Data> ShakerSort(List<Data> data, bool reverse)
         {
-           
+
             return new List<Data>();
         }
         public static List<Data> FastSort(List<Data> data, bool reverse)
@@ -54,9 +103,9 @@ namespace Programing_Labs.Pages.OlypmSort
             return new List<Data>();
         }
 
-        
 
-        
+
+
 
 
 
