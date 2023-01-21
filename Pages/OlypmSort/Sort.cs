@@ -10,7 +10,7 @@ using System.Windows.Threading;
 
 #pragma warning disable SecurityIntelliSenseCS // MS Security rules violation
 
-namespace Programing_Labs.Pages.OlypmSort
+namespace Programing_Labs.Pages.OlympSort
 {
     class Sort
     {
@@ -139,13 +139,112 @@ namespace Programing_Labs.Pages.OlypmSort
         }
         public static double[] ShakerSort(bool reverse)
         {
+            double[] datas = Dispatcher.CurrentDispatcher.Invoke(() => Data.GetValues(Data.Value.Xi));
+            if (!reverse)
+                for (var i = 0; i < datas.Length / 2; i++)
+                {
+                    var swapFlag = false;
 
-            return null;
+                    for (var j = i; j < datas.Length - i - 1; j++)
+                    {
+                        if (datas[j] > datas[j + 1])
+                        {
+                            (datas[j], datas[j + 1]) = (datas[j + 1], datas[j]);
+                            swapFlag = true;
+                        }
+                    }
+
+                    for (var j = datas.Length - 2 - i; j > i; j--)
+                    {
+                        if (datas[j - 1] > datas[j])
+                        {
+                            (datas[j - 1], datas[j]) = (datas[j], datas[j - 1]);
+                            swapFlag = true;
+                        }
+                    }
+
+                    if (!swapFlag)
+                    {
+                        break;
+                    }
+                }
+            else
+                for (var i = 0; i < datas.Length / 2; i++)
+                {
+                    var swapFlag = false;
+
+                    for (var j = i; j < datas.Length - i - 1; j++)
+                    {
+                        if (datas[j] < datas[j + 1])
+                        {
+                            (datas[j], datas[j + 1]) = (datas[j + 1], datas[j]);
+                            swapFlag = true;
+                        }
+                    }
+
+                    for (var j = datas.Length - 2 - i; j > i; j--)
+                    {
+                        if (datas[j - 1] < datas[j])
+                        {
+                            (datas[j - 1], datas[j]) = (datas[j], datas[j - 1]);
+                            swapFlag = true;
+                        }
+                    }
+
+                    if (!swapFlag)
+                    {
+                        break;
+                    }
+                }
+
+            return datas;
         }
-        public static double[] FastSort(bool reverse)
+        public static double[] FastSort(double[] datas, int LeftIndex, int RightIndex, bool reverse)
         {
+            int i = LeftIndex;
+            int j = RightIndex;
+            double bar = datas[(LeftIndex+RightIndex)/2];
 
-            return null;
+            if (!reverse)
+                while (i <= j)
+                {
+                    while (datas[i] < bar) ++i;
+
+                    while (datas[j] > bar) --j;
+
+                    if (i <= j)
+                    {
+                        (datas[i], datas[j]) = (datas[j], datas[i]);
+
+                        ++i; --j;
+
+                    }
+                }
+
+            else
+                while (i <= j)
+                {
+                    while (datas[i] > bar) ++i;
+
+                    while (datas[j] < bar) --j;
+
+                    if (i <= j)
+                    {
+                        (datas[i], datas[j]) = (datas[j], datas[i]);
+
+                        ++i; --j;
+
+                    }
+                }
+
+
+            if (LeftIndex < j)
+                FastSort(datas, LeftIndex, j, reverse);
+
+            if (i < RightIndex)
+                FastSort(datas, i, RightIndex, reverse);
+
+            return datas;
         }
         public static double[] BogoSort(bool reverse)
         {

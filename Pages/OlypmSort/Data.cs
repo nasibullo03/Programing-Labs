@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Threading;
 
-namespace Programing_Labs.Pages.OlypmSort
+namespace Programing_Labs.Pages.OlympSort
 {
     class Data
     {

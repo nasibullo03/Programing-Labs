@@ -51,10 +51,10 @@ namespace Programing_Labs.Pages
         public Lab5_Page()
         {
             InitializeComponent();
-            OlypmSort.Data.SortDataView = ArrayData_ListView;
-            ArrayData_ListView.ItemsSource = OlypmSort.Data.SortDataCollection;
-            ArrayData_ListView1.ItemsSource = OlypmSort.Sort.SortDataCollection;
-            OlypmSort.Sort.cancellationToken = cancellationToken;
+            OlympSort.Data.SortDataView = ArrayData_ListView;
+            ArrayData_ListView.ItemsSource = OlympSort.Data.SortDataCollection;
+            ArrayData_ListView1.ItemsSource = OlympSort.Sort.SortDataCollection;
+            OlympSort.Sort.cancellationToken = cancellationToken;
         }
 
         #region OnStartMethods
@@ -110,32 +110,32 @@ namespace Programing_Labs.Pages
                 //добавить новые данные в списке
                 double.TryParse(TxtBxXi.Text, out double Xi);
 
-                if (OlypmSort.Data.SortDatas.Count >= N && OlypmSort.Data.EditableList.Count == 0)
+                if (OlympSort.Data.SortDatas.Count >= N && OlympSort.Data.EditableList.Count == 0)
                     return;
 
-                OlypmSort.Data.EditValues(Xi);
+                OlympSort.Data.EditValues(Xi);
                 //удалить данные которые уже отредактированы
-                OlypmSort.Data.DeleteEditedValue();
+                OlympSort.Data.DeleteEditedValue();
             }
             else return;
 
-            if (OlypmSort.Data.EditableList.Count == 0)
+            if (OlympSort.Data.EditableList.Count == 0)
             {
                 MenuItemEdit.Visibility = Visibility.Collapsed;
 
-                if (OlypmSort.Data.SortDatas.Count >= N)
+                if (OlympSort.Data.SortDatas.Count >= N)
                     MenuItemAdd.Visibility = Visibility.Collapsed;
                 else MenuItemAdd.Visibility = Visibility.Visible;
 
-                OlypmSort.Data.EditableList.Clear();
-                OlypmSort.Data.EditMode = false;
+                OlympSort.Data.EditableList.Clear();
+                OlympSort.Data.EditMode = false;
 
                 index = (index >= N) ? index : ArrayData_ListView.Items.Count + 1;
                 LblXi.Content = $"X({index})";
                 TxtBxXi.Text = string.Empty;
                 return;
             }
-            OlypmSort.Data.PrepareDataForEditing(TxtBxXi, LblXi);
+            OlympSort.Data.PrepareDataForEditing(TxtBxXi, LblXi);
         }
 
         private void BtnBack_Click(object sender, RoutedEventArgs e)
@@ -156,9 +156,9 @@ namespace Programing_Labs.Pages
                 MenuItemAdd.Visibility = Visibility.Collapsed;
                 return;
             }
-            OlypmSort.Data data = new OlypmSort.Data(Xi);
+            OlympSort.Data data = new OlympSort.Data(Xi);
 
-            await OlypmSort.Data.Add(data);
+            await OlympSort.Data.Add(data);
             if (ArrayData_ListView.Items.Count >= n)
             {
                 MenuItemAdd.Visibility = Visibility.Collapsed;
@@ -170,59 +170,82 @@ namespace Programing_Labs.Pages
         }
         #endregion
 
-        private double[] SetTimer(Func<double[]> action, OlypmSort.Sort.SortType sortType)
+        private double[] SetTimer(Func<double[]> action, OlympSort.Sort.SortType sortType)
         {
-            Timer = new Stopwatch();
-            Timer.Start();
-            double[] d = action.Invoke();
-            Timer.Stop();
+            double[] data = null;
+            try
+            {
+                Timer = new Stopwatch();
+                Timer.Start();
+                data = action.Invoke();
+                Timer.Stop();
+                TxtBxArraySize.Dispatcher.Invoke(async () =>
+                    await OlympSort.Sort.Add(new OlympSort.Sort(sortType, Timer.ElapsedMilliseconds, TxtBxArraySize.Text)));
+            } catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
 
-            TxtBxArraySize.Dispatcher.Invoke(async () =>
-                await OlypmSort.Sort.Add(new OlypmSort.Sort(sortType, Timer.ElapsedMilliseconds, TxtBxArraySize.Text)));
-            return d;
+            }
+            
+            return data;
+
         }
 
         #region MenuItems Sort
         private async void MenuItem_BubleSort_Click(object sender, RoutedEventArgs e)
         {
             await Task.Run(() =>
-            OlypmSort.Data.SortDataView.Dispatcher.Invoke(() =>
-            OlypmSort.Data.SetValues(
+            OlympSort.Data.SortDataView.Dispatcher.Invoke(() =>
+            OlympSort.Data.SetValues(
                     SetTimer(() =>
-                    OlypmSort.Sort.BubleSort(Reverse), OlypmSort.Sort.SortType.Buble),
-                    OlypmSort.Data.Value.SortedXi))
+                    OlympSort.Sort.BubleSort(Reverse), OlympSort.Sort.SortType.Buble),
+                    OlympSort.Data.Value.SortedXi))
             );
         }
 
         private async void MenuItem_InsertSort_Click(object sender, RoutedEventArgs e)
         {
             await Task.Run(() =>
-           OlypmSort.Data.SortDataView.Dispatcher.Invoke(() =>
-           OlypmSort.Data.SetValues(
+           OlympSort.Data.SortDataView.Dispatcher.Invoke(() =>
+           OlympSort.Data.SetValues(
                    SetTimer(() =>
-                   OlypmSort.Sort.InsertSort(Reverse), OlypmSort.Sort.SortType.Insert),
-                   OlypmSort.Data.Value.SortedXi))
+                   OlympSort.Sort.InsertSort(Reverse), OlympSort.Sort.SortType.Insert),
+                   OlympSort.Data.Value.SortedXi))
            );
         }
 
-        private void MenuItem_ShakerSort_Click(object sender, RoutedEventArgs e)
+        private  async void MenuItem_ShakerSort_Click(object sender, RoutedEventArgs e)
         {
-
+            await Task.Run(() =>
+            OlympSort.Data.SortDataView.Dispatcher.Invoke(() =>
+            OlympSort.Data.SetValues(
+                    SetTimer(() =>
+                    OlympSort.Sort.ShakerSort(Reverse), OlympSort.Sort.SortType.Shaker),
+                    OlympSort.Data.Value.SortedXi))
+            );
         }
 
-        private void MenuItem_FastSort_Click(object sender, RoutedEventArgs e)
+        private async void MenuItem_FastSort_Click(object sender, RoutedEventArgs e)
         {
-
+            await Task.Run(() =>
+            OlympSort.Data.SortDataView.Dispatcher.Invoke(() =>
+            OlympSort.Data.SetValues(
+                    SetTimer(() => {
+                    double[] data = Dispatcher.CurrentDispatcher.Invoke(() => OlympSort.Data.GetValues(OlympSort.Data.Value.Xi));
+                        return OlympSort.Sort.FastSort(data, 0,data.Length-1, Reverse);
+                    }, OlympSort.Sort.SortType.Fast),
+                    OlympSort.Data.Value.SortedXi))
+            );
         }
 
         private async void MenuItem_BogoSort_Click(object sender, RoutedEventArgs e)
         {
             await Task.Run(() =>
-          OlypmSort.Data.SortDataView.Dispatcher.Invoke(() =>
-          OlypmSort.Data.SetValues(
+          OlympSort.Data.SortDataView.Dispatcher.Invoke(() =>
+          OlympSort.Data.SetValues(
                   SetTimer(() =>
-                  OlypmSort.Sort.BogoSort(Reverse), OlypmSort.Sort.SortType.Bogo),
-                  OlypmSort.Data.Value.SortedXi))
+                  OlympSort.Sort.BogoSort(Reverse), OlympSort.Sort.SortType.Bogo),
+                  OlympSort.Data.Value.SortedXi))
           );
         }
         #endregion
@@ -254,7 +277,7 @@ namespace Programing_Labs.Pages
             OnStartControls.ForEach(el => el.Visibility = Visibility.Collapsed);
             DataControls_onManuallyClick.ForEach(el => el.Visibility = Visibility.Visible);
 
-            if (OlypmSort.Data.EditMode)
+            if (OlympSort.Data.EditMode)
                 MenuItemBack.Visibility = Visibility.Visible;
 
             if (ArrayData_ListView.Items.Count >= n)
@@ -276,13 +299,13 @@ namespace Programing_Labs.Pages
             OnStartControls.ForEach(el => el.Visibility = Visibility.Collapsed);
             DataControls_onRandomlyClick.ForEach(el => el.Visibility = Visibility.Visible);
 
-            if (OlypmSort.Data.EditMode)
+            if (OlympSort.Data.EditMode)
                 MenuItemBack.Visibility = Visibility.Visible;
 
             if (ArrayData_ListView.Items.Count >= n)
                 MenuItemAdd.Visibility = Visibility.Collapsed;
 
-            OlypmSort.Data.Clear();
+            OlympSort.Data.Clear();
 
             Random random = new Random();
 
@@ -292,7 +315,7 @@ namespace Programing_Labs.Pages
                 data[i] = random.Next();
 
 
-            OlypmSort.Data.Add(data);
+            OlympSort.Data.Add(data);
 
         }
         #endregion
@@ -301,18 +324,18 @@ namespace Programing_Labs.Pages
 
         private void MenuItemClearAll_Click(object sender, RoutedEventArgs e)
         {
-            OlypmSort.Data.Clear();
-            OlypmSort.Sort.Clear();
+            OlympSort.Data.Clear();
+            OlympSort.Sort.Clear();
         }
 
         private void MenuItemClearData_Click(object sender, RoutedEventArgs e)
         {
-            OlypmSort.Data.Clear();
+            OlympSort.Data.Clear();
         }
 
         private void MenuItemClearSortData_Click(object sender, RoutedEventArgs e)
         {
-            OlypmSort.Sort.Clear();
+            OlympSort.Sort.Clear();
         }
 
 
@@ -323,7 +346,7 @@ namespace Programing_Labs.Pages
         {
             var focusedItems = ArrayData_ListView.SelectedItems;
 
-            OlypmSort.Data.Remove(focusedItems);
+            OlympSort.Data.Remove(focusedItems);
             index = ArrayData_ListView.Items.Count + 1;
             LblXi.Content = $"X({index})";
             MenuItemAdd.Visibility = Visibility.Visible;
@@ -336,11 +359,11 @@ namespace Programing_Labs.Pages
 
             System.Collections.IList items = (System.Collections.IList)ArrayData_ListView.SelectedItems;
 
-            var collection = items.Cast<OlypmSort.Data>();
+            var collection = items.Cast<OlympSort.Data>();
 
-            OlypmSort.Data.EditMode = true;
-            OlypmSort.Data.EditableList = collection.ToList();
-            OlypmSort.Data.PrepareDataForEditing(TxtBxXi, LblXi);
+            OlympSort.Data.EditMode = true;
+            OlympSort.Data.EditableList = collection.ToList();
+            OlympSort.Data.PrepareDataForEditing(TxtBxXi, LblXi);
         }
 
 
