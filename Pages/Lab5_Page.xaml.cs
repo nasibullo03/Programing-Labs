@@ -13,6 +13,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.ComponentModel;
+using System.Windows.Threading;
+using System.Diagnostics;
 
 namespace Programing_Labs.Pages
 {
@@ -36,6 +39,9 @@ namespace Programing_Labs.Pages
         /// значение i  для Xi
         /// </summary>
         public int index = 0;
+        private Stopwatch Timer { get; set; }
+
+
 
 
         #endregion
@@ -45,9 +51,11 @@ namespace Programing_Labs.Pages
             InitializeComponent();
             OlypmSort.Data.SortDataView = ArrayData_ListView;
             ArrayData_ListView.ItemsSource = OlypmSort.Data.SortDataCollection;
+            ArrayData_ListView1.ItemsSource = OlypmSort.Sort.SortDataCollection;
             OlypmSort.Sort.cancellationToken = cancellationToken;
         }
 
+        #region OnStartMethods
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             AddBaseControlsValues();
@@ -89,8 +97,7 @@ namespace Programing_Labs.Pages
         }
         private object GetStyleElement(Control element, string name) =>
           element.Template.FindName(name, element);
-
-
+        #endregion
 
         #region Buttons
         private void BtnEdit_Click(object sender, RoutedEventArgs e)
@@ -161,12 +168,31 @@ namespace Programing_Labs.Pages
         }
         #endregion
 
+        private double[] SetTimer(Func<double[]> action, OlypmSort.Sort.SortType sortType)
+        {
+            Timer = new Stopwatch();
+            Timer.Start();
+            double[] d = action.Invoke();
+            Timer.Stop();
+
+            TxtBxArraySize.Dispatcher.Invoke(async () =>
+                await OlypmSort.Sort.Add(new OlypmSort.Sort(sortType, Timer.ElapsedMilliseconds, TxtBxArraySize.Text)));
+            return d;
+        }
+
         #region MenuItems Sort
         private async void MenuItem_BubleSort_Click(object sender, RoutedEventArgs e)
         {
-            var sortedData = Task.Run(() => OlypmSort.Sort.BubleSort(Reverse));
-            await Task.Factory.StartNew(() => OlypmSort.Data.SortDataView.Dispatcher.Invoke(()=> OlypmSort.Data.SetValues(sortedData.Result, OlypmSort.Data.Value.SortedXi)));
-            
+            await Task.Run(() =>
+            OlypmSort.Data.SortDataView.Dispatcher.Invoke(() =>
+            OlypmSort.Data.SetValues(
+                    SetTimer(() =>
+                    OlypmSort.Sort.BubleSort(Reverse), OlypmSort.Sort.SortType.Buble),
+                    OlypmSort.Data.Value.SortedXi))
+            );
+
+
+
         }
 
         private void MenuItem_InsertSort_Click(object sender, RoutedEventArgs e)
@@ -265,7 +291,7 @@ namespace Programing_Labs.Pages
         private void MenuItemClearAll_Click(object sender, RoutedEventArgs e)
         {
             OlypmSort.Data.Clear();
-            /*GC.Collect();*/
+            OlypmSort.Sort.Clear();
         }
 
         private void MenuItemClearData_Click(object sender, RoutedEventArgs e)
@@ -275,7 +301,7 @@ namespace Programing_Labs.Pages
 
         private void MenuItemClearSortData_Click(object sender, RoutedEventArgs e)
         {
-
+            OlypmSort.Sort.Clear();
         }
 
 

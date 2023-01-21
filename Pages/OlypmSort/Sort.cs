@@ -19,26 +19,60 @@ namespace Programing_Labs.Pages.OlypmSort
         /// <summary>
         /// Коллекция значение для изменение значение
         /// </summary>
-        public static List<Data> EditableList { get; set; }
+        public static List<Sort> EditableList { get; set; }
 
         public static bool EditMode { get; set; }
-        private static int Count { get; set; }
-        public int Index { get; set; }
-        public double Xi { get; set; }
-        public double SortedXi { get; set; }
 
-        public static List<Data> SortDatas = new List<Data>();
-        public static ObservableCollection<Data> SortDataCollection = new ObservableCollection<Data>();
-        public enum Value { Xi, SortedXi }
+        public string sortType { get; set; }
+        public string TimerValue { get; set; }
+        public string  ArraySize { get; set; }
 
+        public static List<Sort> SortDatas = new List<Sort>();
+        public static ObservableCollection<Sort> SortDataCollection = new ObservableCollection<Sort>();
 
+        public enum SortType { Buble, Insert, Shaker, Fast, Bogo }
+        public static Dictionary<SortType, string> SortTypeValue = new Dictionary<SortType, string>
+        {
+            {SortType.Buble, "Пузырковая сортировка"},
+            {SortType.Insert, "Сортировка вставками"},
+            {SortType.Shaker, "Шейкерная сортировка"},
+            {SortType.Fast, "Быстрая сортировка"},
+            {SortType.Bogo, "Bogo - сортировка"},
+        };
 
         #endregion
+        #region constructor
         public Sort()
         {
 
         }
+        public Sort(SortType type,  long TimerValue, string ArraySize)
+        {
+            sortType = SortTypeValue[type];
+            this. TimerValue = TimerValue.ToString() + " мс";
+            this.ArraySize = ArraySize;
+        }
+        #endregion
+        #region ListView methods 
+        public async static Task Add(Sort sortData)
+        {
+            SortDatas.Add(sortData);
+            SortDataCollection.Add(sortData);
+            await Task.Yield();
+        }
 
+        public static void Clear()
+        {
+            SortDataView.ItemsSource = new ObservableCollection<Sort>();
+            SortDataCollection?.Clear();
+            SortDatas?.Clear();
+            SortDataView.ItemsSource = SortDataCollection;
+            EditableList?.Clear();
+        }
+
+
+        #endregion
+        #region Sorting Methods
         public static double[] BubleSort(bool reverse)
         {
             double[] datas = Dispatcher.CurrentDispatcher.Invoke(() => Data.GetValues(Data.Value.Xi));
@@ -53,28 +87,22 @@ namespace Programing_Labs.Pages.OlypmSort
                             temp = datas[j + 1];
                             datas[j + 1] = datas[j];
                             datas[j] = temp;
-
-                            /*if (cancellationToken.Token.IsCancellationRequested) return;*/
                         }
                     }
-
                 }
             else
             {
                 for (int i = 0; i < datas.Length; i++)
                 {
                     for (int j = 0; j < datas.Length - 1 - i; j++)
-                    {
+
                         if (datas[j] < datas[j + 1])
                         {
                             temp = datas[j + 1];
                             datas[j + 1] = datas[j];
                             datas[j] = temp;
-
-                            /*if (cancellationToken.Token.IsCancellationRequested) return;*/
-
                         }
-                    }
+
 
                 }
             }
@@ -82,31 +110,28 @@ namespace Programing_Labs.Pages.OlypmSort
 
             return datas;
         }
-        public static List<Data> InsertSort(List<Data> data, bool reverse)
+        public static double[] InsertSort(bool reverse)
         {
 
-            return new List<Data>();
+            return null;
         }
-        public static List<Data> ShakerSort(List<Data> data, bool reverse)
+        public static double[] ShakerSort(bool reverse)
         {
 
-            return new List<Data>();
+            return null;
         }
-        public static List<Data> FastSort(List<Data> data, bool reverse)
+        public static double[] FastSort(bool reverse)
         {
 
-            return new List<Data>();
+            return null;
         }
-        public static List<Data> BogoSort(List<Data> data, bool reverse)
+        public static double[] BogoSort(bool reverse)
         {
 
-            return new List<Data>();
+            return null;
         }
 
-
-
-
-
+        #endregion
 
 
 

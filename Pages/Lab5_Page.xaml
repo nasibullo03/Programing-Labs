@@ -275,11 +275,11 @@
                 <ListView.View>
                     <GridView>
                         <GridViewColumn x:Name="GridView_ColumnIndex" DisplayMemberBinding="{Binding Path=Index}"
-                                        Width="auto">Индекс</GridViewColumn>
+                                        Width="auto">i</GridViewColumn>
                         <GridViewColumn x:Name="GridView_Xi" DisplayMemberBinding="{Binding Path=Xi}"
                                         Width="auto">Данные</GridViewColumn>
                         <GridViewColumn x:Name="GridView_SortedXi" DisplayMemberBinding="{Binding Path=SortedXi}"
-                                        Width="auto">Отсортированные данные</GridViewColumn>
+                                        Width="auto">Результат</GridViewColumn>
                     </GridView>
                 </ListView.View>
             </ListView>
@@ -292,12 +292,12 @@
                       ScrollViewer.VerticalScrollBarVisibility="Auto">
                 <ListView.View>
                     <GridView >
-                        <GridViewColumn DisplayMemberBinding="{Binding Path=SortType}"
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=sortType}"
                                         Width="auto">Тип сортировки</GridViewColumn>
-                        <GridViewColumn  DisplayMemberBinding="{Binding Path=Time}"
-                                        Width="auto">Время</GridViewColumn>
-                        <GridViewColumn  DisplayMemberBinding="{Binding Path=Time}"
-                                        Width="auto">Размерность</GridViewColumn>
+                        <GridViewColumn  DisplayMemberBinding="{Binding Path=TimerValue}"
+                                        Width="auto">Продолжительность</GridViewColumn>
+                        <GridViewColumn  DisplayMemberBinding="{Binding Path=ArraySize}"
+                                         Width="auto">Количество элементов</GridViewColumn>
 
                     </GridView>
                 </ListView.View>
