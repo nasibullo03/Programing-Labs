@@ -190,10 +190,21 @@ namespace Programing_Labs.Pages
             return data;
 
         }
+        private void LoadingAnimation(Visibility visibility)
+        {
+            LoadingGifAnimation.Dispatcher.Invoke(() =>
+            {
+                LoadingGifAnimation.Visibility = visibility;
+                LoadingGifAnimation.Play();
+            });
+
+        }
 
         #region MenuItems Sort
         private async void MenuItem_BubleSort_Click(object sender, RoutedEventArgs e)
         {
+            LoadingAnimation(Visibility.Visible);
+
             await Task.Run(() =>
             OlympSort.Data.SortDataView.Dispatcher.Invoke(() =>
             OlympSort.Data.SetValues(
@@ -231,7 +242,7 @@ namespace Programing_Labs.Pages
             OlympSort.Data.SortDataView.Dispatcher.Invoke(() =>
             OlympSort.Data.SetValues(
                     SetTimer(() => {
-                    double[] data = Dispatcher.CurrentDispatcher.Invoke(() => OlympSort.Data.GetValues(OlympSort.Data.Value.Xi));
+                    double[] data = OlympSort.Data.SortDatas.Select(a => a.Xi).ToArray();
                         return OlympSort.Sort.FastSort(data, 0,data.Length-1, Reverse);
                     }, OlympSort.Sort.SortType.Fast),
                     OlympSort.Data.Value.SortedXi))
