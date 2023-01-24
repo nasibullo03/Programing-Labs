@@ -35,8 +35,6 @@ namespace Programing_Labs.LabsClases
         public static List<GraphicPoint> GraphicPoints = new List<GraphicPoint>();
         public static ObservableCollection<GraphicPoint> GraphicPointsCollection = new ObservableCollection<GraphicPoint>();
 
-
-
         public async static Task Add(GraphicPoint graphicPoint)
         {
             GraphicPoints.Add(graphicPoint);

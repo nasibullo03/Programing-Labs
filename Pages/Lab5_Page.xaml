@@ -4,13 +4,45 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Programing_Labs.Pages"
+      xmlns:gif="http://wpfanimatedgif.codeplex.com"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
+      Loaded="Page_Loaded"
       Title="Lab5_Page">
+    <Grid>
+        <StackPanel x:Name="loadingPanel"
+                     Panel.ZIndex="999"
+                    HorizontalAlignment="Center" 
+                    VerticalAlignment="Center"
+                    Background="Transparent"
+                    Visibility="Collapsed"
+                    
+                    >
 
-    <DockPanel>
-        <!--Вверхный панел для имя задачи-->
-        <Label Content="Олимпиадные сортировки"
+            <Image  x:Name="LoadingGifAnimation" 
+                Visibility="Visible" 
+                Width="120"
+                Source="/Images/loading.gif"
+                gif:ImageBehavior.AnimatedSource="/Images/loading.gif"
+                gif:ImageBehavior.RepeatBehavior="Forever"
+                HorizontalAlignment="Center" 
+                VerticalAlignment="Center" 
+                Panel.ZIndex="1000">
+            </Image>
+            <Label Name="LoadingLabel" 
+                   Panel.ZIndex="1001" 
+                   Margin="0, -20,0,0"
+                   Content="" 
+                   VerticalAlignment="Center" 
+                   HorizontalAlignment="Center"
+                   FontWeight="Bold"
+                   Foreground="#75f"
+                   />
+        </StackPanel>
+
+        <DockPanel>
+            <!--Вверхный панел для имя задачи-->
+            <Label Content="Олимпиадные сортировки"
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
             FontSize="22"
@@ -18,82 +50,87 @@
             FontWeight="Bold"
             DockPanel.Dock="Top"   
                />
-        <Menu Height="auto"
+            <Menu Height="auto"
             VerticalAlignment="Top"
             Background="Transparent"
             DockPanel.Dock="Top">
 
-            <!--TextBoxXi-->
-            <MenuItem x:Name="MenuItemXi"
+                <!--TextBoxXi-->
+                <MenuItem x:Name="MenuItemXi"
                 Visibility="Visible">
-                <MenuItem.Header>
-                    <StackPanel Orientation="Horizontal"
+                    <MenuItem.Header>
+                        <StackPanel Orientation="Horizontal"
                         VerticalAlignment="Top">
-                        <Label x:Name="LabelXi"
+                            <Label x:Name="LabelXi"
                             Content="Xi ="
                             Style="{StaticResource LabelStyle}"
                             FontWeight="Bold"
                             Foreground="White"
                             FontSize="18"
                             VerticalAlignment="Top"/>
-                        <TextBox x:Name="TextBoxXi"
+                            <TextBox x:Name="TextBoxXi"
                             Style="{StaticResource TextBoxStyle}"
                             FontSize="18"
                             Margin="0,-5,0,0"
                             TabIndex="0" />
-                    </StackPanel>
-                </MenuItem.Header>
-            </MenuItem>
+                        </StackPanel>
+                    </MenuItem.Header>
+                </MenuItem>
 
-            <!--TextBoxArraySize-->
-            <MenuItem x:Name="MenuItemArraySize">
-                <MenuItem.Header>
-                    <StackPanel Orientation="Horizontal"
+                <!--TextBoxArraySize-->
+                <MenuItem x:Name="MenuItemArraySize">
+                    <MenuItem.Header>
+                        <StackPanel Orientation="Horizontal"
                         VerticalAlignment="Top">
-                        <Label x:Name="LblArraySize"
-                            Content="n ="
+                            <Label x:Name="LblArraySize"
+                            Content="Количество элементов: "
                             Style="{StaticResource LabelStyle}"
                             FontWeight="Bold"
                             Foreground="White"
                             FontSize="18"
                             VerticalAlignment="Top" />
-                        <TextBox x:Name="TextBoxArraySize"
+                            <TextBox x:Name="TextBoxArraySize"
                             Style="{StaticResource TextBoxStyle}"
                             FontSize="18"
                             Margin="0,-5,0,0"
                             TabIndex="1" />
-                    </StackPanel>
-                </MenuItem.Header>
-            </MenuItem>
+                        </StackPanel>
+                    </MenuItem.Header>
+                </MenuItem>
+                <MenuItem x:Name="MenuItemFill"
+                        Background="#007575"
+                        TabIndex="4"
+                Margin="2"
+                Visibility="Visible">
+                    <MenuItem.Header>
+                        <Label Content="Заполнить"
+                        Style="{StaticResource LabelStyle}"
+                        Foreground="White"
+                        FontSize="16"
+                        VerticalAlignment="Center" />
 
-            <MenuItem x:Name="MenuItemFill">
-                <MenuItem.Header>
-                    <Button x:Name="BtnFill"
-                        Style="{StaticResource ButtonStyle}"
-                        FontSize="16"
-                        Content="Далее"
-                        Height="44"
-                        Width="auto"
-                        FontWeight="Bold"
-                        Click="BtnFill_Click" />
-                </MenuItem.Header>
-            </MenuItem>
-            <MenuItem x:Name="MenuItem_RandomGenerate">
-                <MenuItem.Header>
-                    <Button x:Name="BtnRandomGenerate"
-                        Style="{StaticResource ButtonStyle}"
-                        FontSize="16"
-                        Content="Далее"
-                        Height="44"
-                        Width="auto"
-                        FontWeight="Bold"
-                        Click="BtnRandomGenerate_Click" />
-                </MenuItem.Header>
-            </MenuItem>
-            <MenuItem x:Name="MenuItemEdit"
-                Visibility="Collapsed">
-                <MenuItem.Header>
-                    <Button x:Name="BtnEdit"
+                    </MenuItem.Header>
+                    <MenuItem Header="Вручную"
+                    FontWeight="Black"
+                    x:Name="MenuItem_FillManually"
+                    FontSize="16"
+                    Foreground="#007575"
+                    Background="Transparent"
+                    Click="MenuItem_FillManually_Click"
+                           />
+                    <MenuItem Header="Рандомно"
+                    FontWeight="Black"
+                    x:Name="MenuItem_RandomGenerate"
+                    FontSize="16"
+                    Foreground="#007575"
+                    Background="Transparent"
+                    Click="MenuItem_RandomGenerate_Click"
+                           />
+                </MenuItem>
+                <MenuItem x:Name="MenuItemEdit"
+                Visibility="Visible">
+                    <MenuItem.Header>
+                        <Button x:Name="BtnEdit"
                         Style="{StaticResource ButtonStyle}"
                         FontSize="16"
                         Content="Изменить"
@@ -101,36 +138,48 @@
                         Width="auto"
                         FontWeight="Bold"
                         Click="BtnEdit_Click" />
-                </MenuItem.Header>
-            </MenuItem>
-            <MenuItem x:Name="MenuItemBack"
+                    </MenuItem.Header>
+                </MenuItem>
+                <MenuItem x:Name="MenuItemBack"
                 Visibility="Visible">
-                <MenuItem.Header>
-                    <Button x:Name="BtnBack"
+                    <MenuItem.Header>
+                        <Button x:Name="BtnBack"
                         Style="{StaticResource ButtonStyle}"
                         FontSize="16"
                         Content="Назад"
                         Height="44"
                         Width="auto"
-                        FontWeight="Bold"
                         Click="BtnBack_Click" />
-                </MenuItem.Header>
-            </MenuItem>
-            <MenuItem x:Name="MenuItemAdd">
-                <MenuItem.Header>
-                    <Button x:Name="BtnAdd"
+                    </MenuItem.Header>
+                </MenuItem>
+                <MenuItem x:Name="MenuItemNext"
+                Visibility="Collapsed">
+                    <MenuItem.Header>
+                        <Button x:Name="BtnNext"
+                        Style="{StaticResource ButtonStyle}"
+                        FontSize="16"
+                        Content="Далее"
+                        Height="44"
+                        Width="auto"
+                        Click="BtnNext_Click" />
+                    </MenuItem.Header>
+                </MenuItem>
+                <MenuItem x:Name="MenuItemAdd">
+                    <MenuItem.Header>
+                        <Button x:Name="BtnAdd"
                         Style="{StaticResource ButtonStyle}"
                         FontSize="16"
                         Content="Добавить"
                         Height="44"
                         Width="auto"
-                        FontWeight="Bold"
                         Click="BtnAdd_Click" />
-                </MenuItem.Header>
-            </MenuItem>
-            <MenuItem x:Name="MenuItemCheckBox">
-                <MenuItem.Header>
-                    <CheckBox 
+                    </MenuItem.Header>
+                </MenuItem>
+                <MenuItem x:Name="MenuItemCheckBox"
+                      Visibility="Visible"
+                      >
+                    <MenuItem.Header>
+                        <CheckBox 
                         x:Name="ReverseCheckBox"
                         VerticalAlignment="Center"
                         Content="Обратная сортировка"
@@ -140,25 +189,23 @@
                         Checked="ReverseCheckBox_Checked"
                         Unchecked="ReverseCheckBox_Unchecked"
                         />
-                </MenuItem.Header>
-            </MenuItem>
-
-
-            <!--Сортировать-->
-            <MenuItem x:Name="MenuItemSortOperation"
+                    </MenuItem.Header>
+                </MenuItem>
+                <!--Сортировать-->
+                <MenuItem x:Name="MenuItemSortOperation"
                 Background="#007575"
                 TabIndex="4"
                 Margin="2"
                 Visibility="Visible">
-                <MenuItem.Header>
-                    <Label Content="Сортировать"
+                    <MenuItem.Header>
+                        <Label Content="Сортировать"
                         Style="{StaticResource LabelStyle}"
                         Foreground="White"
                         FontSize="16"
                         VerticalAlignment="Center" />
 
-                </MenuItem.Header>
-                <MenuItem Header="Пузырьковая сортировка"
+                    </MenuItem.Header>
+                    <MenuItem Header="Пузырьковая сортировка"
                     FontWeight="Black"
                     x:Name="MenuItem_BubleSort"
                     FontSize="16"
@@ -166,56 +213,62 @@
                     Background="Transparent"
                     Click="MenuItem_BubleSort_Click"
                            />
-                <MenuItem Header="Сортировка вставками"
+                    <MenuItem Header="Сортировка вставками"
                     FontWeight="Black"
                     x:Name="MenuItem_InsertSort"
                     FontSize="16"
                     Foreground="#007575"
                     Background="Transparent"
                     Click="MenuItem_InsertSort_Click"/>
-
-                <MenuItem Header="Шейкерная сортировка"
+                    <MenuItem Header="Шейкерная сортировка"
                     FontWeight="Black"
                     x:Name="MenuItem_ShakerSort"
                     FontSize="16"
                     Foreground="#007575"
                     Background="Transparent"
                     Click="MenuItem_ShakerSort_Click"/>
-
-                <MenuItem Header="Быстрая сортировка"
+                    <MenuItem Header="Быстрая сортировка"
                     FontWeight="Black"
                     x:Name="MenuItem_FastSort"
                     FontSize="16"
                     Foreground="#007575"
                     Background="Transparent"
                     Click="MenuItem_FastSort_Click"/>
-
-                <MenuItem Header="BOGO сортировка"
+                    <MenuItem Header="BOGO сортировка"
                     FontWeight="Black"
                     x:Name="MenuItem_BogoSort"
                     FontSize="16"
                     Foreground="#007575"
                     Background="Transparent"
                     Click="MenuItem_BogoSort_Click"/>
-
-
-            </MenuItem>
-
-            <!--Очистить-->
-            <MenuItem x:Name="MenuItemClearOpetations"
+                </MenuItem>
+                <MenuItem x:Name="MenuItemCancel"
+                Visibility="Collapsed">
+                    <MenuItem.Header>
+                        <Button x:Name="BtnCancel"
+                        Style="{StaticResource ButtonStyle}"
+                        FontSize="16"
+                        Content="Приостановить"
+                        Height="44"
+                        Width="auto"
+                        Click="BtnCancel_Click" />
+                    </MenuItem.Header>
+                </MenuItem>
+                <!--Очистить-->
+                <MenuItem x:Name="MenuItemClearOpetations"
                 Background="#007575"
                 TabIndex="4"
                 Margin="2"
                 Visibility="Visible">
-                <MenuItem.Header>
-                    <Label Content="Очистить"
+                    <MenuItem.Header>
+                        <Label Content="Очистить"
                         Style="{StaticResource LabelStyle}"
                         Foreground="White"
                         FontSize="16"
                         VerticalAlignment="Center" />
 
-                </MenuItem.Header>
-                <MenuItem Header="Очистить все"
+                    </MenuItem.Header>
+                    <MenuItem Header="Очистить все"
                     FontWeight="Black"
                     x:Name="MenuItemClearAll"
                     FontSize="16"
@@ -223,15 +276,7 @@
                     Background="Transparent"
                     Click="MenuItemClearAll_Click"
                     TabIndex="5" />
-                <MenuItem Header="Очистить график"
-                    x:Name="MenuItemClearPlot"
-                    FontWeight="Black"
-                    FontSize="16"
-                    Foreground="#007575"
-                    Background="Transparent"
-                    Click="MenuItemClearPlot_Click"
-                    TabIndex="6" />
-                <MenuItem Header="Очистить данные"
+                    <MenuItem Header="Очистить данные"
                     x:Name="MenuItemClearData"
                     FontWeight="Black"
                     FontSize="16"
@@ -239,60 +284,71 @@
                     Background="Transparent"
                     Click="MenuItemClearData_Click"
                     TabIndex="6" />
+                    <MenuItem Header="Очистить данные сортировки"
+                    x:Name="MenuItemClearSortData"
+                    FontWeight="Black"
+                    FontSize="16"
+                    Foreground="#007575"
+                    Background="Transparent"
+                    Click="MenuItemClearSortData_Click"
+                    TabIndex="6" />
 
-            </MenuItem>
-        </Menu>
+                </MenuItem>
+            </Menu>
 
 
-        <Grid Background="Transparent">
-            <ListView Name="ArrayData_ListView"
+            <Grid Background="Transparent">
+                <ListView Name="ArrayData_ListView"
                       FontSize="18"
                       Margin="0,0,5,0"
-                      MaxWidth="350"
+                      MaxWidth="450"
                       ScrollViewer.HorizontalScrollBarVisibility="Auto"
                       ScrollViewer.VerticalScrollBarVisibility="Auto"
                       >
-                <ListView.ContextMenu>
-                    <ContextMenu>
-                        <MenuItem Header="Удалить"
+                    <ListView.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem Header="Удалить"
                                   x:Name="Remove"
                                   Click="Remove_Click" />
-                        <MenuItem Header="Редактировать"
+                            <MenuItem Header="Редактировать"
                                   x:Name="Edit"
                                   Click="Edit_Click" />
-                    </ContextMenu>
-                </ListView.ContextMenu>
-                <ListView.View>
-                    <GridView>
-                        <GridViewColumn x:Name="GridView_ColumnIndex" DisplayMemberBinding="{Binding Path=Index}"
-                                        Width="80">Индекс</GridViewColumn>
-                        <GridViewColumn x:Name="GridView_Xi" DisplayMemberBinding="{Binding Path=Xi}"
-                                        Width="150">Данные</GridViewColumn>
-                    </GridView>
-                </ListView.View>
-            </ListView>
-        </Grid>
-        <Grid Background="Transparent" >
-            <ListView Name="ArrayData_ListView1"
+                        </ContextMenu>
+                    </ListView.ContextMenu>
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn x:Name="GridView_ColumnIndex" DisplayMemberBinding="{Binding Path=Index}"
+                                        Width="auto">i</GridViewColumn>
+                            <GridViewColumn x:Name="GridView_Xi" DisplayMemberBinding="{Binding Path=Xi}"
+                                        Width="auto">Данные</GridViewColumn>
+                            <GridViewColumn x:Name="GridView_SortedXi" DisplayMemberBinding="{Binding Path=SortedXi}"
+                                        Width="auto">Результат</GridViewColumn>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </Grid>
+            <Grid Background="Transparent" >
+                <ListView Name="ArrayData_ListView1"
                       FontSize="18"
                       Margin="0,0,5,0"
                       ScrollViewer.HorizontalScrollBarVisibility="Auto"
                       ScrollViewer.VerticalScrollBarVisibility="Auto">
-                <ListView.View>
-                    <GridView >
-                        <GridViewColumn DisplayMemberBinding="{Binding Path=SortType}"
-                                        Width="250">Тип сортировки</GridViewColumn>
-                        <GridViewColumn  DisplayMemberBinding="{Binding Path=Time}"
-                                        Width="150">Время</GridViewColumn>
-                        <GridViewColumn  DisplayMemberBinding="{Binding Path=Time}"
-                                        Width="150">Размерность</GridViewColumn>
+                    <ListView.View>
+                        <GridView >
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=sortType}"
+                                        Width="auto">Тип сортировки</GridViewColumn>
+                            <GridViewColumn  DisplayMemberBinding="{Binding Path=TimerValue}"
+                                        Width="auto">Продолжительность</GridViewColumn>
+                            <GridViewColumn  DisplayMemberBinding="{Binding Path=ArraySize}"
+                                         Width="auto">Количество элементов</GridViewColumn>
 
-                    </GridView>
-                </ListView.View>
-            </ListView>
-        </Grid>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </Grid>
 
 
 
-    </DockPanel>
+        </DockPanel>
+    </Grid>
 </Page>
