@@ -34,13 +34,11 @@ namespace Programing_Labs.Pages
         private List<Control> DataControls_onRandomlyClick { get; set; }
         private List<Control> DataControls_onManuallyClick { get; set; }
 
-        private List<Task> Tasks = new List<Task>();
-        private CancellationTokenSource cancellationToken { get; set; }
-        public static StackPanel loadingPanel1 { get; set; }
+        public static CancellationTokenSource cancellationToken { get; set; } = new CancellationTokenSource();
+        public static StackPanel LoadingPanel1 { get; set; }
         public static Label LoadingLabel1 { get; set; }
-        /// <summary>
-        /// значение i  для Xi
-        /// </summary>
+        public static Control MenuItemCancell1 { get; set; }
+
         public int index = 0;
         private Stopwatch Timer { get; set; }
 
@@ -50,11 +48,16 @@ namespace Programing_Labs.Pages
         {
             InitializeComponent();
             OlympSort.Data.SortDataView = ArrayData_ListView;
+            OlympSort.Sort.SortDataView = ArrayData_ListView1;
+
             ArrayData_ListView.ItemsSource = OlympSort.Data.SortDataCollection;
             ArrayData_ListView1.ItemsSource = OlympSort.Sort.SortDataCollection;
-            OlympSort.Sort.cancellationToken = cancellationToken;
-            loadingPanel1 = loadingPanel;
+
+            OlympSort.Sort.Token = cancellationToken.Token;
+
+            LoadingPanel1 = loadingPanel;
             LoadingLabel1 = LoadingLabel;
+            MenuItemCancell1 = MenuItemCancel;
         }
 
         #region OnStartMethods
@@ -97,6 +100,14 @@ namespace Programing_Labs.Pages
             DataControls_onManuallyClick.ForEach(el => el.Visibility = Visibility.Collapsed);
             MenuItemEdit.Visibility = Visibility.Collapsed;
         }
+        private void OnStartControrsVisibility()
+        {
+            OnStartControls.ForEach(el => el.Visibility = Visibility.Visible);
+            DataControls_onManuallyClick.ForEach(el => el.Visibility = Visibility.Collapsed);
+            if (OlympSort.Data.SortDatas.Count > 0)
+                MenuItemNext.Visibility = Visibility.Visible;
+            MenuItemBack.Visibility = Visibility.Collapsed;
+        }
         private object GetStyleElement(Control element, string name) =>
           element.Template.FindName(name, element);
         #endregion
@@ -137,7 +148,6 @@ namespace Programing_Labs.Pages
             }
             OlympSort.Data.PrepareDataForEditing(TxtBxXi, LblXi);
         }
-
         private void BtnBack_Click(object sender, RoutedEventArgs e)
         {
             OnStartControls.ForEach(el => el.Visibility = Visibility.Visible);
@@ -145,9 +155,8 @@ namespace Programing_Labs.Pages
             MenuItemBack.Visibility = Visibility.Collapsed;
             if (OlympSort.Data.SortDatas.Count > 0)
                 MenuItemNext.Visibility = Visibility.Visible;
-            
-        }
 
+        }
         private async void BtnAdd_Click(object sender, RoutedEventArgs e)
         {
 
@@ -171,19 +180,43 @@ namespace Programing_Labs.Pages
             LblXi.Content = $"X({index})";
 
         }
+        private void BtnNext_Click(object sender, RoutedEventArgs e)
+        {
+            int.TryParse(TxtBxArraySize.Text, out int n);
+            OnStartControls.ForEach(el => el.Visibility = Visibility.Collapsed);
+            DataControls_onRandomlyClick.ForEach(el => el.Visibility = Visibility.Visible);
+            MenuItemNext.Visibility = Visibility.Collapsed;
+
+            if (OlympSort.Data.EditMode)
+                MenuItemBack.Visibility = Visibility.Visible;
+
+            if (ArrayData_ListView.Items.Count >= n)
+                MenuItemAdd.Visibility = Visibility.Collapsed;
+        }
+        private void BtnCancel_Click(object sender, RoutedEventArgs e)
+        {
+            cancellationToken.Cancel();
+            OlympSort.Sort.Token = cancellationToken.Token;
+        }
         #endregion
-        
+
         private double[] SetTimer(Func<double[]> action, OlympSort.Sort.SortType sortType)
         {
             double[] data = null;
+
+            cancellationToken.Token.ThrowIfCancellationRequested();
+
             LoadingLabelText("Идет запуск таймера");
+
             try
             {
                 Timer = new Stopwatch();
                 Timer.Start();
                 data = action.Invoke();
                 Timer.Stop();
+
                 LoadingLabelText("Идет обработка данных");
+
                 TxtBxArraySize.Dispatcher.Invoke(async () =>
                     await OlympSort.Sort.Add(new OlympSort.Sort(sortType, Timer.Elapsed.ToString(), TxtBxArraySize.Text)));
             }
@@ -203,9 +236,12 @@ namespace Programing_Labs.Pages
                 loadingPanel.Visibility = visibility;
             });
         }
+
         private double[] Sort(OlympSort.Sort.SortType sortType)
         {
             LoadingLabelText("Идет сортировка данных");
+            cancellationToken.Token.ThrowIfCancellationRequested();
+
             switch (sortType)
             {
                 case OlympSort.Sort.SortType.Buble:
@@ -226,18 +262,40 @@ namespace Programing_Labs.Pages
         }
         private async void SortingProcces(OlympSort.Sort.SortType sortType)
         {
-            await Task.Run(() =>
-            {
-                OlympSort.Data.SetValues(
-                            SetTimer(() => Sort(sortType), sortType),
-                            OlympSort.Data.Value.SortedXi);
-                LoadingAnimation(Visibility.Collapsed);
-            });
+            cancellationToken = new CancellationTokenSource();
+            CancellationToken token = cancellationToken.Token;
+            OlympSort.Sort.Token = token;
 
+            MenuItemCancel.Visibility = Visibility.Visible;
+            var task = Task.Run((Action)(() =>
+              {
+                  token.ThrowIfCancellationRequested();
+
+                  OlympSort.Data.SetValues(
+                              SetTimer(() => Sort(sortType), sortType),
+                              OlympSort.Data.Value.SortedXi, token);
+                  LoadingAnimation(Visibility.Collapsed);
+                  MenuItemCancel.Dispatcher.Invoke(() => MenuItemCancel.Visibility = Visibility.Collapsed);
+
+              }), token);
+
+            try
+            {
+                await task;
+            }
+            catch
+            {
+                LoadingAnimation(Visibility.Collapsed);
+                MenuItemCancel.Dispatcher.Invoke(() => MenuItemCancel.Visibility = Visibility.Collapsed);
+            }
+            finally
+            {
+                cancellationToken.Dispose();
+            }
         }
         public static async void LoadingLabelText(string text)
         {
-           await Task.Run(() => LoadingLabel1.Dispatcher.Invoke(() => LoadingLabel1.Content = text));
+            await Task.Run(() => LoadingLabel1.Dispatcher.Invoke(() => LoadingLabel1.Content = text));
         }
 
         #region MenuItems Sort
@@ -247,27 +305,27 @@ namespace Programing_Labs.Pages
             SortingProcces(OlympSort.Sort.SortType.Buble);
         }
 
-        private  void MenuItem_InsertSort_Click(object sender, RoutedEventArgs e)
+        private void MenuItem_InsertSort_Click(object sender, RoutedEventArgs e)
         {
             loadingPanel.Visibility = Visibility.Visible;
             SortingProcces(OlympSort.Sort.SortType.Insert);
-           
+
         }
 
-        private  void MenuItem_ShakerSort_Click(object sender, RoutedEventArgs e)
+        private void MenuItem_ShakerSort_Click(object sender, RoutedEventArgs e)
         {
             loadingPanel.Visibility = Visibility.Visible;
             SortingProcces(OlympSort.Sort.SortType.Shaker);
-            
+
         }
 
-        private  void MenuItem_FastSort_Click(object sender, RoutedEventArgs e)
+        private void MenuItem_FastSort_Click(object sender, RoutedEventArgs e)
         {
             loadingPanel.Visibility = Visibility.Visible;
             SortingProcces(OlympSort.Sort.SortType.Fast);
         }
 
-        private  void MenuItem_BogoSort_Click(object sender, RoutedEventArgs e)
+        private void MenuItem_BogoSort_Click(object sender, RoutedEventArgs e)
         {
             loadingPanel.Visibility = Visibility.Visible;
             SortingProcces(OlympSort.Sort.SortType.Bogo);
@@ -317,9 +375,10 @@ namespace Programing_Labs.Pages
         {
             LoadingLabelText("Идет проверка данных");
             loadingPanel.Visibility = Visibility.Visible;
-            
+            MenuItemCancel.Visibility = Visibility.Visible;
+
             int.TryParse(TxtBxArraySize.Text, out int n);
-            
+
             if (n <= 0)
             {
                 MessageBox.Show("Размер массива не может быть меньше или равен нулю!!", "Неверный формат", MessageBoxButton.OK, MessageBoxImage.Warning);
@@ -335,12 +394,13 @@ namespace Programing_Labs.Pages
 
             if (ArrayData_ListView.Items.Count >= n)
                 MenuItemAdd.Visibility = Visibility.Collapsed;
-            
+
             OlympSort.Data.Clear();
             LoadingLabelText("Выполняется генерация данных");
-            
-            OlympSort.Data.GererateData(n);
-            
+            cancellationToken = new CancellationTokenSource();
+            CancellationToken token = cancellationToken.Token;
+            OlympSort.Data.GererateData(n, token);
+
 
         }
         #endregion
@@ -351,11 +411,15 @@ namespace Programing_Labs.Pages
         {
             OlympSort.Data.Clear();
             OlympSort.Sort.Clear();
+            OnStartControrsVisibility();
         }
 
         private void MenuItemClearData_Click(object sender, RoutedEventArgs e)
         {
             OlympSort.Data.Clear();
+            OnStartControrsVisibility();
+
+
         }
 
         private void MenuItemClearSortData_Click(object sender, RoutedEventArgs e)
@@ -395,23 +459,6 @@ namespace Programing_Labs.Pages
 
         #endregion
 
-        private void BtnNext_Click(object sender, RoutedEventArgs e)
-        {
-            int.TryParse(TxtBxArraySize.Text, out int n);
-            OnStartControls.ForEach(el => el.Visibility = Visibility.Collapsed);
-            DataControls_onRandomlyClick.ForEach(el => el.Visibility = Visibility.Visible);
-            MenuItemNext.Visibility = Visibility.Collapsed;
 
-            if (OlympSort.Data.EditMode)
-                MenuItemBack.Visibility = Visibility.Visible;
-
-            if (ArrayData_ListView.Items.Count >= n)
-                MenuItemAdd.Visibility = Visibility.Collapsed;
-        }
-
-        private void BtnCancel_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
     }
 }

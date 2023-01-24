@@ -10,6 +10,7 @@
 //------------------------------------------------------------------------------
 
 using Programing_Labs;
+using ScottPlot;
 using System;
 using System.Diagnostics;
 using System.Windows;
@@ -93,7 +94,7 @@ namespace Programing_Labs {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/Nasibullo\'s Programmig Labs;component/mainwindow.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/Programmig Labs;component/mainwindow.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\MainWindow.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);
