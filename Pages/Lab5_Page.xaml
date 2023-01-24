@@ -18,7 +18,7 @@
                     Visibility="Collapsed"
                     
                     >
-            
+
             <Image  x:Name="LoadingGifAnimation" 
                 Visibility="Visible" 
                 Width="120"
@@ -97,10 +97,9 @@
                         </StackPanel>
                     </MenuItem.Header>
                 </MenuItem>
-
                 <MenuItem x:Name="MenuItemFill"
-                Background="#007575"
-                TabIndex="4"
+                        Background="#007575"
+                        TabIndex="4"
                 Margin="2"
                 Visibility="Visible">
                     <MenuItem.Header>
@@ -128,9 +127,6 @@
                     Click="MenuItem_RandomGenerate_Click"
                            />
                 </MenuItem>
-
-
-
                 <MenuItem x:Name="MenuItemEdit"
                 Visibility="Visible">
                     <MenuItem.Header>
@@ -154,6 +150,18 @@
                         Height="44"
                         Width="auto"
                         Click="BtnBack_Click" />
+                    </MenuItem.Header>
+                </MenuItem>
+                <MenuItem x:Name="MenuItemNext"
+                Visibility="Collapsed">
+                    <MenuItem.Header>
+                        <Button x:Name="BtnNext"
+                        Style="{StaticResource ButtonStyle}"
+                        FontSize="16"
+                        Content="Далее"
+                        Height="44"
+                        Width="auto"
+                        Click="BtnNext_Click" />
                     </MenuItem.Header>
                 </MenuItem>
                 <MenuItem x:Name="MenuItemAdd">
@@ -183,8 +191,6 @@
                         />
                     </MenuItem.Header>
                 </MenuItem>
-
-
                 <!--Сортировать-->
                 <MenuItem x:Name="MenuItemSortOperation"
                 Background="#007575"
@@ -214,7 +220,6 @@
                     Foreground="#007575"
                     Background="Transparent"
                     Click="MenuItem_InsertSort_Click"/>
-
                     <MenuItem Header="Шейкерная сортировка"
                     FontWeight="Black"
                     x:Name="MenuItem_ShakerSort"
@@ -222,7 +227,6 @@
                     Foreground="#007575"
                     Background="Transparent"
                     Click="MenuItem_ShakerSort_Click"/>
-
                     <MenuItem Header="Быстрая сортировка"
                     FontWeight="Black"
                     x:Name="MenuItem_FastSort"
@@ -230,7 +234,6 @@
                     Foreground="#007575"
                     Background="Transparent"
                     Click="MenuItem_FastSort_Click"/>
-
                     <MenuItem Header="BOGO сортировка"
                     FontWeight="Black"
                     x:Name="MenuItem_BogoSort"
@@ -238,10 +241,19 @@
                     Foreground="#007575"
                     Background="Transparent"
                     Click="MenuItem_BogoSort_Click"/>
-
-
                 </MenuItem>
-
+                <MenuItem x:Name="MenuItemCancel"
+                Visibility="Collapsed">
+                    <MenuItem.Header>
+                        <Button x:Name="BtnCancel"
+                        Style="{StaticResource ButtonStyle}"
+                        FontSize="16"
+                        Content="Приостановить"
+                        Height="44"
+                        Width="auto"
+                        Click="BtnCancel_Click" />
+                    </MenuItem.Header>
+                </MenuItem>
                 <!--Очистить-->
                 <MenuItem x:Name="MenuItemClearOpetations"
                 Background="#007575"

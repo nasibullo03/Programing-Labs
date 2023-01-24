@@ -44,9 +44,6 @@ namespace Programing_Labs.Pages
         public int index = 0;
         private Stopwatch Timer { get; set; }
 
-
-
-
         #endregion
 
         public Lab5_Page()
@@ -146,6 +143,9 @@ namespace Programing_Labs.Pages
             OnStartControls.ForEach(el => el.Visibility = Visibility.Visible);
             DataControls_onManuallyClick.ForEach(el => el.Visibility = Visibility.Collapsed);
             MenuItemBack.Visibility = Visibility.Collapsed;
+            if (OlympSort.Data.SortDatas.Count > 0)
+                MenuItemNext.Visibility = Visibility.Visible;
+            
         }
 
         private async void BtnAdd_Click(object sender, RoutedEventArgs e)
@@ -237,7 +237,7 @@ namespace Programing_Labs.Pages
         }
         public static async void LoadingLabelText(string text)
         {
-            await Task.Run(()=>LoadingLabel1.Dispatcher.Invoke(() => LoadingLabel1.Content = text));
+           await Task.Run(() => LoadingLabel1.Dispatcher.Invoke(() => LoadingLabel1.Content = text));
         }
 
         #region MenuItems Sort
@@ -300,6 +300,7 @@ namespace Programing_Labs.Pages
 
             OnStartControls.ForEach(el => el.Visibility = Visibility.Collapsed);
             DataControls_onManuallyClick.ForEach(el => el.Visibility = Visibility.Visible);
+            MenuItemNext.Visibility = Visibility.Collapsed;
 
             if (OlympSort.Data.EditMode)
                 MenuItemBack.Visibility = Visibility.Visible;
@@ -316,16 +317,18 @@ namespace Programing_Labs.Pages
         {
             LoadingLabelText("Идет проверка данных");
             loadingPanel.Visibility = Visibility.Visible;
-
-
+            
             int.TryParse(TxtBxArraySize.Text, out int n);
+            
             if (n <= 0)
             {
                 MessageBox.Show("Размер массива не может быть меньше или равен нулю!!", "Неверный формат", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
+
             OnStartControls.ForEach(el => el.Visibility = Visibility.Collapsed);
             DataControls_onRandomlyClick.ForEach(el => el.Visibility = Visibility.Visible);
+            MenuItemNext.Visibility = Visibility.Collapsed;
 
             if (OlympSort.Data.EditMode)
                 MenuItemBack.Visibility = Visibility.Visible;
@@ -335,6 +338,7 @@ namespace Programing_Labs.Pages
             
             OlympSort.Data.Clear();
             LoadingLabelText("Выполняется генерация данных");
+            
             OlympSort.Data.GererateData(n);
             
 
@@ -388,8 +392,26 @@ namespace Programing_Labs.Pages
         }
 
 
+
         #endregion
 
+        private void BtnNext_Click(object sender, RoutedEventArgs e)
+        {
+            int.TryParse(TxtBxArraySize.Text, out int n);
+            OnStartControls.ForEach(el => el.Visibility = Visibility.Collapsed);
+            DataControls_onRandomlyClick.ForEach(el => el.Visibility = Visibility.Visible);
+            MenuItemNext.Visibility = Visibility.Collapsed;
 
+            if (OlympSort.Data.EditMode)
+                MenuItemBack.Visibility = Visibility.Visible;
+
+            if (ArrayData_ListView.Items.Count >= n)
+                MenuItemAdd.Visibility = Visibility.Collapsed;
+        }
+
+        private void BtnCancel_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

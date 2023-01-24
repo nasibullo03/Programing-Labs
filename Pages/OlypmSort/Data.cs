@@ -187,6 +187,7 @@ namespace Programing_Labs.Pages.OlympSort
                 double[] data = new double[ArraySize];
                 for (int i = 0; i < ArraySize; ++i)
                     data[i] = random.Next();
+                
                 Lab5_Page.LoadingLabelText("Идет обработка данных");
                 Add(data);
                 Lab5_Page.loadingPanel1.Dispatcher.Invoke(()=> Lab5_Page.loadingPanel1.Visibility = Visibility.Collapsed);
