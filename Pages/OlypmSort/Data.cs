@@ -21,7 +21,6 @@ namespace Programing_Labs.Pages.OlympSort
         /// Коллекция значение для изменение значение
         /// </summary>
         public static List<Data> EditableList { get; set; }
-
         public static bool EditMode { get; set; }
         private static int Count { get; set; }
         public int Index { get; set; }
@@ -34,10 +33,6 @@ namespace Programing_Labs.Pages.OlympSort
 
         #endregion
         #region constructors
-        public Data()
-        {
-
-        }
         public Data(double Xi)
         {
             this.Index = ++Count;
@@ -52,15 +47,18 @@ namespace Programing_Labs.Pages.OlympSort
             SortDataCollection.Add(sortData);
             await Task.Yield();
         }
-        public static void Add(double[] datas)
+        public static void Add(double[] datas, CancellationToken token)
         {
-
             Data data1;
+
             foreach (double data in datas)
             {
                 data1 = new Data(data);
                 SortDatas.Add(data1);
             }
+
+            token.ThrowIfCancellationRequested();
+
             SortDataView.Dispatcher.Invoke(() => UpdateCollection());
 
         }
@@ -73,7 +71,9 @@ namespace Programing_Labs.Pages.OlympSort
                     SortDatas.Remove(el as Data);
                 }
             }
+
             var sortDataCollection = new ObservableCollection<Data>();
+
             Count = 0;
             foreach (var el in SortDatas.ToArray())
             {
@@ -83,15 +83,16 @@ namespace Programing_Labs.Pages.OlympSort
 
             SortDataCollection = sortDataCollection;
             SortDataView.ItemsSource = SortDataCollection;
-            SortDataView.UpdateLayout();
+            SortDataView.Items.Refresh();
 
         }
 
         public static void UpdateCollection()
         {
-
             var sortDataCollection = new ObservableCollection<Data>();
+
             Count = 0;
+
             foreach (var el in SortDatas.ToArray())
             {
                 el.Index = ++Count;
@@ -105,12 +106,11 @@ namespace Programing_Labs.Pages.OlympSort
 
         public static void Clear()
         {
-            SortDataView.ItemsSource = new ObservableCollection<Data>();
             SortDataCollection?.Clear();
             SortDatas?.Clear();
             Count = 0;
-            SortDataView.ItemsSource = SortDataCollection;
             EditableList?.Clear();
+            SortDataView.Items.Refresh();
         }
         public static void PrepareDataForEditing(TextBox XiTextBox, Label LblXi)
         {
@@ -129,7 +129,6 @@ namespace Programing_Labs.Pages.OlympSort
 
             SortDataView.ItemsSource = new ObservableCollection<Data>();
             SortDataView.ItemsSource = SortDataCollection;
-
 
         }
         public static void DeleteEditedValue()
@@ -157,9 +156,14 @@ namespace Programing_Labs.Pages.OlympSort
             return data;
 
         }
-        public static void SetValues(double[] data, Value value)
+        public static void SetValues(double[] data, Value value, CancellationToken token)
         {
             Lab5_Page.LoadingLabelText("Идет обработка данных");
+
+            token.ThrowIfCancellationRequested();
+
+            if (data == null) return;
+
             switch (value)
             {
                 case Value.Xi:
@@ -177,21 +181,43 @@ namespace Programing_Labs.Pages.OlympSort
 
                     break;
             }
+
             SortDataView.Dispatcher.Invoke(() => UpdateCollection());
         }
-        public static async void GererateData(int ArraySize)
+        public static async void GererateData(int ArraySize, CancellationToken token)
         {
-            await Task.Run(() =>
+            var task = Task.Run(() =>
+           {
+               Random random = new Random();
+               double[] data = new double[ArraySize];
+               for (int i = 0; i < ArraySize; ++i)
+               {
+                   data[i] = random.Next();
+
+                   token.ThrowIfCancellationRequested();
+               }
+               Lab5_Page.LoadingLabelText("Идет обработка данных");
+               Add(data, token);
+
+               Lab5_Page.LoadingPanel1.Dispatcher.Invoke(() => Lab5_Page.LoadingPanel1.Visibility = Visibility.Collapsed);
+               Lab5_Page.MenuItemCancell1.Dispatcher.Invoke(() => Lab5_Page.MenuItemCancell1.Visibility = Visibility.Collapsed);
+           }, token);
+            try
             {
-                Random random = new Random();
-                double[] data = new double[ArraySize];
-                for (int i = 0; i < ArraySize; ++i)
-                    data[i] = random.Next();
-                
-                Lab5_Page.LoadingLabelText("Идет обработка данных");
-                Add(data);
-                Lab5_Page.loadingPanel1.Dispatcher.Invoke(()=> Lab5_Page.loadingPanel1.Visibility = Visibility.Collapsed);
-            });
+                await task;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                Lab5_Page.LoadingPanel1.Dispatcher.Invoke(() => Lab5_Page.LoadingPanel1.Visibility = Visibility.Collapsed);
+                Lab5_Page.MenuItemCancell1.Dispatcher.Invoke(() => Lab5_Page.MenuItemCancell1.Visibility = Visibility.Collapsed);
+
+            }
+            finally
+            {
+                Lab5_Page.cancellationToken.Dispose();
+
+            }
         }
 
     }

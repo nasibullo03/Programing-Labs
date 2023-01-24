@@ -12,22 +12,20 @@ using System.Windows.Threading;
 
 namespace Programing_Labs.Pages.OlympSort
 {
-    class Sort
+    public class Sort
     {
         #region properties
 
-        private static double temp { get; set; }
+        private static double TemproraryDouble { get; set; }
         public string sortType { get; set; }
         public string TimerValue { get; set; }
         public string ArraySize { get; set; }
         public static ListView SortDataView { get; set; }
-        public static CancellationTokenSource cancellationToken { get; set; }
-
-        public static List<Sort> SortDatas = new List<Sort>();
-        public static ObservableCollection<Sort> SortDataCollection = new ObservableCollection<Sort>();
-
+        public static List<Sort> SortDatas { get; set; } = new List<Sort>();
+        public static ObservableCollection<Sort> SortDataCollection { get; set; } = new ObservableCollection<Sort>();
+        public static CancellationToken Token { get; set; }
         public enum SortType { Buble, Insert, Shaker, Fast, Bogo }
-        public static Dictionary<SortType, string> SortTypeValue = new Dictionary<SortType, string>
+        public static Dictionary<SortType, string> SortTypeValue { get; set; } = new Dictionary<SortType, string>
         {
             {SortType.Buble, "Пузырковая сортировка"},
             {SortType.Insert, "Сортировка вставками"},
@@ -35,13 +33,11 @@ namespace Programing_Labs.Pages.OlympSort
             {SortType.Fast, "Быстрая сортировка"},
             {SortType.Bogo, "Bogo - сортировка"},
         };
-
         #endregion
         #region constructor
         public Sort(SortType type, string TimerValue, string ArraySize)
         {
             sortType = SortTypeValue[type];
-            //this.TimerValue = TimerValue.ToString() + " мс";
             this.TimerValue = TimerValue;
             this.ArraySize = ArraySize;
         }
@@ -56,12 +52,10 @@ namespace Programing_Labs.Pages.OlympSort
 
         public static void Clear()
         {
-            SortDataView.ItemsSource = new ObservableCollection<Sort>();
             SortDataCollection?.Clear();
             SortDatas?.Clear();
-            SortDataView.ItemsSource = SortDataCollection;
+            SortDataView.Items.Refresh();
         }
-
 
         #endregion
         #region Sorting Methods
@@ -76,10 +70,11 @@ namespace Programing_Labs.Pages.OlympSort
                     {
                         if (datas[j] > datas[j + 1])
                         {
-                            temp = datas[j + 1];
+                            TemproraryDouble = datas[j + 1];
                             datas[j + 1] = datas[j];
-                            datas[j] = temp;
+                            datas[j] = TemproraryDouble;
                         }
+                        Token.ThrowIfCancellationRequested();
                     }
                 }
             else
@@ -87,24 +82,22 @@ namespace Programing_Labs.Pages.OlympSort
                 for (int i = 0; i < datas.Length; i++)
                 {
                     for (int j = 0; j < datas.Length - 1 - i; j++)
-
+                    {
                         if (datas[j] < datas[j + 1])
                         {
-                            temp = datas[j + 1];
+                            TemproraryDouble = datas[j + 1];
                             datas[j + 1] = datas[j];
-                            datas[j] = temp;
+                            datas[j] = TemproraryDouble;
                         }
-
-
+                        Token.ThrowIfCancellationRequested();
+                    }
                 }
             }
-
 
             return datas;
         }
         public static double[] InsertSort(bool reverse)
         {
-            //double[] datas = Dispatcher.CurrentDispatcher.Invoke(() => Data.GetValues(Data.Value.Xi));
             double[] datas = Data.GetValues(Data.Value.Xi);
             if (!reverse)
                 for (int i = 1; i < datas.Length; ++i)
@@ -114,7 +107,7 @@ namespace Programing_Labs.Pages.OlympSort
                     while (j >= 0 && datas[j] > temp)
                     {
                         datas[j + 1] = datas[j];
-                        j = j - 1;
+                        j--;
                     }
 
                     datas[j + 1] = temp;
@@ -128,8 +121,12 @@ namespace Programing_Labs.Pages.OlympSort
                     while (j >= 0 && datas[j] < temp)
                     {
                         datas[j + 1] = datas[j];
-                        j = j - 1;
+                        j--;
+
+                        Token.ThrowIfCancellationRequested();
                     }
+
+                    Token.ThrowIfCancellationRequested();
 
                     datas[j + 1] = temp;
 
@@ -138,7 +135,6 @@ namespace Programing_Labs.Pages.OlympSort
         }
         public static double[] ShakerSort(bool reverse)
         {
-            //double[] datas = Dispatcher.CurrentDispatcher.Invoke(() => Data.GetValues(Data.Value.Xi));
             double[] datas = Data.GetValues(Data.Value.Xi);
             if (!reverse)
                 for (var i = 0; i < datas.Length / 2; i++)
@@ -152,6 +148,7 @@ namespace Programing_Labs.Pages.OlympSort
                             (datas[j], datas[j + 1]) = (datas[j + 1], datas[j]);
                             swapFlag = true;
                         }
+                        Token.ThrowIfCancellationRequested();
                     }
 
                     for (var j = datas.Length - 2 - i; j > i; j--)
@@ -161,12 +158,12 @@ namespace Programing_Labs.Pages.OlympSort
                             (datas[j - 1], datas[j]) = (datas[j], datas[j - 1]);
                             swapFlag = true;
                         }
+                        Token.ThrowIfCancellationRequested();
                     }
 
                     if (!swapFlag)
-                    {
                         break;
-                    }
+
                 }
             else
                 for (var i = 0; i < datas.Length / 2; i++)
@@ -180,6 +177,7 @@ namespace Programing_Labs.Pages.OlympSort
                             (datas[j], datas[j + 1]) = (datas[j + 1], datas[j]);
                             swapFlag = true;
                         }
+                        Token.ThrowIfCancellationRequested();
                     }
 
                     for (var j = datas.Length - 2 - i; j > i; j--)
@@ -189,12 +187,11 @@ namespace Programing_Labs.Pages.OlympSort
                             (datas[j - 1], datas[j]) = (datas[j], datas[j - 1]);
                             swapFlag = true;
                         }
+                        Token.ThrowIfCancellationRequested();
                     }
 
                     if (!swapFlag)
-                    {
                         break;
-                    }
                 }
 
             return datas;
@@ -204,6 +201,8 @@ namespace Programing_Labs.Pages.OlympSort
             int i = LeftIndex;
             int j = RightIndex;
             double bar = datas[(LeftIndex + RightIndex) / 2];
+
+            Token.ThrowIfCancellationRequested();
 
             if (!reverse)
                 while (i <= j)
@@ -219,6 +218,8 @@ namespace Programing_Labs.Pages.OlympSort
                         ++i; --j;
 
                     }
+
+                    Token.ThrowIfCancellationRequested();
                 }
 
             else
@@ -235,6 +236,8 @@ namespace Programing_Labs.Pages.OlympSort
                         ++i; --j;
 
                     }
+
+                    Token.ThrowIfCancellationRequested();
                 }
 
 
@@ -249,42 +252,68 @@ namespace Programing_Labs.Pages.OlympSort
         public static double[] BogoSort(bool reverse)
         {
             double[] datas = Dispatcher.CurrentDispatcher.Invoke(() => Data.GetValues(Data.Value.Xi));
-            Random random = new Random();
+
             if (!reverse)
                 while (!IsSorted(datas))
                 {
-                    for (int i = datas.Length - 1; i > 0; --i)
-                    {
-                        int n = random.Next(i + 1);
-                        (datas[i], datas[n]) = (datas[n], datas[i]);
-                    }
+                    datas = RandomPermutation(datas);
+                    Token.ThrowIfCancellationRequested();
                 }
             else
                 while (!IsSorted_Revese(datas))
                 {
-                    for (int i = datas.Length - 1; i > 0; --i)
-                    {
-                        int n = random.Next(i + 1);
-                        (datas[i], datas[n]) = (datas[n], datas[i]);
-                    }
+                    datas = RandomPermutation(datas);
+                    Token.ThrowIfCancellationRequested();
                 }
+
             return datas;
         }
-        static bool IsSorted(double[] datas)
+        private static bool IsSorted_Revese(double[] datas)
         {
             for (int i = 0; i < datas.Length - 1; i++)
-                if (datas[i] > datas[i + 1])
+            {
+                if (datas[i] < datas[i + 1])
                     return false;
+                Token.ThrowIfCancellationRequested();
+
+            }
 
             return true;
         }
-        static bool IsSorted_Revese(double[] datas)
+        private static bool IsSorted(double[] datas)
         {
             for (int i = 0; i < datas.Length - 1; i++)
-                if (datas[i] < datas[i + 1])
+            {
+                if (datas[i] > datas[i + 1])
                     return false;
+                Token.ThrowIfCancellationRequested();
+            }
 
             return true;
+        }
+
+        /// <summary>
+        /// перемешивание элементов массива
+        /// </summary>
+        /// <param name="datas"></param>
+        /// <returns></returns>
+        private static double[] RandomPermutation(double[] datas)
+        {
+            Token.ThrowIfCancellationRequested();
+            Random random = new Random();
+            var n = datas.Length;
+            while (n > 1)
+            {
+                n--;
+                var i = random.Next(n + 1);
+                var temp = datas[i];
+                datas[i] = datas[n];
+                datas[n] = temp;
+                if (Token.IsCancellationRequested)
+                    Token.ThrowIfCancellationRequested(); ;
+            }
+
+            return datas;
         }
 
         #endregion
