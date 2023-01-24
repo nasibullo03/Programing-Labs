@@ -15,12 +15,13 @@ namespace Programing_Labs.Pages.OlympSort
     class Sort
     {
         #region properties
-        public static CancellationTokenSource cancellationToken { get; set; }
+
         private static double temp { get; set; }
-        public static ListView SortDataView { get; set; }
         public string sortType { get; set; }
         public string TimerValue { get; set; }
         public string ArraySize { get; set; }
+        public static ListView SortDataView { get; set; }
+        public static CancellationTokenSource cancellationToken { get; set; }
 
         public static List<Sort> SortDatas = new List<Sort>();
         public static ObservableCollection<Sort> SortDataCollection = new ObservableCollection<Sort>();
@@ -37,14 +38,11 @@ namespace Programing_Labs.Pages.OlympSort
 
         #endregion
         #region constructor
-        public Sort()
-        {
-
-        }
-        public Sort(SortType type, long TimerValue, string ArraySize)
+        public Sort(SortType type, string TimerValue, string ArraySize)
         {
             sortType = SortTypeValue[type];
-            this.TimerValue = TimerValue.ToString() + " мс";
+            //this.TimerValue = TimerValue.ToString() + " мс";
+            this.TimerValue = TimerValue;
             this.ArraySize = ArraySize;
         }
         #endregion
@@ -69,7 +67,7 @@ namespace Programing_Labs.Pages.OlympSort
         #region Sorting Methods
         public static double[] BubleSort(bool reverse)
         {
-            double[] datas = Dispatcher.CurrentDispatcher.Invoke(() => Data.GetValues(Data.Value.Xi));
+            double[] datas = Data.GetValues(Data.Value.Xi);
 
             if (!reverse)
                 for (int i = 0; i < datas.Length; i++)
@@ -106,7 +104,8 @@ namespace Programing_Labs.Pages.OlympSort
         }
         public static double[] InsertSort(bool reverse)
         {
-            double[] datas = Dispatcher.CurrentDispatcher.Invoke(() => Data.GetValues(Data.Value.Xi));
+            //double[] datas = Dispatcher.CurrentDispatcher.Invoke(() => Data.GetValues(Data.Value.Xi));
+            double[] datas = Data.GetValues(Data.Value.Xi);
             if (!reverse)
                 for (int i = 1; i < datas.Length; ++i)
                 {
@@ -139,7 +138,8 @@ namespace Programing_Labs.Pages.OlympSort
         }
         public static double[] ShakerSort(bool reverse)
         {
-            double[] datas = Dispatcher.CurrentDispatcher.Invoke(() => Data.GetValues(Data.Value.Xi));
+            //double[] datas = Dispatcher.CurrentDispatcher.Invoke(() => Data.GetValues(Data.Value.Xi));
+            double[] datas = Data.GetValues(Data.Value.Xi);
             if (!reverse)
                 for (var i = 0; i < datas.Length / 2; i++)
                 {
@@ -203,7 +203,7 @@ namespace Programing_Labs.Pages.OlympSort
         {
             int i = LeftIndex;
             int j = RightIndex;
-            double bar = datas[(LeftIndex+RightIndex)/2];
+            double bar = datas[(LeftIndex + RightIndex) / 2];
 
             if (!reverse)
                 while (i <= j)

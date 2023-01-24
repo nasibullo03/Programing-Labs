@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Threading;
 
+#pragma warning disable SecurityIntelliSenseCS // MS Security rules violation
+
 namespace Programing_Labs.Pages.OlympSort
 {
     class Data
@@ -44,7 +46,7 @@ namespace Programing_Labs.Pages.OlympSort
 
         #endregion
 
-        public async static Task Add(Data sortData)
+        public static async Task Add(Data sortData)
         {
             SortDatas.Add(sortData);
             SortDataCollection.Add(sortData);
@@ -52,17 +54,16 @@ namespace Programing_Labs.Pages.OlympSort
         }
         public static void Add(double[] datas)
         {
+
             Data data1;
             foreach (double data in datas)
             {
                 data1 = new Data(data);
                 SortDatas.Add(data1);
-                SortDataCollection.Add(data1);
             }
+            SortDataView.Dispatcher.Invoke(() => UpdateCollection());
 
         }
-       
-
         public static void Remove(System.Collections.IList item)
         {
             foreach (object el in SortDataView.Items)
@@ -137,7 +138,6 @@ namespace Programing_Labs.Pages.OlympSort
                 EditableList.RemoveAt(0);
         }
 
-
         public static double[] GetValues(Value value)
         {
             double[] data = new double[SortDatas.Count];
@@ -159,6 +159,7 @@ namespace Programing_Labs.Pages.OlympSort
         }
         public static void SetValues(double[] data, Value value)
         {
+            Lab5_Page.LoadingLabelText("Идет обработка данных");
             switch (value)
             {
                 case Value.Xi:
@@ -176,7 +177,20 @@ namespace Programing_Labs.Pages.OlympSort
 
                     break;
             }
-            UpdateCollection();
+            SortDataView.Dispatcher.Invoke(() => UpdateCollection());
+        }
+        public static async void GererateData(int ArraySize)
+        {
+            await Task.Run(() =>
+            {
+                Random random = new Random();
+                double[] data = new double[ArraySize];
+                for (int i = 0; i < ArraySize; ++i)
+                    data[i] = random.Next();
+                Lab5_Page.LoadingLabelText("Идет обработка данных");
+                Add(data);
+                Lab5_Page.loadingPanel1.Dispatcher.Invoke(()=> Lab5_Page.loadingPanel1.Visibility = Visibility.Collapsed);
+            });
         }
 
     }

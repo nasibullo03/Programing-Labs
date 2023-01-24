@@ -17,7 +17,6 @@ using System.ComponentModel;
 using System.Windows.Threading;
 using System.Diagnostics;
 
-#pragma warning disable SecurityIntelliSenseCS // MS Security rules violation
 
 namespace Programing_Labs.Pages
 {
@@ -37,6 +36,8 @@ namespace Programing_Labs.Pages
 
         private List<Task> Tasks = new List<Task>();
         private CancellationTokenSource cancellationToken { get; set; }
+        public static StackPanel loadingPanel1 { get; set; }
+        public static Label LoadingLabel1 { get; set; }
         /// <summary>
         /// значение i  для Xi
         /// </summary>
@@ -55,6 +56,8 @@ namespace Programing_Labs.Pages
             ArrayData_ListView.ItemsSource = OlympSort.Data.SortDataCollection;
             ArrayData_ListView1.ItemsSource = OlympSort.Sort.SortDataCollection;
             OlympSort.Sort.cancellationToken = cancellationToken;
+            loadingPanel1 = loadingPanel;
+            LoadingLabel1 = LoadingLabel;
         }
 
         #region OnStartMethods
@@ -169,95 +172,105 @@ namespace Programing_Labs.Pages
 
         }
         #endregion
-
+        
         private double[] SetTimer(Func<double[]> action, OlympSort.Sort.SortType sortType)
         {
             double[] data = null;
+            LoadingLabelText("Идет запуск таймера");
             try
             {
                 Timer = new Stopwatch();
                 Timer.Start();
                 data = action.Invoke();
                 Timer.Stop();
+                LoadingLabelText("Идет обработка данных");
                 TxtBxArraySize.Dispatcher.Invoke(async () =>
-                    await OlympSort.Sort.Add(new OlympSort.Sort(sortType, Timer.ElapsedMilliseconds, TxtBxArraySize.Text)));
-            } catch (Exception ex)
+                    await OlympSort.Sort.Add(new OlympSort.Sort(sortType, Timer.Elapsed.ToString(), TxtBxArraySize.Text)));
+            }
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
 
             }
-            
+
             return data;
 
         }
         private void LoadingAnimation(Visibility visibility)
         {
-            LoadingGifAnimation.Dispatcher.Invoke(() =>
+            loadingPanel.Dispatcher.Invoke(() =>
             {
-                LoadingGifAnimation.Visibility = visibility;
-                LoadingGifAnimation.Play();
+                loadingPanel.Visibility = visibility;
+            });
+        }
+        private double[] Sort(OlympSort.Sort.SortType sortType)
+        {
+            LoadingLabelText("Идет сортировка данных");
+            switch (sortType)
+            {
+                case OlympSort.Sort.SortType.Buble:
+                    return OlympSort.Sort.BubleSort(Reverse);
+                case OlympSort.Sort.SortType.Insert:
+                    return OlympSort.Sort.InsertSort(Reverse);
+                case OlympSort.Sort.SortType.Shaker:
+                    return OlympSort.Sort.ShakerSort(Reverse);
+                case OlympSort.Sort.SortType.Fast:
+                    double[] data = OlympSort.Data.SortDatas.Select(a => a.Xi).ToArray();
+                    return OlympSort.Sort.FastSort(data, 0, data.Length - 1, Reverse);
+                case OlympSort.Sort.SortType.Bogo:
+                    return OlympSort.Sort.BogoSort(Reverse);
+                default:
+                    return null;
+
+            }
+        }
+        private async void SortingProcces(OlympSort.Sort.SortType sortType)
+        {
+            await Task.Run(() =>
+            {
+                OlympSort.Data.SetValues(
+                            SetTimer(() => Sort(sortType), sortType),
+                            OlympSort.Data.Value.SortedXi);
+                LoadingAnimation(Visibility.Collapsed);
             });
 
         }
+        public static async void LoadingLabelText(string text)
+        {
+            await Task.Run(()=>LoadingLabel1.Dispatcher.Invoke(() => LoadingLabel1.Content = text));
+        }
 
         #region MenuItems Sort
-        private async void MenuItem_BubleSort_Click(object sender, RoutedEventArgs e)
+        private void MenuItem_BubleSort_Click(object sender, RoutedEventArgs e)
         {
-            LoadingAnimation(Visibility.Visible);
-
-            await Task.Run(() =>
-            OlympSort.Data.SortDataView.Dispatcher.Invoke(() =>
-            OlympSort.Data.SetValues(
-                    SetTimer(() =>
-                    OlympSort.Sort.BubleSort(Reverse), OlympSort.Sort.SortType.Buble),
-                    OlympSort.Data.Value.SortedXi))
-            );
+            loadingPanel.Visibility = Visibility.Visible;
+            SortingProcces(OlympSort.Sort.SortType.Buble);
         }
 
-        private async void MenuItem_InsertSort_Click(object sender, RoutedEventArgs e)
+        private  void MenuItem_InsertSort_Click(object sender, RoutedEventArgs e)
         {
-            await Task.Run(() =>
-           OlympSort.Data.SortDataView.Dispatcher.Invoke(() =>
-           OlympSort.Data.SetValues(
-                   SetTimer(() =>
-                   OlympSort.Sort.InsertSort(Reverse), OlympSort.Sort.SortType.Insert),
-                   OlympSort.Data.Value.SortedXi))
-           );
+            loadingPanel.Visibility = Visibility.Visible;
+            SortingProcces(OlympSort.Sort.SortType.Insert);
+           
         }
 
-        private  async void MenuItem_ShakerSort_Click(object sender, RoutedEventArgs e)
+        private  void MenuItem_ShakerSort_Click(object sender, RoutedEventArgs e)
         {
-            await Task.Run(() =>
-            OlympSort.Data.SortDataView.Dispatcher.Invoke(() =>
-            OlympSort.Data.SetValues(
-                    SetTimer(() =>
-                    OlympSort.Sort.ShakerSort(Reverse), OlympSort.Sort.SortType.Shaker),
-                    OlympSort.Data.Value.SortedXi))
-            );
+            loadingPanel.Visibility = Visibility.Visible;
+            SortingProcces(OlympSort.Sort.SortType.Shaker);
+            
         }
 
-        private async void MenuItem_FastSort_Click(object sender, RoutedEventArgs e)
+        private  void MenuItem_FastSort_Click(object sender, RoutedEventArgs e)
         {
-            await Task.Run(() =>
-            OlympSort.Data.SortDataView.Dispatcher.Invoke(() =>
-            OlympSort.Data.SetValues(
-                    SetTimer(() => {
-                    double[] data = OlympSort.Data.SortDatas.Select(a => a.Xi).ToArray();
-                        return OlympSort.Sort.FastSort(data, 0,data.Length-1, Reverse);
-                    }, OlympSort.Sort.SortType.Fast),
-                    OlympSort.Data.Value.SortedXi))
-            );
+            loadingPanel.Visibility = Visibility.Visible;
+            SortingProcces(OlympSort.Sort.SortType.Fast);
         }
 
-        private async void MenuItem_BogoSort_Click(object sender, RoutedEventArgs e)
+        private  void MenuItem_BogoSort_Click(object sender, RoutedEventArgs e)
         {
-            await Task.Run(() =>
-          OlympSort.Data.SortDataView.Dispatcher.Invoke(() =>
-          OlympSort.Data.SetValues(
-                  SetTimer(() =>
-                  OlympSort.Sort.BogoSort(Reverse), OlympSort.Sort.SortType.Bogo),
-                  OlympSort.Data.Value.SortedXi))
-          );
+            loadingPanel.Visibility = Visibility.Visible;
+            SortingProcces(OlympSort.Sort.SortType.Bogo);
         }
         #endregion
 
@@ -301,6 +314,10 @@ namespace Programing_Labs.Pages
         }
         private void MenuItem_RandomGenerate_Click(object sender, RoutedEventArgs e)
         {
+            LoadingLabelText("Идет проверка данных");
+            loadingPanel.Visibility = Visibility.Visible;
+
+
             int.TryParse(TxtBxArraySize.Text, out int n);
             if (n <= 0)
             {
@@ -315,18 +332,11 @@ namespace Programing_Labs.Pages
 
             if (ArrayData_ListView.Items.Count >= n)
                 MenuItemAdd.Visibility = Visibility.Collapsed;
-
+            
             OlympSort.Data.Clear();
-
-            Random random = new Random();
-
-            double[] data = new double[n];
-
-            for (int i = 0; i < n; ++i)
-                data[i] = random.Next();
-
-
-            OlympSort.Data.Add(data);
+            LoadingLabelText("Выполняется генерация данных");
+            OlympSort.Data.GererateData(n);
+            
 
         }
         #endregion

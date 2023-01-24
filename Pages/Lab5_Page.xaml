@@ -4,12 +4,41 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Programing_Labs.Pages"
+      xmlns:gif="http://wpfanimatedgif.codeplex.com"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Loaded="Page_Loaded"
       Title="Lab5_Page">
     <Grid>
-        <MediaElement  Visibility="Visible" Name="LoadingGifAnimation" Source="/Images/loading.gif" Width="120" HorizontalAlignment="Center" VerticalAlignment="Center" Panel.ZIndex="100000"/>
+        <StackPanel x:Name="loadingPanel"
+                     Panel.ZIndex="999"
+                    HorizontalAlignment="Center" 
+                    VerticalAlignment="Center"
+                    Background="Transparent"
+                    Visibility="Collapsed"
+                    
+                    >
+            
+            <Image  x:Name="LoadingGifAnimation" 
+                Visibility="Visible" 
+                Width="120"
+                Source="/Images/loading.gif"
+                gif:ImageBehavior.AnimatedSource="/Images/loading.gif"
+                gif:ImageBehavior.RepeatBehavior="Forever"
+                HorizontalAlignment="Center" 
+                VerticalAlignment="Center" 
+                Panel.ZIndex="1000">
+            </Image>
+            <Label Name="LoadingLabel" 
+                   Panel.ZIndex="1001" 
+                   Margin="0, -20,0,0"
+                   Content="" 
+                   VerticalAlignment="Center" 
+                   HorizontalAlignment="Center"
+                   FontWeight="Bold"
+                   Foreground="#75f"
+                   />
+        </StackPanel>
 
         <DockPanel>
             <!--Вверхный панел для имя задачи-->
