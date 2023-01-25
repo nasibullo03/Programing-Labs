@@ -3,10 +3,6 @@ using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Drawing;
-using org.matheval;
-using ScottPlot.WPF;
 using ScottPlot;
 
 
@@ -35,8 +31,6 @@ namespace Programing_Labs.Pages
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-
-
             TxtBxA = GetStyleElement(TextBoxA, "MainTextBox") as TextBox;
             TxtBxB = GetStyleElement(TextBoxB, "MainTextBox") as TextBox;
             TxtBxE = GetStyleElement(TextBoxE, "MainTextBox") as TextBox;

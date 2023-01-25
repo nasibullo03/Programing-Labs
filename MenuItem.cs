@@ -67,6 +67,11 @@ namespace Programing_Labs
                     ItemQuantity=1,
                     SoursePage =  new[] {"Pages\\Lab5_Page.xaml"},
                     }
+                }, 
+                {6,new MenuItem(){
+                    ItemQuantity=1,
+                    SoursePage =  new[] {"Pages\\DefiniteIntegral\\DefiniteIntegral_Page.xaml"},
+                    }
                 },
             };
 

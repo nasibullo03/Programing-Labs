@@ -3,9 +3,6 @@ using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Drawing;
-using org.matheval;
 using ScottPlot;
 using System.Threading.Tasks;
 
