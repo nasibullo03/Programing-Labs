@@ -1,5 +1,7 @@
-﻿using System;
+﻿using ScottPlot;
+using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -43,6 +45,14 @@ namespace Programing_Labs.Pages.DefiniteIntegral
                 {InputType.TextBoxFx, (TextBox)GetStyleElement(TextBoxFx,"MainTextBox") },
             };
 
+#if DEBUG 
+            UITextBoxes[InputType.TextBoxA].Text = "1";
+            UITextBoxes[InputType.TextBoxB].Text = "50";
+            UITextBoxes[InputType.TextBoxE].Text = "0,1";
+            UITextBoxes[InputType.TextBoxN].Text = "50";
+            UITextBoxes[InputType.TextBoxFx].Text = "cos(x)+x^3";
+#endif
+
         }
         private object GetStyleElement(Control element, string name) =>
           element.Template.FindName(name, element);
@@ -51,25 +61,66 @@ namespace Programing_Labs.Pages.DefiniteIntegral
         #region Buttons_click
         private void RectangleMethod_Click(object sender, RoutedEventArgs e)
         {
+            ClearGraph();
+
             RectangleMethod method = new RectangleMethod(RectangleMethod.RectangleType.Left);
 
             method.SetValues(GetEnteredValues(method));
 
-            GraphVisualization(method, method);
+            GraphVisualization(method);
 
         }
 
-
-        private void GraphVisualization(IEnteredValues enteredValues, IOutputValue outputValue)
+        private void TrapezoidalMethod_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void SimpsonMethod_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+        #endregion
+
+        #region ClearItems_click and clear Methods
+
+        private void ClearGraphItem_Click(object sender, RoutedEventArgs e)
+        {
+            ClearGraph();
+        }
+
+        private void ClearItem_Click(object sender, RoutedEventArgs e)
+        {
+            clearEnteredValues();
+            ClearGraph();
+            GC.Collect();
+        }
+        private void ClearGraph()
+        {
+            WpfPlot1.UpdateDefaultStyle();
+            WpfPlot1.Plot.Clear();
+            WpfPlot1.Refresh();
+        }
+        private void clearEnteredValues()
+        {
+            foreach (var textBox in UITextBoxes.Values)
+                textBox.Text = string.Empty;
+        }
+        #endregion
+
+        #region Function and Graph Visualization
+        private void GraphVisualization(IOutputValue outputValue)
+        {
+
+
             WpfPlot1.Plot.Title($"Oптимальное число разбиений: {outputValue.OptimalSplitValue}");
+            VisualizeSplits(outputValue);
             WpfPlot1.Plot.AddScatter(
                 outputValue.FunctionCoordinates.Select(i => i.X).ToArray(),
                 outputValue.FunctionCoordinates.Select(i => i.Y).ToArray(),
                 markerShape: ScottPlot.MarkerShape.none, lineWidth: 3);
 
-            foreach (Point el in outputValue.SplitCoordinates)
+            foreach (var el in outputValue.SplitCoordinates)
             {
                 WpfPlot1.Plot.AddScatter(
                 new double[] { el.X },
@@ -81,6 +132,42 @@ namespace Programing_Labs.Pages.DefiniteIntegral
 
             WpfPlot1.Refresh();
         }
+        private void VisualizeSplits(IOutputValue outputValue)
+        {
+
+
+            double SplitDistance = (outputValue.SplitCoordinates.Count > 1) ? outputValue.SplitCoordinates[1].X - outputValue.SplitCoordinates[0].X : 1;
+            double correctValue = SplitDistance / 2;
+
+            double[] Xvalues = outputValue.SplitCoordinates.Select(a => a.X).ToArray();
+            double[] Yvalues = outputValue.SplitCoordinates.Select(a => a.Y).ToArray();
+            
+            double[] values = Yvalues;
+            
+            for(int i=0; i < Xvalues.Length; ++i)
+            {
+                Xvalues[i] -= correctValue;
+            }
+            
+            // create a histogram
+            (double[] probabilities, double[] binEdges) = (Yvalues.ToArray(), Xvalues.ToArray());
+            double[] leftEdges = binEdges.Take(binEdges.Length).ToArray();
+
+            // display histogram probabability as a bar plot
+            var bar = WpfPlot1.Plot.AddBar(values: probabilities, positions: leftEdges);
+            bar.BarWidth = SplitDistance;
+            bar.FillColor = ColorTranslator.FromHtml("#9bc3eb");
+            bar.BorderColor = ColorTranslator.FromHtml("#82add9");
+
+            // display histogram distribution curve as a line plot
+            double[] densities = ScottPlot.Statistics.Common.ProbabilityDensity(values, binEdges);
+            WpfPlot1.Plot.AddScatterLines(
+                xs: binEdges,
+                ys: densities,
+                color: System.Drawing.Color.Black,
+                lineWidth: 2,
+                lineStyle: LineStyle.Dash);
+        }
 
         private double F(double X)
         {
@@ -88,12 +175,12 @@ namespace Programing_Labs.Pages.DefiniteIntegral
             expression.Bind("x", X);
             return expression.Eval<double>();
         }
-        private List<Point> GetFunctionCoordinates(IEnteredValues enteredValues)
+        private List<System.Windows.Point> GetFunctionCoordinates(IEnteredValues enteredValues)
         {
-            List<Point> FunctionCoordinates = new List<Point>();
+            List<System.Windows.Point> FunctionCoordinates = new List<System.Windows.Point>();
             for (double i = enteredValues.A; i <= enteredValues.B; i += enteredValues.E)
             {
-                FunctionCoordinates.Add(new Point(i, F(i)));
+                FunctionCoordinates.Add(new System.Windows.Point(i, F(i)));
             }
             return FunctionCoordinates;
         }
@@ -112,26 +199,12 @@ namespace Programing_Labs.Pages.DefiniteIntegral
             enteredValues.N = n;
             enteredValues.F = F;
             enteredValues.GetFunctionCoordinates = GetFunctionCoordinates;
-            
+
 
             return enteredValues;
 
         }
 
-        private void TrapezoidalMethod_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-
-        private void SimpsonMethod_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-        private void ButtonClear_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
         #endregion
 
 

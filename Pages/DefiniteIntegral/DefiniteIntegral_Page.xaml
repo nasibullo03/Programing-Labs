@@ -123,11 +123,10 @@
                 <MenuItem Background="#007575"
                       Margin="0,2,0,2">
                     <MenuItem.Header>
-                        <Label Content="Выберите операцию"
+                        <Label Content="Выполнить"
                            Style="{StaticResource LabelStyle}"
                            Foreground="White"
                            FontSize="16"
-                           
                            VerticalAlignment="Center" />
 
                     </MenuItem.Header>
@@ -151,23 +150,39 @@
                           Click="SimpsonMethod_Click" />
 
                 </MenuItem>
-                <MenuItem>
-                    <MenuItem.Header>
-                        <StackPanel Orientation="Horizontal"
-                                VerticalAlignment="Top">
-                            <Button x:Name="ButtonClear"
-                                Style="{StaticResource ButtonStyle}"
+                <MenuItem Background="#007575"
+                      Margin="2,2,0,2">
+                    <MenuItem.Header >
+                        <Label x:Name="ButtonClear"
+                               Content="Очистить" 
+                               Style="{StaticResource LabelStyle}"
+                                Foreground="White"
                                 FontSize="16"
-                                Content="Очистить"
-                                Height="50"
-                                Width="auto"
-                                FontWeight="Bold"
-                                Click="ButtonClear_Click"
+                                VerticalAlignment="Bottom" Margin="0,0,0,2"
                                 />
-                            
-                        </StackPanel>
+
+
+
 
                     </MenuItem.Header>
+                    <MenuItem
+                        Header="Очистить все"
+                               FontWeight="Black"
+                          FontSize="16"
+                          Foreground="#007575"
+                          Background="Transparent"
+                          Click="ClearItem_Click"
+                              
+                              />
+                    <MenuItem
+                        Header="Очистить график"
+                            FontWeight="Black"
+                          FontSize="16"
+                          Foreground="#007575"
+                          Background="Transparent"
+                          Click="ClearGraphItem_Click"
+                              
+                              />
                 </MenuItem>
             </Menu>
 
@@ -180,9 +195,9 @@
 
 
         </DockPanel>
-        
-        
-        
-        
+
+
+
+
     </Grid>
 </Page>

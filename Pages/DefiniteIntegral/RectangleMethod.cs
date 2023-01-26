@@ -86,6 +86,7 @@ namespace Programing_Labs.Pages.DefiniteIntegral
             F = values.F;
             MethodType = methodType;
         }
+        ~RectangleMethod() { }
 
         #endregion
 
