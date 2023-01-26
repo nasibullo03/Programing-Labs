@@ -111,6 +111,7 @@ namespace Programing_Labs.Pages.DefiniteIntegral
             double sum = 0d;
             double x = 0d;
             double y = 0d;
+
             for (int i = 0; i <= N - 1; i++)
             {
                 x = A + i * h;
