@@ -101,16 +101,6 @@ namespace Programing_Labs.Pages.DefiniteIntegral
             GetFunctionCoordinates = values.GetFunctionCoordinates;
         }
 
-
-        /*public List<Point> GetFunctionCoordinates()
-        {
-            List<Point> FunctionCoordinates = new List<Point>();
-            for (double i = A; i <= B; i += E)
-            {
-                FunctionCoordinates.Add(new Point(i, F(i)));
-            }
-            return FunctionCoordinates;
-        }*/
         #endregion
 
         #region RectangleResultMethods
@@ -121,6 +111,7 @@ namespace Programing_Labs.Pages.DefiniteIntegral
             double sum = 0d;
             double x = 0d;
             double y = 0d;
+
             for (int i = 0; i <= N - 1; i++)
             {
                 x = A + i * h;
