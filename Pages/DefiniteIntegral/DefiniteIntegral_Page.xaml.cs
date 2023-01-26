@@ -25,6 +25,7 @@ namespace Programing_Labs.Pages.DefiniteIntegral
         #region Properties
 
         private enum InputType { TextBoxA, TextBoxB, TextBoxN, TextBoxE, TextBoxFx }
+        private enum MethodType { Rectangle, Trepezoida, Simpson }
         private Dictionary<InputType, TextBox> UITextBoxes { get; set; }
 
         #endregion
@@ -57,33 +58,32 @@ namespace Programing_Labs.Pages.DefiniteIntegral
         private object GetStyleElement(Control element, string name) =>
           element.Template.FindName(name, element);
 
-        
+
         #region Buttons_click
         private void RectangleMethod_Click(object sender, RoutedEventArgs e)
         {
             ClearGraph();
-
             RectangleMethod method = new RectangleMethod(RectangleMethod.RectangleType.Left);
-
             method.SetValues(GetEnteredValues(method));
-
             GraphVisualization(method);
-
         }
 
         private void TrapezoidalMethod_Click(object sender, RoutedEventArgs e)
         {
+            ClearGraph();
 
         }
 
         private void SimpsonMethod_Click(object sender, RoutedEventArgs e)
         {
-
+            ClearGraph();
+            SimpsonMethod method = new SimpsonMethod();
+            method.SetValues(GetEnteredValues(method));
+            GraphVisualization(method);
         }
         #endregion
 
         #region ClearItems_click and clear Methods
-
         private void ClearGraphItem_Click(object sender, RoutedEventArgs e)
         {
             ClearGraph();
@@ -109,17 +109,89 @@ namespace Programing_Labs.Pages.DefiniteIntegral
         #endregion
 
         #region Function and Graph Visualization
-        private void GraphVisualization(IOutputValue outputValue)
+        private void GraphVisualization(RectangleMethod method)
+        {
+            WpfPlot1.Plot.Title($"S = {method.OptimalSplitValue}");
+            VisualizeSplits(method);
+            VisualizeGraphLine(method.FunctionCoordinates);
+            VisualizeSplitsDots(method);
+            WpfPlot1.Refresh();
+        }
+        private void GraphVisualization(SimpsonMethod method)
+        {
+            WpfPlot1.Plot.Title($"S = {method.OptimalSplitValue}");
+            GraphFillColor(method);
+            VisualizeSplits(method);
+            VisualizeGraphLine(method.FunctionCoordinates);
+            VisualizeSplitsDots(method);
+            WpfPlot1.Refresh();
+        }
+
+        private void VisualizeSplits(RectangleMethod value)
+        {
+            double SplitDistance = (value.SplitCoordinates.Count > 1) ? value.SplitCoordinates[1].X - value.SplitCoordinates[0].X : 1;
+            double correctValue = SplitDistance / 2;
+
+            double[] Xvalues = value.SplitCoordinates.Select(a => a.X).ToArray();
+            double[] Yvalues = value.SplitCoordinates.Select(a => a.Y).ToArray();
+
+            double[] values = Yvalues;
+
+            for (int i = 0; i < Xvalues.Length; ++i)
+            {
+                Xvalues[i] -= correctValue;
+            }
+
+            // создание гистограмма 
+            (double[] probabilities, double[] binEdges) = (Yvalues.ToArray(), Xvalues.ToArray());
+            double[] leftEdges = binEdges.Take(binEdges.Length).ToArray();
+
+            // отображение вероятности гистограммы в виде столбчатой диаграммы
+            var bar = WpfPlot1.Plot.AddBar(values: probabilities, positions: leftEdges);
+            bar.BarWidth = SplitDistance;
+            bar.FillColor = ColorTranslator.FromHtml("#9bc3eb");
+            bar.BorderColor = ColorTranslator.FromHtml("#82add9");
+
+            // отображение кривой распределения гистограммы в виде линейного графика
+            double[] densities = ScottPlot.Statistics.Common.ProbabilityDensity(values, binEdges);
+
+            WpfPlot1.Plot.AddScatterLines(
+                xs: binEdges,
+                ys: densities,
+                lineWidth: 1,
+                lineStyle: LineStyle.Dash);
+        }
+        private void VisualizeSplits(SimpsonMethod value)
         {
 
+            double[] Xvalues = value.SplitCoordinates.Select(a => a.X).ToArray();
+            double[] Yvalues = value.SplitCoordinates.Select(a => a.Y).ToArray();
 
-            WpfPlot1.Plot.Title($"Oптимальное число разбиений: {outputValue.OptimalSplitValue}");
-            VisualizeSplits(outputValue);
-            WpfPlot1.Plot.AddScatter(
-                outputValue.FunctionCoordinates.Select(i => i.X).ToArray(),
-                outputValue.FunctionCoordinates.Select(i => i.Y).ToArray(),
-                markerShape: ScottPlot.MarkerShape.none, lineWidth: 3);
+            List<List<double[]>> lines = new List<List<double[]>>();
+            double Ymin = Yvalues.Min();
 
+            for (int i = 0; i < Xvalues.Length; ++i)
+            {
+                WpfPlot1.Plot.AddScatter(
+              new double[] { Xvalues[i], Xvalues[i] },
+              new double[] { Ymin, Yvalues[i] },
+               markerShape: ScottPlot.MarkerShape.none, lineWidth: 1,
+               color: ColorTranslator.FromHtml("#82add9"));
+            }
+
+        }
+
+        private void GraphFillColor(IOutputValue value)
+        {
+            var values = value.FunctionCoordinates;
+            double[] Xvalues = values.Select(a => a.X).ToArray();
+            double[] Yvalues = values.Select(a => a.Y).ToArray();
+
+            WpfPlot1.Plot.AddFill(Xvalues, Yvalues, color: ColorTranslator.FromHtml("#9bc3eb"));
+            WpfPlot1.Plot.SetAxisLimits(xMin: Xvalues.Min(), xMax: Xvalues.Max());
+        }
+        private void VisualizeSplitsDots(IOutputValue outputValue)
+        {
             foreach (var el in outputValue.SplitCoordinates)
             {
                 WpfPlot1.Plot.AddScatter(
@@ -127,48 +199,16 @@ namespace Programing_Labs.Pages.DefiniteIntegral
                 new double[] { el.Y },
                 color: System.Drawing.Color.FromName("Green"),
                 markerSize: 7);
-
             }
 
-            WpfPlot1.Refresh();
         }
-        private void VisualizeSplits(IOutputValue outputValue)
+        private void VisualizeGraphLine(List<System.Windows.Point> points)
         {
-
-
-            double SplitDistance = (outputValue.SplitCoordinates.Count > 1) ? outputValue.SplitCoordinates[1].X - outputValue.SplitCoordinates[0].X : 1;
-            double correctValue = SplitDistance / 2;
-
-            double[] Xvalues = outputValue.SplitCoordinates.Select(a => a.X).ToArray();
-            double[] Yvalues = outputValue.SplitCoordinates.Select(a => a.Y).ToArray();
-            
-            double[] values = Yvalues;
-            
-            for(int i=0; i < Xvalues.Length; ++i)
-            {
-                Xvalues[i] -= correctValue;
-            }
-            
-            // create a histogram
-            (double[] probabilities, double[] binEdges) = (Yvalues.ToArray(), Xvalues.ToArray());
-            double[] leftEdges = binEdges.Take(binEdges.Length).ToArray();
-
-            // display histogram probabability as a bar plot
-            var bar = WpfPlot1.Plot.AddBar(values: probabilities, positions: leftEdges);
-            bar.BarWidth = SplitDistance;
-            bar.FillColor = ColorTranslator.FromHtml("#9bc3eb");
-            bar.BorderColor = ColorTranslator.FromHtml("#82add9");
-
-            // display histogram distribution curve as a line plot
-            double[] densities = ScottPlot.Statistics.Common.ProbabilityDensity(values, binEdges);
-            WpfPlot1.Plot.AddScatterLines(
-                xs: binEdges,
-                ys: densities,
-                color: System.Drawing.Color.Black,
-                lineWidth: 2,
-                lineStyle: LineStyle.Dash);
+            WpfPlot1.Plot.AddScatter(
+               points.Select(i => i.X).ToArray(),
+               points.Select(i => i.Y).ToArray(),
+               markerShape: ScottPlot.MarkerShape.none, lineWidth: 3);
         }
-
         private double F(double X)
         {
             org.matheval.Expression expression = new org.matheval.Expression(UITextBoxes[InputType.TextBoxFx].Text.ToLower());

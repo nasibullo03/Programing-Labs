@@ -171,6 +171,8 @@
     <Compile Include="Pages\DefiniteIntegral\IEnteredValues.cs" />
     <Compile Include="Pages\DefiniteIntegral\IOutputValue.cs" />
     <Compile Include="Pages\DefiniteIntegral\RectangleMethod.cs" />
+    <Compile Include="Pages\DefiniteIntegral\SimpsonMethod.cs" />
+    <Compile Include="Pages\DefiniteIntegral\TrapezoidalMethod.cs" />
     <Compile Include="Pages\Lab4_Page.xaml.cs">
       <DependentUpon>Lab4_Page.xaml</DependentUpon>
     </Compile>

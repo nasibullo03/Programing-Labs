@@ -98,6 +98,7 @@ namespace Programing_Labs.Pages.DefiniteIntegral
             E = values.E;
             N = values.N;
             F = values.F;
+            GetFunctionCoordinates = values.GetFunctionCoordinates;
         }
 
 
