@@ -62,11 +62,12 @@ namespace Programing_Labs.Pages.DefiniteIntegral
         private double Simpson()
         {
             SplitCoordinates = new List<Point>();
-            /*            SplitCoordinates1 = new List<Point>();*/
             double h = (B - A) / N;
             double sum1 = 0d;
             double sum2 = 0d;
             double xk = 0d, yk = 0d, xk_1 = 0d;
+
+            SplitCoordinates.Add(new Point(A, F(A)));
 
             for (double k = 1; k <= N; k++)
             {
@@ -83,8 +84,9 @@ namespace Programing_Labs.Pages.DefiniteIntegral
                 sum2 += F((xk + xk_1) / 2);
             }
 
+            SplitCoordinates.Add(new Point(B, F(B)));
 
-            double result = (h / 3d) * (((1d / 2d) * F(A)) + sum1 + (2 * sum2) + ((1d / 2d) * F(B)));
+            double result = h / 3d * ((1d / 2d * F(A)) + sum1 + (2 * sum2) + (1d / 2d * F(B)));
 
             return result;
         }

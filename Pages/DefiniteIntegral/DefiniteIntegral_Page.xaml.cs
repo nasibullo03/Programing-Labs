@@ -46,7 +46,7 @@ namespace Programing_Labs.Pages.DefiniteIntegral
                 {InputType.TextBoxFx, (TextBox)GetStyleElement(TextBoxFx,"MainTextBox") },
             };
 
-#if DEBUG 
+#if DEBUG
             UITextBoxes[InputType.TextBoxA].Text = "1";
             UITextBoxes[InputType.TextBoxB].Text = "50";
             UITextBoxes[InputType.TextBoxE].Text = "0,1";
@@ -71,6 +71,9 @@ namespace Programing_Labs.Pages.DefiniteIntegral
         private void TrapezoidalMethod_Click(object sender, RoutedEventArgs e)
         {
             ClearGraph();
+            TrapezoidalMethod method = new TrapezoidalMethod();
+            method.SetValues(GetEnteredValues(method));
+            GraphVisualization(method);
 
         }
 
@@ -98,6 +101,7 @@ namespace Programing_Labs.Pages.DefiniteIntegral
         private void ClearGraph()
         {
             WpfPlot1.UpdateDefaultStyle();
+            WpfPlot1.Plot.Title("");
             WpfPlot1.Plot.Clear();
             WpfPlot1.Refresh();
         }
@@ -112,6 +116,15 @@ namespace Programing_Labs.Pages.DefiniteIntegral
         private void GraphVisualization(RectangleMethod method)
         {
             WpfPlot1.Plot.Title($"S = {method.OptimalSplitValue}");
+            VisualizeSplits(method);
+            VisualizeGraphLine(method.FunctionCoordinates);
+            VisualizeSplitsDots(method);
+            WpfPlot1.Refresh();
+        }
+        private void GraphVisualization(TrapezoidalMethod method)
+        {
+            WpfPlot1.Plot.Title($"S = {method.OptimalSplitValue}");
+            GraphFillColor(method);
             VisualizeSplits(method);
             VisualizeGraphLine(method.FunctionCoordinates);
             VisualizeSplitsDots(method);
@@ -163,11 +176,9 @@ namespace Programing_Labs.Pages.DefiniteIntegral
         }
         private void VisualizeSplits(SimpsonMethod value)
         {
-
             double[] Xvalues = value.SplitCoordinates.Select(a => a.X).ToArray();
             double[] Yvalues = value.SplitCoordinates.Select(a => a.Y).ToArray();
 
-            List<List<double[]>> lines = new List<List<double[]>>();
             double Ymin = Yvalues.Min();
 
             for (int i = 0; i < Xvalues.Length; ++i)
@@ -175,9 +186,31 @@ namespace Programing_Labs.Pages.DefiniteIntegral
                 WpfPlot1.Plot.AddScatter(
               new double[] { Xvalues[i], Xvalues[i] },
               new double[] { Ymin, Yvalues[i] },
-               markerShape: ScottPlot.MarkerShape.none, lineWidth: 1,
+               markerShape: ScottPlot.MarkerShape.none, lineWidth: 4,
                color: ColorTranslator.FromHtml("#82add9"));
             }
+
+        }
+        private void VisualizeSplits(TrapezoidalMethod value)
+        {
+            double[] Xvalues = value.SplitCoordinates.Select(a => a.X).ToArray();
+            double[] Yvalues = value.SplitCoordinates.Select(a => a.Y).ToArray();
+
+            double Ymin = Yvalues.Min();
+
+            for (int i = 0; i < Xvalues.Length; ++i)
+            {
+                WpfPlot1.Plot.AddScatter(
+              new double[] { Xvalues[i], Xvalues[i] },
+              new double[] { Ymin, Yvalues[i] },
+               markerShape: ScottPlot.MarkerShape.none, lineWidth: 4,
+               color: ColorTranslator.FromHtml("#82add9"));
+            }
+
+            WpfPlot1.Plot.AddScatter(Xvalues,
+              Yvalues,
+               markerShape: ScottPlot.MarkerShape.none, lineWidth: 4,
+               color: ColorTranslator.FromHtml("#82add9"));
 
         }
 
@@ -227,7 +260,6 @@ namespace Programing_Labs.Pages.DefiniteIntegral
 
         private IEnteredValues GetEnteredValues(IEnteredValues enteredValues)
         {
-
             double.TryParse(UITextBoxes[InputType.TextBoxA].Text, out var a);
             double.TryParse(UITextBoxes[InputType.TextBoxB].Text, out var b);
             double.TryParse(UITextBoxes[InputType.TextBoxE].Text, out var e);
@@ -239,7 +271,6 @@ namespace Programing_Labs.Pages.DefiniteIntegral
             enteredValues.N = n;
             enteredValues.F = F;
             enteredValues.GetFunctionCoordinates = GetFunctionCoordinates;
-
 
             return enteredValues;
 
