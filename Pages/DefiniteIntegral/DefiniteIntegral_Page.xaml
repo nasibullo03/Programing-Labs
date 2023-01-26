@@ -1,0 +1,203 @@
+﻿<Page x:Class="Programing_Labs.Pages.DefiniteIntegral.DefiniteIntegral_Page"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Programing_Labs.Pages.DefiniteIntegral"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="DefiniteIntegral_Page"
+      Loaded="Page_Loaded"
+      >
+
+    <Grid>
+        <DockPanel>
+            <!--Вверхный панел для имя задачи-->
+            <Label Content="Вычисление определенного интеграла"
+               DockPanel.Dock="Top"
+               HorizontalAlignment="Center"
+               VerticalAlignment="Center"
+               FontSize="22"
+               Foreground="White"
+               FontWeight="Bold"/>
+            <Menu Height="auto"
+              VerticalAlignment="Top"
+              Background="Transparent"
+              DockPanel.Dock="Top">
+                <!--TextBoxA-->
+                <MenuItem>
+                    <MenuItem.Header>
+                        <StackPanel Orientation="Horizontal"
+                                VerticalAlignment="Top">
+                            <Label Content="a ="
+                               Style="{StaticResource LabelStyle}"
+                               FontWeight="Bold"
+                               Foreground="White"
+                               FontSize="18"
+                               VerticalAlignment="Top" />
+                            <TextBox x:Name="TextBoxA"
+                                 Style="{StaticResource TextBoxStyle}"
+                                 FontSize="18"
+                                 Margin="0,-5,0,0"
+                                 TabIndex="0" />
+                        </StackPanel>
+                    </MenuItem.Header>
+                </MenuItem>
+                <!--TextBoxB-->
+                <MenuItem>
+                    <MenuItem.Header>
+                        <StackPanel Orientation="Horizontal"
+                                VerticalAlignment="Top">
+                            <Label Content="b ="
+                               Style="{StaticResource LabelStyle}"
+                               FontWeight="Bold"
+                               Foreground="White"
+                               FontSize="18"
+                               VerticalAlignment="Top" />
+                            <TextBox x:Name="TextBoxB"
+                                 Style="{StaticResource TextBoxStyle}"
+                                 FontSize="18"
+                                 Margin="0,-5,0,0"
+                                 TabIndex="1" />
+                        </StackPanel>
+                    </MenuItem.Header>
+                </MenuItem>
+                <!--TextBoxE-->
+                <MenuItem>
+                    <MenuItem.Header>
+                        <StackPanel Orientation="Horizontal"
+                                VerticalAlignment="Top">
+                            <Label Content="n ="
+                               Style="{StaticResource LabelStyle}"
+                               FontWeight="Bold"
+                               Foreground="White"
+                               FontSize="18"
+                               VerticalAlignment="Top" />
+                            <TextBox x:Name="TextBoxN"
+                                 Style="{StaticResource TextBoxStyle}"
+                                 FontSize="18"
+                                 Margin="0,-5,0,0"
+                                 TabIndex="2" />
+                        </StackPanel>
+                    </MenuItem.Header>
+                </MenuItem>
+                <!--TextBoxE-->
+                <MenuItem>
+                    <MenuItem.Header>
+                        <StackPanel Orientation="Horizontal"
+                                VerticalAlignment="Top">
+                            <Label Content="e = "
+                               Style="{StaticResource LabelStyle}"
+                               FontWeight="Bold"
+                               Foreground="White"
+                               FontSize="18"
+                               VerticalAlignment="Top" />
+                            <TextBox x:Name="TextBoxE"
+                                 Style="{StaticResource TextBoxStyle}"
+                                 FontSize="18"
+                                 Margin="0,-5,0,0"
+                                 TabIndex="2" />
+                        </StackPanel>
+                    </MenuItem.Header>
+                </MenuItem>
+                <!--TextBoxFx-->
+                <MenuItem>
+                    <MenuItem.Header>
+                        <StackPanel Orientation="Horizontal"
+                                VerticalAlignment="Top">
+                            <Label Content="F(x) ="
+                               Style="{StaticResource LabelStyle}"
+                               FontWeight="Bold"
+                               Foreground="White"
+                               FontSize="18"
+                               VerticalAlignment="Top" />
+                            <TextBox x:Name="TextBoxFx"
+                                 Style="{StaticResource TextBoxStyle}"
+                                 FontSize="18"
+                                 Margin="0,-5,0,0"
+                                 TabIndex="3" />
+                        </StackPanel>
+                    </MenuItem.Header>
+                </MenuItem>
+                <!--Выберите операцию-->
+                <MenuItem Background="#007575"
+                      Margin="0,2,0,2">
+                    <MenuItem.Header>
+                        <Label Content="Выполнить"
+                           Style="{StaticResource LabelStyle}"
+                           Foreground="White"
+                           FontSize="16"
+                           VerticalAlignment="Center" />
+
+                    </MenuItem.Header>
+                    <MenuItem Header="Метод прямоугольников"
+                              FontWeight="Black"
+                          FontSize="16"
+                          Foreground="#007575"
+                          Background="Transparent"
+                          Click="RectangleMethod_Click"/>
+                    <MenuItem Header="Метод трапеций"
+                              FontWeight="Black"
+                          FontSize="16"
+                          Foreground="#007575"
+                          Background="Transparent"
+                          Click="TrapezoidalMethod_Click" />
+                    <MenuItem Header="Метод Симпсона"
+                          FontWeight="Black"
+                          FontSize="16"
+                          Foreground="#007575"
+                          Background="Transparent"
+                          Click="SimpsonMethod_Click" />
+
+                </MenuItem>
+                <MenuItem Background="#007575"
+                      Margin="2,2,0,2">
+                    <MenuItem.Header >
+                        <Label x:Name="ButtonClear"
+                               Content="Очистить" 
+                               Style="{StaticResource LabelStyle}"
+                                Foreground="White"
+                                FontSize="16"
+                                VerticalAlignment="Bottom" Margin="0,0,0,2"
+                                />
+
+
+
+
+                    </MenuItem.Header>
+                    <MenuItem
+                        Header="Очистить все"
+                               FontWeight="Black"
+                          FontSize="16"
+                          Foreground="#007575"
+                          Background="Transparent"
+                          Click="ClearItem_Click"
+                              
+                              />
+                    <MenuItem
+                        Header="Очистить график"
+                            FontWeight="Black"
+                          FontSize="16"
+                          Foreground="#007575"
+                          Background="Transparent"
+                          Click="ClearGraphItem_Click"
+                              
+                              />
+                </MenuItem>
+            </Menu>
+
+            <!--Plot для графика-->
+            <WpfPlot x:Name="WpfPlot1"
+                 Height="auto"
+                 Width="auto"
+                 />
+
+
+
+        </DockPanel>
+
+
+
+
+    </Grid>
+</Page>

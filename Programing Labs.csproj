@@ -165,6 +165,14 @@
     <Compile Include="LabsClases\GraphicPoint.cs" />
     <Compile Include="LabsClases\LeastSquareMethod.cs" />
     <Compile Include="LabsClases\Matrix.cs" />
+    <Compile Include="Pages\DefiniteIntegral\DefiniteIntegral_Page.xaml.cs">
+      <DependentUpon>DefiniteIntegral_Page.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\DefiniteIntegral\IEnteredValues.cs" />
+    <Compile Include="Pages\DefiniteIntegral\IOutputValue.cs" />
+    <Compile Include="Pages\DefiniteIntegral\RectangleMethod.cs" />
+    <Compile Include="Pages\DefiniteIntegral\SimpsonMethod.cs" />
+    <Compile Include="Pages\DefiniteIntegral\TrapezoidalMethod.cs" />
     <Compile Include="Pages\Lab4_Page.xaml.cs">
       <DependentUpon>Lab4_Page.xaml</DependentUpon>
     </Compile>
@@ -180,6 +188,10 @@
     <Compile Include="UserControls\ModernSmallUserInputControl.xaml.cs">
       <DependentUpon>ModernSmallUserInputControl.xaml</DependentUpon>
     </Compile>
+    <Page Include="Pages\DefiniteIntegral\DefiniteIntegral_Page.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\Lab1_1_Page.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

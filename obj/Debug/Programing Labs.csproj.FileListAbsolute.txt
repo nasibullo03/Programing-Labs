@@ -158,3 +158,5 @@ C:\Users\Admin\Source\Repos\Programing-Labs\obj\Debug\Pages\Lab5_Page.baml
 C:\Users\Admin\Source\Repos\Programing-Labs\bin\Debug\WpfAnimatedGif.dll
 C:\Users\Admin\Source\Repos\Programing-Labs\bin\Debug\WpfAnimatedGif.pdb
 C:\Users\Admin\Source\Repos\Programing-Labs\bin\Debug\WpfAnimatedGif.xml
+C:\Users\Admin\Source\Repos\Programing-Labs\obj\Debug\Pages\DefiniteIntegral\DefiniteIntegral_Page.g.cs
+C:\Users\Admin\Source\Repos\Programing-Labs\obj\Debug\Pages\DefiniteIntegral\DefiniteIntegral_Page.baml

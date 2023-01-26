@@ -15,9 +15,7 @@
                     HorizontalAlignment="Center" 
                     VerticalAlignment="Center"
                     Background="Transparent"
-                    Visibility="Collapsed"
-                    
-                    >
+                    Visibility="Collapsed" >
 
             <Image  x:Name="LoadingGifAnimation" 
                 Visibility="Visible" 
