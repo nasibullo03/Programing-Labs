@@ -24,15 +24,26 @@ namespace Programing_Labs.Pages.DefiniteIntegral
     {
         #region Properties
 
-        private enum InputType { TextBoxA, TextBoxB, TextBoxN, TextBoxE, TextBoxFx }
-        private enum MethodType { Rectangle, Trepezoida, Simpson }
+        public enum InputType { TextBoxA, TextBoxB, TextBoxN, TextBoxE, TextBoxFx }
+        public enum MethodType { Rectangle, Trepezoida, Simpson }
         private Dictionary<InputType, TextBox> UITextBoxes { get; set; }
+        private Dictionary<MethodType, bool> PerformMethods { get; set; } = new Dictionary<MethodType, bool>() {
+                {MethodType.Rectangle,true},
+                {MethodType.Trepezoida,false},
+                {MethodType.Simpson,false}
+
+            };
+        private bool FirstTimeLoaded { get; set; } = true;
 
         #endregion
 
         public DefiniteIntegral_Page()
         {
             InitializeComponent();
+            GraphVisualize.WpfPlot1 = WpfPlot1;
+            GraphVisualize.WpfPlot2 = WpfPlot2;
+            GraphVisualize.WpfPlot3 = WpfPlot3;
+
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
@@ -45,7 +56,22 @@ namespace Programing_Labs.Pages.DefiniteIntegral
                 {InputType.TextBoxE, (TextBox)GetStyleElement(TextBoxE,"MainTextBox") },
                 {InputType.TextBoxFx, (TextBox)GetStyleElement(TextBoxFx,"MainTextBox") },
             };
+            UITextBoxes[InputType.TextBoxA].Tag = "TextBoxA";
+            UITextBoxes[InputType.TextBoxB].Tag = "TextBoxB";
+            UITextBoxes[InputType.TextBoxE].Tag = "TextBoxE";
+            UITextBoxes[InputType.TextBoxN].Tag = "TextBoxN";
+            UITextBoxes[InputType.TextBoxFx].Tag = "TextBoxFx";
 
+            foreach (TextBox textBox in UITextBoxes.Values)
+            {
+                if ((string)textBox.Tag != "TextBoxFx")
+                {
+                    DataObject.AddPastingHandler(textBox, (s, a) => a.CancelCommand());
+                    textBox.PreviewTextInput += new TextCompositionEventHandler(Check.PreviewTextInput);
+                }
+            }
+
+            FirstTimeLoaded = false;
 #if DEBUG
             UITextBoxes[InputType.TextBoxA].Text = "1";
             UITextBoxes[InputType.TextBoxB].Text = "50";
@@ -54,37 +80,44 @@ namespace Programing_Labs.Pages.DefiniteIntegral
             UITextBoxes[InputType.TextBoxFx].Text = "cos(x)+x^3";
 #endif
 
+
         }
         private object GetStyleElement(Control element, string name) =>
           element.Template.FindName(name, element);
 
-
-        #region Buttons_click
-        private void RectangleMethod_Click(object sender, RoutedEventArgs e)
+        private void PerformMethod(MethodType type)
         {
-            ClearGraph();
-            RectangleMethod method = new RectangleMethod(RectangleMethod.RectangleType.Left);
-            method.SetValues(GetEnteredValues(method));
-            GraphVisualization(method);
+            /* await Task.Run(() =>
+             {
+
+                 TextBoxA.Dispatcher.Invoke(() =>
+                 {*/
+            if (Check.CheckTextBoxesValues(UITextBoxes))
+            {
+                /*WpfPlot1.Dispatcher.Invoke(() => */
+                ClearGraph();
+                switch (type)
+                {
+                    case MethodType.Rectangle:
+                        RectangleMethod method = new RectangleMethod(RectangleMethod.RectangleType.Left);
+                        method.SetValues(GetEnteredValues(method));
+                        GraphVisualize.Visualize(method);
+                        break;
+                    case MethodType.Trepezoida:
+                        TrapezoidalMethod method1 = new TrapezoidalMethod();
+                        method1.SetValues(GetEnteredValues(method1));
+                        GraphVisualize.Visualize(method1);
+                        break;
+                    case MethodType.Simpson:
+                        SimpsonMethod method2 = new SimpsonMethod();
+                        method2.SetValues(GetEnteredValues(method2));
+                        GraphVisualize.Visualize(method2);
+                        break;
+                }
+            }
+
         }
 
-        private void TrapezoidalMethod_Click(object sender, RoutedEventArgs e)
-        {
-            ClearGraph();
-            TrapezoidalMethod method = new TrapezoidalMethod();
-            method.SetValues(GetEnteredValues(method));
-            GraphVisualization(method);
-
-        }
-
-        private void SimpsonMethod_Click(object sender, RoutedEventArgs e)
-        {
-            ClearGraph();
-            SimpsonMethod method = new SimpsonMethod();
-            method.SetValues(GetEnteredValues(method));
-            GraphVisualization(method);
-        }
-        #endregion
 
         #region ClearItems_click and clear Methods
         private void ClearGraphItem_Click(object sender, RoutedEventArgs e)
@@ -107,141 +140,13 @@ namespace Programing_Labs.Pages.DefiniteIntegral
         }
         private void clearEnteredValues()
         {
+
             foreach (var textBox in UITextBoxes.Values)
                 textBox.Text = string.Empty;
+
         }
         #endregion
 
-        #region Function and Graph Visualization
-        private void GraphVisualization(RectangleMethod method)
-        {
-            WpfPlot1.Plot.Title($"S = {method.OptimalSplitValue}");
-            VisualizeSplits(method);
-            VisualizeGraphLine(method.FunctionCoordinates);
-            VisualizeSplitsDots(method);
-            WpfPlot1.Refresh();
-        }
-        private void GraphVisualization(TrapezoidalMethod method)
-        {
-            WpfPlot1.Plot.Title($"S = {method.OptimalSplitValue}");
-            GraphFillColor(method);
-            VisualizeSplits(method);
-            VisualizeGraphLine(method.FunctionCoordinates);
-            VisualizeSplitsDots(method);
-            WpfPlot1.Refresh();
-        }
-        private void GraphVisualization(SimpsonMethod method)
-        {
-            WpfPlot1.Plot.Title($"S = {method.OptimalSplitValue}");
-            GraphFillColor(method);
-            VisualizeSplits(method);
-            VisualizeGraphLine(method.FunctionCoordinates);
-            VisualizeSplitsDots(method);
-            WpfPlot1.Refresh();
-        }
-
-        private void VisualizeSplits(RectangleMethod value)
-        {
-            double SplitDistance = (value.SplitCoordinates.Count > 1) ? value.SplitCoordinates[1].X - value.SplitCoordinates[0].X : 1;
-            double correctValue = SplitDistance / 2;
-
-            double[] Xvalues = value.SplitCoordinates.Select(a => a.X).ToArray();
-            double[] Yvalues = value.SplitCoordinates.Select(a => a.Y).ToArray();
-
-            double[] values = Yvalues;
-
-            for (int i = 0; i < Xvalues.Length; ++i)
-            {
-                Xvalues[i] -= correctValue;
-            }
-
-            // создание гистограмма 
-            (double[] probabilities, double[] binEdges) = (Yvalues.ToArray(), Xvalues.ToArray());
-            double[] leftEdges = binEdges.Take(binEdges.Length).ToArray();
-
-            // отображение вероятности гистограммы в виде столбчатой диаграммы
-            var bar = WpfPlot1.Plot.AddBar(values: probabilities, positions: leftEdges);
-            bar.BarWidth = SplitDistance;
-            bar.FillColor = ColorTranslator.FromHtml("#9bc3eb");
-            bar.BorderColor = ColorTranslator.FromHtml("#82add9");
-
-            // отображение кривой распределения гистограммы в виде линейного графика
-            double[] densities = ScottPlot.Statistics.Common.ProbabilityDensity(values, binEdges);
-
-            WpfPlot1.Plot.AddScatterLines(
-                xs: binEdges,
-                ys: densities,
-                lineWidth: 1,
-                lineStyle: LineStyle.Dash);
-        }
-        private void VisualizeSplits(SimpsonMethod value)
-        {
-            double[] Xvalues = value.SplitCoordinates.Select(a => a.X).ToArray();
-            double[] Yvalues = value.SplitCoordinates.Select(a => a.Y).ToArray();
-
-            double Ymin = Yvalues.Min();
-
-            for (int i = 0; i < Xvalues.Length; ++i)
-            {
-                WpfPlot1.Plot.AddScatter(
-              new double[] { Xvalues[i], Xvalues[i] },
-              new double[] { Ymin, Yvalues[i] },
-               markerShape: ScottPlot.MarkerShape.none, lineWidth: 4,
-               color: ColorTranslator.FromHtml("#82add9"));
-            }
-
-        }
-        private void VisualizeSplits(TrapezoidalMethod value)
-        {
-            double[] Xvalues = value.SplitCoordinates.Select(a => a.X).ToArray();
-            double[] Yvalues = value.SplitCoordinates.Select(a => a.Y).ToArray();
-
-            double Ymin = Yvalues.Min();
-
-            for (int i = 0; i < Xvalues.Length; ++i)
-            {
-                WpfPlot1.Plot.AddScatter(
-              new double[] { Xvalues[i], Xvalues[i] },
-              new double[] { Ymin, Yvalues[i] },
-               markerShape: ScottPlot.MarkerShape.none, lineWidth: 4,
-               color: ColorTranslator.FromHtml("#82add9"));
-            }
-
-            WpfPlot1.Plot.AddScatter(Xvalues,
-              Yvalues,
-               markerShape: ScottPlot.MarkerShape.none, lineWidth: 4,
-               color: ColorTranslator.FromHtml("#82add9"));
-
-        }
-
-        private void GraphFillColor(IOutputValue value)
-        {
-            var values = value.FunctionCoordinates;
-            double[] Xvalues = values.Select(a => a.X).ToArray();
-            double[] Yvalues = values.Select(a => a.Y).ToArray();
-
-            WpfPlot1.Plot.AddFill(Xvalues, Yvalues, color: ColorTranslator.FromHtml("#9bc3eb"));
-            WpfPlot1.Plot.SetAxisLimits(xMin: Xvalues.Min(), xMax: Xvalues.Max());
-        }
-        private void VisualizeSplitsDots(IOutputValue outputValue)
-        {
-            foreach (var el in outputValue.SplitCoordinates)
-            {
-                WpfPlot1.Plot.AddScatter(
-                new double[] { el.X },
-                new double[] { el.Y },
-                color: System.Drawing.Color.FromName("Green"),
-                markerSize: 7);
-            }
-
-        }
-        private void VisualizeGraphLine(List<System.Windows.Point> points)
-        {
-            WpfPlot1.Plot.AddScatter(
-               points.Select(i => i.X).ToArray(),
-               points.Select(i => i.Y).ToArray(),
-               markerShape: ScottPlot.MarkerShape.none, lineWidth: 3);
-        }
         private double F(double X)
         {
             org.matheval.Expression expression = new org.matheval.Expression(UITextBoxes[InputType.TextBoxFx].Text.ToLower());
@@ -276,8 +181,94 @@ namespace Programing_Labs.Pages.DefiniteIntegral
 
         }
 
-        #endregion
+        private void SympsonMethodItem_Checked(object sender, RoutedEventArgs e)
+        {
+            PerformMethods[MethodType.Simpson] = true;
+            if (!FirstTimeLoaded) PanelSizeChanged();
+        }
+
+        private void SympsonMethodItem_Unchecked(object sender, RoutedEventArgs e)
+        {
+            PerformMethods[MethodType.Simpson] = false;
+            if (!FirstTimeLoaded) PanelSizeChanged();
+        }
+
+        private void TrapezoidalMethodItem_Checked(object sender, RoutedEventArgs e)
+        {
+            PerformMethods[MethodType.Trepezoida] = true;
+            if (!FirstTimeLoaded) PanelSizeChanged(); ;
+        }
+
+        private void TrapezoidalMethodItem_Unchecked(object sender, RoutedEventArgs e)
+        {
+            PerformMethods[MethodType.Trepezoida] = false;
+            if (!FirstTimeLoaded) PanelSizeChanged();
+        }
+
+        private void RectangleMethodItem_Checked(object sender, RoutedEventArgs e)
+        {
+            PerformMethods[MethodType.Rectangle] = true;
+            if (!FirstTimeLoaded) PanelSizeChanged();
+        }
+
+        private void RectangleMethodItem_Unchecked(object sender, RoutedEventArgs e)
+        {
+            PerformMethods[MethodType.Rectangle] = false;
+            if (!FirstTimeLoaded) PanelSizeChanged();
+        }
+
+        private void PanelSizeChanged()
+        {
+            int MetodsCount = 0;
+            bool[] values = PerformMethods.Select(a => a.Value).ToArray();
+
+            foreach (bool el in values)
+            {
+                if (el) ++MetodsCount;
+            }
+
+            double GraphWidth;
+            if (!values[0] && !values[1] && !values[1])
+            {
+                PerformMethods[MethodType.Rectangle] = true;
+                GraphWidth = this.ActualWidth;
+                values[0] = true;
+            }
+            else
+            {
+                GraphWidth = this.ActualWidth / MetodsCount;
+            }
 
 
+            WpfPlot1.Width = GraphWidth;
+            WpfPlot2.Width = GraphWidth;
+            WpfPlot3.Width = GraphWidth;
+
+            WpfPlot1.Visibility = values[0] ? Visibility.Visible : Visibility.Collapsed;
+            WpfPlot2.Visibility = values[1] ? Visibility.Visible : Visibility.Collapsed;
+            WpfPlot3.Visibility = values[2] ? Visibility.Visible : Visibility.Collapsed;
+
+        }
+
+        private void Perform_Click(object sender, RoutedEventArgs e)
+        {
+            var value = PerformMethods.Select(a => a.Value).ToArray();
+
+
+            if (value[0]) PerformMethod(MethodType.Rectangle);
+            if (value[1]) PerformMethod(MethodType.Trepezoida);
+            if (value[2]) PerformMethod(MethodType.Simpson);
+
+        }
+
+        private void Page_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            if (!FirstTimeLoaded) PanelSizeChanged();
+        }
+
+        private void GraphPanel_Loaded(object sender, RoutedEventArgs e)
+        {
+            PanelSizeChanged();
+        }
     }
 }
