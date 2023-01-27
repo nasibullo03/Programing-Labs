@@ -8,10 +8,15 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="DefiniteIntegral_Page"
       Loaded="Page_Loaded"
+      SizeChanged="Page_SizeChanged"
       >
-
+    
     <Grid>
-        <DockPanel>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="131*"/>
+            <RowDefinition Height="320*"/>
+        </Grid.RowDefinitions>
+        <DockPanel Grid.RowSpan="2">
             <!--Вверхный панел для имя задачи-->
             <Label Content="Вычисление определенного интеграла"
                DockPanel.Dock="Top"
@@ -121,45 +126,88 @@
                 </MenuItem>
                 <!--Выберите операцию-->
                 <MenuItem Background="#007575"
-                      Margin="0,2,0,2">
+                      Margin="0,2,2,2" SubmenuOpened="BtnPerform_SubmenuOpened"
+                       SubmenuClosed="BtnPerform_SubmenuClosed">
                     <MenuItem.Header>
-                        <Label Content="Выполнить"
-                           Style="{StaticResource LabelStyle}"
-                           Foreground="White"
+                        <StackPanel Orientation="Horizontal">
+                            <Button x:Name="Perform"
+                                Content="Выполнить"
+                                Style="{StaticResource ButtonStyle}"
+                                Foreground="White"
+                                Background="Transparent"
+                                Height="36"
+                                Margin="0"
+                                    Click="Perform_Click"
                            FontSize="16"
-                           VerticalAlignment="Center" />
-
+                           VerticalAlignment="Center"
+                                />
+                            <Image x:Name="ArrowIconDown" Height="25" Width="25" Margin="-3,7,0,0" Stretch="Fill" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <Image.Source>
+                                    <BitmapImage UriSource="/Images/down-arrow.png" DecodePixelWidth="30" DecodePixelHeight="30"/>
+                                </Image.Source>
+                            </Image>
+                            <Image x:Name="ArrowIconUp" Visibility="Collapsed" Height="25" Width="25" Margin="-3,7,0,0" Stretch="Fill" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <Image.Source>
+                                    <BitmapImage UriSource="/Images/down-arrow.png" DecodePixelWidth="30" DecodePixelHeight="30" Rotation="Rotate180"/>
+                                </Image.Source>
+                            </Image>
+                        </StackPanel>
                     </MenuItem.Header>
                     <MenuItem Header="Метод прямоугольников"
+                              x:Name="RectangleMethodItem"
                               FontWeight="Black"
                           FontSize="16"
                           Foreground="#007575"
                           Background="Transparent"
-                          Click="RectangleMethod_Click"/>
+                          Checked="RectangleMethodItem_Checked"
+                              IsChecked="True"
+                              Unchecked="RectangleMethodItem_Unchecked"
+                              IsCheckable="True"
+                              />
+                    <!-- Click="RectangleMethod_Click" -->
                     <MenuItem Header="Метод трапеций"
+                              Name="TrapezoidalMethodItem"
+                              FontWeight="Black"
+                            FontSize="16"
+                            Foreground="#007575"
+                          Background="Transparent"
+                              Checked="TrapezoidalMethodItem_Checked"
+                              Unchecked="TrapezoidalMethodItem_Unchecked"
+                              IsCheckable="True"/>
+                    <MenuItem Header="Метод Симпсона"
+                          x:Name="SympsonMethodItem"
                               FontWeight="Black"
                           FontSize="16"
                           Foreground="#007575"
                           Background="Transparent"
-                          Click="TrapezoidalMethod_Click" />
-                    <MenuItem Header="Метод Симпсона"
-                          FontWeight="Black"
-                          FontSize="16"
-                          Foreground="#007575"
-                          Background="Transparent"
-                          Click="SimpsonMethod_Click" />
+                              Checked="SympsonMethodItem_Checked"
+                              Unchecked="SympsonMethodItem_Unchecked"
+                              IsCheckable="True"/>
 
                 </MenuItem>
                 <MenuItem Background="#007575"
-                      Margin="2,2,0,2">
+                      Margin="2,2,0,2" SubmenuOpened="MenuItem_SubmenuOpened"
+                          SubmenuClosed="MenuItem_SubmenuClosed">
                     <MenuItem.Header >
-                        <Label x:Name="ButtonClear"
+                        <StackPanel Orientation="Horizontal">
+                            <Label x:Name="ButtonClear"
                                Content="Очистить" 
                                Style="{StaticResource LabelStyle}"
                                 Foreground="White"
                                 FontSize="16"
                                 VerticalAlignment="Bottom" Margin="0,0,0,2"
                                 />
+                            <Image x:Name="ClearBtnIconDown"  Height="25" Width="25" Margin="-2,7,0,0" Stretch="Fill" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <Image.Source>
+                                    <BitmapImage UriSource="/Images/down-arrow.png" DecodePixelWidth="30" DecodePixelHeight="30"/>
+                                </Image.Source>
+                            </Image>
+                            <Image Visibility="Collapsed" x:Name="ClearBtnIconUp" Height="25" Width="25" Margin="-2,7,0,0" Stretch="Fill" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <Image.Source>
+                                    <BitmapImage UriSource="/Images/down-arrow.png" DecodePixelWidth="30" DecodePixelHeight="30" Rotation="Rotate180"/>
+                                </Image.Source>
+                            </Image>
+                        </StackPanel>
 
 
 
@@ -185,16 +233,23 @@
                               />
                 </MenuItem>
             </Menu>
+            <StackPanel x:Name="GraphPanel" DockPanel.Dock="Bottom" 
+                        Orientation="Horizontal" Loaded="GraphPanel_Loaded" >
+                <!--Plot для графика-->
 
-            <!--Plot для графика-->
-            <WpfPlot x:Name="WpfPlot1"
-                 Height="auto"
-                 Width="auto"
+                <WpfPlot x:Name="WpfPlot1"
+                 Height="auto" DockPanel.Dock="Left"
                  />
-
-
-
+                <WpfPlot x:Name="WpfPlot2"
+                 Height="auto" DockPanel.Dock="Left"
+                         
+                 />
+                <WpfPlot x:Name="WpfPlot3"
+                 Height="auto" DockPanel.Dock="Right"
+                 />
+            </StackPanel>
         </DockPanel>
+        
 
 
 

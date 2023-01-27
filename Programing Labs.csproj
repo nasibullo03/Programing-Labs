@@ -168,6 +168,7 @@
     <Compile Include="Pages\DefiniteIntegral\DefiniteIntegral_Page.xaml.cs">
       <DependentUpon>DefiniteIntegral_Page.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\DefiniteIntegral\GraphVisualize.cs" />
     <Compile Include="Pages\DefiniteIntegral\IEnteredValues.cs" />
     <Compile Include="Pages\DefiniteIntegral\IOutputValue.cs" />
     <Compile Include="Pages\DefiniteIntegral\RectangleMethod.cs" />
@@ -366,6 +367,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\loading.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\down-arrow.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="packages\SkiaSharp.NativeAssets.macOS.2.88.3\build\net462\SkiaSharp.NativeAssets.macOS.targets" Condition="Exists('packages\SkiaSharp.NativeAssets.macOS.2.88.3\build\net462\SkiaSharp.NativeAssets.macOS.targets')" />
