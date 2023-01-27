@@ -19,7 +19,7 @@ namespace Programing_Labs.Pages.DefiniteIntegral
         #region Function and Graph Visualization
         public static void Visualize(RectangleMethod method)
         {
-            WpfPlot1.Plot.Title($"S = {method.OptimalSplitValue}");
+            WpfPlot1.Plot.Title($"Метод прямоугольника");
             VisualizeSplits(method);
             VisualizeGraphLine(method.FunctionCoordinates, DefiniteIntegral_Page.MethodType.Rectangle);
             VisualizeSplitsDots(method, DefiniteIntegral_Page.MethodType.Rectangle);

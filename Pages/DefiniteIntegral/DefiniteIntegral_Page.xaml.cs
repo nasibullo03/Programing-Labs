@@ -27,13 +27,9 @@ namespace Programing_Labs.Pages.DefiniteIntegral
         public enum InputType { TextBoxA, TextBoxB, TextBoxN, TextBoxE, TextBoxFx }
         public enum MethodType { Rectangle, Trepezoida, Simpson }
         private Dictionary<InputType, TextBox> UITextBoxes { get; set; }
-        private Dictionary<MethodType, bool> PerformMethods { get; set; } = new Dictionary<MethodType, bool>() {
-                {MethodType.Rectangle,true},
-                {MethodType.Trepezoida,false},
-                {MethodType.Simpson,false}
-
-            };
         private bool FirstTimeLoaded { get; set; } = true;
+        private bool[] IsCheckedMethod { get; set; } = new bool[3];
+
 
         #endregion
 
@@ -72,6 +68,7 @@ namespace Programing_Labs.Pages.DefiniteIntegral
             }
 
             FirstTimeLoaded = false;
+
 #if DEBUG
             UITextBoxes[InputType.TextBoxA].Text = "1";
             UITextBoxes[InputType.TextBoxB].Text = "50";
@@ -80,21 +77,14 @@ namespace Programing_Labs.Pages.DefiniteIntegral
             UITextBoxes[InputType.TextBoxFx].Text = "cos(x)+x^3";
 #endif
 
-
         }
         private object GetStyleElement(Control element, string name) =>
           element.Template.FindName(name, element);
 
         private void PerformMethod(MethodType type)
         {
-            /* await Task.Run(() =>
-             {
-
-                 TextBoxA.Dispatcher.Invoke(() =>
-                 {*/
             if (Check.CheckTextBoxesValues(UITextBoxes))
             {
-                /*WpfPlot1.Dispatcher.Invoke(() => */
                 ClearGraph();
                 switch (type)
                 {
@@ -115,9 +105,7 @@ namespace Programing_Labs.Pages.DefiniteIntegral
                         break;
                 }
             }
-
         }
-
 
         #region ClearItems_click and clear Methods
         private void ClearGraphItem_Click(object sender, RoutedEventArgs e)
@@ -183,81 +171,77 @@ namespace Programing_Labs.Pages.DefiniteIntegral
 
         private void SympsonMethodItem_Checked(object sender, RoutedEventArgs e)
         {
-            PerformMethods[MethodType.Simpson] = true;
+            IsCheckedMethod[2] = true;
             if (!FirstTimeLoaded) PanelSizeChanged();
         }
 
         private void SympsonMethodItem_Unchecked(object sender, RoutedEventArgs e)
         {
-            PerformMethods[MethodType.Simpson] = false;
+            IsCheckedMethod[2] = false;
             if (!FirstTimeLoaded) PanelSizeChanged();
         }
-
         private void TrapezoidalMethodItem_Checked(object sender, RoutedEventArgs e)
         {
-            PerformMethods[MethodType.Trepezoida] = true;
-            if (!FirstTimeLoaded) PanelSizeChanged(); ;
+            IsCheckedMethod[1] = true;
+            if (!FirstTimeLoaded)
+            {
+                PanelSizeChanged();
+                PerformMethod(MethodType.Trepezoida);
+            }
         }
 
         private void TrapezoidalMethodItem_Unchecked(object sender, RoutedEventArgs e)
         {
-            PerformMethods[MethodType.Trepezoida] = false;
+            IsCheckedMethod[1] = false;
             if (!FirstTimeLoaded) PanelSizeChanged();
         }
 
         private void RectangleMethodItem_Checked(object sender, RoutedEventArgs e)
         {
-            PerformMethods[MethodType.Rectangle] = true;
-            if (!FirstTimeLoaded) PanelSizeChanged();
+            IsCheckedMethod[0] = true;
+            if (!FirstTimeLoaded)
+            {
+                PanelSizeChanged();
+                PerformMethod(MethodType.Rectangle);
+            }
         }
 
         private void RectangleMethodItem_Unchecked(object sender, RoutedEventArgs e)
         {
-            PerformMethods[MethodType.Rectangle] = false;
+            IsCheckedMethod[0] = false;
             if (!FirstTimeLoaded) PanelSizeChanged();
         }
 
         private void PanelSizeChanged()
         {
             int MetodsCount = 0;
-            bool[] values = PerformMethods.Select(a => a.Value).ToArray();
 
-            foreach (bool el in values)
+            foreach (bool el in IsCheckedMethod)
             {
                 if (el) ++MetodsCount;
             }
 
             double GraphWidth;
-            if (!values[0] && !values[1] && !values[1])
-            {
-                PerformMethods[MethodType.Rectangle] = true;
-                GraphWidth = this.ActualWidth;
-                values[0] = true;
-            }
-            else
-            {
-                GraphWidth = this.ActualWidth / MetodsCount;
-            }
 
+            GraphWidth = this.ActualWidth / ((MetodsCount > 0) ? MetodsCount : 1);
 
             WpfPlot1.Width = GraphWidth;
             WpfPlot2.Width = GraphWidth;
             WpfPlot3.Width = GraphWidth;
 
-            WpfPlot1.Visibility = values[0] ? Visibility.Visible : Visibility.Collapsed;
-            WpfPlot2.Visibility = values[1] ? Visibility.Visible : Visibility.Collapsed;
-            WpfPlot3.Visibility = values[2] ? Visibility.Visible : Visibility.Collapsed;
+            WpfPlot1.Visibility = IsCheckedMethod[0] ? Visibility.Visible : Visibility.Collapsed;
+            WpfPlot2.Visibility = IsCheckedMethod[1] ? Visibility.Visible : Visibility.Collapsed;
+            WpfPlot3.Visibility = IsCheckedMethod[2] ? Visibility.Visible : Visibility.Collapsed;
 
         }
 
         private void Perform_Click(object sender, RoutedEventArgs e)
         {
-            var value = PerformMethods.Select(a => a.Value).ToArray();
-
-
-            if (value[0]) PerformMethod(MethodType.Rectangle);
-            if (value[1]) PerformMethod(MethodType.Trepezoida);
-            if (value[2]) PerformMethod(MethodType.Simpson);
+            if (IsCheckedMethod[0]) PerformMethod(MethodType.Rectangle);
+            if (IsCheckedMethod[1]) PerformMethod(MethodType.Trepezoida);
+            if (IsCheckedMethod[2]) PerformMethod(MethodType.Simpson);
+            if (!IsCheckedMethod[0] && !IsCheckedMethod[1] && !IsCheckedMethod[2])
+                MessageBox.Show("Сначала выберите операцию для выполнение!", "Неверная операция", MessageBoxButton.OK, MessageBoxImage.Exclamation);
 
         }
 
@@ -269,6 +253,30 @@ namespace Programing_Labs.Pages.DefiniteIntegral
         private void GraphPanel_Loaded(object sender, RoutedEventArgs e)
         {
             PanelSizeChanged();
+        }
+
+        private void MenuItem_SubmenuOpened(object sender, RoutedEventArgs e)
+        {
+            ClearBtnIconUp.Visibility = Visibility.Visible;
+            ClearBtnIconDown.Visibility = Visibility.Collapsed;
+        }
+
+        private void MenuItem_SubmenuClosed(object sender, RoutedEventArgs e)
+        {
+            ClearBtnIconUp.Visibility = Visibility.Collapsed;
+            ClearBtnIconDown.Visibility = Visibility.Visible;
+        }
+        private void BtnPerform_SubmenuClosed(object sender, RoutedEventArgs e)
+        {
+            ArrowIconUp.Visibility = Visibility.Collapsed;
+            ArrowIconDown.Visibility = Visibility.Visible;
+        }
+
+       
+        private void BtnPerform_SubmenuOpened(object sender, RoutedEventArgs e)
+        {
+            ArrowIconUp.Visibility = Visibility.Visible;
+            ArrowIconDown.Visibility = Visibility.Collapsed;
         }
     }
 }

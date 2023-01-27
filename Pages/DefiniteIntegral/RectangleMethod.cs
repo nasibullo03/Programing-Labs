@@ -111,7 +111,7 @@ namespace Programing_Labs.Pages.DefiniteIntegral
             double sum = 0d;
             double x = 0d;
             double y = 0d;
-
+            LeftSplitCoordinates.Add(new Point(A, F(A)));
             for (int i = 0; i <= N - 1; i++)
             {
                 x = A + i * h;
@@ -120,6 +120,7 @@ namespace Programing_Labs.Pages.DefiniteIntegral
                 LeftSplitCoordinates.Add(new Point(x, y));
             }
 
+            LeftSplitCoordinates.Add(new Point(B, F(B)));
             double result = h * sum;
             return result;
         }
@@ -130,6 +131,7 @@ namespace Programing_Labs.Pages.DefiniteIntegral
             double sum = 0d;
             double x = 0d;
             double y = 0d;
+            RightSplitCoordinates.Add(new Point(A, F(A)));
             for (var i = 1; i <= N; i++)
             {
                 x = A + i * h;
@@ -137,7 +139,7 @@ namespace Programing_Labs.Pages.DefiniteIntegral
                 sum += y;
                 RightSplitCoordinates.Add(new Point(x, y));
             }
-
+            RightSplitCoordinates.Add(new Point(B, F(B)));
             double result = h * sum;
             return result;
         }
@@ -148,6 +150,7 @@ namespace Programing_Labs.Pages.DefiniteIntegral
             double sum = (F(A) + F(B)) / 2;
             double x = 0d;
             double y = 0d;
+            MiddleSplitCoordinates.Add(new Point(A, F(A)));
             for (var i = 1; i < N; i++)
             {
                 x = A + h * i;
@@ -155,7 +158,7 @@ namespace Programing_Labs.Pages.DefiniteIntegral
                 sum += y;
                 MiddleSplitCoordinates.Add(new Point(x, y));
             }
-
+            MiddleSplitCoordinates.Add(new Point(B, F(B)));
             double result = h * sum;
             return result;
         }

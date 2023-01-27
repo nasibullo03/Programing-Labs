@@ -10,7 +10,7 @@
       Loaded="Page_Loaded"
       SizeChanged="Page_SizeChanged"
       >
-
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="131*"/>
@@ -126,7 +126,8 @@
                 </MenuItem>
                 <!--Выберите операцию-->
                 <MenuItem Background="#007575"
-                      Margin="0,2,2,2">
+                      Margin="0,2,2,2" SubmenuOpened="BtnPerform_SubmenuOpened"
+                       SubmenuClosed="BtnPerform_SubmenuClosed">
                     <MenuItem.Header>
                         <StackPanel Orientation="Horizontal">
                             <Button x:Name="Perform"
@@ -140,9 +141,14 @@
                            FontSize="16"
                            VerticalAlignment="Center"
                                 />
-                            <Image Height="25" Width="25" Margin="-3,7,0,0" Stretch="Fill" HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <Image x:Name="ArrowIconDown" Height="25" Width="25" Margin="-3,7,0,0" Stretch="Fill" HorizontalAlignment="Center" VerticalAlignment="Center">
                                 <Image.Source>
                                     <BitmapImage UriSource="/Images/down-arrow.png" DecodePixelWidth="30" DecodePixelHeight="30"/>
+                                </Image.Source>
+                            </Image>
+                            <Image x:Name="ArrowIconUp" Visibility="Collapsed" Height="25" Width="25" Margin="-3,7,0,0" Stretch="Fill" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <Image.Source>
+                                    <BitmapImage UriSource="/Images/down-arrow.png" DecodePixelWidth="30" DecodePixelHeight="30" Rotation="Rotate180"/>
                                 </Image.Source>
                             </Image>
                         </StackPanel>
@@ -180,7 +186,8 @@
 
                 </MenuItem>
                 <MenuItem Background="#007575"
-                      Margin="2,2,0,2">
+                      Margin="2,2,0,2" SubmenuOpened="MenuItem_SubmenuOpened"
+                          SubmenuClosed="MenuItem_SubmenuClosed">
                     <MenuItem.Header >
                         <StackPanel Orientation="Horizontal">
                             <Label x:Name="ButtonClear"
@@ -190,9 +197,14 @@
                                 FontSize="16"
                                 VerticalAlignment="Bottom" Margin="0,0,0,2"
                                 />
-                            <Image Height="25" Width="25" Margin="-2,7,0,0" Stretch="Fill" HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <Image x:Name="ClearBtnIconDown"  Height="25" Width="25" Margin="-2,7,0,0" Stretch="Fill" HorizontalAlignment="Center" VerticalAlignment="Center">
                                 <Image.Source>
                                     <BitmapImage UriSource="/Images/down-arrow.png" DecodePixelWidth="30" DecodePixelHeight="30"/>
+                                </Image.Source>
+                            </Image>
+                            <Image Visibility="Collapsed" x:Name="ClearBtnIconUp" Height="25" Width="25" Margin="-2,7,0,0" Stretch="Fill" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <Image.Source>
+                                    <BitmapImage UriSource="/Images/down-arrow.png" DecodePixelWidth="30" DecodePixelHeight="30" Rotation="Rotate180"/>
                                 </Image.Source>
                             </Image>
                         </StackPanel>
