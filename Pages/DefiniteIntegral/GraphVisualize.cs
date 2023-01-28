@@ -47,6 +47,7 @@ namespace Programing_Labs.Pages.DefiniteIntegral
         private static void VisualizeSplits(RectangleMethod value)
         {
             double SplitDistance = (value.SplitCoordinates.Count > 1) ? value.SplitCoordinates[1].X - value.SplitCoordinates[0].X : 1;
+
             double correctValue = SplitDistance / 2;
 
             double[] Xvalues = value.SplitCoordinates.Select(a => a.X).ToArray();

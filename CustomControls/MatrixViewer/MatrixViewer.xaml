@@ -4,9 +4,126 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Programing_Labs.CustomControls.MatrixViewer"
+             xmlns:Check ="clr-namespace:Programing_Labs"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-            
+
+    <UserControl.Resources>
+        <SolidColorBrush x:Key="TextBoxBackgroundColor" Color="#5833FF"/>
+        <SolidColorBrush x:Key="TextBoxForegroundColor" Color="#E2E4FD"/>
+        <SolidColorBrush x:Key="TextBoxMouseOverBackgroundColor" Color="#6F77F3"/>
+        <SolidColorBrush x:Key="TextBoxMouseOverForegroundColor" Color="#E2E4FD"/>
+
+        <!-- Start MatrixTextBoxStryle-->
+        <Style x:Key="MatrixValueTextBox" TargetType="{x:Type TextBox}">
+
+            <Setter Property="Foreground" Value="{StaticResource TextBoxForegroundColor}"/>
+            <Setter Property="Background" Value="{StaticResource TextBoxBackgroundColor}"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Width" Value="auto"/>
+            <Setter Property="MinWidth" Value="30"/>
+            <Setter Property="Text" Value="0"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TextBox}">
+                        <Border x:Name="textBoxBorder" 
+                                CornerRadius="5" 
+                                
+                                Background="{TemplateBinding Background}"
+                                Padding="0" Margin="1"
+                                BorderThickness="1"
+                                
+                                >
+                            <TextBox x:Name="textbox1" Text="{TemplateBinding Text}"
+                                     Background="Transparent" 
+                                     Margin="0" 
+                                     Padding="0"
+                                     BorderThickness="0"
+                                       Foreground="{TemplateBinding Foreground}"
+                                     FontSize="{TemplateBinding FontSize}"
+                                     FontWeight="{TemplateBinding FontWeight}"
+                                     VerticalAlignment="Center" HorizontalAlignment="Center"
+                                    SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                    PreviewTextInput="textbox1_PreviewTextInput"
+                                     />
+
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="{StaticResource TextBoxMouseOverBackgroundColor}"/>
+                            </Trigger>
+                            <Trigger SourceName="textbox1" Property="IsFocused" Value="True">
+                                <Setter  Property="Background" Value="{StaticResource TextBoxForegroundColor}"/>
+                                <Setter  Property="Foreground" Value="{StaticResource TextBoxBackgroundColor}"/>
+                                <Setter TargetName="textBoxBorder" Property="BorderBrush" Value="#A8AEF8"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+
+
+
+        </Style>
+
+        <!-- End MatrixTextBoxStryle-->
+
+    </UserControl.Resources>
+    <Grid >
+
+        <ListView x:Name="ListViewMatrix"
+            Padding="0" 
+            Margin="0"
+            Background="Transparent"
+            BorderThickness="0"
+                        
+            >
+            <ListView.ItemTemplate >
+                <DataTemplate >
+                    <ListView x:Name="ListViewRowItem" Padding="0" Margin="0" Background="Transparent" BorderThickness="0">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <TextBox x:Name="TxtBxInput" Text="{Binding RowValue}" Style="{StaticResource MatrixValueTextBox}"/>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+
+        <StackPanel Orientation="Horizontal">
+            <Image x:Name="InputScobe"/>
+            <Image x:Name="Scobe"/>
+            <StackPanel >
+            <TextBox Text="0" Style="{StaticResource MatrixValueTextBox}"/>
+            <TextBox Text="0" Style="{StaticResource MatrixValueTextBox}"/>
+            <TextBox  Text="0" Style="{StaticResource MatrixValueTextBox}"/>
+            <TextBox  Text="0" Style="{StaticResource MatrixValueTextBox}"/>
+            </StackPanel><StackPanel >
+            <TextBox Text="0" Style="{StaticResource MatrixValueTextBox}"/>
+            <TextBox Text="0" Style="{StaticResource MatrixValueTextBox}"/>
+            <TextBox  Text="0" Style="{StaticResource MatrixValueTextBox}"/>
+            <TextBox  Text="0" Style="{StaticResource MatrixValueTextBox}"/>
+            </StackPanel><StackPanel >
+            <TextBox Text="0" Style="{StaticResource MatrixValueTextBox}"/>
+            <TextBox Text="0" Style="{StaticResource MatrixValueTextBox}"/>
+            <TextBox  Text="0" Style="{StaticResource MatrixValueTextBox}"/>
+            <TextBox  Text="0" Style="{StaticResource MatrixValueTextBox}"/>
+            </StackPanel><StackPanel >
+            <TextBox Text="0" Style="{StaticResource MatrixValueTextBox}"/>
+            <TextBox Text="0" Style="{StaticResource MatrixValueTextBox}"/>
+            <TextBox  Text="0" Style="{StaticResource MatrixValueTextBox}"/>
+            <TextBox  Text="0" Style="{StaticResource MatrixValueTextBox}"/>
+            </StackPanel>
+
+
+
+            <StackPanel x:Name="OutputMatrix_StackPanel">
+
+            </StackPanel>
+            <Image x:Name="ClosseScobe"/>
+        </StackPanel>
     </Grid>
 </UserControl>
