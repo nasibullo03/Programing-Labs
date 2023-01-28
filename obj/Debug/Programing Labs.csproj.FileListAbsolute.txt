@@ -76,10 +76,8 @@ C:\Users\student\Source\Repos\Programing-Labs\obj\Debug\Programing Labs.exe
 C:\Users\student\Source\Repos\Programing-Labs\obj\Debug\Programing Labs.pdb
 C:\Users\Admin\Source\Repos\Programing-Labs\obj\Debug\Pages\Lab3_Page.g.cs
 C:\Users\Admin\Source\Repos\Programing-Labs\obj\Debug\Styles\ListViewStyle.g.cs
-C:\Users\Admin\Source\Repos\Programing-Labs\obj\Debug\UserControls\ModernSmallUserInputControl.g.cs
 C:\Users\Admin\Source\Repos\Programing-Labs\obj\Debug\Pages\Lab3_Page.baml
 C:\Users\Admin\Source\Repos\Programing-Labs\obj\Debug\Styles\ListViewStyle.baml
-C:\Users\Admin\Source\Repos\Programing-Labs\obj\Debug\UserControls\ModernSmallUserInputControl.baml
 C:\Users\student\Source\Repos\Programing-Labs\obj\Debug\Pages\Lab3_Page.g.cs
 C:\Users\student\Source\Repos\Programing-Labs\obj\Debug\Pages\Lab4_Page.g.cs
 C:\Users\student\Source\Repos\Programing-Labs\obj\Debug\Styles\ListViewStyle.g.cs
@@ -160,3 +158,9 @@ C:\Users\Admin\Source\Repos\Programing-Labs\bin\Debug\WpfAnimatedGif.pdb
 C:\Users\Admin\Source\Repos\Programing-Labs\bin\Debug\WpfAnimatedGif.xml
 C:\Users\Admin\Source\Repos\Programing-Labs\obj\Debug\Pages\DefiniteIntegral\DefiniteIntegral_Page.g.cs
 C:\Users\Admin\Source\Repos\Programing-Labs\obj\Debug\Pages\DefiniteIntegral\DefiniteIntegral_Page.baml
+C:\Users\Admin\Source\Repos\Programing-Labs\obj\Debug\Pages\SLAE\SLAE_Page.g.cs
+C:\Users\Admin\Source\Repos\Programing-Labs\obj\Debug\Pages\SLAE\SLAE_Page.baml
+C:\Users\Admin\Source\Repos\Programing-Labs\obj\Debug\CustomControls\ModernSmallUserInputControl.g.cs
+C:\Users\Admin\Source\Repos\Programing-Labs\obj\Debug\CustomControls\MatrixViewer\MatrixViewerStyle.baml
+C:\Users\Admin\Source\Repos\Programing-Labs\obj\Debug\CustomControls\ModernSmallUserInputControl.baml
+C:\Users\Admin\Source\Repos\Programing-Labs\obj\Debug\GeneratedInternalTypeHelper.g.cs

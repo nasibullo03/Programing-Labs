@@ -222,17 +222,18 @@ namespace Programing_Labs.Pages.DefiniteIntegral
             }
 
             double GraphWidth;
+            unchecked
+            {
+                GraphWidth = this.ActualWidth / ((MetodsCount > 0) ? MetodsCount : 1);
 
-            GraphWidth = this.ActualWidth / ((MetodsCount > 0) ? MetodsCount : 1);
+                WpfPlot1.Width = GraphWidth;
+                WpfPlot2.Width = GraphWidth;
+                WpfPlot3.Width = GraphWidth;
 
-            WpfPlot1.Width = GraphWidth;
-            WpfPlot2.Width = GraphWidth;
-            WpfPlot3.Width = GraphWidth;
-
-            WpfPlot1.Visibility = IsCheckedMethod[0] ? Visibility.Visible : Visibility.Collapsed;
-            WpfPlot2.Visibility = IsCheckedMethod[1] ? Visibility.Visible : Visibility.Collapsed;
-            WpfPlot3.Visibility = IsCheckedMethod[2] ? Visibility.Visible : Visibility.Collapsed;
-
+                WpfPlot1.Visibility = IsCheckedMethod[0] ? Visibility.Visible : Visibility.Collapsed;
+                WpfPlot2.Visibility = IsCheckedMethod[1] ? Visibility.Visible : Visibility.Collapsed;
+                WpfPlot3.Visibility = IsCheckedMethod[2] ? Visibility.Visible : Visibility.Collapsed;
+            }
         }
 
         private void Perform_Click(object sender, RoutedEventArgs e)
