@@ -206,11 +206,13 @@ namespace Programing_Labs.Pages
         Timer.Start();
         data = action.Invoke();
         Timer.Stop();
-
+        TimeSpan t = Timer.Elapsed;
+        
         LoadingLabelText("Идет обработка данных");
-
+        //QueryPerformanceCounter
         TxtBxArraySize.Dispatcher.Invoke(async () =>
             await OlympSort.Sort.Add(new OlympSort.Sort(sortType, Timer.Elapsed.ToString(), TxtBxArraySize.Text)));
+     
       }
       catch (Exception ex)
       {
