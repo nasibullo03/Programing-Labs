@@ -32,9 +32,6 @@ C:\Users\Admin\Source\Repos\Programing-Labs\obj\Debug\Programing Labs.csproj.Gen
 C:\Users\Admin\Source\Repos\Programing-Labs\obj\Debug\Programing Labs.csproj.CoreCompileInputs.cache
 C:\Users\Admin\Source\Repos\Programing-Labs\obj\Debug\Programing Labs.csproj.CopyComplete
 C:\Users\Admin\Source\Repos\Programing-Labs\obj\Debug\Styles\ButtonStyle.baml
-C:\Users\student\Source\Repos\Programing-Labs\bin\Debug\Programing Labs.exe.config
-C:\Users\student\Source\Repos\Programing-Labs\bin\Debug\Programing Labs.exe
-C:\Users\student\Source\Repos\Programing-Labs\bin\Debug\Programing Labs.pdb
 C:\Users\student\Source\Repos\Programing-Labs\bin\Debug\org.matheval.dll
 C:\Users\student\Source\Repos\Programing-Labs\bin\Debug\ScottPlot.dll
 C:\Users\student\Source\Repos\Programing-Labs\bin\Debug\ScottPlot.WPF.dll
@@ -45,7 +42,6 @@ C:\Users\student\Source\Repos\Programing-Labs\bin\Debug\WpfMath.dll
 C:\Users\student\Source\Repos\Programing-Labs\bin\Debug\ScottPlot.xml
 C:\Users\student\Source\Repos\Programing-Labs\bin\Debug\System.Numerics.Vectors.xml
 C:\Users\student\Source\Repos\Programing-Labs\bin\Debug\System.ValueTuple.xml
-C:\Users\student\Source\Repos\Programing-Labs\obj\Debug\Programing Labs.csproj.AssemblyReference.cache
 C:\Users\student\Source\Repos\Programing-Labs\obj\Debug\Pages\Lab2_Page.baml
 C:\Users\student\Source\Repos\Programing-Labs\obj\Debug\Styles\ButtonStyle.baml
 C:\Users\student\Source\Repos\Programing-Labs\obj\Debug\Styles\FormulaStyle.baml
@@ -61,19 +57,14 @@ C:\Users\student\Source\Repos\Programing-Labs\obj\Debug\Pages\Lab1_2_Page.g.cs
 C:\Users\student\Source\Repos\Programing-Labs\obj\Debug\Pages\Lab2_Page.g.cs
 C:\Users\student\Source\Repos\Programing-Labs\obj\Debug\MainWindow.g.cs
 C:\Users\student\Source\Repos\Programing-Labs\obj\Debug\App.g.cs
-C:\Users\student\Source\Repos\Programing-Labs\obj\Debug\Programing Labs_MarkupCompile.cache
-C:\Users\student\Source\Repos\Programing-Labs\obj\Debug\Programing Labs_MarkupCompile.lref
 C:\Users\student\Source\Repos\Programing-Labs\obj\Debug\App.baml
 C:\Users\student\Source\Repos\Programing-Labs\obj\Debug\Pages\Lab1_1_Page.baml
 C:\Users\student\Source\Repos\Programing-Labs\obj\Debug\Pages\Lab1_2_Page.baml
 C:\Users\student\Source\Repos\Programing-Labs\obj\Debug\MainWindow.baml
-C:\Users\student\Source\Repos\Programing-Labs\obj\Debug\Programing Labs.g.resources
 C:\Users\student\Source\Repos\Programing-Labs\obj\Debug\Programing_Labs.Properties.Resources.resources
 C:\Users\student\Source\Repos\Programing-Labs\obj\Debug\Programing Labs.csproj.GenerateResource.cache
 C:\Users\student\Source\Repos\Programing-Labs\obj\Debug\Programing Labs.csproj.CoreCompileInputs.cache
 C:\Users\student\Source\Repos\Programing-Labs\obj\Debug\Programing Labs.csproj.CopyComplete
-C:\Users\student\Source\Repos\Programing-Labs\obj\Debug\Programing Labs.exe
-C:\Users\student\Source\Repos\Programing-Labs\obj\Debug\Programing Labs.pdb
 C:\Users\Admin\Source\Repos\Programing-Labs\obj\Debug\Pages\Lab3_Page.g.cs
 C:\Users\Admin\Source\Repos\Programing-Labs\obj\Debug\Styles\ListViewStyle.g.cs
 C:\Users\Admin\Source\Repos\Programing-Labs\obj\Debug\UserControls\ModernSmallUserInputControl.g.cs
@@ -160,3 +151,50 @@ C:\Users\Admin\Source\Repos\Programing-Labs\bin\Debug\WpfAnimatedGif.pdb
 C:\Users\Admin\Source\Repos\Programing-Labs\bin\Debug\WpfAnimatedGif.xml
 C:\Users\Admin\Source\Repos\Programing-Labs\obj\Debug\Pages\DefiniteIntegral\DefiniteIntegral_Page.g.cs
 C:\Users\Admin\Source\Repos\Programing-Labs\obj\Debug\Pages\DefiniteIntegral\DefiniteIntegral_Page.baml
+C:\Users\student\Source\Repos\Programing-Labs\bin\Debug\Programmig Labs.exe.config
+C:\Users\student\Source\Repos\Programing-Labs\bin\Debug\Programmig Labs.exe.manifest
+C:\Users\student\Source\Repos\Programing-Labs\bin\Debug\Programmig Labs.application
+C:\Users\student\Source\Repos\Programing-Labs\bin\Debug\Programmig Labs.exe
+C:\Users\student\Source\Repos\Programing-Labs\bin\Debug\Programmig Labs.pdb
+C:\Users\student\Source\Repos\Programing-Labs\bin\Debug\SixLabors.ImageSharp.dll
+C:\Users\student\Source\Repos\Programing-Labs\bin\Debug\SkiaSharp.dll
+C:\Users\student\Source\Repos\Programing-Labs\bin\Debug\SkiaSharp.Views.Desktop.Common.dll
+C:\Users\student\Source\Repos\Programing-Labs\bin\Debug\SkiaSharp.Views.WPF.dll
+C:\Users\student\Source\Repos\Programing-Labs\bin\Debug\System.Buffers.dll
+C:\Users\student\Source\Repos\Programing-Labs\bin\Debug\System.Memory.dll
+C:\Users\student\Source\Repos\Programing-Labs\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\student\Source\Repos\Programing-Labs\bin\Debug\System.Text.Encoding.CodePages.dll
+C:\Users\student\Source\Repos\Programing-Labs\bin\Debug\WpfAnimatedGif.dll
+C:\Users\student\Source\Repos\Programing-Labs\bin\Debug\SixLabors.ImageSharp.xml
+C:\Users\student\Source\Repos\Programing-Labs\bin\Debug\SkiaSharp.pdb
+C:\Users\student\Source\Repos\Programing-Labs\bin\Debug\SkiaSharp.xml
+C:\Users\student\Source\Repos\Programing-Labs\bin\Debug\SkiaSharp.Views.Desktop.Common.pdb
+C:\Users\student\Source\Repos\Programing-Labs\bin\Debug\SkiaSharp.Views.Desktop.Common.xml
+C:\Users\student\Source\Repos\Programing-Labs\bin\Debug\SkiaSharp.Views.WPF.pdb
+C:\Users\student\Source\Repos\Programing-Labs\bin\Debug\SkiaSharp.Views.WPF.xml
+C:\Users\student\Source\Repos\Programing-Labs\bin\Debug\System.Buffers.xml
+C:\Users\student\Source\Repos\Programing-Labs\bin\Debug\System.Drawing.Common.xml
+C:\Users\student\Source\Repos\Programing-Labs\bin\Debug\System.Memory.xml
+C:\Users\student\Source\Repos\Programing-Labs\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+C:\Users\student\Source\Repos\Programing-Labs\bin\Debug\System.Text.Encoding.CodePages.xml
+C:\Users\student\Source\Repos\Programing-Labs\bin\Debug\WpfAnimatedGif.pdb
+C:\Users\student\Source\Repos\Programing-Labs\bin\Debug\WpfAnimatedGif.xml
+C:\Users\student\Source\Repos\Programing-Labs\obj\Debug\Programing Labs.csproj.ResolveComReference.cache
+C:\Users\student\Source\Repos\Programing-Labs\obj\Debug\Pages\DefiniteIntegral\DefiniteIntegral_Page.g.cs
+C:\Users\student\Source\Repos\Programing-Labs\obj\Debug\Pages\Lab5_Page.g.cs
+C:\Users\student\Source\Repos\Programing-Labs\obj\Debug\Programmig Labs_MarkupCompile.cache
+C:\Users\student\Source\Repos\Programing-Labs\obj\Debug\Programmig Labs_MarkupCompile.lref
+C:\Users\student\Source\Repos\Programing-Labs\obj\Debug\Pages\DefiniteIntegral\DefiniteIntegral_Page.baml
+C:\Users\student\Source\Repos\Programing-Labs\obj\Debug\Pages\Lab5_Page.baml
+C:\Users\student\Source\Repos\Programing-Labs\obj\Debug\Programmig Labs.g.resources
+C:\Users\student\Source\Repos\Programing-Labs\obj\Debug\Programmig Labs.TrustInfo.xml
+C:\Users\student\Source\Repos\Programing-Labs\obj\Debug\Programmig Labs.exe.manifest
+C:\Users\student\Source\Repos\Programing-Labs\obj\Debug\Programmig Labs.application
+C:\Users\student\Source\Repos\Programing-Labs\obj\Debug\Programmig Labs.exe
+C:\Users\student\Source\Repos\Programing-Labs\obj\Debug\Programmig Labs.pdb
+C:\Users\student\Source\Repos\Programing-Labs\bin\Debug\libSkiaSharp.dylib
+C:\Users\student\Source\Repos\Programing-Labs\bin\Debug\x86\libSkiaSharp.dll
+C:\Users\student\Source\Repos\Programing-Labs\bin\Debug\x64\libSkiaSharp.dll
+C:\Users\student\Source\Repos\Programing-Labs\bin\Debug\arm64\libSkiaSharp.dll
+C:\Users\student\Source\Repos\Programing-Labs\obj\Debug\Programmig Labs_Content.g.cs
+C:\Users\student\Source\Repos\Programing-Labs\obj\Debug\Programing Labs.csproj.AssemblyReference.cache

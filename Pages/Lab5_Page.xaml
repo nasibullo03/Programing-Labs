@@ -239,6 +239,13 @@
                     Foreground="#007575"
                     Background="Transparent"
                     Click="MenuItem_BogoSort_Click"/>
+                    <MenuItem Header="Запустить все виды сортировок"
+                    FontWeight="Black"
+                    x:Name="MenuItem_StartSortingAllTypes"
+                    FontSize="16"
+                    Foreground="#007575"
+                    Background="Transparent"
+                    Click="MenuItem_StartSortingTypes_Click"/>
                 </MenuItem>
                 <MenuItem x:Name="MenuItemCancel"
                 Visibility="Collapsed">

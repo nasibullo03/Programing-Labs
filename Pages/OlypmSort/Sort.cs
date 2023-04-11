@@ -22,7 +22,7 @@ namespace Programing_Labs.Pages.OlympSort
         public static List<Sort> SortDatas { get; set; } = new List<Sort>();
         public static ObservableCollection<Sort> SortDataCollection { get; set; } = new ObservableCollection<Sort>();
         public static CancellationToken Token { get; set; }
-        public enum SortType { Buble, Insert, Shaker, Fast, Bogo }
+        public enum SortType { Buble, Insert, Shaker, Fast, Bogo,AllTypes }
         public static Dictionary<SortType, string> SortTypeValue { get; set; } = new Dictionary<SortType, string>
         {
             {SortType.Buble, "Пузырковая сортировка"},
