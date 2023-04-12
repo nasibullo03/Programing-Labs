@@ -198,3 +198,92 @@ C:\Users\student\Source\Repos\Programing-Labs\bin\Debug\x64\libSkiaSharp.dll
 C:\Users\student\Source\Repos\Programing-Labs\bin\Debug\arm64\libSkiaSharp.dll
 C:\Users\student\Source\Repos\Programing-Labs\obj\Debug\Programmig Labs_Content.g.cs
 C:\Users\student\Source\Repos\Programing-Labs\obj\Debug\Programing Labs.csproj.AssemblyReference.cache
+C:\Users\Admin\Source\Repos\Programing-Labs1\bin\Debug\Programmig Labs.exe.config
+C:\Users\Admin\Source\Repos\Programing-Labs1\bin\Debug\Programmig Labs.exe.manifest
+C:\Users\Admin\Source\Repos\Programing-Labs1\bin\Debug\Programmig Labs.application
+C:\Users\Admin\Source\Repos\Programing-Labs1\bin\Debug\Programmig Labs.exe
+C:\Users\Admin\Source\Repos\Programing-Labs1\bin\Debug\Programmig Labs.pdb
+C:\Users\Admin\Source\Repos\Programing-Labs1\bin\Debug\org.matheval.dll
+C:\Users\Admin\Source\Repos\Programing-Labs1\bin\Debug\ScottPlot.dll
+C:\Users\Admin\Source\Repos\Programing-Labs1\bin\Debug\ScottPlot.WPF.dll
+C:\Users\Admin\Source\Repos\Programing-Labs1\bin\Debug\SixLabors.ImageSharp.dll
+C:\Users\Admin\Source\Repos\Programing-Labs1\bin\Debug\SkiaSharp.dll
+C:\Users\Admin\Source\Repos\Programing-Labs1\bin\Debug\SkiaSharp.Views.Desktop.Common.dll
+C:\Users\Admin\Source\Repos\Programing-Labs1\bin\Debug\SkiaSharp.Views.WPF.dll
+C:\Users\Admin\Source\Repos\Programing-Labs1\bin\Debug\System.Buffers.dll
+C:\Users\Admin\Source\Repos\Programing-Labs1\bin\Debug\System.Drawing.Common.dll
+C:\Users\Admin\Source\Repos\Programing-Labs1\bin\Debug\System.Memory.dll
+C:\Users\Admin\Source\Repos\Programing-Labs1\bin\Debug\System.Numerics.Vectors.dll
+C:\Users\Admin\Source\Repos\Programing-Labs1\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\Admin\Source\Repos\Programing-Labs1\bin\Debug\System.Text.Encoding.CodePages.dll
+C:\Users\Admin\Source\Repos\Programing-Labs1\bin\Debug\System.ValueTuple.dll
+C:\Users\Admin\Source\Repos\Programing-Labs1\bin\Debug\WpfAnimatedGif.dll
+C:\Users\Admin\Source\Repos\Programing-Labs1\bin\Debug\WpfMath.dll
+C:\Users\Admin\Source\Repos\Programing-Labs1\bin\Debug\ScottPlot.xml
+C:\Users\Admin\Source\Repos\Programing-Labs1\bin\Debug\SixLabors.ImageSharp.xml
+C:\Users\Admin\Source\Repos\Programing-Labs1\bin\Debug\SkiaSharp.pdb
+C:\Users\Admin\Source\Repos\Programing-Labs1\bin\Debug\SkiaSharp.xml
+C:\Users\Admin\Source\Repos\Programing-Labs1\bin\Debug\SkiaSharp.Views.Desktop.Common.pdb
+C:\Users\Admin\Source\Repos\Programing-Labs1\bin\Debug\SkiaSharp.Views.Desktop.Common.xml
+C:\Users\Admin\Source\Repos\Programing-Labs1\bin\Debug\SkiaSharp.Views.WPF.pdb
+C:\Users\Admin\Source\Repos\Programing-Labs1\bin\Debug\SkiaSharp.Views.WPF.xml
+C:\Users\Admin\Source\Repos\Programing-Labs1\bin\Debug\System.Buffers.xml
+C:\Users\Admin\Source\Repos\Programing-Labs1\bin\Debug\System.Drawing.Common.xml
+C:\Users\Admin\Source\Repos\Programing-Labs1\bin\Debug\System.Memory.xml
+C:\Users\Admin\Source\Repos\Programing-Labs1\bin\Debug\System.Numerics.Vectors.xml
+C:\Users\Admin\Source\Repos\Programing-Labs1\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+C:\Users\Admin\Source\Repos\Programing-Labs1\bin\Debug\System.Text.Encoding.CodePages.xml
+C:\Users\Admin\Source\Repos\Programing-Labs1\bin\Debug\System.ValueTuple.xml
+C:\Users\Admin\Source\Repos\Programing-Labs1\bin\Debug\WpfAnimatedGif.pdb
+C:\Users\Admin\Source\Repos\Programing-Labs1\bin\Debug\WpfAnimatedGif.xml
+C:\Users\Admin\Source\Repos\Programing-Labs1\obj\Debug\Programing Labs.csproj.AssemblyReference.cache
+C:\Users\Admin\Source\Repos\Programing-Labs1\obj\Debug\Programing Labs.csproj.SuggestedBindingRedirects.cache
+C:\Users\Admin\Source\Repos\Programing-Labs1\obj\Debug\Programing Labs.csproj.ResolveComReference.cache
+C:\Users\Admin\Source\Repos\Programing-Labs1\obj\Debug\Pages\Lab2_Page.baml
+C:\Users\Admin\Source\Repos\Programing-Labs1\obj\Debug\Styles\ButtonStyle.baml
+C:\Users\Admin\Source\Repos\Programing-Labs1\obj\Debug\Styles\FormulaStyle.baml
+C:\Users\Admin\Source\Repos\Programing-Labs1\obj\Debug\Styles\LabelStyle.baml
+C:\Users\Admin\Source\Repos\Programing-Labs1\obj\Debug\Styles\MenuButtonStyle.baml
+C:\Users\Admin\Source\Repos\Programing-Labs1\obj\Debug\Styles\MenuButtonStyleClicked.baml
+C:\Users\Admin\Source\Repos\Programing-Labs1\obj\Debug\Styles\MenuSubitemStyle.baml
+C:\Users\Admin\Source\Repos\Programing-Labs1\obj\Debug\Styles\MenuSubitemStyleClicked.baml
+C:\Users\Admin\Source\Repos\Programing-Labs1\obj\Debug\Styles\SearchBoxStyle.baml
+C:\Users\Admin\Source\Repos\Programing-Labs1\obj\Debug\Styles\TextBoxStyle.baml
+C:\Users\Admin\Source\Repos\Programing-Labs1\obj\Debug\Pages\DefiniteIntegral\DefiniteIntegral_Page.g.cs
+C:\Users\Admin\Source\Repos\Programing-Labs1\obj\Debug\Pages\Lab1_1_Page.g.cs
+C:\Users\Admin\Source\Repos\Programing-Labs1\obj\Debug\Pages\Lab1_2_Page.g.cs
+C:\Users\Admin\Source\Repos\Programing-Labs1\obj\Debug\Pages\Lab2_Page.g.cs
+C:\Users\Admin\Source\Repos\Programing-Labs1\obj\Debug\MainWindow.g.cs
+C:\Users\Admin\Source\Repos\Programing-Labs1\obj\Debug\Pages\Lab3_Page.g.cs
+C:\Users\Admin\Source\Repos\Programing-Labs1\obj\Debug\Pages\Lab4_Page.g.cs
+C:\Users\Admin\Source\Repos\Programing-Labs1\obj\Debug\Pages\Lab5_Page.g.cs
+C:\Users\Admin\Source\Repos\Programing-Labs1\obj\Debug\Styles\ListViewStyle.g.cs
+C:\Users\Admin\Source\Repos\Programing-Labs1\obj\Debug\UserControls\ModernSmallUserInputControl.g.cs
+C:\Users\Admin\Source\Repos\Programing-Labs1\obj\Debug\App.g.cs
+C:\Users\Admin\Source\Repos\Programing-Labs1\obj\Debug\Programmig Labs_MarkupCompile.cache
+C:\Users\Admin\Source\Repos\Programing-Labs1\obj\Debug\Programmig Labs_MarkupCompile.lref
+C:\Users\Admin\Source\Repos\Programing-Labs1\obj\Debug\App.baml
+C:\Users\Admin\Source\Repos\Programing-Labs1\obj\Debug\Pages\DefiniteIntegral\DefiniteIntegral_Page.baml
+C:\Users\Admin\Source\Repos\Programing-Labs1\obj\Debug\Pages\Lab1_1_Page.baml
+C:\Users\Admin\Source\Repos\Programing-Labs1\obj\Debug\Pages\Lab1_2_Page.baml
+C:\Users\Admin\Source\Repos\Programing-Labs1\obj\Debug\MainWindow.baml
+C:\Users\Admin\Source\Repos\Programing-Labs1\obj\Debug\Pages\Lab3_Page.baml
+C:\Users\Admin\Source\Repos\Programing-Labs1\obj\Debug\Pages\Lab4_Page.baml
+C:\Users\Admin\Source\Repos\Programing-Labs1\obj\Debug\Pages\Lab5_Page.baml
+C:\Users\Admin\Source\Repos\Programing-Labs1\obj\Debug\Styles\ListViewStyle.baml
+C:\Users\Admin\Source\Repos\Programing-Labs1\obj\Debug\UserControls\ModernSmallUserInputControl.baml
+C:\Users\Admin\Source\Repos\Programing-Labs1\obj\Debug\Programmig Labs.g.resources
+C:\Users\Admin\Source\Repos\Programing-Labs1\obj\Debug\Programing_Labs.Properties.Resources.resources
+C:\Users\Admin\Source\Repos\Programing-Labs1\obj\Debug\Programing Labs.csproj.GenerateResource.cache
+C:\Users\Admin\Source\Repos\Programing-Labs1\obj\Debug\Programing Labs.csproj.CoreCompileInputs.cache
+C:\Users\Admin\Source\Repos\Programing-Labs1\obj\Debug\Programmig Labs.TrustInfo.xml
+C:\Users\Admin\Source\Repos\Programing-Labs1\obj\Debug\Programmig Labs.exe.manifest
+C:\Users\Admin\Source\Repos\Programing-Labs1\obj\Debug\Programmig Labs.application
+C:\Users\Admin\Source\Repos\Programing-Labs1\obj\Debug\Programing Labs.csproj.CopyComplete
+C:\Users\Admin\Source\Repos\Programing-Labs1\obj\Debug\Programmig Labs.exe
+C:\Users\Admin\Source\Repos\Programing-Labs1\obj\Debug\Programmig Labs.pdb
+C:\Users\Admin\Source\Repos\Programing-Labs1\bin\Debug\libSkiaSharp.dylib
+C:\Users\Admin\Source\Repos\Programing-Labs1\bin\Debug\x86\libSkiaSharp.dll
+C:\Users\Admin\Source\Repos\Programing-Labs1\bin\Debug\x64\libSkiaSharp.dll
+C:\Users\Admin\Source\Repos\Programing-Labs1\bin\Debug\arm64\libSkiaSharp.dll
+C:\Users\Admin\Source\Repos\Programing-Labs1\obj\Debug\Programmig Labs_Content.g.cs

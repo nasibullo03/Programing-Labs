@@ -59,7 +59,7 @@ namespace Programing_Labs.Pages.OlympSort
         #region Sorting Methods
         public static double[] BubleSort(bool reverse)
         {
-            double[] datas = Data.GetValues(Data.Value.Xi);
+            double[] datas = Data.GetValues(Data.Value.Xi).Clone() as double[];
 
             if (!reverse)
                 for (int i = 0; i < datas.Length; i++)
@@ -96,7 +96,7 @@ namespace Programing_Labs.Pages.OlympSort
         }
         public static double[] InsertSort(bool reverse)
         {
-            double[] datas = Data.GetValues(Data.Value.Xi);
+            double[] datas = Data.GetValues(Data.Value.Xi).Clone() as double[];
             if (!reverse)
                 for (int i = 1; i < datas.Length; ++i)
                 {
@@ -133,7 +133,7 @@ namespace Programing_Labs.Pages.OlympSort
         }
         public static double[] ShakerSort(bool reverse)
         {
-            double[] datas = Data.GetValues(Data.Value.Xi);
+            double[] datas = Data.GetValues(Data.Value.Xi).Clone() as double[];
             if (!reverse)
                 for (var i = 0; i < datas.Length / 2; i++)
                 {
@@ -249,7 +249,7 @@ namespace Programing_Labs.Pages.OlympSort
         }
         public static double[] BogoSort(bool reverse)
         {
-            double[] datas = Dispatcher.CurrentDispatcher.Invoke(() => Data.GetValues(Data.Value.Xi));
+            double[] datas = Data.GetValues(Data.Value.Xi).Clone() as double[];
 
             if (!reverse)
                 while (!IsSorted(datas))
