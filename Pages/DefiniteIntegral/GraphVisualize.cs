@@ -13,8 +13,7 @@ namespace Programing_Labs.Pages.DefiniteIntegral
     class GraphVisualize
     {
         public static WpfPlot WpfPlot1 { get; set; }
-        public static WpfPlot WpfPlot2 { get; set; }
-        public static WpfPlot WpfPlot3 { get; set; }
+       
         
         #region Function and Graph Visualization
         public static void Visualize(RectangleMethod method)
@@ -27,26 +26,27 @@ namespace Programing_Labs.Pages.DefiniteIntegral
         }
         public static void Visualize(TrapezoidalMethod method)
         {
-            WpfPlot2.Plot.Title($"S = {method.OptimalSplitValue}");
+            WpfPlot1.Plot.Title($"S = {method.OptimalSplitValue}");
             FillColor(method);
             VisualizeSplits(method);
             VisualizeGraphLine(method.FunctionCoordinates, DefiniteIntegral_Page.MethodType.Trepezoida);
             VisualizeSplitsDots(method, DefiniteIntegral_Page.MethodType.Trepezoida);
-            WpfPlot2.Refresh();
+            WpfPlot1.Refresh();
         }
         public static void Visualize(SimpsonMethod method)
         {
-            WpfPlot3.Plot.Title($"S = {method.OptimalSplitValue}");
+            WpfPlot1.Plot.Title($"S = {method.OptimalSplitValue}");
             FillColor(method);
             VisualizeSplits(method);
             VisualizeGraphLine(method.FunctionCoordinates, DefiniteIntegral_Page.MethodType.Simpson);
             VisualizeSplitsDots(method, DefiniteIntegral_Page.MethodType.Simpson);
-            WpfPlot3.Refresh();
+            WpfPlot1.Refresh();
         }
 
         private static void VisualizeSplits(RectangleMethod value)
         {
-            double SplitDistance = (value.SplitCoordinates.Count > 1) ? value.SplitCoordinates[1].X - value.SplitCoordinates[0].X : 1;
+            
+            double SplitDistance = (value.SplitCoordinates?.Count > 1) ? value.SplitCoordinates[1].X - value.SplitCoordinates[0].X : 1;
             double correctValue = SplitDistance / 2;
 
             double[] Xvalues = value.SplitCoordinates.Select(a => a.X).ToArray();
@@ -87,7 +87,7 @@ namespace Programing_Labs.Pages.DefiniteIntegral
 
             for (int i = 0; i < Xvalues.Length; ++i)
             {
-                WpfPlot3.Plot.AddScatter(
+                WpfPlot1.Plot.AddScatter(
               new double[] { Xvalues[i], Xvalues[i] },
               new double[] { Ymin, Yvalues[i] },
                markerShape: ScottPlot.MarkerShape.none, lineWidth: 4,
@@ -104,13 +104,13 @@ namespace Programing_Labs.Pages.DefiniteIntegral
 
             for (int i = 0; i < Xvalues.Length; ++i)
             {
-                WpfPlot2.Plot.AddScatter(
+                WpfPlot1.Plot.AddScatter(
               new double[] { Xvalues[i], Xvalues[i] },
               new double[] { Ymin, Yvalues[i] },
                markerShape: ScottPlot.MarkerShape.none, lineWidth: 4,
                color: ColorTranslator.FromHtml("#82add9"));
             }
-            WpfPlot2.Plot.AddScatter(Xvalues,
+            WpfPlot1.Plot.AddScatter(Xvalues,
               Yvalues,
                markerShape: ScottPlot.MarkerShape.none, lineWidth: 4,
                color: ColorTranslator.FromHtml("#82add9"));
@@ -123,8 +123,8 @@ namespace Programing_Labs.Pages.DefiniteIntegral
             double[] Xvalues = values.Select(a => a.X).ToArray();
             double[] Yvalues = values.Select(a => a.Y).ToArray();
 
-            WpfPlot3.Plot.AddFill(Xvalues, Yvalues, color: ColorTranslator.FromHtml("#9bc3eb"));
-            WpfPlot3.Plot.SetAxisLimits(xMin: Xvalues.Min(), xMax: Xvalues.Max());
+            WpfPlot1.Plot.AddFill(Xvalues, Yvalues, color: ColorTranslator.FromHtml("#9bc3eb"));
+            WpfPlot1.Plot.SetAxisLimits(xMin: Xvalues.Min(), xMax: Xvalues.Max());
         }
         private static void FillColor(TrapezoidalMethod value)
         {
@@ -132,8 +132,8 @@ namespace Programing_Labs.Pages.DefiniteIntegral
             double[] Xvalues = values.Select(a => a.X).ToArray();
             double[] Yvalues = values.Select(a => a.Y).ToArray();
 
-            WpfPlot2.Plot.AddFill(Xvalues, Yvalues, color: ColorTranslator.FromHtml("#9bc3eb"));
-            WpfPlot2.Plot.SetAxisLimits(xMin: Xvalues.Min(), xMax: Xvalues.Max());
+            WpfPlot1.Plot.AddFill(Xvalues, Yvalues, color: ColorTranslator.FromHtml("#9bc3eb"));
+            WpfPlot1.Plot.SetAxisLimits(xMin: Xvalues.Min(), xMax: Xvalues.Max());
         }
         private static void VisualizeSplitsDots(IOutputValue outputValue, DefiniteIntegral_Page.MethodType method)
         {
@@ -152,7 +152,7 @@ namespace Programing_Labs.Pages.DefiniteIntegral
                 case DefiniteIntegral_Page.MethodType.Trepezoida:
                     foreach (var el in outputValue.SplitCoordinates)
                     {
-                        WpfPlot2.Plot.AddScatter(
+                        WpfPlot1.Plot.AddScatter(
                         new double[] { el.X },
                         new double[] { el.Y },
                         color: System.Drawing.Color.FromName("Green"),
@@ -162,7 +162,7 @@ namespace Programing_Labs.Pages.DefiniteIntegral
                 case DefiniteIntegral_Page.MethodType.Simpson:
                     foreach (var el in outputValue.SplitCoordinates)
                     {
-                        WpfPlot3.Plot.AddScatter(
+                        WpfPlot1.Plot.AddScatter(
                         new double[] { el.X },
                         new double[] { el.Y },
                         color: System.Drawing.Color.FromName("Green"),
@@ -185,13 +185,13 @@ namespace Programing_Labs.Pages.DefiniteIntegral
                markerShape: ScottPlot.MarkerShape.none, lineWidth: 3);
                     break;
                 case DefiniteIntegral_Page.MethodType.Trepezoida:
-                    WpfPlot2.Plot.AddScatter(
+                    WpfPlot1.Plot.AddScatter(
               points.Select(i => i.X).ToArray(),
               points.Select(i => i.Y).ToArray(),
               markerShape: ScottPlot.MarkerShape.none, lineWidth: 3);
                     break;
                 case DefiniteIntegral_Page.MethodType.Simpson:
-                    WpfPlot3.Plot.AddScatter(
+                    WpfPlot1.Plot.AddScatter(
               points.Select(i => i.X).ToArray(),
               points.Select(i => i.Y).ToArray(),
               markerShape: ScottPlot.MarkerShape.none, lineWidth: 3);

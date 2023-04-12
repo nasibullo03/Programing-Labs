@@ -21,40 +21,10 @@ namespace Programing_Labs.Pages.DefiniteIntegral
 
         #region IOutputValue    
         public List<Point> FunctionCoordinates => GetFunctionCoordinates(this);
-        public List<Point> SplitCoordinates
-        {
-            get
-            {
-                switch (MethodType)
-                {
-                    case RectangleType.Left:
-                        return LeftSplitCoordinates;
-                    case RectangleType.Right:
-                        return RightSplitCoordinates;
-                    case RectangleType.Central:
-                        return MiddleSplitCoordinates;
-                    default:
-                        return null;
-                }
-            }
-        }
-        public double? OptimalSplitValue
-        {
-            get
-            {
-                switch (MethodType)
-                {
-                    case RectangleType.Left:
-                        return LeftRectangle();
-                    case RectangleType.Right:
-                        return RightRectangle();
-                    case RectangleType.Central:
-                        return CentralRectangle();
-                    default:
-                        return null;
-                }
-            }
-        }
+        public List<Point> SplitCoordinates { get; private set; }
+       
+        public double? OptimalSplitValue { get; set; }
+       
 
 
         #endregion
@@ -85,7 +55,25 @@ namespace Programing_Labs.Pages.DefiniteIntegral
             N = values.E;
             F = values.F;
             MethodType = methodType;
+
+            switch (MethodType)
+            {
+                case RectangleType.Left:
+                    OptimalSplitValue = LeftRectangle();
+                    SplitCoordinates = LeftSplitCoordinates;
+                    break;
+                case RectangleType.Right:
+                    OptimalSplitValue = RightRectangle();
+                    SplitCoordinates = RightSplitCoordinates;
+                    break;
+                case RectangleType.Central:
+                    OptimalSplitValue = CentralRectangle();
+                    SplitCoordinates = MiddleSplitCoordinates;
+                    break;
+               
+            }
         }
+    
         ~RectangleMethod() { }
 
         #endregion

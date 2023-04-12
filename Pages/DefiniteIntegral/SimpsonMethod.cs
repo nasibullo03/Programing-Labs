@@ -23,9 +23,9 @@ namespace Programing_Labs.Pages.DefiniteIntegral
         public List<Point> FunctionCoordinates => GetFunctionCoordinates(this);
 
         public List<Point> SplitCoordinates { get; private set; }
-        public List<Point> ParabolsCoordinates => FindParabolsCoordinates();
+        public List<Point> ParabolsCoordinates { get; private set; } 
 
-        public double? OptimalSplitValue => Simpson();
+        public double? OptimalSplitValue { get; private set; }
         #endregion
 
         #endregion
@@ -43,6 +43,10 @@ namespace Programing_Labs.Pages.DefiniteIntegral
             N = values.N;
             F = values.F;
             GetFunctionCoordinates = values.GetFunctionCoordinates;
+        
+            OptimalSplitValue = Simpson();
+            ParabolsCoordinates = FindParabolsCoordinates();
+
         }
 
 
@@ -54,6 +58,9 @@ namespace Programing_Labs.Pages.DefiniteIntegral
             N = values.N;
             F = values.F;
             GetFunctionCoordinates = values.GetFunctionCoordinates;
+            OptimalSplitValue = Simpson();
+            ParabolsCoordinates = FindParabolsCoordinates();
+
         }
 
         #endregion

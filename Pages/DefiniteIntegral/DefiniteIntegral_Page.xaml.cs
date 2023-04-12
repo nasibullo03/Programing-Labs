@@ -1,19 +1,8 @@
-﻿using ScottPlot;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Programing_Labs.Pages.DefiniteIntegral
 {
@@ -27,18 +16,14 @@ namespace Programing_Labs.Pages.DefiniteIntegral
         public enum InputType { TextBoxA, TextBoxB, TextBoxN, TextBoxE, TextBoxFx }
         public enum MethodType { Rectangle, Trepezoida, Simpson }
         private Dictionary<InputType, TextBox> UITextBoxes { get; set; }
-        private bool FirstTimeLoaded { get; set; } = true;
-        private bool[] IsCheckedMethod { get; set; } = new bool[3];
 
-
+        
         #endregion
 
         public DefiniteIntegral_Page()
         {
             InitializeComponent();
             GraphVisualize.WpfPlot1 = WpfPlot1;
-            GraphVisualize.WpfPlot2 = WpfPlot2;
-            GraphVisualize.WpfPlot3 = WpfPlot3;
 
         }
 
@@ -67,7 +52,6 @@ namespace Programing_Labs.Pages.DefiniteIntegral
                 }
             }
 
-            FirstTimeLoaded = false;
 
 #if DEBUG
             UITextBoxes[InputType.TextBoxA].Text = "1";
@@ -121,7 +105,6 @@ namespace Programing_Labs.Pages.DefiniteIntegral
         }
         private void ClearGraph()
         {
-            WpfPlot1.UpdateDefaultStyle();
             WpfPlot1.Plot.Title("");
             WpfPlot1.Plot.Clear();
             WpfPlot1.Refresh();
@@ -169,114 +152,25 @@ namespace Programing_Labs.Pages.DefiniteIntegral
 
         }
 
-        private void SympsonMethodItem_Checked(object sender, RoutedEventArgs e)
+        private void WpfPlot1_Loaded(object sender, RoutedEventArgs e)
         {
-            IsCheckedMethod[2] = true;
-            if (!FirstTimeLoaded) PanelSizeChanged();
+            
+            
         }
 
-        private void SympsonMethodItem_Unchecked(object sender, RoutedEventArgs e)
+        private void RectangleMethodItem_Click(object sender, RoutedEventArgs e)
         {
-            IsCheckedMethod[2] = false;
-            if (!FirstTimeLoaded) PanelSizeChanged();
-        }
-        private void TrapezoidalMethodItem_Checked(object sender, RoutedEventArgs e)
-        {
-            IsCheckedMethod[1] = true;
-            if (!FirstTimeLoaded)
-            {
-                PanelSizeChanged();
-                PerformMethod(MethodType.Trepezoida);
-            }
+            PerformMethod(MethodType.Rectangle);
         }
 
-        private void TrapezoidalMethodItem_Unchecked(object sender, RoutedEventArgs e)
+        private void TrapezoidalMethodItem_Click(object sender, RoutedEventArgs e)
         {
-            IsCheckedMethod[1] = false;
-            if (!FirstTimeLoaded) PanelSizeChanged();
+            PerformMethod(MethodType.Trepezoida);
         }
 
-        private void RectangleMethodItem_Checked(object sender, RoutedEventArgs e)
+        private void SympsonMethodItem_Click(object sender, RoutedEventArgs e)
         {
-            IsCheckedMethod[0] = true;
-            if (!FirstTimeLoaded)
-            {
-                PanelSizeChanged();
-                PerformMethod(MethodType.Rectangle);
-            }
-        }
-
-        private void RectangleMethodItem_Unchecked(object sender, RoutedEventArgs e)
-        {
-            IsCheckedMethod[0] = false;
-            if (!FirstTimeLoaded) PanelSizeChanged();
-        }
-
-        private void PanelSizeChanged()
-        {
-            int MetodsCount = 0;
-
-            foreach (bool el in IsCheckedMethod)
-            {
-                if (el) ++MetodsCount;
-            }
-
-            double GraphWidth;
-
-            GraphWidth = this.ActualWidth / ((MetodsCount > 0) ? MetodsCount : 1);
-
-            WpfPlot1.Width = GraphWidth;
-            WpfPlot2.Width = GraphWidth;
-            WpfPlot3.Width = GraphWidth;
-
-            WpfPlot1.Visibility = IsCheckedMethod[0] ? Visibility.Visible : Visibility.Collapsed;
-            WpfPlot2.Visibility = IsCheckedMethod[1] ? Visibility.Visible : Visibility.Collapsed;
-            WpfPlot3.Visibility = IsCheckedMethod[2] ? Visibility.Visible : Visibility.Collapsed;
-
-        }
-
-        private void Perform_Click(object sender, RoutedEventArgs e)
-        {
-            if (IsCheckedMethod[0]) PerformMethod(MethodType.Rectangle);
-            if (IsCheckedMethod[1]) PerformMethod(MethodType.Trepezoida);
-            if (IsCheckedMethod[2]) PerformMethod(MethodType.Simpson);
-            if (!IsCheckedMethod[0] && !IsCheckedMethod[1] && !IsCheckedMethod[2])
-                MessageBox.Show("Сначала выберите операцию для выполнение!", "Неверная операция", MessageBoxButton.OK, MessageBoxImage.Exclamation);
-
-        }
-
-        private void Page_SizeChanged(object sender, SizeChangedEventArgs e)
-        {
-            if (!FirstTimeLoaded) PanelSizeChanged();
-        }
-
-        private void GraphPanel_Loaded(object sender, RoutedEventArgs e)
-        {
-            PanelSizeChanged();
-        }
-
-        private void MenuItem_SubmenuOpened(object sender, RoutedEventArgs e)
-        {
-            ClearBtnIconUp.Visibility = Visibility.Visible;
-            ClearBtnIconDown.Visibility = Visibility.Collapsed;
-        }
-
-        private void MenuItem_SubmenuClosed(object sender, RoutedEventArgs e)
-        {
-            ClearBtnIconUp.Visibility = Visibility.Collapsed;
-            ClearBtnIconDown.Visibility = Visibility.Visible;
-        }
-        private void BtnPerform_SubmenuClosed(object sender, RoutedEventArgs e)
-        {
-            ArrowIconUp.Visibility = Visibility.Collapsed;
-            ArrowIconDown.Visibility = Visibility.Visible;
-        }
-
-       
-        private void BtnPerform_SubmenuOpened(object sender, RoutedEventArgs e)
-        {
-            ArrowIconUp.Visibility = Visibility.Visible;
-            ArrowIconDown.Visibility = Visibility.Collapsed;
+            PerformMethod(MethodType.Simpson);
         }
     }
 }

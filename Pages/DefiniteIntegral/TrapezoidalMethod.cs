@@ -23,7 +23,7 @@ namespace Programing_Labs.Pages.DefiniteIntegral
 
         public List<Point> SplitCoordinates { get; set; }
 
-        public double? OptimalSplitValue => Trapezoidal();
+        public double? OptimalSplitValue { get; private set; }
 
 
         #endregion
@@ -41,6 +41,7 @@ namespace Programing_Labs.Pages.DefiniteIntegral
             N = values.N;
             F = values.F;
             GetFunctionCoordinates = values.GetFunctionCoordinates;
+            OptimalSplitValue = Trapezoidal();
         }
 
 
@@ -52,6 +53,8 @@ namespace Programing_Labs.Pages.DefiniteIntegral
             N = values.N;
             F = values.F;
             GetFunctionCoordinates = values.GetFunctionCoordinates;
+            OptimalSplitValue = Trapezoidal();
+
         }
         #endregion 
 
