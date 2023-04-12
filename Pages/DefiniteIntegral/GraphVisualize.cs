@@ -46,9 +46,11 @@ namespace Programing_Labs.Pages.DefiniteIntegral
         private static void VisualizeSplits(RectangleMethod value)
         {
             
-            double SplitDistance = (value.SplitCoordinates?.Count > 1) ? value.SplitCoordinates[1].X - value.SplitCoordinates[0].X : 1;
+            double SplitDistance = (value.SplitCoordinates.Count > 1) ? Math.Abs(value.SplitCoordinates[1].X - value.SplitCoordinates[0].X) : 1;
             double correctValue = SplitDistance / 2;
-
+            
+            foreach(var el in value.SplitCoordinates) System.Windows.Forms.MessageBox.Show(el.ToString());
+            
             double[] Xvalues = value.SplitCoordinates.Select(a => a.X).ToArray();
             double[] Yvalues = value.SplitCoordinates.Select(a => a.Y).ToArray();
 
@@ -116,7 +118,7 @@ namespace Programing_Labs.Pages.DefiniteIntegral
                color: ColorTranslator.FromHtml("#82add9"));
 
         }
-
+       
         private static void FillColor(SimpsonMethod value)
         {
             var values = value.FunctionCoordinates;

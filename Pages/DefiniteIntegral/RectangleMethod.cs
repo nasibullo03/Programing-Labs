@@ -72,10 +72,10 @@ namespace Programing_Labs.Pages.DefiniteIntegral
                     break;
                
             }
+            
         }
     
-        ~RectangleMethod() { }
-
+        
         #endregion
 
         #region Interface Methods
@@ -87,6 +87,24 @@ namespace Programing_Labs.Pages.DefiniteIntegral
             N = values.N;
             F = values.F;
             GetFunctionCoordinates = values.GetFunctionCoordinates;
+
+            switch (MethodType)
+            {
+                case RectangleType.Left:
+                    OptimalSplitValue = LeftRectangle();
+                    SplitCoordinates = LeftSplitCoordinates;
+                    break;
+                case RectangleType.Right:
+                    OptimalSplitValue = RightRectangle();
+                    SplitCoordinates = RightSplitCoordinates;
+                    break;
+                case RectangleType.Central:
+                    OptimalSplitValue = CentralRectangle();
+                    SplitCoordinates = MiddleSplitCoordinates;
+                    break;
+
+            }
+
         }
 
         #endregion
@@ -99,7 +117,7 @@ namespace Programing_Labs.Pages.DefiniteIntegral
             double sum = 0d;
             double x = 0d;
             double y = 0d;
-            LeftSplitCoordinates.Add(new Point(A, F(A)));
+            
             for (int i = 0; i <= N - 1; i++)
             {
                 x = A + i * h;
@@ -119,7 +137,7 @@ namespace Programing_Labs.Pages.DefiniteIntegral
             double sum = 0d;
             double x = 0d;
             double y = 0d;
-            RightSplitCoordinates.Add(new Point(A, F(A)));
+           
             for (var i = 1; i <= N; i++)
             {
                 x = A + i * h;
@@ -138,7 +156,7 @@ namespace Programing_Labs.Pages.DefiniteIntegral
             double sum = (F(A) + F(B)) / 2;
             double x = 0d;
             double y = 0d;
-            MiddleSplitCoordinates.Add(new Point(A, F(A)));
+            
             for (var i = 1; i < N; i++)
             {
                 x = A + h * i;
