@@ -91,11 +91,8 @@ namespace Programing_Labs.Pages
              Точность(e)  = Accuracy
             Result -ЭТО Х
              */
-            Xpoints.Clear();
-            Ypoints.Clear();
-            BeginTexts.Clear();
-            BeginScatterPlots.Clear();
 
+            ClearStartdatrtParams();
 
             if (Check.CheckTextBoxesValues(UITextBoxes, TxtBxA.Text, TxtBxB.Text))
             {
@@ -137,6 +134,8 @@ namespace Programing_Labs.Pages
                             if (Math.Abs(b - a) < Accuracy)
                             {
                                 Result = (a + b) / 2;
+                                BeginPoints.Add(new List<double>() { a, F(a) });
+                                lastPoints.Add(new List<double>() { b, F(b) });
                                 WpfPlot1.Plot.Clear();
                                 WpfPlot1.Refresh();
                                 ShowGraph(StartPoint, EndPoint, Result);
@@ -146,8 +145,7 @@ namespace Programing_Labs.Pages
                             F2 = F1;
                             x1 = k2 * a + k1 * b;
                             F1 = F(x1);
-                            BeginPoints.Add(new List<double>() { a, F(a) });
-                            lastPoints.Add(new List<double>() { b, F(b) });
+                           
                         }
                         else
                         {
@@ -155,6 +153,8 @@ namespace Programing_Labs.Pages
                             if (Math.Abs(b - a) < Accuracy)
                             {
                                 Result = (a + b) / 2;
+                                BeginPoints.Add(new List<double>() { a, F(a) });
+                                lastPoints.Add(new List<double>() { b, F(b) });
                                 WpfPlot1.Plot.Clear();
                                 WpfPlot1.Refresh();
                                 ShowGraph(StartPoint, EndPoint, Result);
@@ -164,9 +164,10 @@ namespace Programing_Labs.Pages
                             F1 = F2;
                             x2 = k1 * a + k2 * b;
                             F2 = F(x2);
-                            BeginPoints.Add(new List<double>() { a, F(a) });
-                            lastPoints.Add(new List<double>() { b, F(b) });
+                            
                         }
+                        BeginPoints.Add(new List<double>() { a, F(a) });
+                        lastPoints.Add(new List<double>() { b, F(b) });
                     }
                 }
                 catch (Exception ex)
