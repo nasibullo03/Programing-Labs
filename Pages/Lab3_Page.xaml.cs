@@ -121,10 +121,7 @@ namespace Programing_Labs.Pages
                     F1 = F(x1);
                     F2 = F(x2);
 
-                    BeginPoints.Add(new List<double>() { x1, F1 });
-                    lastPoints.Add(new List<double>() { x2, F2 });
-
-
+                   
                     while (true)
                     {
 
