@@ -88,50 +88,37 @@
                     </StackPanel>
                 </MenuItem.Header>
             </MenuItem>
-            <!--TextBoxE-->
-            <!--
-            <MenuItem x:Name="MenuItemE">
+            <MenuItem x:Name="MenuItemFill"
+                Background="#007575"
+                TabIndex="4"
+                Margin="0,2"
+                Visibility="Visible">
                 <MenuItem.Header>
-                    <StackPanel Orientation="Horizontal"
-                                VerticalAlignment="Top">
-                        <Label Content="e ="
-                               Style="{StaticResource LabelStyle}"
-                               FontWeight="Bold"
-                               Foreground="White"
-                               FontSize="18"
-                               VerticalAlignment="Top" />
-                        <TextBox x:Name="TextBoxE"
-                                 Style="{StaticResource TextBoxStyle}"
-                                 FontSize="18"
-                                 Margin="0,-5,0,0"
-                                 TabIndex="2" />
-                    </StackPanel>
+                    <Label Content="Заполнить"
+                        Style="{StaticResource LabelStyle}"
+                        Foreground="White"
+                        FontSize="16"
+                        FontWeight="Bold"
+                        VerticalAlignment="Center" />
+
                 </MenuItem.Header>
+                <MenuItem Header="Вручную"
+                    FontWeight="Black"
+                    x:Name="MenuItem_FillManually"
+                    FontSize="16"
+                    Foreground="#007575"
+                    Background="Transparent"
+                    Click="MenuItem_FillManually_Click"
+                           />
+                <MenuItem Header="Рандомно"
+                    FontWeight="Black"
+                    x:Name="MenuItem_RandomGenerate"
+                    FontSize="16"
+                    Foreground="#007575"
+                    Background="Transparent"
+                    Click="MenuItem_RandomGenerate_Click"
+                           />
             </MenuItem>
-            -->
-            <!--TextBoxFx-->
-            <!--
-            <MenuItem x:Name="MenuItemFx">
-                <MenuItem.Header>
-                    <StackPanel Orientation="Horizontal"
-                                VerticalAlignment="Top">
-                        <Label Content="F(x) ="
-                               Style="{StaticResource LabelStyle}"
-                               FontWeight="Bold"
-                               Foreground="White"
-                               FontSize="18"
-                               VerticalAlignment="Top" />
-                        <TextBox x:Name="TextBoxFx"
-                                 Style="{StaticResource TextBoxStyle}"
-                                 FontSize="18"
-                                 Margin="0,-5,0,0"
-                                 TabIndex="3"
-                                 InputLanguageManager.InputLanguage="en" />
-                    </StackPanel>
-                </MenuItem.Header>
-            </MenuItem>
--->
-            
             <MenuItem x:Name="MenuItemNext">
                 <MenuItem.Header>
                     <Button x:Name="BtnNext"
@@ -215,7 +202,7 @@
                            />
 
             </MenuItem>
-            
+
             <!--Очистить-->
             <MenuItem x:Name="MenuItemClearOpetations"
                       Background="#007575"
@@ -256,6 +243,7 @@
                           TabIndex="6" />
 
             </MenuItem>
+
         </Menu>
         <Grid Background="Transparent">
             <ListView Name="GraphicPointList"
